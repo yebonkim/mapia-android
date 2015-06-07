@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center" android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <View android:layout_width="30.0dip" android:layout_height="300.0dip" />
+        <LinearLayout android:layout_width="0.0dip" android:layout_height="300.0dip" android:layout_weight="1.0">
+            <TextView android:textSize="16.0sp" android:textColor="#ff000000" android:id="@+id/ft_textview" android:background="#ff9fc93c" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="정보주체는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며 정보삭제 및 처리정지를 요청할 수도 있습니다. 정보삭제 또는 처리정지를 원하시는 경우 개인정보보호 담당자에게 서면, 전화 또는 이메일로 연락하시면 지체 없이 조치하겠습니다. 정보주체는 개인정보보호법 등 관계법령을 위반하여 본 개인정보처리방침에 따라 처리하고 있는 이용자 본인이나 타인의 개인정보 및 사생활을 침해하여서는 아니됩니다." android:maxLines="5" />
+        </LinearLayout>
+        <View android:layout_width="30.0dip" android:layout_height="300.0dip" />
+    </LinearLayout>
+</RelativeLayout>

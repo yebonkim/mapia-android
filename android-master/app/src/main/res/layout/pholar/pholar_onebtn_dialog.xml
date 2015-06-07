@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="#ffffffff" android:layout_width="296.0dip" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <RelativeLayout android:id="@+id/messageLayout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <View android:layout_width="15.0dip" android:layout_height="106.0dip" />
+            <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ff404042" android:gravity="center" android:id="@+id/message" android:paddingLeft="15.0dip" android:paddingRight="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="23.0dip" android:layout_marginBottom="23.0dip" android:layout_centerInParent="true" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </RelativeLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_below="@+id/messageLayout">
+            <com.mapia.custom.FontSettableButton android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/btnMain" android:background="#ff2c2c2c" android:layout_width="0.0dip" android:layout_height="fill_parent" android:text="@string/cancel" android:layout_weight="1.0" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

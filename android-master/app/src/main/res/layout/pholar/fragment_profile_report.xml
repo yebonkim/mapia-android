@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fpr_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:id="@+id/fpr_name" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View android:layout_width="46.0dip" android:layout_height="46.0dip" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="310.0dip" android:layout_marginTop="140.0dip">
+        <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/fpr_icon" android:layout_width="310.0dip" android:layout_height="310.0dip" android:src="@drawable/common_noneprofile" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+    </LinearLayout>
+</RelativeLayout>

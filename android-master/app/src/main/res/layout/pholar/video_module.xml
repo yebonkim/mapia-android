@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:id="@+id/camera_app_root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.camera.PreviewFrameLayout android:layout_gravity="center" android:id="@+id/frame" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.mapia.camera.ui.PreviewSurfaceView android:id="@+id/preview_surface_view" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <com.mapia.camera.ui.RenderOverlay android:id="@+id/render_overlay" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <TextView android:id="@+id/time_lapse_label" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/time_lapse_title" />
+    </com.mapia.camera.PreviewFrameLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/progress_holder" android:background="#48000000" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content" style="@android:style/Widget.ProgressBar" />
+        <TextView android:id="@+id/progress_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="10%" />
+    </LinearLayout>
+</merge>

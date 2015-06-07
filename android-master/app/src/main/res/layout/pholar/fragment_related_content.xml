@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffefefef" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fillViewport="true">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@+id/btnClose" android:background="@drawable/post_close_black" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" />
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@+id/scrollContainer" android:paddingTop="155.0dip" android:paddingBottom="61.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.mapia.custom.FontSettableTextView android:textSize="25.0sp" android:textColor="#ff222222" android:id="@+id/related_content_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/related_contents_post_complete" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff999999" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="30.0dip" android:text="@string/related_contents_desc1" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

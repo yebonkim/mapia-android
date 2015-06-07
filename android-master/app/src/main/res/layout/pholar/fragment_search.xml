@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fs_header" android:background="#ff292929" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fs_prev" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip" android:src="@drawable/post_prev" />
+        <LinearLayout android:background="#ff3f3f3f" android:layout_width="1.0dip" android:layout_height="53.0dip" android:layout_marginRight="16.0dip" />
+        <LinearLayout android:gravity="center" android:id="@+id/fs_search_icon" android:layout_width="15.0dip" android:layout_height="53.0dip" android:layout_marginRight="5.0dip">
+            <ImageView android:layout_width="15.0dip" android:layout_height="15.0dip" android:src="@drawable/search_search_s" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <com.mapia.custom.FontSettableEditText android:textSize="15.0sp" android:textColor="#ffffffff" android:textColorHint="#ff7f7f7f" android:gravity="center_vertical" android:id="@+id/fs_edittext" android:background="#ff292929" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="@string/search_tag_title" android:singleLine="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/fs_remove_button" android:visibility="invisible" android:layout_width="53.0dip" android:layout_height="53.0dip">
+            <ImageView android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/common_del_search" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fs_floatbar" android:background="#fff9f9f9" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_below="@+id/fs_header">
+        <LinearLayout android:layout_width="16.0dip" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@+id/fs_tag_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ImageView android:id="@+id/fs_tag_image" android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/search_tag_on" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff4f4f4f" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:text="@string/search_tag_tab_title" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@+id/fs_pic_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:alpha="0.3">
+            <ImageView android:id="@+id/fs_pic_image" android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/search_pic_on" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff4f4f4f" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:text="@string/search_pic_tab_title" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/fs_user_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:alpha="0.3">
+            <ImageView android:id="@+id/fs_user_image" android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/search_user_on" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff4f4f4f" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:text="@string/search_user_tab_title" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="16.0dip" android:layout_height="fill_parent" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/fs_separator" android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fs_floatbar" />
+    <android.support.v4.view.ViewPager android:id="@+id/fs_viewpager" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fs_separator" />
+</RelativeLayout>

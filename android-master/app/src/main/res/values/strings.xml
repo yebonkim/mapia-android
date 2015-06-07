@@ -1,0 +1,1059 @@
+<resources>
+    <string name="mapia">mapia</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_map">MapActivity</string>
+        <string name="app_name">mapia</string>
+        <string name="item">Item #</string>
+        <string name="facebook_app_id">863112470402085</string>
+        <string name="facebook_app_sercret">b8933d06e9f58989affe30d39d4b29a9</string>
+        <string name="twitter_consumer_key">pgHFETv10XzCbdN9IEiFajszC</string>
+        <string name="twitter_consumer_secret">5QhB4AdyjrMp0zWhEWmIWap3JHm96IcMl5PFUMDBQvfrIAGMQi</string>
+        <string name="instagram_client_id">036d1554ace5461b973bf54e5c41f854</string>
+        <string name="instagram_client_secret">5b651079994e43b9aca4e248d9b9a148</string>
+        <string name="vk_app_id">4352648</string>
+        <!-- Error -->
+        <string name="error">Error!</string>
+        <string name="json_error">JSON Error!</string>
+        <string name="close">Close</string>
+        <!-- DialogsMain -->
+        <string name="message">Message</string>
+        <string name="title">Title</string>
+        <string name="progress">Progress</string>
+        <string name="ok">Okay</string>
+        <string name="set">Set</string>
+        <string name="cancel">취소</string>
+
+        <string name="progress_save_message">Saving</string>
+
+        <string name="social_facebook_button">{icon-facebook} Facebook login</string>
+        <string name="social_twitter_button">{icon-twitter} Twitter login</string>
+        <string name="social_google_button">{icon-gplus} G+ login</string>
+        <string name="social_instagram_button">{icon-instagram} Vk login</string>
+
+        <!-- Menu -->
+        <string name="menu_done_item">Done</string>
+        <string name="menu_list_item">List</string>
+        <string name="menu_photo">Photo</string>
+        <string name="menu_load">Load</string>
+        <string name="menu_save">Save</string>
+        <string name="menu_settings">Settings</string>
+        <string name="menu_delete_item">Delete</string>
+        <string name="menu_clear">Clear</string>
+        <string name="menu_erase">Erase</string>
+        <string name="menu_pencil">Pencil</string>
+        <string name="menu_color">Color</string>
+        <string name="menu_size">Size</string>
+        <string name="menu_refresh">Refresh</string>
+        <string name="menu_marker">markers</string>
+        <string name="menu_share_widget">Share</string>
+        <string name="menu_share">Share</string>
+        <string name="action_settings">Options</string>
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="divider">Divider</string>
+        <string name="delete_friend">Remove friend</string>
+        <string name="add_friend">Invite</string>
+        <string name="search_friend">Search</string>
+
+        <string name="activity_signup_clause">계속 진행할 시 <b>개인정보취급방침</b>을 읽었으며 <b>서비스 약관</b>에\n동의하신 것으로 간주됩니다.</string>
+    <string name="title_activity_write_post">WritePostActivity</string>
+
+
+
+
+    <string name="download">Download</string>
+    <string name="resume">Resume</string>
+    <string name="refresh">Refresh</string>
+    <string name="refreshing">Refreshing..</string>
+    <string name="canceled">Canceled</string>
+    <string name="finished">Finished</string>
+    <string name="size">Size</string>
+    <string name="key">Key</string>
+    <string name="nothing_found_to_open_file">
+        There\'s nothing that can open this type of file
+    </string>
+    <string name="files_to_be_uploaded">Files to be uploaded:</string>
+    <string name="transfers">Transfers:</string>
+    <string name="open">Open</string>
+    <string name="upload_video">Upload A Video</string>
+    <string name="upload_image">Upload An Image</string>
+    <string name="create_bucket">Create bucket</string>
+    <string name="delete_bucket">Delete bucket</string>
+
+
+
+        <string name="access_sd_fail">"Couldn't access SD card."</string>
+        <string name="accessibility_back_to_first_level">Close setting controls</string>
+        <string name="accessibility_camera_picker">Front and back camera switch</string>
+        <string name="accessibility_check_box">%1$s check box</string>
+        <string name="accessibility_decrement">Decrease %1$s</string>
+        <string name="accessibility_increment">Increase %1$s</string>
+        <string name="accessibility_menu_button">Menu button</string>
+        <string name="accessibility_mode_picker">Camera, video, or panorama selector</string>
+        <string name="accessibility_pause_video">Pause video</string>
+        <string name="accessibility_play_video">Play video</string>
+        <string name="accessibility_reload_video">Reload video</string>
+        <string name="accessibility_review_cancel">Review cancel</string>
+        <string name="accessibility_review_ok">Review done</string>
+        <string name="accessibility_review_retake">Review retake</string>
+        <string name="accessibility_review_thumbnail">Most recent photo</string>
+        <string name="accessibility_second_level_indicators">More setting controls</string>
+        <string name="accessibility_shutter_button">Shutter button</string>
+        <string name="accessibility_switch_to_camera">Switch to photo</string>
+        <string name="accessibility_switch_to_new_panorama">Switch to new panorama</string>
+        <string name="accessibility_switch_to_panorama">Switch to panorama</string>
+        <string name="accessibility_switch_to_video">Switch to video</string>
+        <string name="accessibility_time_bar">Video player time bar</string>
+        <string name="accessibility_zoom_control">Zoom control</string>
+        <!--<string name="action_settings">Settings</string>-->
+        <string name="agreement">동의</string>
+        <!--<string name="app_name">mapia</string>-->
+        <string name="approval">승인</string>
+    <string name="auth_fail_and_retry_login">"기존 로그인 정보가 만료되어
+재로그인 후 사용하실 수 있습니다."</string>
+    <string name="bg_replacement_message">"Set your device down.
+Step out of view for a moment."</string>
+        <string name="block">차단</string>
+        <string name="camera_disabled">Camera has been disabled because of security policies.</string>
+        <string name="camera_error_1">지원하지 않는 코덱입니다</string>
+        <string name="camera_error_2">영상 파일에 오류가 있어 등록이 불가능합니다</string>
+        <string name="camera_error_3">휴대폰 저장공간 확인 후 재시도 해주시기 바랍니다</string>
+        <string name="camera_error_4">일시적인 오류로 실패하였습니다</string>
+        <string name="camera_error_title">Camera error</string>
+        <string name="camera_label">Camera</string>
+        <string name="camera_menu_more_label">MORE OPTIONS</string>
+        <string name="camera_menu_settings_label">SETTINGS</string>
+        <string name="camera_not_support">카메라를 지원 하지 않는 단말입니다</string>
+        <!--<string name="cancel">취소</string>-->
+        <string name="cancel_posting">포스팅 중지</string>
+    <string name="cancel_posting_desc">"작성 중이던 내용은 저장되지 않습니다.
+중지하시겠습니까?"</string>
+        <string name="cannot_connect_camera">"Can't connect to the camera."</string>
+        <string name="capital_off">OFF</string>
+        <string name="capital_on">ON</string>
+        <string name="clear_effects">Clear effects</string>
+        <string name="clip">동영상</string>
+    <string name="coach_home_01">"지금 가장 이슈가 되고 있는
+사진이나 사람들을 만나보세요"</string>
+    <string name="coach_home_02">"인기있는 태그를 둘러보고
+내 관심사를 찾아보세요"</string>
+        <string name="coach_location">위치를 추가할 수 있습니다</string>
+    <string name="coach_recommendedTag">"내가 많이 사용하는 해시태그를
+추천해드립니다"</string>
+        <string name="coach_swipe_action">다음 사진을 편하게 넘겨볼 수 있어요</string>
+        <string name="coach_tag">해시태그를 입력할 수 있습니다</string>
+        <string name="coach_taggallery_01">관심 있는 태그를 팔로우 해보세요</string>
+    <string name="coach_taggallery_02">"팔로우한 태그 / 유저의 포스팅은
+마이피드에서 볼 수 있어요"</string>
+        <string name="com_facebook_choose_friends">Choose Friends</string>
+        <string name="com_facebook_dialogloginactivity_ok_button">OK</string>
+        <string name="com_facebook_image_download_unknown_error">Unexpected error while downloading an image.</string>
+        <string name="com_facebook_internet_permission_error_message">WebView login requires INTERNET permission</string>
+        <string name="com_facebook_internet_permission_error_title">AndroidManifest Error</string>
+        <string name="com_facebook_like_button_liked">Liked</string>
+        <string name="com_facebook_like_button_not_liked">Like</string>
+        <string name="com_facebook_loading">Loading...</string>
+        <string name="com_facebook_loginview_cancel_action">Cancel</string>
+        <string name="com_facebook_loginview_log_in_button">Log in with Facebook</string>
+        <string name="com_facebook_loginview_log_out_action">Log out</string>
+        <string name="com_facebook_loginview_log_out_button">Log out</string>
+        <string name="com_facebook_loginview_logged_in_as">Logged in as: %1$s</string>
+        <string name="com_facebook_loginview_logged_in_using_facebook">Logged in using Facebook</string>
+        <string name="com_facebook_logo_content_description">Facebook Logo</string>
+        <string name="com_facebook_nearby">Nearby</string>
+        <string name="com_facebook_picker_done_button_text">Done</string>
+        <string name="com_facebook_placepicker_subtitle_catetory_only_format">%1$s</string>
+        <string name="com_facebook_placepicker_subtitle_format">%1$s • %2$,d were here</string>
+        <string name="com_facebook_placepicker_subtitle_were_here_only_format">%1$,d were here</string>
+        <string name="com_facebook_requesterror_password_changed">Your Facebook password has changed. Please log into this app again to reconnect your Facebook account.</string>
+        <string name="com_facebook_requesterror_permissions">This app doesn’t have permission to do this. To change permissions, try logging into the app again.</string>
+        <string name="com_facebook_requesterror_reconnect">Please log into this app again to reconnect your Facebook account.</string>
+        <string name="com_facebook_requesterror_relogin">Please log into this app again to reconnect your Facebook account.</string>
+        <string name="com_facebook_requesterror_web_login">Your Facebook account is locked. Please log into www.facebook.com to continue.</string>
+        <string name="com_facebook_tooltip_default">"New! You're in control - choose what info you want to share with apps."</string>
+        <string name="com_facebook_usersettingsfragment_log_in_button">Log in…</string>
+        <string name="com_facebook_usersettingsfragment_logged_in">Logged in</string>
+        <string name="com_facebook_usersettingsfragment_not_logged_in">Not logged in</string>
+        <string name="com_kakao_account_cancel">Cancel</string>
+        <string name="com_kakao_alert_appKey">need to declare com.kakao.sdk.AppKey in your AndroidManifest.xml</string>
+        <string name="com_kakao_alert_install_kakaotalk">There is no installed KakaoTalk version higher than 4.2.0</string>
+        <string name="com_kakao_cancel_button">Cancel</string>
+        <string name="com_kakao_confirm_logout">Are you sure to log out from this app?</string>
+        <string name="com_kakao_confirm_unlink">Are you sure to unlink from this app?</string>
+        <string name="com_kakao_kakaostory_account">with KakaoStory</string>
+        <string name="com_kakao_kakaotalk_account">with KakaoTalk</string>
+        <string name="com_kakao_login_button">Log in with KakaoAccount</string>
+        <string name="com_kakao_logout_button">Log out</string>
+        <string name="com_kakao_ok_button">OK</string>
+        <string name="com_kakao_other_kakaoaccount">with another KakaoAccount</string>
+        <string name="com_kakao_profile_nickname">Nickname</string>
+        <string name="com_kakao_profile_userId">Kakao User ID</string>
+        <string name="com_kakao_unlink_button">Unlink</string>
+        <string name="comment_add">입력</string>
+        <string name="comment_copy">댓글이 클립보드에 복사되었습니다</string>
+        <string name="comment_delete">이 댓글을 삭제하시겠습니까?</string>
+    <string name="comment_exceeded_alert">"최대 글자 수를 초과하였습니다
+(500자 이내)"</string>
+        <string name="comment_hint">댓글을 입력하세요...</string>
+        <string name="comment_modify">댓글 수정</string>
+        <string name="common_android_wear_notification_needs_update_text">An application requires an update to the Android Wear app.</string>
+        <string name="common_android_wear_update_text">"This app won't run unless you update the Android Wear app."</string>
+        <string name="common_android_wear_update_title">Update Android Wear</string>
+        <string name="common_google_play_services_enable_button">Enable Google Play services</string>
+        <string name="common_google_play_services_enable_text">"This app won't work unless you enable Google Play services."</string>
+        <string name="common_google_play_services_enable_title">Enable Google Play services</string>
+        <string name="common_google_play_services_error_notification_requested_by_msg">Requested by %1$s</string>
+        <string name="common_google_play_services_install_button">Get Google Play services</string>
+        <string name="common_google_play_services_install_text_phone">"This app won't run without Google Play services, which are missing from your phone."</string>
+        <string name="common_google_play_services_install_text_tablet">"This app won't run without Google Play services, which are missing from your tablet."</string>
+        <string name="common_google_play_services_install_title">Get Google Play services</string>
+        <string name="common_google_play_services_invalid_account_text">The specified account does not exist on this device. Please choose a different account.</string>
+        <string name="common_google_play_services_invalid_account_title">Invalid Account</string>
+        <string name="common_google_play_services_needs_enabling_title">An application requires Google Play services to be enabled.</string>
+        <string name="common_google_play_services_network_error_text">A data connection is required to connect to Google Play services.</string>
+        <string name="common_google_play_services_network_error_title">Network Error</string>
+        <string name="common_google_play_services_notification_needs_installation_title">An application requires installation of Google Play services.</string>
+        <string name="common_google_play_services_notification_needs_update_title">An application requires an update for Google Play services.</string>
+        <string name="common_google_play_services_notification_ticker">Google Play services error</string>
+        <string name="common_google_play_services_unknown_issue">Unknown issue with Google Play services.</string>
+        <string name="common_google_play_services_unsupported_text">Google Play services, which some of your applications rely on, is not supported by your device. Please contact the manufacturer for assistance.</string>
+        <string name="common_google_play_services_unsupported_title">Google Play services</string>
+        <string name="common_google_play_services_update_button">Update</string>
+        <string name="common_google_play_services_update_text">"This app won't run unless you update Google Play services."</string>
+        <string name="common_google_play_services_update_title">Update Google Play services</string>
+        <string name="common_no_connection">인터넷에 연결되어 있지 않습니다</string>
+        <string name="common_open_on_phone">Open on phone</string>
+        <string name="common_refreshing">새로고침 중 입니다</string>
+        <string name="common_signin_button_text">Sign in</string>
+        <string name="common_signin_button_text_long">Sign in with Google</string>
+        <string name="complete">완료</string>
+        <string name="confirm">확인</string>
+        <string name="core_com_kakao_sdk_loading">Loading…</string>
+        <string name="crop_image_error">이미지를 읽을 수 없습니다</string>
+        <string name="crop_no_more">더 이상 자를 수 없습니다</string>
+        <string name="crop_top_title">자르기</string>
+        <string name="define_roundedimageview" />
+        <string name="delete">삭제</string>
+        <string name="dialog_ok">OK</string>
+    <string name="dialog_sorry_share">"공유하기는 다음 버전에 오픈될 예정입니다
+조금만 기다려 주세요"</string>
+    <string name="dialog_update_by_push">"최신버전에서 지원되는 알림을 수신했습니다
+업데이트 하시겠습니까?"</string>
+    <string name="dialog_update_by_scheme">"최신버전에서 지원 가능한 기능입니다
+업데이트 하시겠습니까?"</string>
+        <string name="disable_video_snapshot_hint">Video snapshot is disabled when special effects are on.</string>
+    <string name="disconnect_snsmapping_alert">"%1$s를 사용하려면 네이버와 페이스북 중 적어도 하나의 계정이 등록되어 있어야 합니다.
+다른 계정을 등록한 후 시도해주세요."</string>
+        <string name="effect_backdropper_gallery">Your video</string>
+        <string name="effect_backdropper_space">In space</string>
+        <string name="effect_backdropper_sunset">Sunset</string>
+        <string name="effect_background">BACKGROUND</string>
+        <string name="effect_goofy_face_big_eyes">Big eyes</string>
+        <string name="effect_goofy_face_big_mouth">Big mouth</string>
+        <string name="effect_goofy_face_big_nose">Big nose</string>
+        <string name="effect_goofy_face_small_eyes">Small eyes</string>
+        <string name="effect_goofy_face_small_mouth">Small mouth</string>
+        <string name="effect_goofy_face_squeeze">Squeeze</string>
+        <string name="effect_none">None</string>
+        <string name="effect_silly_faces">SILLY FACES</string>
+        <string name="empty">" "</string>
+        <string name="end_ask">문의하기</string>
+        <string name="end_blind_reason">님이 올리신 %1$s은 매피아서비스에서 제한하고 있는 불법성(%2$s)에 해당되어 비공개 조치 되었습니다. 추가 위반 시 서비스 이용에 제약이 있을 수 있으니 사용에 유의 부탁 드립니다.</string>
+        <string name="end_block">님의 포스팅 차단</string>
+    <string name="end_block_desc">"님의 포스팅을
+mapia에서 더 이상 볼 수 없으며,
+팔로우 중인 경우 언팔로우됩니다."</string>
+        <string name="end_check_agreement">이용 약관 확인하기</string>
+        <string name="end_copy_url_complete">URL이 클립보드에 복사되었습니다</string>
+        <string name="end_delete">이 포스팅을 삭제하시겠습니까?</string>
+        <string name="end_explanation_guide">(30일 이내 이의신청 가능)</string>
+        <string name="end_explanation_link">재게시(이의신청) 요청접수하기</string>
+        <string name="end_invalid_contents">삭제되거나 접근이 제한된 포스팅입니다</string>
+        <string name="end_invalid_contents_blinded">접근이 제한된 %1$s입니다</string>
+        <string name="end_invalid_contents_go_home">홈으로 가기</string>
+        <string name="end_invalid_contents_nocontents">접근이 제한된 포스팅입니다</string>
+        <string name="end_invalid_mycontents">비공개된 포스팅입니다</string>
+        <string name="end_penalty_reason">제한 사유 :</string>
+        <string name="end_refresh_comment">이전 댓글 보기</string>
+        <string name="end_the_last_page">마지막 페이지 입니다</string>
+        <!--<string name="facebook_app_id">1524945657777608</string>-->
+        <string name="filter_name_amaro">해질녘</string>
+        <string name="filter_name_blackandwhite">흑백</string>
+        <string name="filter_name_clear">선명하게</string>
+        <string name="filter_name_delicious">맛있게</string>
+        <string name="filter_name_delicious2">디저트</string>
+        <string name="filter_name_emerald">에메랄드</string>
+        <string name="filter_name_healthy">헬시</string>
+        <string name="filter_name_latte">라떼</string>
+        <string name="filter_name_monochrome">B/W</string>
+        <string name="filter_name_ny">노스탤지어</string>
+        <string name="filter_name_original">원본</string>
+        <string name="filter_name_rise">새벽녘</string>
+        <string name="filter_name_sakura">벚꽃</string>
+        <string name="filter_name_tender">부드럽게</string>
+        <string name="filter_name_toy">토이</string>
+        <string name="filter_name_vintage">빈티지</string>
+        <string name="home_hotpic">지금 가장 핫한 사진들을 확인하세요</string>
+        <string name="home_hotuser">지금 가장 핫한 유저들을 만나보세요</string>
+        <string name="home_no_connection">인터넷에 연결되어 있지 않습니다</string>
+        <string name="home_retry">다시 시도하기</string>
+        <string name="image_file_name_format">"'IMG'_yyyyMMdd_HHmmss"</string>
+        <string name="image_load_fail">이미지 불러오기에 실패 하였습니다</string>
+        <string name="image_oom_error">메모리가 부족합니다. 메모리 정리 후 다시 시도 해 주세요</string>
+        <string name="image_unknown_error">알수없는 에러가 발생 하였습니다</string>
+        <string name="kakao_app_key">46771582b2ae614cec4e16a16fcd6a04</string>
+        <string name="kakao_scheme">kakao46771582b2ae614cec4e16a16fcd6a04</string>
+        <string name="kakaolink_host">kakaolink</string>
+        <string name="key_body_view">BodyView</string>
+        <string name="key_notice_data">NaverNoticeData</string>
+        <string name="library_roundedimageview_author">Vince Mi</string>
+        <string name="library_roundedimageview_authorWebsite">https://github.com/vinc3m1</string>
+        <string name="library_roundedimageview_isOpenSource">true</string>
+        <string name="library_roundedimageview_libraryDescription">A fast ImageView (and Drawable) that supports rounded corners (and ovals or circles) based on the original example from Romain Guy.</string>
+        <string name="library_roundedimageview_libraryName">RoundedImageView</string>
+        <string name="library_roundedimageview_libraryVersion">1.3.0</string>
+        <string name="library_roundedimageview_libraryWebsite">https://github.com/vinc3m1/RoundedImageView</string>
+        <string name="library_roundedimageview_licenseId">apache_2_0</string>
+        <string name="library_roundedimageview_repositoryLink">https://github.com/vinc3m1/RoundedImageView.git</string>
+        <string name="license_agreement">mapia 이용약관 동의 (필수)</string>
+    <string name="license_agreement_contents">"‘mapia’ 이용자 여러분, 반갑습니다.
+
+ ‘mapia’를 이용하시면서 필요하시거나 궁금해하실 기본적인 ‘서비스’ 이용 관련 정보를 약관에 담아 안내 드립니다. 약관을 통해 ‘회사’와 ‘회원’과의 권리, 의무 및 책임사항, 기타 사항을 확인하실 수 있으며, ‘회사’는 이 약관의 내용을 ‘회원’이 쉽게 확인할 수 있도록 ‘서비스’ 초기 화면에 게시합니다. ‘회사’는 안정적인 ‘서비스’를 지속적으로 제공하기 위해 최선을 다해 노력해 나갈 것이며 안내 드리는 서비스 약관을 통해 ‘mapia’가 여러분께 조금 더 가까이 다가갈 수 있기를 기대합니다.
+
+ 약관에서 사용되는 용어의 정의와 해석은 다음과 같습니다.
+ ‘서비스’는 단말기(PC, TV, 휴대형단말기 등의 각종 유무선 장치를 포함)와 상관없이 ‘회원’이 이용할 수 있는 ‘mapia’ 및 관련 제반 서비스를 의미합니다. ‘회원’은 ‘회사’의 ‘서비스’에 접속하여 이 약관에 따라 ‘회사’와 이용계약을 체결하고 ‘회사’가 제공하는 ‘서비스’를 이용하는 고객을 말합니다. ‘게시물’은 ‘회원’이 ‘mapia’ 서비스의 이용 시 ‘mapia’상에 게시한 글, 태그, 사진, 동영상 등의 개별 컨텐츠 및 수집물 등을 의미합니다. ‘mapia’ 서비스란 관심사에 대해 사진과 동영상을 올리고 공유하고 의견을 나누는 비지인 기반의 관심소셜네트워크 서비스입니다.
+
+ 약관은 ‘회원’이 쉽게 알 수 있도록 게시하며 사전 공지 후 개정합니다.
+ ‘회사’는 약관의 내용을 ‘회원’이 쉽게 알 수 있도록 ‘서비스’ 내에 게시하며, 관련법령을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다. 약관의 변경이 있는 경우 ‘회사’는 서비스 내에 개정이유와 적용일자를 게시하여 ‘회원’에게 이를 알릴 수 있으며, 중대한 약관변경의 경우 전자적 수단을 통해 별도로 통지할 수 있습니다.
+
+ 약관과 운영정책은 명시된 우선순위를 기본으로 하되 상호 보완됩니다.
+ ‘회사’는 ‘mapia’ 서비스에 대한 이용약관 및 별도의 운영정책(이하 '운영정책')을 둘 수 있습니다. 이 약관에서 정하지 아니한 사항이나 해석에 대해서는 별도의 운영정책, 관계법령 또는 상관례에 따릅니다.
+
+ ‘mapia’의 실제 이용까지는 몇 가지 절차를 거치게 됩니다.
+ 이용계약은 ‘회원’이 되고자 하는 자(이하 ‘가입신청자’)가 약관의 내용에 대하여 동의를 한 다음 회원가입신청을 하고 ‘회사’가 이러한 신청에 대하여 승낙함으로써 체결됩니다. ‘mapia’의 ‘가입신청자’는 자신의 네이버아이디 및 ‘회사’가 지정하는 타서비스계정(이하 ‘네오아이디’)을 통해 ‘mapia’의 ‘회원’ 계정을 개설할 수 있습니다. ‘회사’는 ‘가입신청자’의 신청에 대하여 ‘서비스’이용 승낙을 원칙으로 합니다. ‘회원’은 이용 승낙을 통해 ‘mapia’서비스를 자유롭게 이용할 수 있습니다.
+
+ ‘회원’의 개인정보를 보호하기 위해 노력합니다.
+ 회사는 ‘mapia’서비스의 원활한 제공을 위하여 회원이 동의한 목적과 범위 내에서만 개인정보를 이용하며, 개인정보보호 관련 법령에 따라 안전하게 관리합니다. 회사가 회원의 개인정보를 안전하게 취급하기 위하여 기울이는 노력이나 기타 상세한 사항은 ‘mapia’ 개인정보취급방침에서 확인 가능합니다.
+
+ 공지가 잘 전달될 수 있도록 힘씁니다.
+ ‘회사’가 ‘회원’께 통지를 하는 경우 이 약관에 별도 규정이 없는 한 ‘서비스’ 내 알림 또는 기타 ‘회사’가 적당하다고 판단하는 방법으로 제공 할 수 있습니다. 이 때 ‘회사’는 ‘회원’ 전체에 대한 통지의 경우 7일 이상 ‘mapia’의 서비스 초기화면 또는 공지사항 등에 게시함으로써 통지를 갈음할 수 있습니다.
+
+ ‘회원’의 의견도 적극적으로 수용합니다.
+ ‘회사’는 관련법과 이 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며, 계속적이고 안정적으로 ‘서비스’를 제공하기 위하여 최선을 다하여 노력합니다. 또한 ‘회원’이 안전하게 ‘서비스’를 이용할 수 있도록 개인정보(신용정보 포함)보호를 위해 보안시스템을 갖추어야 하며 개인정보취급방침을 공시하고 준수합니다. ‘서비스’의 이용과 관련하여 ‘회원’이 제기한 의견이나 불만이 정당하다고 인정할 경우에도 이를 처리하기 위해 노력합니다. 필요한 경우 ‘회원’이 제기한 의견이나 불만사항에 대해서는 게시판을 활용하거나 기타 ‘회사’가 적당하다고 판단하는 방법 등을 통하여 ‘회원’에게 처리과정 및 결과를 전달할 수 있습니다.
+
+ ‘mapia’ 서비스 사용과 관련해서는 몇 가지 주의사항이 요구됩니다.
+ ‘서비스’에 대한 저작권 및 지적재산권은 ‘회사’에 귀속되며 이 때 ‘회원’의 게시물 및 제휴계약에 따라 제공된 저작물 등은 제외합니다. ‘회원’은 ‘회사’가 제공하는 ‘서비스’와 관련한 게시물 또는 기타 정보를 변경, 수정, 제한하는 등의 조치를 취하지 않습니다. 또한 ‘mapia’ 이용자는 ‘회사’에서 ‘서비스’ 내에 게시한 정보에 대한 변경 또는 ‘회사’의 동의 없이 영리를 목적으로 ‘서비스’를 사용하는 행위가 금지되며, ‘회사’나 제 3자에 대한 사칭, 명의 도용, 저작권 등 지적재산권 침해, 명예 손상, 업무 방해 등을 일으키는 행위가 금지됩니다. ‘회원’은 관계법, 이 약관의 규정, ‘운영정책’ 및 이용안내, ‘서비스’와 관련하여 공지한 주의사항 및 ‘회사’가 통지하는 사항 등을 준수하여야 하고 기타 ‘회사’의 업무에 방해되는 행위를 하여서는 안됩니다.
+
+ 안정적 ‘mapia’ 서비스 제공을 위해 노력합니다.
+ ‘회사’는 상당한 이유가 있는 경우에 운영상, 기술상의 필요에 따라 제공하고 있는 전부 또는 일부 서비스를 변경할 수 있습니다. ‘mapia’ 서비스의 내용, 이용방법, 이용시간에 대한 변경이 있는 경우 변경사유, 변경될 ‘서비스’의 내용 및 제공일자 등은 그 변경 전에 ‘mapia’ 서비스 내 공지사항 화면 등 ‘회원’이 충분히 인지할 수 있는 방식으로 게시합니다. ‘회사’는 무료로 제공되는 ‘서비스’의 일부 또는 전부를 ‘회사’의 정책 및 운영의 필요상 수정, 중단, 변경할 수 있으며, 이에 대하여 관련법에 특별한 규정이 없는 한 ‘회원’에게 별도의 보상을 하지 않습니다.
+
+ 다양한 정보를 제공할 수 있습니다.
+ ‘회사’는 ‘회원’이 ‘mapia’ 서비스 이용 중 필요하다고 인정되는 다양한 정보를 공지사항이나 서비스 내 알림, 푸쉬 등의 방법으로 ‘회원’에게 제공할 수 있으며, ‘회원’은 관련법에 따른 거래관련 정보 및 고객문의 등에 대한 답변 등을 제외하고는 언제든지 수신 거절을 할 수 있습니다. 다만, ‘회원’에게 영리목적의 광고성 정보를 ‘전자적 전송매체에 의하여 전송하려고 하는 경우에는 별도로 ‘회원’의 사전 동의를 받아서 전송합니다.
+
+ ‘회사’와 ‘회원’은 권리보호를 위해 노력합니다.
+ ‘회원’은 ‘mapia’에 생성한 자신의 계정을 통해 ‘회원’의 사진, 동영상 기타 컨텐츠를 ‘mapia’에 업로드 하거나 ‘게시물’을 작성할 수 있습니다. ‘회원’이 자신의 계정에 업로드한 컨텐츠는 외부 사이트에서 검색, 수집, 링크될 수 있습니다. ‘회원’이 업로드 한 컨텐츠가 ‘회원’의 저작물인 경우 ‘회원’은 저작권자로서 게재된 컨텐츠의 모든 권리를 정당하게 보유하며 본인 스스로 이에 대해 책임을 집니다. 해당 컨텐츠가 타인의 저작물일 경우 ‘회원’은 당해 컨텐츠가 ‘mapia’에 게시되어 본 약관에 정한 바와 같이 이용되는 것에 대한 정당한 권리를 확보하여 출처표기와 함께 업로드해야 합니다. 이 경우 컨텐츠의 모든 권리는 원저작자에게 정당하게 귀속됩니다. ‘회원’은 본 약관의 동의를 통해 ‘mapia’의 서비스속성 및 이용시 발생할 책임과 권리를 이해하고 허가하였으며, 필요한 라이선스, 권리, 동의 및 허락을 소유하거나 확보하였음을 확인합니다.
+
+ ‘회사’는 ‘mapia’ 서비스 내 게시물의 권리자 보호를 위한 절차를 제공합니다.
+ ‘회원’이 ‘mapia’ 서비스내에 게시한 모든 ‘게시물’은 해당 저작자에게 그 권리와 책임이 귀속되며, 저작물 무단 도용, 명예 훼손, 초상권 또는 사생활 침해로 판단되는 경우 요청에 의해 ‘게시물’이 임시로 게시중단 될 수 있습니다. 이 경우 ‘회원’은 침해행위의 해당사항이 없음을 소명하고 재게시를 요청할 수 있습니다. 게시중단과 관련한 상세 내용은 ‘운영정책’에 정한 바에 따릅니다. ‘회사’는 ‘회원’이 이 약관의 의무를 위반하거나 ‘서비스’의 정상적인 운영을 방해한 경우 ‘회원’의 ‘mapia’ 서비스 이용을 제한할 수 있습니다. 영구이용정지시 ‘회원’이 ‘mapia’ 서비스 이용을 통해 획득한 혜택 등도 모두 소멸되며, ‘회사’는 이에 대해 별도로 보상하지 않습니다. 관련 제한의 조건 및 세부내용은 ‘운영정책’을 따릅니다.
+ ‘회사’가 ‘회원’의 ‘서비스’ 이용을 제한하거나 계약을 해지하는 경우에는 ‘회사’는 통지 방식에 따라 알리게 되며 이때 ‘회원’은 ‘회사’가 정한 절차에 따라 이의신청을 할 수 있습니다. 이의가 정당하다고 ‘회사’가 인정하는 경우 ‘회사’는 즉시 ‘서비스’의 이용을 재개합니다.
+
+ ‘회사’는 ‘서비스’의 불법적 혹은 무단사용에 대한 모든 적절한 법적 행위를 취할 수 있는 권리를 보유합니다.
+ ‘회사’는 ‘회원’의 ‘게시물’이 타인의 지적재산권을 포함한 법률 기타 제3자의 권리를 침해하거나 이용약관 또는 운영원칙을 침해하는 컨텐츠임이 확인될 경우 이를 사전예고 없이 ‘서비스’에서 철회 또는 삭제하는 등의 조치를 취할 수 있는 권리를 보유합니다. 또한 ‘회원’의 약관위반, 부적절한 업로드시도, 타인의 권리침해 등의 중대한 ‘서비스’ 방해를 사유로 ‘회원’의 계정에 대한 경고, 비공개, 일시이용정지, 영구이용정지 등 사용상 제재를 가할 수 있습니다. 자세한 절차와 내용은 ‘운영정책’을 따릅니다.
+
+ ‘서비스’에 대한 권리를 존중해 주시기 바랍니다.
+ ‘회사’가 제공하는 ‘mapia’의 ‘서비스’ 디자인, ‘회사’가 만든 텍스트, 스크립트(script), 그래픽, ‘회원’ 상호간 전송 기능 등 ‘회사’가 제공하는 ‘서비스’에 관련된 모든 상표, ‘서비스’ 마크, 로고 등에 관한 저작권 기타 지적재산권은 관련법령에 기하여 ‘회사’가 보유하고 있거나 ‘회사’에게 소유권 또는 사용권이 있습니다. ‘회사’는 ‘mapia’와 관련하여 ‘회원’에게 ‘회사’가 정한 이용조건에 따라 ‘서비스’를 이용할 수 있는 이용권만을 부여하며, ‘회원’은 이에 대한 양도, 판매, 담보제공 등의 처분행위를 할 수 없습니다. ‘회원’은 본 이용약관으로 인하여 ‘서비스’를 소유하거나 ‘서비스’에 관한 저작권을 보유하게 되는 것이 아니라 ‘회사’로부터 ‘서비스’의 이용을 허락 받게 되는 것으로, ‘회원’은 정보취득 또는 개인용도로만 제공되는 형태로 ‘서비스’를 이용할 수 있습니다. ‘회원’은 명시적으로 허락된 내용을 제외하고는 ‘서비스’를 통해 얻어지는 ‘회원’ 상태정보를 영리 목적으로 사용, 복사, 유통하는 것을 포함하여 ‘회사’가 만든 텍스트, 스크립트, 그래픽의 ‘회원’ 상호간 전송기능 등을 복사하거나 유통할 수 없습니다.
+
+ 언제든지 해지하실 수 있습니다.
+
+ '회원'은 언제든지 mapia 이용계약 해지 신청을 할 수 있으며, 회사는 관련법령 등이 정하는 바에 따라 이를 즉시 처리하여야 합니다. 회원이 계약을 해지할 경우, 관련법 및 개인정보취급방침에 따라 회사가 회원정보를 보유하는 경우를 제외하고는 해지 즉시 '회원'의 모든 데이터는 소멸되며 이는 복구할 수 없습니다.
+ 회원이 계약을 해지하는 경우, 회원을 식별할 수 있는 프로필 사진 기타 본인계정에 부속된 내용 일체는 삭제됩니다. 다만, 타인 또는 공용게시판에 등록한 댓글이나 '좋아요' 등의 게시물 등은 삭제되지 않으니 사전에 삭제 후 탈퇴하시기 바랍니다.
+ ‘서비스’운영에 대한 책임 중 몇 가지 예외 사항이 있습니다.
+ ‘회사’는 천재지변 또는 이에 준하는 불가항력으로 인하여 ‘서비스’를 제공할 수 없는 경우에는 ‘서비스’ 제공에 관한 책임이 면제되며, 단말기 등 접근 매체의 분실로 인한 ‘서비스’ 이용 장애 등과 같이 ‘회원’의 귀책사유로 인한 ‘서비스’ 이용의 장애 및 통신 장애 등으로 인한 ‘서비스’ 이용 장애 등에 대하여는 책임을 지지 않습니다. 또한 ‘회원’이 ‘서비스’와 관련하여 게재한 정보, 자료, 사실의 신뢰도, 정확성 등의 내용과 ‘회원’ 간 또는 ‘회원’과 제 3자 상호간에 ‘서비스’를 매개로 하여 거래 등을 한 경우에는 책임이 면제됩니다. 그 밖에도 무료로 제공되는 ‘서비스’ 이용과 관련하여 관련법에 특별한 규정이 없는 한 책임을 지지 않습니다. ‘회원’의 ‘게시물’이 ‘서비스’됨에 있어 본 약관에서 정하여 ‘회원’이 동의한 보증 및 책임을 ‘회원’의 고의 또는 과실로 이행하지 않음에 따라 발생하는 권리침해에 대해서도 ‘회사’는 책임을 지지 않습니다. 다만, ‘mapia’내에 링크되어 있는 웹사이트들이 개인정보를 수집하는 행위에 대해서는 본 ‘mapia’의 약관 및 개인정보취급방침이 적용되지 않음을 알려 드립니다.
+
+ 본 약관과 관련해 ‘회사’와 ‘회원’간에 제기된 소송은 대한민국 법을 준거법으로 하며, 발생한 분쟁에 대해서는 민사소송법 상 정한 절차를 따릅니다.
+"</string>
+        <string name="license_all_policy">전체 동의하기</string>
+        <string name="license_help_agreement">mapia 이용약관에 동의가 필요합니다</string>
+        <string name="license_help_location">위치정보 이용약관 동의가 필요합니다</string>
+        <string name="license_help_privacy">개인정보 취급 방침에 동의가 필요합니다</string>
+    <string name="license_location_contents">"제 1 조 (목적)
+
+ 이 약관은 네이버 주식회사 (이하 “회사”)가 제공하는 위치정보사업 또는 위치기반서비스사업과 관련하여 회사와 개인위치정보주체와의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
+
+ 제 2 조 (약관 외 준칙)
+ 이 약관에 명시되지 않은 사항은 위치정보의 보호 및 이용 등에 관한 법률, 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 전기통신기본법, 전기통신사업법 등 관계법령과 회사의 이용약관 및 개인정보취급방침, 회사가 별도로 정한 지침 등에 의합니다.
+
+ 제 3 조 (서비스 내용 및 요금)
+
+ ①회사는 직접 위치정보를 수집하거나 위치정보사업자로부터 위치정보를 전달받아 아래와 같은 위치기반서비스를 제공합니다.
+ 1. Geo Tagging 서비스: 게시물에 포함된 개인위치정보주체 또는 이동성 있는 기기의 위치정보가 게시물과 함께 저장됩니다.
+ 2.현재 위치를 활용한 검색결과 제공 서비스: 정보 검색 요청 시 개인위치정보주체 또는 이동성 있는 기기의 위치를 이용한 검색결과 및 주변결과(맛집, 주변업체 등)를 제시합니다.
+ 3. 현재 위치를 활용한 친구찾기 및 친구맺기: 현재 위치를 활용하여 친구를 찾아주거나 친구를 추천하여 줍니다.
+ 4. 연락처 교환하기: 현재 위치를 활용하여 친구와 연락처를 교환할 수 있습니다.
+ 5. 이용자 위치를 활용한 광고정보 제공: 검색결과 또는 기타 서비스 이용 과정에서 개인위치정보주체 또는 이동성 있는 기기의 위치를 이용하여 광고소재를 제시합니다.
+ ②제1항 위치기반서비스의 이용요금은 무료입니다.
+
+ 제 4 조 (위치정보 수집방법)
+
+ 회사는 다음과 같은 방식으로 개인위치정보를 수집합니다.
+ ① 휴대폰 단말기를 이용한 기지국 기반(Cell ID방식)의 실시간 위치정보 수집
+ ② GPS칩이 내장된 전용 단말기를 통해 수집되는 GPS 정보를 통한 위치정보 수집
+ ③ Wi-Fi칩이 내장된 전용 단말기를 통해 수집되는 Wi-Fi 정보를 통한 위치정보 수집
+ ④ 스마트폰, 태블릿PC 등 전자 단말기의 운영체계(Operation System)에서 제공하는 위치정보 API를 통해 제공받는 위치정보의 수집
+
+ 제 5 조 (개인위치정보주체의 권리)
+
+ ①개인위치정보주체는 개인위치정보 수집 범위 및 이용약관의 내용 중 일부 또는 개인위치정보의 이용ㆍ제공 목적, 제공받는 자의 범위 및 위치기반서비스의 일부에 대하여 동의를 유보할 수 있습니다.
+ ②개인위치정보주체는 개인위치정보의 수집ㆍ이용ㆍ제공에 대한 동의의 전부 또는 일부를 철회할 수 있습니다.
+ ③개인위치정보주체는 언제든지 개인위치정보의 수집ㆍ이용ㆍ제공의 일시적인 중지를 요구할 수 있습니다.
+ 이 경우 회사는 요구를 거절하지 아니하며, 이를 위한 기술적 수단을 갖추고 있습니다
+ ④개인위치정보주체는 회사에 대하여 아래 자료의 열람 또는 고지를 요구할 수 있고, 당해 자료에 오류가 있는 경우에는 그 정정을 요구할 수 있습니다.
+ 이 경우 회사는 정당한 이유 없이 요구를 거절하지 아니합니다.
+ 1.개인위치정보주체에 대한 위치정보 수집ㆍ이용ㆍ제공사실 확인자료
+ 2.개인위치정보주체의 개인위치정보가 위치정보의 보호 및 이용 등에 관한 법률 또는 다른 법령의 규정에 의하여 제3자에게 제공된 이유 및 내용
+ ⑤회사는 개인위치정보주체가 동의의 전부 또는 일부를 철회한 경우에는 지체 없이 수집된 개인위치정보 및 위치정보 수집ㆍ이용ㆍ제공사실 확인자료를 파기합니다.
+ 단, 동의의 일부를 철회하는 경우에는 철회하는 부분의 개인위치정보 및 위치정보 수집ㆍ이용ㆍ제공사실 확인자료에 한합니다.
+ ⑥개인위치정보주체는 제1항 내지 제4항의 권리행사를 위하여 이 약관 제13조의 연락처를 이용하여 회사에 요구할 수 있습니다.
+
+ 제 6 조 (법정대리인의 권리)
+
+ ①회사는 만14세 미만 아동으로부터 개인위치정보를 수집ㆍ이용 또는 제공하고자 하는 경우에는 만14세 미만 아동과 그 법정대리인의 동의를 받아야 합니다.
+ ②법정대리인은 만14세 미만 아동의 개인위치정보를 수집ㆍ이용ㆍ제공에 동의하는 경우 동의유보권, 동의철회권 및 일시중지권, 열람ㆍ고지요구권을 행사할 수 있습니다.
+
+ 제 7 조 (위치정보 이용ㆍ제공사실 확인자료 보유근거 및 보유기간)
+
+ 회사는 위치정보의 보호 및 이용 등에 관한 법률 제16조 제2항에 근거하여 개인위치정보주체에 대한 위치정보 수집ㆍ이용ㆍ제공사실 확인자료를 위치정보시스템에 자동으로 기록하며, 6개월 이상 보관합니다.
+
+ 제 8 조 (서비스의 변경 및 중지)
+
+ ①회사는 위치정보사업자의 정책변경 등과 같이 회사의 제반 사정 또는 법률상의 장애 등으로 서비스를 유지할 수 없는 경우, 서비스의 전부 또는 일부를 제한, 변경하거나 중지할 수 있습니다.
+ ②제1항에 의한 서비스 중단의 경우에는 회사는 사전에 인터넷 등에 공지하거나 개인위치정보주체에게 통지합니다.
+
+ 제 9 조 (개인위치정보 제3자 제공시 즉시 통보)
+
+ ①회사는 개인위치정보주체의 동의 없이 당해 개인위치정보주체의 개인위치정보를 제3자에게 제공하지 아니하며, 제3자 제공 서비스를 제공하는 경우에는 제공 받는 자 및 제공목적을 사전에 개인위치정보주체에게 고지하고 동의를 받습니다.
+ ②회사는 개인위치정보를 개인위치정보주체가 지정하는 제3자에게 제공하는 경우에는 개인위치정보를 수집한 당해 통신단말장치로 매회 개인위치정보주체에게 제공받는 자, 제공일시 및 제공목적을 즉시 통보합니다.
+ ③다만, 아래에 해당하는 경우에는 개인위치정보주체가 미리 특정하여 지정한 통신단말장치 또는 전자우편주소 등으로 통보합니다.
+ 1.개인위치정보를 수집한 당해 통신단말장치가 문자, 음성 또는 영상의 수신기능을 갖추지 아니한 경우
+ 2.개인위치정보주체가 개인위치정보를 수집한 당해 통신단말장치 외의 통신단말장치 또는 전자우편주소 등으로 통보할 것을 미리 요청한 경우
+
+ 제 10 조 (8세 이하의 아동 등의 보호의무자의 권리)
+
+ ①회사는 아래의 경우에 해당하는 자(이하 “8세 이하의 아동”등이라 한다)의 보호의무자가 8세 이하의 아동 등의 생명 또는 신체보호를 위하여 개인위치정보의 이용 또는 제공에 동의하는 경우에는 본인의 동의가 있는 것으로 봅니다.
+ 1.8세 이하의 아동
+ 2.금치산자
+ 3.장애인복지법제2조제2항제2호의 규정에 의한 정신적 장애를 가진 자로서 장애인고용촉진및직업재활법 제2조제2호의 규정에 의한 중증장애인에 해당하는 자(장애인복지법 제29조의 규정에 의하여 장애인등록을 한 자에 한한다)
+ ②8세 이하의 아동 등의 생명 또는 신체의 보호를 위하여 개인위치정보의 이용 또는 제공에 동의를 하고자 하는 보호의무자는 서면동의서에 보호의무자임을 증명하는 서면을 첨부하여 회사에 제출하여야 합니다.
+ ③보호의무자는 8세 이하의 아동 등의 개인위치정보 이용 또는 제공에 동의하는 경우 개인위치정보주체 권리의 전부를 행사할 수 있습니다.
+
+ 제 11 조 (손해배상)
+
+ 개인위치정보주체는 회사의 위치정보의 보호 및 이용 등에 관한 법률 제15조 내지 26조의 규정을 위반한 행위로 손해를 입은 경우에 회사에 대하여 손해배상을 청구할 수 있습니다. 이 경우 회사는 고의 또는 과실이 없음을 입증하지 아니하면 책임을 면할 수 없습니다.
+
+ 제 12 조 (분쟁의 조정)
+
+ ①회사는 위치정보와 관련된 분쟁에 대하여 개인위치정보주체와 협의가 이루어지지 아니하거나 협의를 할 수 없는 경우에는 방송통신위원회에 재정을 신청할 수 있습니다.
+ ②회사 또는 개인위치정보주체는 위치정보와 관련된 분쟁에 대해 당사자간 협의가 이루어지지 아니하거나 협의를 할 수 없는 경우에는 개인정보보호법에 따라 개인정보분쟁조정위원회에 조정을 신청할 수 있습니다.
+
+ 제 13 조 (사업자 정보)
+
+ 회사의 상호, 주소, 전화번호 그 밖의 연락처는 다음과 같습니다.
+ 상호: 네이버주식회사
+ 주소: 경기도 성남시 분당구 불정로 6 네이버 그린팩토리 (463-867)
+ 전화번호: 1588-3820
+ 이메일 주소: navercc@naver.com
+ 부칙
+ 제 1 조 시행일
+ 본 약관은 2014년 10월 29일부터 적용됩니다.
+
+ 제 2 조 위치정보관리 책임자 정보
+ 회사는 다음과 같이 위치정보 관리책임자를 지정하여 이용자들이 서비스 이용과정에서 발생한 민원사항 처리를 비롯하여 개인위치정보주체의 권리 보호를 위해 힘쓰고 있습니다.
+
+ 위치정보 관리책임자 : (개인)정보보호 담당 부서 임원(개인정보 관리책임자 겸직)
+ 전화번호 : 1588-3820
+ 이메일 주소 : privacy@naver.com"</string>
+        <string name="license_location_policy">위치정보 이용약관 동의 (필수)</string>
+    <string name="license_privacy_contents">"개인정보 수집 및 이용 동의(필수)
+
+ 정보통신망법에 따라 mapia의 회원가입을 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용 목적, 개인정보의 보유 및 이용기간을 안내해 드리오니 자세히 읽으신 후, 동의하여 주시기 바랍니다. 이용자는 개인정보의 수집 및 이용을 거부하실 권리가 있으나, mapia는 서비스 제공을 위해 필요한 최소한의 개인정보만을 수집하고 있는 바, 이를 거부하실 경우 회원가입이 불가능할 수 있습니다.
+
+ 1. 수집하는 개인정보의 항목 및 수집방법
+ 이메일 주소로 회원 가입 시 이메일 주소, 비밀번호, 닉네임을 필수로 수집하며, 네이버 또는 페이스북 계정 연동 시에도 닉네임은 필수 수집합니다. 또한 ‘네이버 아이디로 로그인’을 이용할 경우, 기본정보(이메일 주소, 별명, 프로필사진, 성별, 연령대, 네이버 아이디, 생년월일, 휴대폰번호, 실명여부)를 네이버로부터 제공받고, ‘페이스북 아이디로 로그인’을 이용할 경우에는 이메일 주소 및 공개 프로필 정보(이름, 프로필 사진, 연령대, 성별)를 페이스북으로부터 제공받고 있습니다. 또한 지인 검색 및 알림, 초대 등을 위하여 휴대폰 번호, 단말기 주소록 내에 저장된 연락처 정보(지인의 이름, 전화번호)가 수집됩니다.
+ 그 외에 서비스 이용 과정이나 앱 실행 과정에서 IP Address, 쿠키, 방문일시, 서비스 이용기록, 불량 이용기록, 기기정보, 위치정보가 수집될 수 있으며, 고객 문의 접수 및 처리 과정에서 이메일 주소나 전화번호가 수집될 수도 있습니다.
+
+ 2. 개인정보의 수집 및 이용목적
+ 회사는 웹사이트 및 모바일 서비스 이용을 위한 컨텐츠 제공, 특정 맞춤 서비스 제공, 본인 확인, 지인 검색·알림·초대 등과 같은 서비스 제공을 위해 개인정보를 활용합니다.
+ 또한, 회원제 서비스 제공, 회원 식별, mapia 이용약관 위반 회원에 대한 이용제한 조치, 서비스의 원활한 운영에 지장을 미치는 행위 및 서비스 부정이용 행위 제재, 가입의사 확인, 가입 및 가입횟수 제한, 분쟁 조정을 위한 기록보존, 불만처리 등 민원처리, 고지사항 전달, 회원탈퇴 의사의 확인 등과 같은 회원관리를 목적으로도 개인정보를 이용합니다.
+ 그 외에도 신규 서비스 개발, 통계학적 특성에 따른 서비스 제공 및 광고 게재, 서비스의 유효성 확인, 이벤트 정보 및 참여기회 제공, 광고성 정보 제공, 접속빈도 파악, 회원의 서비스 이용에 대한 통계 분석 등 다양한 마케팅·광고에 활용될 수 있습니다.
+
+ 3. 개인정보의 보유 및 이용기간
+ 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체 없이 파기합니다. 다만, 서비스의 부정한 이용으로 인한 분쟁을 방지하기 위한 내부방침에 따라 서비스의 부정이용기록, 즉 이용약관 및 운영원칙에 위배되는 행위를 한 이용자의 개인정보는 1년간 보존한 다음 파기합니다. 또한 회사가 법령에 따라 보관해야 하는 정보는 아래와 같습니다.
+ - 전자상거래 등에서의 소비자보호에 관한 법률
+ 계약 또는 청약철회 등에 관한 기록 : 5년
+ 대금결제 및 재화 등의 공급에 관한 기록 : 5년
+ 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
+ - 통신비밀보호법
+ 서비스 방문기록 : 3개월
+"</string>
+        <string name="license_privacy_policy">개인정보 취급방침 동의 (필수)</string>
+        <string name="loading">로딩중</string>
+        <string name="location_gallery_related">연관</string>
+        <string name="login_btn_facebook">페이스북으로 시작하기</string>
+        <string name="login_btn_naver">네이버로 시작하기</string>
+        <string name="login_change_nickname">닉네임 변경</string>
+        <string name="menu_camera">Camera</string>
+        <string name="menu_search">Search</string>
+        <string name="message_changed">소개를 변경했습니다</string>
+        <string name="modify">수정</string>
+        <string name="myaccount_sharing_band">밴드</string>
+        <string name="myaccount_sharing_facebook">페이스북</string>
+        <string name="myaccount_sharing_kakaotalk">카카오톡</string>
+        <string name="myaccount_sharing_line">라인</string>
+        <string name="myaccount_sharing_sms">문자</string>
+        <string name="myfeed_floating_following">팔로잉</string>
+        <string name="myfeed_follow_following">팔로잉</string>
+    <string name="myfeed_follow_no_data_01">"내가 팔로잉하는 유저가 없습니다
+HOT USER에서 팔로잉할 유저를 찾아보세요"</string>
+        <string name="myfeed_follow_no_data_02">HOT USER 보기</string>
+    <string name="myfeed_hello_01">"이곳은 MY FEED입니다
+내가 올린 포스팅과 팔로잉하는 태그/유저의
+최신 업데이트를 모아서 보여드립니다"</string>
+        <string name="myfeed_hello_02">관심 태그/유저를 팔로잉해보세요</string>
+        <string name="myfeed_list_block_01">님 차단하기</string>
+    <string name="myfeed_list_block_02">"님의 포스팅을
+mapia에서 더 이상 볼 수 없으며,
+팔로우 중인 경우 언팔로우됩니다."</string>
+        <string name="myfeed_list_dialog_01">이 포스팅 숨기기</string>
+        <string name="myfeed_list_dialog_02">님 차단하기</string>
+        <string name="myfeed_list_dialog_03">이 포스팅 신고하기</string>
+    <string name="myfeed_list_dialog_block">"님의 포스팅을
+mapia에서 더 이상 볼 수 없으며,
+팔로우 중인 경우 언팔로우됩니다."</string>
+        <string name="myfeed_list_dialog_tag">이 태그를 삭제하시겠습니까?</string>
+        <string name="myfeed_list_more_view">... 더 보기</string>
+    <string name="myfeed_no_data_01">"팔로잉하는 태그/유저에
+포스팅이 아직 올라오지 않았습니다"</string>
+        <string name="myfeed_no_data_02">더 많은 관심사를 팔로잉해보세요</string>
+        <string name="myfeed_posting_first">첫 번째 포스팅 올리기</string>
+        <string name="myfeed_tag_follow">팔로우</string>
+        <string name="myfeed_tag_following">팔로잉</string>
+        <string name="myfeed_tag_following_tag">팔로잉 태그</string>
+    <string name="myfeed_tag_no_data_01">"팔로잉하는 태그가 없습니다
+관심사를 검색하고 팔로잉해보세요"</string>
+        <string name="myfeed_tag_no_data_02">관심 태그 찾기</string>
+        <string name="myfeed_view_hottag_hotuser">인기 태그/유저 보기</string>
+        <string name="nickname_alert_contains_space">닉네임에 공백은 사용할 수 없습니다.</string>
+        <string name="nickname_alert_default">닉네임을 다시 확인해 주세요.</string>
+        <string name="nickname_alert_dup">이미 사용 중인 닉네임입니다.</string>
+        <string name="nickname_alert_invalid_nick">닉네임에 특수문자가 포함되어 있습니다.</string>
+        <string name="nickname_alert_invalid_res">닉네임 변경 실패</string>
+        <string name="nickname_alert_no_nickname">닉네임이 없습니다.</string>
+        <string name="nickname_alert_prohibite_word">닉네임에 금칙어가 포함되어 있습니다.</string>
+        <string name="nickname_alert_too_long">닉네임은 15자 이하의 문자만 가능합니다.</string>
+        <string name="nickname_alert_too_short">특수문자를 제외한 2자 이상의 문자로 입력해 주세요.</string>
+        <string name="nickname_and_message_changed">닉네임과 소개를 변경했습니다</string>
+        <string name="nickname_changed">닉네임을 변경했습니다</string>
+        <string name="no_external_storage">No external storage available</string>
+        <string name="no_external_storage_title">No Storage</string>
+        <string name="no_like">이 포스팅에 제일 먼저 좋아요 해주세요</string>
+    <string name="no_location_found">"검색 결과가 없습니다
+정확한 위치명으로 검색해 주세요"</string>
+        <string name="no_storage">Insert an SD card before using the camera.</string>
+        <string name="no_tag_history">입력 태그 기록이 없습니다</string>
+        <string name="not_selectable_in_scene_mode">Not selectable in scene mode.</string>
+        <string name="noti_all">전체</string>
+        <string name="noti_all_deleted_posting">삭제된 포스팅입니다</string>
+        <string name="noti_all_sir">님</string>
+    <string name="noti_block_message">"님을
+차단하시겠습니까?
+차단된 경우 더 이상 회원님의
+포스팅을 보거나 팔로우 할 수 없습니다."</string>
+        <string name="noti_block_user">유저차단</string>
+        <string name="noti_follow_deleted_posting">삭제된 포스팅입니다</string>
+        <string name="noti_follow_sir">님</string>
+        <string name="noti_following">팔로잉</string>
+        <string name="noti_my">내 소식</string>
+        <string name="noti_my_deleted_posting">삭제된 포스팅입니다</string>
+        <string name="noti_my_sir">님</string>
+        <string name="noti_no_data">새로운 소식이 없습니다</string>
+        <string name="noti_type_follow_me">이 회원님을 팔로우하기 시작했습니다.</string>
+        <string name="noti_type_follow_tag_01">"이 "</string>
+        <string name="noti_type_follow_tag_02">" 태그를 팔로우하기 시작했습니다."</string>
+        <string name="noti_type_follow_user_01">"이 "</string>
+        <string name="noti_type_follow_user_02">" 을 팔로우하기 시작했습니다."</string>
+        <string name="noti_type_mention_body">이 회원님을 언급했습니다.</string>
+        <string name="noti_type_mention_comment">이 댓글에서 회원님을 언급했습니다.</string>
+        <string name="noti_type_mention_pic_comment">이 회원님을 언급한 사진에 댓글을 남겼습니다.</string>
+        <string name="noti_type_mention_pic_like">이 회원님을 언급한 사진에 좋아요 했습니다.</string>
+        <string name="noti_type_mention_pic_repic">이 회원님을 언급한 사진에 리픽 했습니다.</string>
+        <string name="noti_type_pic_comment">이 회원님의 포스팅에 댓글을 남겼습니다.</string>
+        <string name="noti_type_pic_like">이 회원님의 포스팅에 좋아요 했습니다.</string>
+        <string name="noti_type_pic_repic">이 회원님의 포스팅을 리픽 했습니다.</string>
+        <string name="noti_unblock_user">유저차단해제</string>
+        <string name="notice_close">Close</string>
+        <string name="notice_dont_show_agin_text">Do Not Show Again</string>
+        <string name="notice_list_check_details_by_button">Please check the details of the event by clicking this link below!</string>
+        <string name="notice_list_show_details">More</string>
+        <string name="notice_list_upadte_latest_version">Update Latest Version</string>
+        <string name="notice_list_using_latest_version">Latest Version</string>
+        <string name="notice_msg_no_items">No Notices.</string>
+        <string name="notice_msg_please_wait">Please wait.</string>
+        <string name="notice_name">Notices</string>
+        <string name="notice_popup_cancel">Cancel</string>
+    <string name="notice_popup_error_network">"Could not check notice.
+Please check your network."</string>
+    <string name="notice_popup_error_server_api">"Could not check notice.
+Please try again after a while."</string>
+        <string name="notice_popup_event_go">Move Now</string>
+        <string name="notice_popup_go">Move Now</string>
+        <string name="notice_popup_later">Update Later</string>
+        <string name="notice_popup_ok">OK</string>
+        <string name="notice_popup_update_now">Update Now</string>
+        <string name="notice_promotion_text">Do Not Show for %1$s days</string>
+        <string name="notice_type_event">event</string>
+        <string name="notice_type_normal">notice</string>
+        <string name="notice_type_update">update</string>
+        <string name="package_name_band">com.nhn.android.band</string>
+        <string name="package_name_facebook">com.facebook.katana</string>
+        <string name="package_name_kakaotalk">com.kakao.talk</string>
+        <string name="package_name_line">jp.naver.line.android</string>
+        <string name="pano_dialog_panorama_failed">"Couldn't save panorama."</string>
+        <string name="pano_dialog_prepare_preview">Preparing panorama</string>
+        <string name="pano_dialog_title">Panorama</string>
+        <string name="pano_dialog_waiting_previous">Waiting for previous panorama</string>
+        <string name="pano_review_rendering">Rendering panorama</string>
+        <string name="pano_review_saving_indication_str">Saving…</string>
+        <string name="pano_too_fast_prompt">Too fast</string>
+        <string name="penalty_account_confirm">확인</string>
+    <string name="penalty_account_message">"계정 서비스 활동이 제한되어
+사용하실 수 없습니다."</string>
+        <string name="penalty_comment">댓글을 등록할 수 없습니다.</string>
+        <string name="penalty_confirm">알겠습니다</string>
+    <string name="penalty_desc">"반복적으로 부적합한 포스팅을 등록하여 열람 외의
+계정 서비스 활동이 제한되었습니다."</string>
+        <string name="penalty_posting">포스팅을 등록할 수 없습니다.</string>
+        <string name="penalty_posting_confirm">알겠습니다</string>
+    <string name="penalty_posting_message">"이용약관에 위배되는 포스팅이 존재합니다.
+추가 위반 시 서비스 활동이 제한될 수 있으니
+사용에 유의하시기 바랍니다."</string>
+        <string name="pic">사진</string>
+        <string name="popup_menu_copy">복사하기</string>
+        <string name="popup_menu_copy_url">URL 복사하기</string>
+        <string name="popup_menu_delete">삭제하기</string>
+        <string name="popup_menu_hide">숨기기</string>
+        <string name="popup_menu_modify">수정하기</string>
+        <string name="popup_menu_report">신고하기</string>
+        <string name="post">글쓰기</string>
+        <string name="post_cancel">취소</string>
+        <string name="post_complete">등록 완료하였습니다</string>
+        <string name="post_edittext_hint">사진에 대한 이야기를 나누세요.</string>
+        <string name="post_exceeded_alert">최대 글자 수를 초과하였습니다 (500자 이내)</string>
+        <string name="post_failed">등록 실패하였습니다</string>
+        <string name="post_retry">다시시도</string>
+        <string name="post_search_location">장소검색</string>
+        <string name="post_search_location_title">위치선택</string>
+        <string name="post_share_Facebook">Facebook</string>
+        <string name="post_share_kakaostory">KakaoStory</string>
+        <string name="post_share_line">LINE</string>
+        <string name="pref_camcorder_settings_category">Camcorder settings</string>
+        <string name="pref_camera_countdown_label">COUNTDOWN TIMER</string>
+        <string name="pref_camera_countdown_label_fifteen">15 SECONDS</string>
+        <string name="pref_camera_countdown_label_off">TIMER OFF</string>
+        <string name="pref_camera_countdown_label_one">1 SECOND</string>
+        <string name="pref_camera_countdown_label_ten">10 SECONDS</string>
+        <string name="pref_camera_countdown_label_three">3 SECONDS</string>
+        <string name="pref_camera_flashmode_default">auto</string>
+        <string name="pref_camera_flashmode_entry_auto">Auto</string>
+        <string name="pref_camera_flashmode_entry_off">Off</string>
+        <string name="pref_camera_flashmode_entry_on">On</string>
+        <string name="pref_camera_flashmode_label">FLASH MODE</string>
+        <string name="pref_camera_flashmode_label_auto">FLASH AUTO</string>
+        <string name="pref_camera_flashmode_label_off">FLASH OFF</string>
+        <string name="pref_camera_flashmode_label_on">FLASH ON</string>
+        <string name="pref_camera_flashmode_no_flash">no_flash</string>
+        <string name="pref_camera_flashmode_title">Flash mode</string>
+        <string name="pref_camera_focusmode_entry_auto">Auto</string>
+        <string name="pref_camera_focusmode_entry_infinity">Infinity</string>
+        <string name="pref_camera_focusmode_entry_macro">Macro</string>
+        <string name="pref_camera_focusmode_label_auto">AUTO</string>
+        <string name="pref_camera_focusmode_label_infinity">INFINITY</string>
+        <string name="pref_camera_focusmode_label_macro">MACRO</string>
+        <string name="pref_camera_focusmode_title">Focus mode</string>
+        <string name="pref_camera_hdr_default">@string/setting_off_value</string>
+        <string name="pref_camera_hdr_label">HDR</string>
+        <string name="pref_camera_id_default">0</string>
+        <string name="pref_camera_id_entry_back">Back</string>
+        <string name="pref_camera_id_entry_front">Front</string>
+        <string name="pref_camera_id_label_back">FRONT CAMERA</string>
+        <string name="pref_camera_id_label_front">BACK CAMERA</string>
+        <string name="pref_camera_id_title">Choose camera</string>
+        <string name="pref_camera_location_label">LOCATION</string>
+        <string name="pref_camera_picturesize_entry_13mp">13M pixels</string>
+        <string name="pref_camera_picturesize_entry_1_3mp">1.3M pixels</string>
+        <string name="pref_camera_picturesize_entry_1mp">1M pixels</string>
+        <string name="pref_camera_picturesize_entry_2mp">2M pixels</string>
+        <string name="pref_camera_picturesize_entry_2mp_wide">2M pixels (16:9)</string>
+        <string name="pref_camera_picturesize_entry_3mp">3M pixels</string>
+        <string name="pref_camera_picturesize_entry_4mp">4M pixels</string>
+        <string name="pref_camera_picturesize_entry_5mp">5M pixels</string>
+        <string name="pref_camera_picturesize_entry_8mp">8M pixels</string>
+        <string name="pref_camera_picturesize_entry_qvga">QVGA</string>
+        <string name="pref_camera_picturesize_entry_vga">VGA</string>
+        <string name="pref_camera_picturesize_title">Picture size</string>
+        <string name="pref_camera_recordlocation_default">none</string>
+        <string name="pref_camera_recordlocation_title">Store location</string>
+        <string name="pref_camera_scenemode_default">auto</string>
+        <string name="pref_camera_scenemode_entry_action">Action</string>
+        <string name="pref_camera_scenemode_entry_auto">Auto</string>
+        <string name="pref_camera_scenemode_entry_hdr">HDR</string>
+        <string name="pref_camera_scenemode_entry_night">Night</string>
+        <string name="pref_camera_scenemode_entry_party">Party</string>
+        <string name="pref_camera_scenemode_entry_sunset">Sunset</string>
+        <string name="pref_camera_scenemode_label_action">ACTION</string>
+        <string name="pref_camera_scenemode_label_auto">NONE</string>
+        <string name="pref_camera_scenemode_label_night">NIGHT</string>
+        <string name="pref_camera_scenemode_label_party">PARTY</string>
+        <string name="pref_camera_scenemode_label_sunset">SUNSET</string>
+        <string name="pref_camera_scenemode_title">Scene mode</string>
+        <string name="pref_camera_settings_category">Camera settings</string>
+        <string name="pref_camera_timer_default">0</string>
+        <string name="pref_camera_timer_sound_default">@string/setting_on_value</string>
+        <string name="pref_camera_timer_sound_title">Beep during countdown</string>
+        <string name="pref_camera_timer_title">Countdown timer</string>
+        <string name="pref_camera_video_flashmode_default">off</string>
+        <string name="pref_camera_whitebalance_default">auto</string>
+        <string name="pref_camera_whitebalance_entry_auto">Auto</string>
+        <string name="pref_camera_whitebalance_entry_cloudy">Cloudy</string>
+        <string name="pref_camera_whitebalance_entry_daylight">Daylight</string>
+        <string name="pref_camera_whitebalance_entry_fluorescent">Fluorescent</string>
+        <string name="pref_camera_whitebalance_entry_incandescent">Incandescent</string>
+        <string name="pref_camera_whitebalance_label">WHITE BALANCE</string>
+        <string name="pref_camera_whitebalance_label_auto">AUTO</string>
+        <string name="pref_camera_whitebalance_label_cloudy">CLOUDY</string>
+        <string name="pref_camera_whitebalance_label_daylight">DAYLIGHT</string>
+        <string name="pref_camera_whitebalance_label_fluorescent">FLUORESCENT</string>
+        <string name="pref_camera_whitebalance_label_incandescent">INCANDESCENT</string>
+        <string name="pref_camera_whitebalance_title">White balance</string>
+        <string name="pref_exposure_default">0</string>
+        <string name="pref_exposure_label">EXPOSURE</string>
+        <string name="pref_exposure_title">Exposure</string>
+        <string name="pref_video_effect_default">none</string>
+        <string name="pref_video_effect_title">Effects</string>
+        <string name="pref_video_quality_default">5</string>
+        <string name="pref_video_quality_entry_1080p">HD 1080p</string>
+        <string name="pref_video_quality_entry_480p">SD 480p</string>
+        <string name="pref_video_quality_entry_720p">HD 720p</string>
+        <string name="pref_video_quality_entry_high">High</string>
+        <string name="pref_video_quality_entry_low">Low</string>
+        <string name="pref_video_quality_title">Video quality</string>
+        <string name="pref_video_time_lapse_frame_interval_1000">1 second</string>
+        <string name="pref_video_time_lapse_frame_interval_10000">10 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_10800000">3 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_12000">12 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_120000">2 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_1440000">24 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_14400000">4 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_1500">1.5 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_15000">15 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_150000">2.5 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_180000">3 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_1800000">0.5 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_18000000">5 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_2000">2 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_21600000">6 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_24000">24 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_240000">4 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_2500">2.5 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_3000">3 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_30000">0.5 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_300000">5 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_360000">6 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_3600000">1 hour</string>
+        <string name="pref_video_time_lapse_frame_interval_36000000">10 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_4000">4 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_43200000">12 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_500">0.5 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_5000">5 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_5400000">1.5 hour</string>
+        <string name="pref_video_time_lapse_frame_interval_54000000">15 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_6000">6 seconds</string>
+        <string name="pref_video_time_lapse_frame_interval_60000">1 minute</string>
+        <string name="pref_video_time_lapse_frame_interval_600000">10 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_720000">12 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_7200000">2 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_86400000">24 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_90000">1.5 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_900000">15 minutes</string>
+        <string name="pref_video_time_lapse_frame_interval_9000000">2.5 hours</string>
+        <string name="pref_video_time_lapse_frame_interval_default">0</string>
+        <string name="pref_video_time_lapse_frame_interval_off">Off</string>
+        <string name="pref_video_time_lapse_frame_interval_title">Time lapse</string>
+        <string name="preparing_sd">Preparing SD card…</string>
+        <string name="processing">처리 중</string>
+        <string name="processing_complete">처리 완료</string>
+        <string name="processing_failed">처리 실패</string>
+        <string name="processing_failed_invalid_video">처리 실패(등록 불가 영상)</string>
+    <string name="profile_block_alert">"차단된 유저는 회원님의 포스팅을 보거나
+팔로우 할 수 없으며, 차단된 유저의
+포스팅도 받아보실 수 없습니다.
+차단하시겠습니까?"</string>
+        <string name="profile_block_user">님 차단하기</string>
+        <string name="profile_follow_follower">팔로워</string>
+        <string name="profile_follow_no_follower">팔로워가 없습니다</string>
+        <string name="profile_grid_no_data_01">등록한 포스팅이 아직 없습니다</string>
+        <string name="profile_grid_no_data_02">첫번째 포스팅을 올려주세요</string>
+        <string name="profile_grid_no_data_03">등록한 포스팅이 아직 없습니다</string>
+        <string name="profile_icon_crop_01">사이즈 변경 후 적용해 주세요</string>
+        <string name="profile_icon_crop_02">변경한 사진을 적용하고 있습니다</string>
+    <string name="profile_icon_crop_03">"이미지를 불러오는 중 오류가 발생했습니다
+잠시 후 다시 시도해 주세요"</string>
+        <string name="profile_icon_crop_completed">완료</string>
+        <string name="profile_icon_crop_setting">프로필 사진 설정</string>
+        <string name="profile_icon_deleted">프로필 사진이 삭제되었습니다</string>
+        <string name="profile_like_no_data">좋아요한 사진이 없습니다</string>
+        <string name="profile_like_title">좋아요</string>
+        <string name="profile_list_detail">자세히 알아보기</string>
+        <string name="profile_list_no_data_01">등록한 포스팅이 아직 없습니다</string>
+        <string name="profile_list_no_data_02">첫번째 포스팅을 올려주세요</string>
+        <string name="profile_list_no_data_03">등록한 포스팅이 아직 없습니다</string>
+        <string name="profile_penalty_01">반복적으로 이용약관에 위배되는 포스팅을 등록하여 열람 외의 계정 서비스 활동이 제한되었습니다.</string>
+        <string name="profile_penalty_02">이용약관 확인하기</string>
+        <string name="profile_penalty_03">접근이 제한된 계정입니다</string>
+        <string name="profile_report">계정 신고하기</string>
+        <string name="profile_report_user">님 신고하기</string>
+        <string name="profile_represent">대표</string>
+        <string name="profile_tag_footer">동일 태그로 5개 이상의 포스팅을 올리면 앨범이 생성됩니다</string>
+        <string name="profile_tag_no_data_01">태그 앨범이 아직 없습니다</string>
+        <string name="profile_tag_no_data_02">동일 태그로 5개 이상의 포스팅을 올리면 앨범이 생성됩니다</string>
+        <string name="profile_tag_no_data_03">태그 앨범이 아직 없습니다</string>
+        <string name="profile_unblock_message">차단 해제되었습니다</string>
+        <string name="profile_unblock_user">님 차단해제하기</string>
+        <string name="profile_withdrawal_member">탈퇴한 회원의 프로필입니다.</string>
+        <string name="ptr_last_updated">Updated: %1$s</string>
+        <string name="ptr_loading">Loading</string>
+        <string name="ptr_pull_to_refresh">Pull to refresh</string>
+        <string name="ptr_release_to_refresh">Release to refresh</string>
+        <string name="recent_tag">최근 입력 태그</string>
+        <string name="recommended_tag">추천태그</string>
+        <string name="related_contents_desc1">등록한 #태그의 다른 포스팅을 만나보세요</string>
+        <string name="related_contents_follow">팔로우</string>
+        <string name="related_contents_following">팔로잉</string>
+        <string name="related_contents_post_complete">등록이 완료되었습니다!</string>
+        <string name="related_contents_posting_video">포스팅 진행 중 입니다</string>
+        <string name="remember_location_no">No thanks</string>
+    <string name="remember_location_prompt">"Tag your photos and videos with the locations where they are taken.
+
+Other apps can access this information along with your saved images."</string>
+        <string name="remember_location_title">Remember photo locations?</string>
+        <string name="remember_location_yes">Yes</string>
+    <string name="repic_coach">"리픽 버튼을 선택하면
+이 포스팅에 연결된 더 많은 사진을 볼 수 있어요"</string>
+    <string name="repic_coach2">"공감되는 사진을 이어서 포스팅 해보세요
+리픽한 사진은 연결되어 한 곳에서 볼 수 있어요"</string>
+        <string name="repic_count">이 포스팅에는 _____의 리픽이 있습니다</string>
+        <string name="repic_count_unit">개</string>
+    <string name="repic_definition">"*리픽은 비슷한 사진으로 소통하며
+포스팅을 서로 엮어주는
+매피아만의 사진 릴레이 기능입니다"</string>
+        <string name="repic_desc">님의 포스팅에 리픽됨</string>
+        <string name="repic_hide">이 포스팅을 숨기시겠습니까?</string>
+    <string name="repic_norepic">"이 포스팅에는 아직 리픽이 없습니다
+첫 번째로 리픽해 주세요!"</string>
+        <string name="repic_show_previous_repic">이전 리픽 보기...</string>
+        <string name="report_account">계정신고</string>
+    <string name="report_account_completed">"신고해주셔서 감사합니다
+신고 내용은 운영정책에 따라 처리됩니다"</string>
+    <string name="report_account_desc">"단, 명예훼손피해･저작권침해 사유는 게시중단서비스(PC 버전)를
+통해 신고해주시기 바랍니다"</string>
+        <string name="report_account_empty">계정 신고 사유가 입력되지 않았습니다</string>
+        <string name="report_account_input">계정 신고 사유를 입력해주세요</string>
+        <string name="report_account_report">신고</string>
+        <string name="report_account_suspend">게시중단서비스(PC 버전)</string>
+        <string name="review_cancel">CANCEL</string>
+        <string name="review_ok">DONE</string>
+        <string name="search_autocomplete_footer">검색 결과 전체 보기</string>
+        <string name="search_guide">장소의 이름을 입력해 주세요</string>
+        <string name="search_history_footer">전체 기록 삭제</string>
+    <string name="search_location_noresult">"검색 결과가 없습니다
+정확한 위치명으로 검색해 주세요"</string>
+    <string name="search_place_01">"장소명으로
+원하는 장소을 찾아보세요"</string>
+    <string name="search_place_02">"검색결과가 없습니다
+다른 검색어로 시도해 보세요!"</string>
+    <string name="search_place_no_result">"검색결과가 없습니다
+다른 검색어로 시도해 보세요!"</string>
+        <string name="search_place_tab_title">장소</string>
+        <string name="search_place_title">장소 검색</string>
+        <string name="search_tag_01">관심 있는 태그를 검색하세요</string>
+    <string name="search_tag_02">"검색결과가 없습니다
+다른 검색어로 시도해 보세요!"</string>
+    <string name="search_tag_no_result">"검색결과가 없습니다
+다른 검색어로 시도해 보세요!"</string>
+        <string name="search_tag_tab_title">태그</string>
+        <string name="search_tag_title">태그 검색</string>
+        <string name="search_user_01">닉네임으로 유저를 찾아보세요</string>
+    <string name="search_user_02">"검색결과가 없습니다
+다른 검색어로 시도해 보세요!"</string>
+    <string name="search_user_no_result">"검색결과가 없습니다
+다른 검색어로 시도해 보세요!"</string>
+        <string name="search_user_tab_title">유저</string>
+        <string name="search_user_title">유저 검색</string>
+        <string name="set_duration">Set duration in seconds</string>
+        <string name="set_time_interval">Set Time Interval</string>
+        <string name="set_time_interval_help">Time lapse feature is off. Turn it on to set time interval.</string>
+        <string name="set_timer_help">Countdown timer is off. Turn it on to count down before taking a picture.</string>
+        <string name="setting">설정</string>
+        <string name="setting_confirm_delete_account">mapia 계정을 삭제하고 탈퇴합니다</string>
+        <string name="setting_confirm_unmapping_sns">계정 연결을 해제하시겠습니까?</string>
+        <string name="setting_connected">연결됨</string>
+        <string name="setting_delete_account_desc1">탈퇴하기 전에 꼭 확인하세요</string>
+    <string name="setting_delete_account_desc2">"탈퇴 시, 수집한 개인 정보는 지체 없이 파기되며 mapia 계정은 삭제되어 해당 계정으로는 서비스 접근이 불가능합니다.
+등록한 컨텐츠에 대한 모든 정보는 삭제되어 복구할 수 없으며, 삭제까지는 시간이 소요될 수 있습니다."</string>
+        <string name="setting_item_allow_searching">외부 검색 허용</string>
+        <string name="setting_item_allow_searching_hint">네이버 및 외부 검색 서비스에 포스팅을 공개</string>
+        <string name="setting_item_announcement">공지사항</string>
+        <string name="setting_item_appinfo">프로그램 정보</string>
+        <string name="setting_item_autosave">갤러리 자동저장</string>
+        <string name="setting_item_block_disturb">방해 금지</string>
+        <string name="setting_item_block_disturb_finishing_time">종료시간</string>
+        <string name="setting_item_block_disturb_on">방해금지 반복설정</string>
+        <string name="setting_item_block_disturb_starting_time">시작시간</string>
+        <string name="setting_item_block_user">차단 유저 목록</string>
+        <string name="setting_item_block_user_block">유저차단</string>
+        <string name="setting_item_block_user_desc">차단된 유저는 회원님의 포스팅을 보거나 팔로우할 수 없습니다</string>
+        <string name="setting_item_block_user_empty">차단된 유저가 없습니다</string>
+        <string name="setting_item_block_user_unblock">차단해제</string>
+        <string name="setting_item_camera">카메라</string>
+        <string name="setting_item_change_password">비밀번호 변경</string>
+        <string name="setting_item_correction">흔들림 방지</string>
+        <string name="setting_item_data_save">데이터 절약</string>
+        <string name="setting_item_data_save_hine">이미지 로딩 속도에 영향을 줄 수 있음</string>
+        <string name="setting_item_disallow_searching_hint">네이버 및 외부 검색 서비스에 포스팅을 비공개</string>
+        <string name="setting_item_email">이메일</string>
+        <string name="setting_item_eula">이용약관</string>
+        <string name="setting_item_eula_location">위치정보이용약관</string>
+        <string name="setting_item_facebook">페이스북</string>
+        <string name="setting_item_help">도움말</string>
+        <string name="setting_item_legalnotice">법적공지</string>
+        <string name="setting_item_line">라인</string>
+        <string name="setting_item_location">위치정보</string>
+        <string name="setting_item_logout">로그아웃</string>
+        <string name="setting_item_mirror_mode">거울모드</string>
+        <string name="setting_item_naver">네이버</string>
+        <string name="setting_item_nickname">닉네임</string>
+        <string name="setting_item_notice_comment">댓글 알림</string>
+        <string name="setting_item_notice_comment_sub">내 포스팅에 댓글을 남긴 경우</string>
+        <string name="setting_item_notice_follower">새 팔로워 알림</string>
+        <string name="setting_item_notice_follower_sub">새로운 회원이 나를 팔로우하는 경우</string>
+        <string name="setting_item_notice_following">팔로잉 알림</string>
+        <string name="setting_item_notice_following_sub">내가 팔로우한 회원이 새 태그를 팔로우한 경우</string>
+        <string name="setting_item_notice_like">좋아요 알림</string>
+        <string name="setting_item_notice_like_sub">내 포스팅에 좋아요한 경우</string>
+        <string name="setting_item_notice_mention">나를 언급한 경우 알림</string>
+        <string name="setting_item_notice_mention_sub">포스팅이나 댓글에서 나를 언급한 경우</string>
+        <string name="setting_item_notice_on">알림 허용</string>
+        <string name="setting_item_notice_repic">리픽 알림</string>
+        <string name="setting_item_notice_repic_sub">내 포스팅을 리픽한 경우</string>
+        <string name="setting_item_notice_setting">표시할 알림 설정</string>
+        <string name="setting_item_notice_sound">소리</string>
+        <string name="setting_item_notice_vibration">진동</string>
+        <string name="setting_item_opinion">의견 보내기</string>
+        <string name="setting_item_policy">운영정책</string>
+        <string name="setting_item_privacy">개인정보취급방침</string>
+        <string name="setting_item_save_original_photo">원본 사진 저장</string>
+        <string name="setting_item_save_original_photo_sub">촬영한 사진을 휴대폰 앨범에 저장</string>
+        <string name="setting_item_save_mapia_photo">매피아 사진 저장</string>
+        <string name="setting_item_save_mapia_photo_sub">매피아에 포스팅한 사진을 휴대폰 앨범에 저장</string>
+        <string name="setting_item_save_mapia_video">매피아 동영상 저장</string>
+        <string name="setting_item_save_mapia_video_sub">매피아에 포스팅한 동영상을 휴대폰 앨범에 저장</string>
+        <string name="setting_item_selfy_stic">셀카봉 블루투스 지원</string>
+        <string name="setting_item_tutorial">튜토리얼</string>
+        <string name="setting_item_twitter">트위터</string>
+        <string name="setting_item_video_autoplay">동영상 자동 재생</string>
+        <string name="setting_item_video_autoplay_mode_always">항상</string>
+        <string name="setting_item_video_autoplay_mode_off">꺼짐</string>
+        <string name="setting_item_video_autoplay_mode_wifi">Wifi에서만</string>
+        <string name="setting_logout">로그아웃</string>
+        <string name="setting_logout_confirm">로그아웃 하시겠습니까?</string>
+        <string name="setting_not_connected">연결안됨</string>
+        <string name="setting_off">Off</string>
+        <string name="setting_off_value">off</string>
+        <string name="setting_on">On</string>
+        <string name="setting_on_value">on</string>
+    <string name="setting_profile_deleted">"프로필 사진이
+삭제되었습니다"</string>
+        <string name="setting_profile_error">프로필 변경 중 오류가 발생했습니다.</string>
+        <string name="setting_profile_icon_delete_confirm">프로필 사진을 삭제하시겠습니까?</string>
+        <string name="setting_profile_icon_delete_pic">프로필 사진 삭제</string>
+        <string name="setting_profile_icon_select_pic">사진 앨범에서 선택</string>
+        <string name="setting_profile_icon_take_pic">사진촬영</string>
+        <string name="setting_profile_length_over">30자 이내로 입력해주세요</string>
+        <string name="setting_profile_message">소개</string>
+        <string name="setting_profile_message_length_over">소개글은 30자까지 입력이 가능합니다.</string>
+        <string name="setting_profile_message_prohibite_word">소개글에 금칙어가 포함되어 있습니다.</string>
+        <string name="setting_profile_nickname_exist">이미 사용 중인 닉네임입니다.</string>
+        <string name="setting_profile_nickname_length_over">닉네임은 15자 이하의 문자만 가능합니다.</string>
+        <string name="setting_profile_nickname_length_short">특수문자를 제외한 2자 이상의 문자로 입력해 주세요.</string>
+        <string name="setting_profile_nickname_not_exist">닉네임이 없습니다.</string>
+        <string name="setting_profile_nickname_prohibite_word">닉네임에 금칙어가 포함되어 있습니다.</string>
+        <string name="setting_profile_nickname_special_char">닉네임에 특수문자가 포함되어 있습니다.</string>
+        <string name="setting_top_account">계정 관리</string>
+        <string name="setting_top_app_info">프로그램 정보</string>
+        <string name="setting_top_block_disturb">방해 금지</string>
+        <string name="setting_top_camera">카메라 설정</string>
+        <string name="setting_top_delete_account">mapia 탈퇴</string>
+        <string name="setting_top_message">소개 편집</string>
+        <string name="setting_top_nickname">닉네임 편집</string>
+        <string name="setting_top_noti">알림</string>
+        <string name="setting_top_profile">프로필</string>
+        <string name="setting_top_video_auto">동영상 자동 재생</string>
+        <string name="setting_version">현재 버전 %1$s</string>
+        <string name="show_all">전체보기</string>
+        <string name="sns_mapping_error">잠시 후 다시 시도해주세요</string>
+        <string name="sns_mapping_exist_user">이미 mapia에 연결되어있는 계정입니다</string>
+        <string name="spaceIsLow_content">Your SD card is running out of space. Change the quality setting or delete some images or other files.</string>
+        <string name="system_err">시스템 에러</string>
+        <string name="tab_albums">Albums</string>
+        <string name="tab_photos">Photos</string>
+        <string name="tag_gallery_related">연관</string>
+        <string name="tap_to_focus">Touch to focus.</string>
+        <string name="time_lapse_hours">hours</string>
+        <string name="time_lapse_interval_set">Done</string>
+        <string name="time_lapse_minutes">minutes</string>
+        <string name="time_lapse_seconds">seconds</string>
+        <string name="time_lapse_title">Time lapse recording</string>
+        <string name="twitter_login_error">계정과 비밀번호를 확인 후 재시도 해주시기 바랍니다</string>
+        <string name="uploading">전송 중</string>
+        <string name="uploading_complete">전송 완료</string>
+        <string name="uploading_failed">전송 실패</string>
+        <string name="video_camera_label">Camcorder</string>
+        <string name="video_delete_cancel">취소</string>
+        <string name="video_delete_confirm">삭제</string>
+        <string name="video_delete_dialog_text_1">동영상 촬영 중지</string>
+        <string name="video_delete_dialog_text_2">촬영중이던 영상은 저장되지 않습니다.</string>
+        <string name="video_delete_dialog_text_3">삭제하시겠습니까?</string>
+        <string name="video_file_name_format">"'VID'_yyyyMMdd_HHmmss"</string>
+        <string name="video_play_err">동영상 재생 오류</string>
+        <string name="video_play_err_1">알 수 없는 오류로 재생할 수 없습니다.</string>
+        <string name="video_play_err_1004_1005">잠시 후 다시 시도해주세요.</string>
+        <string name="video_play_err_1005">일시적인 오류로 재생할 수 없습니다. 잠시 후 다시 시도해주세요.</string>
+        <string name="video_play_err_10_26">저작권 침해 또는 운영원칙 위반 내용이 포함되어 있는 동영상입니다.</string>
+        <string name="video_play_err_2">동영상 정보를 찾을 수 없습니다.</string>
+        <string name="video_play_err_3">원본 동영상이 삭제되었습니다.</string>
+        <string name="video_play_err_4">동영상에 대한 접근 권한이 없습니다.</string>
+        <string name="video_play_err_600">올바른 Video ID가 아닙니다.</string>
+        <string name="video_play_err_700">이 단말에서 재생할 수 없는 동영상 형식입니다.</string>
+        <string name="video_play_err_9">지원하지 않는 코덱입니다.</string>
+        <string name="video_play_err_default">일시적인 오류로 재생할 수 없습니다. 잠시 후 다시 시도해주세요.</string>
+        <string name="video_player_err_default">알 수 없는 오류로 재생할 수 없습니다.</string>
+        <string name="video_player_preparing">동영상 재생 준비 중</string>
+        <string name="video_ratio_error">5초이상 동영상만 가능합니다.</string>
+        <string name="video_reach_size_limit">Size limit reached.</string>
+        <string name="video_recording_started">Video recording has started.</string>
+        <string name="video_recording_stopped">Video recording has stopped.</string>
+        <string name="video_snapshot_hint">Touch to take photo while recording.</string>
+        <string name="wait">Please wait…</string>
+
+
+
+</resources>

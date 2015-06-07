@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/bu_icon" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginLeft="16.0dip" android:src="#ffe6e6e6" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_weight="1.0">
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.mapia.custom.FontSettableTextView android:textSize="16.0sp" android:textColor="#ff000000" android:gravity="center|left" android:id="@+id/bu_nickname" android:layout_width="wrap_content" android:layout_height="wrap_content" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/bu_block_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="16.0dip">
+            <ImageView android:id="@+id/bu_block_image" android:layout_width="17.0dip" android:layout_height="17.0dip" android:src="@drawable/setting_unblock" />
+            <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ff545454" android:gravity="center" android:id="@+id/bu_block_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/setting_item_block_user_unblock" android:layout_centerInParent="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:background="#33808080" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+</LinearLayout>

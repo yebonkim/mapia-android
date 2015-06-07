@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#fff9f9f9" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.makeramen.RoundedImageView android:id="@+id/profileThumbnail" android:layout_width="39.0dip" android:layout_height="39.0dip" android:layout_marginLeft="16.0dip" android:layout_marginTop="12.5dip" android:layout_marginRight="9.0dip" android:src="@drawable/common_noneprofile_ss" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+    <RelativeLayout android:paddingTop="13.5dip" android:paddingBottom="10.5dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toRightOf="@+id/profileThumbnail">
+        <LinearLayout android:orientation="horizontal" android:id="@+id/txtLayout1" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0dip" android:textColor="#ff414042" android:id="@+id/txtUserName" android:layout_width="wrap_content" android:layout_height="wrap_content" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <com.mapia.custom.FontSettableTextView android:textSize="9.5dip" android:textColor="#ff9c9c9c" android:layout_gravity="center_vertical" android:id="@+id/txtTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="7.0dip" android:layout_marginTop="1.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <com.mapia.myfeed.tag.mapiaTextView android:textSize="13.0dip" android:textColor="#ff414042" android:id="@+id/txtComment" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_below="@+id/txtLayout1" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+</RelativeLayout>

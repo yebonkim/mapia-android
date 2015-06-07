@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/fl_swiperefreshlayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="53.0dip">
+        <com.huewu.pla.lib.MultiColumnListView android:id="@+id/fl_multilistview" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" pla:plaColumnNumber="3" pla:plaLandscapeColumnNumber="3" xmlns:pla="http://schemas.android.com/apk/res-auto" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <LinearLayout android:id="@+id/fl_location_area" android:background="#ffe5e5e5" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="134.0dip">
+        <ImageView android:id="@+id/mapImage" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+    </LinearLayout>
+    <com.mapia.locationgallery.LocationGalleryHeaderLayout android:id="@+id/fl_header" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="187.0dip">
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fl_header_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="#fff3f3f3" android:alpha="0.45" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="53.0dip">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:id="@+id/fl_tag_fold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fl_info" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="55.0dip" android:layout_marginRight="55.0dip" android:layout_marginBottom="53.0dip">
+            <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <ImageView android:layout_width="16.0dip" android:layout_height="21.0dip" android:src="@drawable/loca_pin" />
+                <TextView android:textSize="21.0sp" android:textColor="#ff000000" android:ellipsize="end" android:gravity="center" android:id="@+id/fl_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="21.5dip" android:maxLines="2" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fl_floating" android:background="#c0ffffff" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_alignParentBottom="true">
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff9c9c9c" android:id="@+id/fl_tag_rel" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/location_gallery_related" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <com.mapia.autoscrolllistview.AutoScrollListView android:id="@+id/fl_tag_listview" android:scrollbars="none" android:layout_width="0.0dip" android:layout_height="30.0dip" android:layout_marginLeft="4.5dip" android:layout_marginRight="20.0dip" android:layout_weight="1.0" android:overScrollMode="never" />
+            <ImageView android:id="@+id/fl_order_like_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="7.5dip" android:src="@drawable/common_sort_likeon" />
+            <ImageView android:id="@+id/fl_order_time_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="7.5dip" android:src="@drawable/common_sort_timeoff" />
+            <ImageView android:id="@+id/fl_loca_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="7.5dip" android:src="@drawable/loca_mapoff" />
+        </LinearLayout>
+    </com.mapia.locationgallery.LocationGalleryHeaderLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fl_header_fold" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fh_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <ImageView android:id="@+id/fh_share_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/common_share" />
+    </LinearLayout>
+    <ImageView android:id="@+id/fl_littledata" android:visibility="gone" android:layout_width="29.0dip" android:layout_height="26.0dip" android:layout_marginBottom="76.0dip" android:src="@drawable/common_symbol_s" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+</RelativeLayout>

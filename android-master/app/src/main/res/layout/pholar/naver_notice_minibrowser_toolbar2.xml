@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/webview_bottom" android:background="@drawable/naver_notice_webview_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageButton android:id="@+id/webview_backkey" android:background="@drawable/naver_notice_webview_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/naver_notice_selector_back_btn" android:layout_weight="1.0" android:contentDescription="이전 페이지" />
+    <ImageButton android:id="@+id/webview_forwordkey" android:background="@drawable/naver_notice_webview_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/naver_notice_selector_fwd_btn" android:layout_weight="1.0" android:contentDescription="다음 페이지" />
+    <ImageButton android:id="@+id/webview_gotoKey" android:background="@drawable/naver_notice_webview_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/naver_notice_ico_on_3" android:layout_weight="1.0" android:contentDescription="다른 브라우저로 열기" />
+    <View android:id="@+id/webview_border" android:background="#ff000000" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_weight="0.0" />
+    <ImageButton android:id="@+id/webview_endkey" android:background="@drawable/naver_notice_webview_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/naver_notice_ico_on_4" android:layout_weight="1.0" android:contentDescription="닫기" />
+</LinearLayout>

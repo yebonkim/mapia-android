@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#dcffffff" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageButton android:id="@+id/left1" android:visibility="gone" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginLeft="16.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        <ImageButton android:id="@+id/left2" android:visibility="gone" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginLeft="10.0dip" android:layout_toRightOf="@+id/left1" android:layout_centerVertical="true" />
+        <LinearLayout android:orientation="horizontal" android:id="@+id/centerLayout" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_centerInParent="true">
+            <com.makeramen.RoundedImageView android:id="@+id/profileThumb" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="6.0dip" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+            <TextView android:textSize="14.5dip" android:textColor="#ff2c2c2c" android:gravity="center" android:id="@+id/userName" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="GFACTORYOFTHEAR" android:maxLength="15" />
+        </LinearLayout>
+        <TextView android:textSize="18.0sp" android:gravity="center_vertical" android:id="@+id/txtCenter" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_centerInParent="true" />
+        <TextView android:textSize="18.0sp" android:gravity="center_vertical" android:id="@+id/txtRight" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginRight="10.0dip" android:layout_alignParentRight="true" />
+        <RelativeLayout android:id="@+id/btnRight1" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="fill_parent" android:layout_marginRight="16.0dip" android:layout_alignParentRight="true">
+            <ImageView android:id="@+id/right1" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

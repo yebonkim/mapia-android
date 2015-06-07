@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/left1" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:src="@drawable/common_prev" android:layout_centerVertical="true" />
+        <com.mapia.custom.FontSettableTextView android:textSize="18.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting" android:layout_centerInParent="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:overScrollMode="never">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginTop="15.0dip" />
+            <include android:id="@+id/itemProfile" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemAccount" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginTop="15.0dip" />
+            <include android:id="@+id/itemNoti" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemBlockDisturb" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginTop="15.0dip" />
+            <include android:id="@+id/itemCamera" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemVideo" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemDataSave" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemAllowSearching" android:layout_width="fill_parent" android:layout_height="63.0dip" layout="@layout/setting_item_high" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemBlockUser" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginTop="15.0dip" />
+            <include android:id="@+id/itemAnnouncement" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemInfo" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemHelp" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginTop="15.0dip" />
+            <include android:id="@+id/itemLogout" android:layout_width="fill_parent" android:layout_height="53.0dip" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <RelativeLayout android:layout_width="fill_parent" android:layout_height="85.0dip">
+                <ImageView android:background="@drawable/setting_bi" android:layout_width="17.5dip" android:layout_height="17.5dip" android:layout_centerInParent="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

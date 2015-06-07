@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height">
+        <ImageView android:id="@+id/left1" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <com.mapia.custom.FontSettableTextView android:textSize="18.0dip" android:textColor="#ff000000" android:id="@+id/txtTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_item_legalnotice" android:layout_centerInParent="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <View android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.mapia.custom.FontSettableTextView android:textSize="11.5dip" android:textColor="#ff000000" android:id="@+id/opensource_license_text_view" android:background="#fff9f9f9" android:paddingLeft="16.0dip" android:paddingTop="10.0dip" android:paddingRight="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </ScrollView>
+        <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@+id/ol_progressbar" android:background="@drawable/loading_icon_loop" android:layout_width="22.0dip" android:layout_height="22.0dip" android:layout_centerInParent="true" />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/left1" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <com.mapia.custom.FontSettableTextView android:textSize="18.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text="@string/setting_top_app_info" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="46.0dip" android:layout_height="46.0dip" />
+    </LinearLayout>
+    <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="219.5dip">
+                <ImageView android:layout_gravity="center_horizontal" android:id="@+id/fsai_icon" android:background="@drawable/ic_mapia" android:layout_width="72.0dip" android:layout_height="72.0dip" android:layout_marginTop="20.0dip" />
+                <ImageView android:layout_gravity="center_horizontal" android:background="@drawable/setting_name" android:layout_width="64.0dip" android:layout_height="11.0dip" android:layout_marginTop="10.0dip" />
+                <com.mapia.custom.FontSettableTextView android:textSize="10.0dip" android:textColor="#ffb1b1b1" android:layout_gravity="center_horizontal" android:id="@+id/txtVersion" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.5dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                <Button android:textSize="16.0dip" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/btnUpdate" android:background="#ff969696" android:layout_width="fill_parent" android:layout_height="52.0dip" android:layout_marginLeft="16.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="16.0dip" android:layout_marginBottom="25.0dip" />
+            </LinearLayout>
+            <RelativeLayout android:orientation="vertical" android:id="@+id/fsai_develop" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="100.0dip">
+                <LinearLayout android:gravity="center" android:orientation="vertical" android:background="#ff2c2c2c" android:layout_width="fill_parent" android:layout_height="80.0dip">
+                    <com.mapia.custom.FontSettableTextView android:textSize="11.0sp" android:textColor="#ffd5d5d5" android:id="@+id/fsai_develop_text00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="android application was developed by" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <LinearLayout android:gravity="bottom|center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip">
+                        <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ffeaeaea" android:id="@+id/fsai_develop_text01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AniToy, helloyako, xdreamz" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                        <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ffb4b4b4" android:id="@+id/fsai_develop_text02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="and" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                        <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ffeaeaea" android:id="@+id/fsai_develop_text03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="jinju119" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    </LinearLayout>
+                </LinearLayout>
+                <ImageView android:id="@+id/fsai_develop_ribbon" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/info_top_left" />
+            </RelativeLayout>
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemEula" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemPrivacy" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemLocation" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemPolicy" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemlegalNotice" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <include android:id="@+id/itemTutorial" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" layout="@layout/setting_item" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <View android:id="@+id/fsai_footer" android:layout_width="fill_parent" android:layout_height="60.0dip" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

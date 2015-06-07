@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.custom.SizeableRelativeLayout android:id="@+id/fplr_pic_area" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@+id/fplr_noimage" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fplr_pic" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+        <com.mapia.videoplayer.mapiaVideoPlayer android:id="@+id/fplr_video" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ImageView android:layout_width="fill_parent" android:layout_height="120.0dip" android:src="@drawable/gradient_myfeed_one_column" android:layout_alignParentBottom="true" />
+        <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_alignParentBottom="true">
+            <LinearLayout android:gravity="center" android:layout_width="wrap_content" android:layout_height="29.0dip" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="16.0dip" />
+        </LinearLayout>
+        <View android:id="@+id/fplr_big_like_filter" android:background="#ff000000" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.15" />
+        <RelativeLayout android:id="@+id/fplr_big_like_area" android:visibility="gone" android:layout_width="67.5dip" android:layout_height="57.5dip" android:layout_centerInParent="true">
+            <ImageView android:id="@+id/fplr_big_like_left" android:layout_width="56.5dip" android:layout_height="57.0dip" android:layout_marginTop="0.5dip" android:src="@drawable/end_like_left" />
+            <ImageView android:id="@+id/fplr_big_like_right" android:layout_width="33.0dip" android:layout_height="33.5dip" android:layout_marginLeft="34.5dip" android:layout_marginTop="0.0dip" android:src="@drawable/end_like_right" />
+        </RelativeLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fplr_block" android:background="#ebf2f2f2" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_centerInParent="true">
+            <ImageView android:layout_width="41.0dip" android:layout_height="41.0dip" android:src="@drawable/error_mark_red" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff414042" android:gravity="center" android:id="@+id/fplr_block_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="77.0dip" android:layout_marginTop="19.0dip" android:layout_marginRight="77.0dip" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ffb0b0b0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="19.0dip" android:text="@string/profile_list_detail" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </com.mapia.custom.SizeableRelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="11.0dip" android:layout_weight="1.0">
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff414042" android:id="@+id/fplr_body" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="18.0dip" android:maxLines="5" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff474cfa" android:id="@+id/fplr_tags" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip" android:singleLine="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="31.0dip" android:layout_marginTop="11.0dip" android:layout_marginBottom="26.0dip">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fplr_like_area" android:layout_width="wrap_content" android:layout_height="31.0dip">
+                    <LinearLayout android:gravity="center" android:id="@+id/fplr_like_button" android:layout_width="31.0dip" android:layout_height="31.0dip">
+                        <RelativeLayout android:id="@+id/fplr_like_button_scale" android:layout_width="31.0dip" android:layout_height="31.0dip">
+                            <ImageView android:id="@+id/fplr_like_button_left" android:visibility="gone" android:layout_width="17.0dip" android:layout_height="17.0dip" android:layout_marginLeft="5.5dip" android:layout_marginTop="6.0dip" android:src="@drawable/myfeed_new_likeon1" />
+                            <ImageView android:id="@+id/fplr_like_button_right" android:visibility="gone" android:layout_width="9.5dip" android:layout_height="9.5dip" android:layout_marginLeft="16.0dip" android:layout_marginTop="6.0dip" android:src="@drawable/myfeed_new_likeon2" />
+                            <ImageView android:id="@+id/fplr_like_button_base" android:layout_width="31.0dip" android:layout_height="31.0dip" android:src="@drawable/myfeed_new_likeoff" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <TextView android:textSize="13.0sp" android:textColor="#ff828282" android:id="@+id/fplr_like" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="-2.0dip" android:text="0" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fplr_comment_area" android:layout_width="wrap_content" android:layout_height="31.0dip" android:layout_marginLeft="29.0dip">
+                    <ImageView android:layout_width="21.0dip" android:layout_height="21.0dip" android:src="@drawable/myfeed_comm" />
+                    <TextView android:textSize="13.0sp" android:textColor="#ff828282" android:id="@+id/fplr_comment" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:text="0" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fplr_repic_area" android:layout_width="wrap_content" android:layout_height="31.0dip" android:layout_marginLeft="29.0dip">
+                    <ImageView android:layout_width="21.0dip" android:layout_height="21.0dip" android:src="@drawable/myfeed_repic" />
+                    <TextView android:textSize="13.0sp" android:textColor="#ff828282" android:id="@+id/fplr_repic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="16.0dip" android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

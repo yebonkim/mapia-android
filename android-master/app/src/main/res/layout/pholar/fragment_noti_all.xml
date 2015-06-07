@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/fna_swiperefreshlayout" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ListView android:id="@+id/fna_listview" android:background="#ffffffff" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fna_nodata" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView android:id="@+id/fna_nodata_image" android:layout_width="40.0dip" android:layout_height="40.0dip" />
+        <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff9c9c9c" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:layout_marginBottom="60.0dip" android:text="@string/noti_no_data" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </LinearLayout>
+</RelativeLayout>

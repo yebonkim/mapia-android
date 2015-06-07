@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@+id/title_bg" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include android:id="@+id/webview_title" layout="@layout/naver_notice_top_option_common" />
+    </LinearLayout>
+    <ProgressBar android:id="@+id/progress_bar" android:layout_width="fill_parent" android:layout_height="5.0dip" android:max="100" android:progressDrawable="@drawable/naver_notice_webview_progressbar" style="?android:attr/progressBarStyleHorizontal" />
+    <WebView android:id="@+id/web_holder" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+    <LinearLayout android:gravity="center_vertical" android:layout_gravity="bottom" android:id="@+id/webview_bottom" android:background="@drawable/naver_notice_webview_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@+id/webview_backkey" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="70.0dip" android:src="@drawable/naver_notice_ico_off_1" />
+        <ImageView android:id="@+id/webview_forwordkey" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="100.0dip" android:src="@drawable/naver_notice_ico_off_2" />
+        <ImageView android:id="@+id/webview_gotoKey" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="100.0dip" android:src="@drawable/naver_notice_ico_on_3" />
+        <LinearLayout android:id="@+id/webview_border" android:background="#ff000000" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="70.0dip" />
+        <LinearLayout android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:id="@+id/webview_endkey" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/naver_notice_ico_on_4" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.videoplayer.mapiaVideoView android:id="@+id/videoView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+    <RelativeLayout android:id="@+id/btnClose" android:layout_width="54.0dip" android:layout_height="54.0dip" android:layout_alignParentRight="true">
+        <ImageView android:background="@drawable/common_close_w" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_centerInParent="true" />
+    </RelativeLayout>
+</RelativeLayout>

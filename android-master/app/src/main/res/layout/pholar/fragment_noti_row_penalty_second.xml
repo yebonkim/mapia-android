@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:layout_width="61.0dip" android:layout_height="fill_parent">
+            <ImageView android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/error_mark_redsmall" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@+id/fnrp_message_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="14.0dip" android:layout_marginBottom="14.0dip">
+                <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff414042" android:ellipsize="end" android:id="@+id/fnrp_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="3" android:lineSpacingExtra="2.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ff9c9c9c" android:ellipsize="end" android:id="@+id/fnrp_comment" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:singleLine="true" android:alpha="0.8" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_width="50.0dip" android:layout_height="fill_parent" android:layout_marginRight="13.0dip">
+            <ImageView android:id="@+id/fnrp_close_button" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/error_close3" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:background="#fff2f2f2" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+</LinearLayout>

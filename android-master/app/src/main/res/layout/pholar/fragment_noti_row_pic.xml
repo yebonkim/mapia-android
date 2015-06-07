@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fnrp_background" android:background="#fff1f5ff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:minHeight="72.0dip">
+        <LinearLayout android:gravity="center" android:layout_width="61.0dip" android:layout_height="fill_parent">
+            <View android:layout_width="6.0dip" android:layout_height="75.0dip" />
+            <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/fnr_icon" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/common_noneprofile_ss" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="14.0dip" android:layout_marginBottom="14.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="#ff414042" android:id="@+id/fnrp_message" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="2.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout android:gravity="center" android:layout_width="75.0dip" android:layout_height="fill_parent">
+            <RelativeLayout android:background="#ffe5e5e5" android:layout_width="59.0dip" android:layout_height="59.0dip" android:layout_marginLeft="8.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="8.0dip">
+                <ImageView android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/noimage_small" android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <com.mapia.custom.UrlSetableImageView android:id="@+id/fnrp_pic" android:background="@drawable/noti_pic_border" android:layout_width="59.0dip" android:layout_height="59.0dip" android:layout_marginLeft="8.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="8.0dip" android:scaleType="centerCrop" />
+            <RelativeLayout android:id="@+id/fnrp_play" android:visibility="gone" android:layout_width="59.0dip" android:layout_height="59.0dip" android:layout_marginLeft="8.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="8.0dip">
+                <ImageView android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/post_s_play" android:layout_centerInParent="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout android:background="#fff2f2f2" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+</LinearLayout>

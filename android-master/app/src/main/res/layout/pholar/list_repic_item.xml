@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#fff9f9f9" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:descendantFocusability="blocksDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.endpage.repic.RepicItem android:id="@+id/item" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <ImageView android:id="@+id/repicItemDivider" android:background="#fff9f9f9" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="1.5dip" android:layout_below="@+id/item" />
+    <ImageView android:id="@+id/repicItemBottomPadding" android:background="#fff9f9f9" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="16.0dip" android:layout_below="@+id/repicItemDivider" />
+</RelativeLayout>

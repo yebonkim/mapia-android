@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.profile.tag.ProfileTagRelativeLayout android:id="@+id/fptr_layout" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="83.0dip">
+        <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ff9c9c9c" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:text="@string/profile_tag_footer" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <ImageView android:layout_width="29.0dip" android:layout_height="26.0dip" android:layout_marginTop="6.0dip" android:src="@drawable/common_symbol_s" />
+        <View android:id="@+id/fptr_image" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" />
+    </LinearLayout>
+</com.mapia.profile.tag.ProfileTagRelativeLayout>

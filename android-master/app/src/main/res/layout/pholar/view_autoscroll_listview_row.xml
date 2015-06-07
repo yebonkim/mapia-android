@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@+id/valr_layout" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:id="@+id/valr_tag_button" android:layout_width="fill_parent" android:layout_height="30.0dip">
+        <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff2b2b2b" android:ellipsize="end" android:id="@+id/valr_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </LinearLayout>
+</LinearLayout>

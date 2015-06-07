@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/watermark_bottom_layout" android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@+id/watermark_control_view" android:layout_width="fill_parent" android:layout_height="160.0dip">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="37.0dip">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <ImageView android:background="#ff292929" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                <ImageView android:background="#ffffffff" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+            </LinearLayout>
+            <ImageView android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/cam_watermark_bar" android:layout_centerHorizontal="true" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <ImageView android:layout_gravity="center_vertical" android:layout_width="37.0dip" android:layout_height="wrap_content" android:src="@drawable/cam_bar_num_1" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/cam_graydot_1" />
+                <View android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/cam_graydot_2" />
+                <View android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                <RelativeLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_graydot_3" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:src="@drawable/cam_bar_num_2" android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+                <View android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/cam_graydot_4" />
+                <View android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/cam_graydot_5" />
+                <ImageView android:layout_gravity="center_vertical" android:layout_width="37.0dip" android:layout_height="wrap_content" android:src="@drawable/cam_bar_num_3" />
+            </LinearLayout>
+            <ImageView android:id="@+id/watermark_control_bar" android:paddingLeft="15.0dip" android:paddingRight="15.0dip" android:visibility="gone" android:clickable="true" android:layout_width="34.0dip" android:layout_height="fill_parent" android:src="@drawable/cam_copy_ctrl" />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="79.0dip">
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+                <ImageView android:layout_gravity="center_vertical" android:id="@+id/watermark_none" android:background="@drawable/selector_watermark_none" android:layout_width="51.0dip" android:layout_height="21.0dip" />
+                <LinearLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:id="@+id/watermark_on" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="56.0dip">
+                    <ImageView android:layout_gravity="center_vertical" android:background="@drawable/selector_watermark_on" android:layout_width="11.0dip" android:layout_height="11.0dip" />
+                    <TextView android:textSize="12.0sp" android:textColor="@color/selector_watermark_textcolor" android:gravity="center_vertical" android:layout_gravity="center_vertical" android:id="@+id/watermark_on_nick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.0dip" android:text="닉네임" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <ImageView android:background="#ff3f3f3f" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+        <ImageView android:id="@+id/watermark_close" android:layout_width="fill_parent" android:layout_height="43.5dip" android:src="@drawable/cam_fold" android:scaleType="center" />
+    </LinearLayout>
+</RelativeLayout>

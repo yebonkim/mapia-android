@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="60.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageButton android:id="@+id/edit_top_common_arrow_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="7.0dip" android:src="@drawable/cam_prev" style="@style/edit_top_common_arrow_image" />
+    <ImageButton android:id="@+id/edit_top_common_arrow_next_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="7.0dip" android:layout_marginRight="5.0dip" android:src="@drawable/cam_next" android:layout_alignParentRight="true" style="@style/edit_top_common_arrow_image" />
+</RelativeLayout>

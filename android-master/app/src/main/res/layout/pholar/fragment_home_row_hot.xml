@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.custom.RectangleLinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="#ffd9d9d9" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fhrh_background_back" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fhrh_background_front" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <ImageView android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.85" />
+        <android.support.v4.view.ViewPager android:id="@+id/fhrh_viewpager" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="9.0dip" android:layout_alignBottom="@+id/fhrh_viewpager">
+            <ImageView android:id="@+id/fhrh_indicator_left" android:layout_width="5.0dip" android:layout_height="5.0dip" android:src="@drawable/main_nv_over" />
+            <ImageView android:id="@+id/fhrh_indicator_right" android:layout_width="5.0dip" android:layout_height="5.0dip" android:layout_marginLeft="8.0dip" android:src="@drawable/main_nv_normal" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.mapia.custom.RectangleLinearLayout>

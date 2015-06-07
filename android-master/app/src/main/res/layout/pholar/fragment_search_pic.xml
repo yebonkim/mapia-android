@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ListView android:id="@+id/fsp_history" android:visibility="gone" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:dividerHeight="0.0dip" android:overScrollMode="never" />
+        <ListView android:id="@+id/fsp_autocomplete" android:visibility="gone" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:dividerHeight="0.0dip" android:overScrollMode="never" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fsp_default" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:id="@+id/fsp_nodata_image" android:layout_width="40.0dip" android:layout_height="40.0dip" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff9c9c9c" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/search_pic_01" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fsp_autocomplete_nodata" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:id="@+id/fsp_autocomplete_nodata_image" android:layout_width="40.0dip" android:layout_height="40.0dip" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff9c9c9c" android:gravity="center" android:id="@+id/fsp_autocomplete_nodata_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/search_pic_02" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/fsp_progress" android:background="#ffffffff" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@+id/fsp_progressbar" android:background="@drawable/loading_icon_loop" android:layout_width="22.0dip" android:layout_height="22.0dip" android:layout_centerInParent="true" />
+    </RelativeLayout>
+</RelativeLayout>

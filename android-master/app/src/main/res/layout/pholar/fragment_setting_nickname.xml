@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/topNavigationBar" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height">
+        <ImageView android:id="@+id/prev_nickname" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:src="@drawable/common_prev" android:layout_centerVertical="true" />
+        <com.mapia.custom.FontSettableTextView android:textSize="18.0dip" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_top_nickname" android:layout_centerInParent="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <com.mapia.custom.FontSettableTextView android:textSize="16.0dip" android:textColor="#ffb0b0b0" android:gravity="center" android:id="@+id/btnOk" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginRight="8.0dip" android:text="@string/confirm" android:layout_alignParentRight="true" android:layout_centerVertical="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/topNavigationBar" />
+    <ScrollView android:id="@+id/scroll_view" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:overScrollMode="never">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <View android:layout_width="fill_parent" android:layout_height="15.0dip" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <LinearLayout android:orientation="horizontal" android:id="@+id/inputLayout" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+                <com.mapia.custom.FontSettableTextView android:textSize="16.0dip" android:textColor="#ff000000" android:id="@+id/txtNickname" android:layout_width="60.0dip" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/setting_item_nickname" android:layout_centerVertical="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                <com.mapia.custom.FontSettableEditText android:textSize="15.0dip" android:textColor="#ff414141" android:gravity="center_vertical" android:id="@+id/editNickname" android:background="#ffffffff" android:layout_width="0.0dip" android:layout_height="53.0dip" android:layout_marginLeft="10.0dip" android:singleLine="true" android:maxLength="15" android:layout_weight="1.0" android:textCursorDrawable="@null" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                <RelativeLayout android:id="@+id/btnClearNickname" android:layout_width="44.0dip" android:layout_height="53.0dip" android:layout_alignParentRight="true">
+                    <ImageView android:background="@drawable/login_name_del" android:layout_width="18.0dip" android:layout_height="18.0dip" android:layout_centerInParent="true" />
+                </RelativeLayout>
+            </LinearLayout>
+            <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ffe31c1c" android:gravity="start|center|top" android:id="@+id/nicknameAlert" android:background="#ffffffff" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="22.0dip" android:text="@string/nickname_alert_dup" android:layout_below="@+id/inputLayout" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <View android:layout_width="fill_parent" android:layout_height="53.0dip" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

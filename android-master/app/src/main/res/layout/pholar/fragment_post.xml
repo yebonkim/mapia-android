@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.post.InterceptTouchViewGroup android:id="@+id/root" android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@+id/topNavigationBar" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/fragment_post_header" />
+    <com.mapia.post.HighlightEditText android:textSize="14.0sp" android:textColor="#ff252525" android:textColorHint="#ffdcdcdc" android:gravity="start" android:id="@+id/body" android:background="#ffffffff" android:paddingLeft="16.0dip" android:paddingTop="16.0dip" android:paddingRight="16.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="90.5dip" android:hint="@string/post_edittext_hint" android:maxLength="500" android:inputType="textMultiLine|textNoSuggestions" android:privateImeOptions="inputType=PredictionOff" android:textCursorDrawable="@null" />
+    <LinearLayout android:orientation="vertical" android:id="@+id/bottomBar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <RelativeLayout android:id="@+id/gpsLayer" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="36.0dip">
+            <ImageView android:id="@+id/icoGps" android:background="@drawable/post_gps" android:layout_width="9.0dip" android:layout_height="12.0dip" android:layout_marginLeft="16.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0dip" android:textColor="#ff919191" android:ellipsize="end" android:layout_gravity="center" android:id="@+id/location" android:background="#ffffffff" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="7.5dip" android:layout_toRightOf="@+id/icoGps" android:layout_centerVertical="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <ImageView android:id="@+id/removeLoc" android:background="@drawable/post_del_gps" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginRight="9.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <ImageView android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:alpha="0.08" />
+        <RelativeLayout android:id="@+id/recommendedTagLayer" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="41.0dip">
+            <HorizontalScrollView android:background="#ffffffff" android:scrollbars="none" android:fadingEdge="none" android:fadingEdgeLength="0.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:overScrollMode="never">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/recommendedTagHolder" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <com.mapia.custom.FontSettableTextView android:textSize="12.0dip" android:textColor="#ff919191" android:gravity="center" android:id="@+id/txtRecommendedTag" android:paddingLeft="12.5dip" android:paddingRight="12.5dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/recommended_tag" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+        <RelativeLayout android:id="@+id/utility_bar" android:background="#ff2c2c2c" android:layout_width="fill_parent" android:layout_height="44.0dip">
+            <ImageButton android:id="@+id/btnUtilityTag" android:background="@drawable/selector_post_tag" android:layout_width="37.0dip" android:layout_height="37.0dip" android:layout_marginLeft="10.5dip" android:layout_marginRight="10.5dip" android:layout_centerVertical="true" />
+            <ImageView android:id="@+id/util_divider1" android:background="#ffffffff" android:layout_width="1.5dip" android:layout_height="fill_parent" android:layout_toRightOf="@+id/btnUtilityTag" android:alpha="0.1" />
+            <ImageView android:id="@+id/btnUtilityLocation" android:background="@drawable/selector_post_location" android:clickable="true" android:layout_width="37.0dip" android:layout_height="37.0dip" android:layout_marginLeft="10.5dip" android:layout_marginRight="10.5dip" android:layout_toRightOf="@+id/util_divider1" android:layout_centerVertical="true" />
+            <ImageView android:id="@+id/util_divider2" android:background="#ffffffff" android:layout_width="1.5dip" android:layout_height="fill_parent" android:layout_toRightOf="@+id/btnUtilityLocation" android:alpha="0.1" />
+            <RelativeLayout android:id="@+id/btnShareTwitter" android:layout_width="37.0dip" android:layout_height="fill_parent" android:layout_marginLeft="2.0dip" android:layout_marginRight="8.0dip" android:layout_alignParentRight="true">
+                <ImageView android:id="@+id/imgShareTwitter" android:background="@drawable/selector_post_share_twitter" android:layout_width="25.0dip" android:layout_height="21.0dip" android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/btnShareFacebook" android:layout_width="37.0dip" android:layout_height="fill_parent" android:layout_marginLeft="2.0dip" android:layout_toLeftOf="@+id/btnShareTwitter">
+                <ImageView android:id="@+id/imgShareFacebook" android:background="@drawable/selector_post_share_facebook" android:layout_width="25.0dip" android:layout_height="21.0dip" android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/btnShareLine" android:layout_width="37.0dip" android:layout_height="fill_parent" android:layout_toLeftOf="@+id/btnShareFacebook">
+                <ImageView android:id="@+id/imgShareLine" android:background="@drawable/selector_post_share_line" android:layout_width="25.0dip" android:layout_height="21.0dip" android:layout_centerInParent="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/tagInputLayout" android:background="#fff9f9f9" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="125.5dip">
+        <ListView android:id="@+id/listTagInputHelper" android:background="#fff9f9f9" android:visibility="gone" android:scrollbars="none" android:fadingEdge="none" android:fadingEdgeLength="0.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:divider="@null" android:dividerHeight="0.0dip" />
+        <RelativeLayout android:id="@+id/noContents" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <ImageView android:id="@+id/symbol" android:background="@drawable/common_symbol_s" android:layout_width="29.0dip" android:layout_height="26.0dip" android:layout_centerHorizontal="true" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff9c9c9c" android:gravity="center" android:id="@+id/txtNoTagHistory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/no_tag_history" android:layout_below="@+id/symbol" android:lineSpacingExtra="5.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/coach" android:background="@drawable/coach_bg_1" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:background="@drawable/coach_close" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:layout_alignParentRight="true" />
+        <ImageView android:id="@+id/coach2" android:background="@drawable/coach_bg_2" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ImageView android:id="@+id/coach1" android:background="@drawable/coach_bg_1" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="23.0dip" android:layout_centerHorizontal="true">
+            <ImageView android:id="@+id/navi1" android:background="@drawable/tutorial_navion" android:layout_width="7.0dip" android:layout_height="7.0dip" android:layout_marginRight="5.0dip" />
+            <ImageView android:id="@+id/navi2" android:background="@drawable/tutorial_navioff" android:layout_width="7.0dip" android:layout_height="7.0dip" android:layout_marginLeft="5.0dip" />
+        </LinearLayout>
+        <ImageView android:id="@+id/coachClose" android:background="@drawable/coach_close" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</com.mapia.post.InterceptTouchViewGroup>

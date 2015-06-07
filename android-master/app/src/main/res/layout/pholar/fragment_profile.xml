@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.custom.FixedViewPager android:id="@+id/fp_viewpager" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="53.0dip" />
+    <com.mapia.profile.ProfileHeaderLayout android:id="@+id/fp_header" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="293.0dip">
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fp_header_background" android:background="@drawable/bitmap_profile_default_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <LinearLayout android:background="#fff3f3f3" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.45" />
+        <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="53.0dip">
+            <TextView android:textSize="18.0dip" android:textColor="#ff000000" android:id="@+id/fp_name_fold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fp_info" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="53.0dip">
+            <RelativeLayout android:layout_width="120.0dip" android:layout_height="87.5dip">
+                <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/fp_icon" android:layout_width="80.0dip" android:layout_height="80.0dip" android:layout_marginLeft="20.0dip" android:src="@drawable/common_noneprofile_s" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+                <ImageView android:id="@+id/fp_follow_image" android:visibility="gone" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="7.5dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fp_follow_button" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+            <TextView android:textSize="20.0dip" android:textColor="#ff000000" android:id="@+id/fp_name" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="12.0dip" android:textColor="#ff545454" android:ellipsize="end" android:id="@+id/fp_message" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="24.0dip" android:layout_marginTop="4.0dip" android:layout_marginRight="24.0dip" android:layout_marginBottom="2.0dip" android:singleLine="true" android:maxLength="30" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="37.0dip" android:layout_marginTop="20.0dip">
+                <LinearLayout android:orientation="vertical" android:id="@+id/fp_posting_button" android:layout_width="51.5dip" android:layout_height="32.0dip">
+                    <LinearLayout android:gravity="center|top" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="15.0dip" android:textColor="#ff000000" android:id="@+id/fp_posting_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="-1.0dip" android:alpha="0.6" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="51.5dip" android:layout_height="16.0dip" android:src="@drawable/profile_posting" />
+                </LinearLayout>
+                <LinearLayout android:background="#ff000000" android:layout_width="1.0dip" android:layout_height="32.0dip" android:layout_marginLeft="7.5dip" android:layout_marginRight="7.5dip" android:alpha="0.07" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fp_follower_button" android:layout_width="51.5dip" android:layout_height="32.0dip">
+                    <LinearLayout android:gravity="center|top" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="15.0dip" android:textColor="#ff000000" android:id="@+id/fp_follower_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="-1.0dip" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="51.5dip" android:layout_height="16.0dip" android:src="@drawable/profile_follower" />
+                </LinearLayout>
+                <LinearLayout android:background="#ff000000" android:layout_width="1.0dip" android:layout_height="32.0dip" android:layout_marginLeft="7.5dip" android:layout_marginRight="7.5dip" android:alpha="0.07" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fp_following_button" android:layout_width="51.5dip" android:layout_height="32.0dip">
+                    <LinearLayout android:gravity="center|top" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="15.0dip" android:textColor="#ff000000" android:id="@+id/fp_following_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="-1.0dip" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="51.5dip" android:layout_height="16.0dip" android:src="@drawable/profile_following" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/fp_separator" android:background="#ff000000" android:layout_width="1.0dip" android:layout_height="32.0dip" android:layout_marginLeft="7.5dip" android:layout_marginRight="7.5dip" android:alpha="0.07" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fp_like_button" android:layout_width="51.5dip" android:layout_height="32.0dip">
+                    <LinearLayout android:gravity="center|top" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:textSize="15.0dip" android:textColor="#ff000000" android:id="@+id/fp_like_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="-1.0dip" />
+                    </LinearLayout>
+                    <ImageView android:layout_width="51.5dip" android:layout_height="16.0dip" android:src="@drawable/profile_like" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fp_floatbar" android:background="#c0ffffff" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_alignParentBottom="true">
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff9c9c9c" android:id="@+id/fp_tag_rep" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/profile_represent" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <LinearLayout android:gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="53.0dip" android:layout_weight="1.0">
+                <com.mapia.autoscrolllistview.AutoScrollListView android:id="@+id/fp_tag_listview" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_marginLeft="4.5dip" android:overScrollMode="never" />
+            </LinearLayout>
+            <ImageView android:id="@+id/fp_grid_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="6.5dip" android:src="@drawable/common_3rowview_over" />
+            <ImageView android:id="@+id/fp_list_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="6.5dip" android:src="@drawable/common_1rowview_normal" />
+            <ImageView android:id="@+id/fp_tag_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="8.5dip" android:src="@drawable/common_tagview_normal" />
+        </LinearLayout>
+    </com.mapia.profile.ProfileHeaderLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/pf_nomember" android:background="#ffffffff" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff9c9c9c" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/profile_withdrawal_member" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <LinearLayout android:orientation="vertical" android:id="@+id/pf_nomember_footer" android:layout_width="fill_parent" android:layout_height="60.0dip" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fp_header_fold" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fp_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:layout_width="0.0dip" android:layout_height="53.0dip" android:layout_weight="1.0" />
+        <ImageView android:id="@+id/fp_sharing_button" android:visibility="invisible" android:layout_width="41.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="3.0dip" android:src="@drawable/profile_share" />
+        <ImageView android:id="@+id/fp_setting_button" android:visibility="gone" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/profile_setting" />
+        <ImageView android:id="@+id/fp_more_button" android:visibility="gone" android:layout_width="27.0dip" android:layout_height="31.0dip" android:layout_marginTop="11.0dip" android:layout_marginRight="7.5dip" android:src="@drawable/myfeed_more" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/fp_penalty" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="85.0dip">
+        <LinearLayout android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="84.5dip">
+            <LinearLayout android:gravity="center" android:layout_width="56.0dip" android:layout_height="fill_parent">
+                <ImageView android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/error_mark_redsmall2" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="14.0dip" android:layout_marginBottom="14.0dip">
+                    <com.mapia.custom.FontSettableTextView android:textSize="12.0sp" android:textColor="#ff414042" android:ellipsize="end" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/profile_penalty_01" android:maxLines="3" android:lineSpacingExtra="2.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <com.mapia.custom.FontSettableTextView android:textSize="12.0sp" android:textColor="#ffb0b0b0" android:ellipsize="end" android:id="@+id/fp_clause" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/profile_penalty_02" android:singleLine="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:layout_width="47.0dip" android:layout_height="fill_parent">
+                <ImageView android:id="@+id/fp_close_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="6.0dip" android:layout_marginRight="6.0dip" android:src="@drawable/error_close3" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:background="#fff2f2f2" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/pf_block" android:background="#e61c1c1c" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <ImageView android:layout_width="41.0dip" android:layout_height="41.0dip" android:src="@drawable/error_mark_red" />
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff9c9c9c" android:id="@+id/pf_block_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="19.0dip" android:text="@string/profile_penalty_03" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <ImageView android:id="@+id/pf_block_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev_w" />
+    </RelativeLayout>
+</RelativeLayout>

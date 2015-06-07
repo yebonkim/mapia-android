@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fnrp_background" android:background="#fff1f5ff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:minHeight="72.0dip">
+        <LinearLayout android:gravity="center" android:layout_width="61.0dip" android:layout_height="fill_parent">
+            <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/fnr_icon" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/common_noneprofile_ss" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="14.0dip" android:layout_marginBottom="14.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="#ff414042" android:id="@+id/fnrd_message" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="2.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_width="16.0dip" android:layout_height="fill_parent" />
+    </LinearLayout>
+    <LinearLayout android:background="#fff2f2f2" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+</LinearLayout>

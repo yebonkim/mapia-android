@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fn_header" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginLeft="50.0dip" android:layout_weight="1.0">
+            <ImageView android:layout_width="90.0dip" android:layout_height="14.0dip" android:src="@drawable/activity_title" />
+        </LinearLayout>
+        <ImageView android:id="@+id/fn_search_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/common_search" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/fn_separator_1" android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fn_header" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fn_floatbar" android:background="#fff9f9f9" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_below="@+id/fn_separator_1">
+        <LinearLayout android:layout_width="16.0dip" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@+id/fn_all_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ImageView android:id="@+id/fn_all_image" android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/noti_alarm_on" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff414042" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:text="@string/noti_all" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@+id/fn_my_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:alpha="0.3">
+            <ImageView android:id="@+id/fn_my_image" android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/noti_my_on" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff414042" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:text="@string/noti_my" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/fn_follow_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:alpha="0.3">
+            <ImageView android:id="@+id/fn_follow_image" android:layout_width="23.0dip" android:layout_height="23.0dip" android:src="@drawable/noti_follow_on" />
+            <com.mapia.custom.FontSettableTextView android:textSize="13.0sp" android:textColor="#ff414042" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:text="@string/noti_following" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="16.0dip" android:layout_height="fill_parent" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/fn_separator_2" android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fn_floatbar" />
+    <android.support.v4.view.ViewPager android:id="@+id/fn_viewpager" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fn_separator_2" />
+    <RelativeLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fn_nodata" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fn_separator_1">
+        <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/fullbg_activity" android:scaleType="centerCrop" />
+        <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_marginBottom="30.0dip" android:text="@string/noti_no_data" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

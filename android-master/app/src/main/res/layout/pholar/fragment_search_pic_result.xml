@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fspr_header" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fspr_prev" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <TextView android:textSize="15.0sp" android:textColor="#ff000000" android:id="@+id/fspr_tag" android:background="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="50.0dip" android:singleLine="true" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/fspr_separator" android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fspr_header" />
+    <com.huewu.pla.lib.MultiColumnListView android:id="@+id/fspr_listview" android:background="#ffffffff" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fspr_separator" android:overScrollMode="never" pla:plaColumnNumber="3" pla:plaLandscapeColumnNumber="3" xmlns:pla="http://schemas.android.com/apk/res-auto" />
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/fspr_nodata_text" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fspr_separator">
+        <ImageView android:id="@+id/fspr_nodata_image" android:layout_width="40.0dip" android:layout_height="40.0dip" />
+        <com.mapia.custom.FontSettableTextView android:textSize="13.0dip" android:textColor="#ff9c9c9c" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="13.0sp" android:text="@string/search_pic_no_result" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </LinearLayout>
+    <ImageView android:id="@+id/fspr_nodata" android:visibility="gone" android:layout_width="29.0dip" android:layout_height="26.0dip" android:layout_marginBottom="16.0dip" android:src="@drawable/common_symbol_s" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+</RelativeLayout>

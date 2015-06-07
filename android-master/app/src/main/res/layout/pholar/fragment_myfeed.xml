@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.custom.FixedViewPager android:id="@+id/fm_viewpager" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="53.0dip" />
+    <RelativeLayout android:id="@+id/fm_nodata" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="53.0dip">
+        <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/fullbg_myfeed1" android:scaleType="centerCrop" />
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginTop="63.0dip" android:layout_weight="1.0">
+                <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/fm_nodata_text1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/myfeed_hello_01" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/fm_nodata_text2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/myfeed_hello_02" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:id="@+id/fm_go_home" android:background="@drawable/myfeed_nodata_button_background" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" android:layout_marginBottom="10.0dip">
+                <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/myfeed_view_hottag_hotuser" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:id="@+id/fm_make_my_pic" android:background="#ff2c2c35" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" android:layout_marginBottom="90.0dip">
+                <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/myfeed_posting_first" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/fm_floatbar" android:background="#fff9f9f9" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginTop="53.0dip">
+        <LinearLayout android:gravity="center" android:id="@+id/fm_tag_count_area" android:layout_width="wrap_content" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip">
+            <ImageView android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/myfeed_tag" />
+            <TextView android:textSize="13.0sp" android:textColor="#ff2b2b2b" android:id="@+id/fm_tag_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:layout_marginTop="1.0dip" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/fm_user_count_area" android:layout_width="wrap_content" android:layout_height="53.0dip" android:layout_marginLeft="17.0dip">
+            <ImageView android:layout_width="16.0dip" android:layout_height="16.0dip" android:src="@drawable/myfeed_p" />
+            <TextView android:textSize="13.0sp" android:textColor="#ff2b2b2b" android:id="@+id/fm_user_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:layout_marginTop="1.0dip" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0.0dip" android:layout_height="53.0dip" android:layout_weight="1.0" />
+        <LinearLayout android:gravity="center" android:id="@+id/fm_one_column" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="6.5dip">
+            <ImageView android:id="@+id/fm_one_column_image" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/common_1rowview_over" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/fm_three_column" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="8.5dip">
+            <ImageView android:id="@+id/fm_three_column_image" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/common_3rowview_normal" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout android:orientation="vertical" android:id="@+id/fm_header" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <LinearLayout android:orientation="horizontal" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+            <LinearLayout android:layout_width="53.0dip" android:layout_height="53.0dip" />
+            <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <ImageView android:layout_width="85.0dip" android:layout_height="14.0dip" android:src="@drawable/myfeed_title" />
+            </LinearLayout>
+            <ImageView android:id="@+id/fm_search_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/common_search" />
+        </LinearLayout>
+        <LinearLayout android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/fm_uploading" android:background="#ff2b2e3a" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="57.0dip" android:layout_below="@+id/fm_header" android:alpha="0.96">
+        <RelativeLayout android:id="@+id/fm_video_upload_top" android:layout_width="fill_parent" android:layout_height="53.0dip">
+            <RelativeLayout android:id="@+id/fm_video_thumb_layout" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="10.0dip" android:layout_centerVertical="true">
+                <ImageView android:id="@+id/fm_video_thumb" android:background="#ff666666" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+                <ImageView android:background="@drawable/post_play_xs" android:layout_width="19.0dip" android:layout_height="19.0dip" android:layout_centerInParent="true" />
+                <ImageView android:background="#ff444754" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentTop="true" />
+                <ImageView android:background="#ff444754" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentBottom="true" />
+                <ImageView android:background="#ff444754" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentLeft="true" />
+                <ImageView android:background="#ff444754" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <com.mapia.custom.FontSettableTextView android:textSize="15.0dip" android:textColor="#ffffffff" android:id="@+id/fm_uploading_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/uploading" android:layout_toRightOf="@+id/fm_video_thumb_layout" android:layout_centerVertical="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <ImageView android:id="@+id/fm_close_uploading_status_bar" android:background="@drawable/error_close" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="6.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            <ImageView android:id="@+id/fm_retry_uploading" android:background="@drawable/post_reload" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="2.0dip" android:layout_toLeftOf="@+id/fm_close_uploading_status_bar" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <ImageView android:id="@+id/fm_uploading_progressbar" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fm_video_upload_top" />
+    </RelativeLayout>
+</RelativeLayout>

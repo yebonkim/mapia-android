@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@+id/tutorial_root" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <ImageView android:id="@+id/tutorial_bg_1" android:background="@drawable/tutorial_bg_01" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+    <ImageView android:id="@+id/tutorial_bg_2" android:background="@drawable/tutorial_bg_02" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" android:alpha="0.0" />
+    <ImageView android:id="@+id/tutorial_bg_3" android:background="@drawable/tutorial_bg_03" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" android:alpha="0.0" />
+    <ImageView android:id="@+id/tutorial_bg_4" android:background="@drawable/tutorial_bg_04" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" android:alpha="0.0" />
+    <android.support.v4.view.ViewPager android:id="@+id/tutorial_view_pager" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@+id/tutorial_navi_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="33.0dip">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/tutorial_navion" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/tutorial_navioff" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/tutorial_navioff" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tutorial_navioff" />
+    </LinearLayout>
+    <ImageView android:layout_gravity="bottom|center" android:id="@+id/tutorial_logo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="34.0dip" android:src="@drawable/tutorial_logo" />
+    <FrameLayout android:layout_gravity="bottom|center" android:id="@+id/tutorial_now" android:layout_width="fill_parent" android:layout_height="157.0dip" android:alpha="0.0">
+        <View android:background="@drawable/tutorial_gradation" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ImageView android:layout_gravity="bottom|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="34.0dip" android:src="@drawable/tutorial_now" />
+    </FrameLayout>
+</FrameLayout>

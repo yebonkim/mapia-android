@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="drawable" name="bitmap_black_background">#ff000000</item>
+    <item type="drawable" name="bitmap_default_background">#ffe5e5e5</item>
+    <item type="drawable" name="bitmap_profile_default_background">#fffefefe</item>
+    <item type="drawable" name="color_dark_focus">#5fff0000</item>
+    <item type="drawable" name="color_dark_normal">#5f000000</item>
+    <item type="drawable" name="com_facebook_picker_default_separator_color">#33464c59</item>
+    <item type="drawable" name="myfeed_tag_color_normal">#ff414042</item>
+    <item type="drawable" name="myfeed_tag_color_point">#ffff0000</item>
+    <item type="drawable" name="mapia_default_color">#ff000000</item>
+    <item type="drawable" name="video_encode_background">#ffdfdfdf</item>
+    <item type="drawable" name="video_encode_progress">#ff5566db</item>
+</resources>

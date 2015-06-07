@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:paddingRight="15.0dip" android:paddingBottom="15.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@+id/watermark_area" android:background="@drawable/cam_watermark" android:visibility="gone" android:layout_width="53.0dip" android:layout_height="22.0dip" android:layout_alignParentRight="true" />
+    <LinearLayout android:orientation="horizontal" android:id="@+id/watermark_on_area" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true">
+        <ImageView android:layout_gravity="center_vertical" android:id="@+id/watermark_copy" android:layout_width="10.0dip" android:layout_height="10.0dip" android:src="@drawable/cam_c_small" />
+        <TextView android:textSize="11.0sp" android:textColor="#99ffffff" android:gravity="center_vertical" android:id="@+id/watermark_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" />
+    </LinearLayout>
+</RelativeLayout>

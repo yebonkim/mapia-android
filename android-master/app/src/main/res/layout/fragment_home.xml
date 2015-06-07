@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffe5e5e5" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@+id/fh_header" android:background="#2e3e4f" android:layout_width="fill_parent" android:layout_height="53.5dip" android:layout_alignParentTop="true">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="53.0dip">
+            <LinearLayout android:gravity="center" android:id="@+id/fh_title" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginLeft="51.0dip" android:layout_weight="1.0">
+                <TextView android:id="@+id/fh_title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAPIA" android:textColor="#ffffff" android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="10pt" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center|left" android:id="@+id/fh_button_search" android:layout_width="51.0dip" android:layout_height="fill_parent">
+                <ImageView android:layout_width="46.0dip" android:layout_height="46.0dip" android:src="@drawable/main_search" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fh_header" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/mapShowFragment"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_below="@+id/fh_header">
+    </LinearLayout>
+    <!--<com.mapia.custom.HomeSwipeRefreshLayout android:id="@+id/fh_swiperefreshlayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fh_header">-->
+        <!--<com.mapia.custom.ListenableScrollView android:id="@+id/fh_scrollview" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never">-->
+            <!--<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_hot" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.taggroup.HomeTaggroupLinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">-->
+                    <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_01" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--</com.mapia.home.taggroup.HomeTaggroupLinearLayout>-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_01" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_01_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_02" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_02" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_02_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_03" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_03" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_03_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_04" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_04" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_04_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_05" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_05" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_05_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_06" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_06" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_06_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_07" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_07" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_07_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_08" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_08" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_08_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_09" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_09" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_09_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_10" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_10" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_10_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_11" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+                <!--<com.mapia.home.banner.HomeBannerRelativeLayout android:orientation="vertical" android:id="@+id/fh_banner_11" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.0dip">-->
+                    <!--<ImageView android:id="@+id/fh_banner_11_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />-->
+                <!--</com.mapia.home.banner.HomeBannerRelativeLayout>-->
+                <!--<LinearLayout android:orientation="vertical" android:id="@+id/fh_group_12" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+            <!--</LinearLayout>-->
+        <!--</com.mapia.custom.ListenableScrollView>-->
+    <!--</com.mapia.custom.HomeSwipeRefreshLayout>-->
+    <RelativeLayout android:id="@+id/fh_no_connection" android:background="#ffffffff" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="60.0dip">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <ImageView android:layout_width="41.0dip" android:layout_height="41.0dip" android:src="@drawable/error_mark_grey" />
+           </LinearLayout>
+    </RelativeLayout>
+    <View android:id="@+id/fh_myfeed_textview" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="48.0dip" />
+    <View android:id="@+id/fh_profile_textview" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" />
+</RelativeLayout>

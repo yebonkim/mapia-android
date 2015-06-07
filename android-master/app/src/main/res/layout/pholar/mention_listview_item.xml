@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="70.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/btnProfile" android:layout_width="61.0dip" android:layout_height="fill_parent">
+        <com.makeramen.RoundedImageView android:id="@+id/imgProfile" android:layout_width="39.0dip" android:layout_height="39.0dip" android:src="@drawable/common_noneprofile_ss" android:scaleType="fitCenter" android:layout_centerInParent="true" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <com.mapia.custom.FontSettableTextView android:textSize="14.5dip" android:textColor="#ff414042" android:id="@+id/txtNickname" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.5dip" android:layout_toRightOf="@+id/btnProfile" android:layout_centerVertical="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+</RelativeLayout>

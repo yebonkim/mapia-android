@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="17.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@+id/filter_intensity_left" android:layout_width="@dimen/filter_intensity_bar_num_width" android:layout_height="fill_parent">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_bar_num_2" />
+    </FrameLayout>
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_filter_dot" android:layout_toRightOf="@+id/filter_intensity_left" android:layout_centerVertical="true" />
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_filter_dot" android:layout_toLeftOf="@+id/filter_intensity_right" android:layout_centerVertical="true" />
+    <SeekBar android:id="@+id/filter_intensity_seekbar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toLeftOf="@+id/filter_intensity_right" android:layout_toRightOf="@+id/filter_intensity_left" android:layout_centerVertical="true" style="@style/filter_intensity_seekbar" />
+    <FrameLayout android:id="@+id/filter_intensity_right" android:layout_width="@dimen/filter_intensity_bar_num_width" android:layout_height="fill_parent" android:layout_alignParentRight="true">
+        <ImageView android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_bar_num_4" />
+    </FrameLayout>
+</RelativeLayout>

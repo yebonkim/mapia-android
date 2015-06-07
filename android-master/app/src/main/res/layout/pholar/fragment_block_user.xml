@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:id="@+id/bu_header" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/prev_block_user" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:src="@drawable/common_prev" android:layout_centerVertical="true" />
+        <com.mapia.custom.FontSettableTextView android:textSize="18.0sp" android:textColor="#ff000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_item_block_user" android:layout_centerInParent="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <LinearLayout android:orientation="vertical" android:id="@+id/bu_desc" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ffa9a9a9" android:gravity="center" android:layout_width="fill_parent" android:layout_height="39.0dip" android:text="@string/setting_item_block_user_desc" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    </LinearLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ListView android:id="@+id/bu_list" android:background="#fff9f9f9" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" />
+        <RelativeLayout android:id="@+id/bu_empty" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.mapia.custom.FontSettableTextView android:textSize="12.0sp" android:textColor="#ffa9a9a9" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_item_block_user_empty" android:layout_centerInParent="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

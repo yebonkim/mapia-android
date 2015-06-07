@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40.0dip">
+        <LinearLayout android:gravity="center_vertical" android:id="@+id/fstar_tag_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:id="@+id/fstar_tag_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:singleLine="true" android:maxLength="21" />
+            <TextView android:textSize="14.0sp" android:textColor="#ff384cd8" android:id="@+id/fstar_tag_2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:maxLength="20" />
+            <TextView android:textSize="14.0sp" android:textColor="#ff000000" android:ellipsize="end" android:id="@+id/fstar_tag_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:maxLength="20" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center|right" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <TextView android:textSize="10.0sp" android:textColor="#ffb7b7b7" android:id="@+id/fstar_tag_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="16.0dip" android:text="0" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

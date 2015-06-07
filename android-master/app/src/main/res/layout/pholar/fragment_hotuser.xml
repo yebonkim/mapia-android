@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fhu_header" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fhu_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ImageView android:layout_width="96.0dip" android:layout_height="14.0dip" android:src="@drawable/hotuser_title" />
+        </LinearLayout>
+        <ImageView android:id="@+id/fhu_search_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/common_search" />
+    </LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/fhu_swiperefreshlayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fhu_header">
+        <ListView android:id="@+id/fhu_listview" android:background="#ffdddddd" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <LinearLayout android:orientation="vertical" android:id="@+id/fhu_separator" android:background="#33808080" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fhu_header" />
+    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_below="@+id/fhu_separator">
+        <LinearLayout android:orientation="vertical" android:id="@+id/fhu_progressbar" android:background="@drawable/loading_icon_loop" android:layout_width="22.0dip" android:layout_height="22.0dip" />
+    </LinearLayout>
+</RelativeLayout>

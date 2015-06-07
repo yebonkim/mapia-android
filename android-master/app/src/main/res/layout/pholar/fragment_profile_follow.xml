@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@+id/fpf_header" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/fpf_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <TextView android:textSize="18.0sp" android:textColor="#ff000000" android:id="@+id/fpf_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="1.0dip" android:text="@string/profile_follow_follower" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="50.0dip" android:layout_height="53.0dip" />
+    </LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/fpf_swiperefreshlayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fpf_header">
+        <ListView android:id="@+id/fpf_listview" android:background="#fff9f9f9" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <RelativeLayout android:id="@+id/fpf_nodata" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/fpf_header">
+        <ImageView android:id="@+id/fpf_nodata_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/profile_nonefollower_bg" android:scaleType="centerCrop" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <TextView android:textSize="15.0dip" android:textColor="#ffffffff" android:id="@+id/fpf_nodata_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/profile_follow_no_follower" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout android:orientation="vertical" android:background="#33808080" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fpf_header" />
+</RelativeLayout>

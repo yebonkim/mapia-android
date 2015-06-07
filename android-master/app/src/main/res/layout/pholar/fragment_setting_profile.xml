@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/topNavigationBar" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height">
+        <ImageView android:id="@+id/left1" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:src="@drawable/common_prev" android:layout_centerVertical="true" />
+        <com.mapia.custom.FontSettableTextView android:textSize="18.0dip" android:textColor="#ff000000" android:id="@+id/txtTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_top_profile" android:layout_centerInParent="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/topNavigationBar" />
+    <ScrollView android:id="@+id/scroll_view" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:overScrollMode="never">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@+id/profile" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <RelativeLayout android:layout_width="127.0dip" android:layout_height="127.0dip" android:layout_marginTop="20.0dip" android:layout_marginBottom="20.0dip" android:layout_centerInParent="true">
+                    <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/profileImage" android:layout_width="127.0dip" android:layout_height="127.0dip" android:src="@drawable/common_noneprofile" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+                    <RelativeLayout android:id="@+id/editProfile" android:layout_width="52.0dip" android:layout_height="40.0dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true">
+                        <ImageView android:background="@drawable/setting_edit" android:clickable="false" android:layout_width="36.5dip" android:layout_height="24.5dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+                    </RelativeLayout>
+                    <LinearLayout android:gravity="center" android:id="@+id/fsp_delete" android:background="#ffffffff" android:visibility="gone" android:layout_width="130.0dip" android:layout_height="50.0dip" android:layout_centerInParent="true" android:alpha="0.8">
+                        <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ff414042" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_profile_deleted" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+            <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/profile_nickname_layout" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="53.0dip">
+                    <com.mapia.custom.FontSettableTextView android:textSize="16.0dip" android:textColor="#ff000000" android:layout_width="60.0dip" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:text="@string/setting_item_nickname" android:layout_centerVertical="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <com.mapia.custom.FontSettableTextView android:textSize="15.0dip" android:textColor="#ff414141" android:gravity="center_vertical" android:id="@+id/profile_nickname" android:background="#ffffffff" android:layout_width="wrap_content" android:layout_height="53.0dip" android:layout_marginLeft="10.0dip" android:singleLine="true" android:maxLength="15" android:layout_weight="1.0" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <ImageView android:layout_gravity="center_vertical" android:layout_width="15.5dip" android:layout_height="15.5dip" android:layout_marginRight="12.5dip" android:src="@drawable/setting_arrow" />
+                </LinearLayout>
+                <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/profile_message_layout" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.mapia.custom.FontSettableTextView android:textSize="16.0dip" android:textColor="#ff000000" android:gravity="center_vertical" android:layout_width="60.0dip" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip" android:text="@string/setting_profile_message" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14.0dip" android:layout_marginBottom="12.0dip" android:layout_weight="1.0">
+                        <com.mapia.custom.FontSettableTextView android:textSize="15.0dip" android:textColor="#ff414141" android:gravity="center_vertical" android:id="@+id/profile_message" android:background="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:maxLines="2" android:maxLength="30" android:layout_weight="1.0" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    </LinearLayout>
+                    <ImageView android:layout_gravity="center_vertical" android:layout_width="15.5dip" android:layout_height="15.5dip" android:layout_marginRight="12.5dip" android:src="@drawable/setting_arrow" />
+                </LinearLayout>
+                <ImageView android:background="#19000000" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            </LinearLayout>
+            <View android:layout_width="fill_parent" android:layout_height="53.0dip" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

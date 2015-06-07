@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ff1b1b1b" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@+id/fpic_prev_button" android:background="#ff292929" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <LinearLayout android:gravity="center|left|top" android:layout_width="53.0dip" android:layout_height="53.0dip">
+            <ImageView android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginLeft="12.5dip" android:layout_marginTop="11.0dip" android:src="@drawable/cam_arrow_prev" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="53.0dip" android:layout_weight="1.0">
+            <com.mapia.custom.FontSettableTextView android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@+id/fpic_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/profile_icon_crop_setting" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:id="@+id/fpic_complete_button" android:layout_width="53.0dip" android:layout_height="53.0dip">
+            <com.mapia.custom.FontSettableTextView android:textSize="16.0sp" android:textColor="@color/point_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/profile_icon_crop_completed" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="53.0dip">
+        <RelativeLayout android:layout_width="340.0dip" android:layout_height="340.0dip" android:layout_centerInParent="true">
+            <com.mapia.custom.TouchImageView android:id="@+id/fpic_crop_base" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            <com.mapia.custom.CircleFilterImageView android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            <LinearLayout android:orientation="vertical" android:id="@+id/fpic_loading_icon" android:background="@drawable/loading_icon_loop" android:visibility="gone" android:layout_width="22.0dip" android:layout_height="22.0dip" android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

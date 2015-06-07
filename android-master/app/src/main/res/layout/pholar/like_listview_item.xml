@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="70.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:background="#33808080" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentBottom="true" />
+    <com.makeramen.RoundedImageView android:id="@+id/imgProfile" android:layout_width="39.0dip" android:layout_height="39.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="10.0dip" android:src="#ffe6e6e6" android:scaleType="fitCenter" android:layout_centerVertical="true" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+    <ImageView android:id="@+id/btnFollow" android:background="@drawable/selector_like_member_follow" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginLeft="5.0dip" android:layout_marginRight="16.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toLeftOf="@+id/btnFollow" android:layout_toRightOf="@+id/imgProfile" android:layout_centerVertical="true">
+        <com.mapia.custom.FontSettableTextView android:textSize="14.5dip" android:textColor="#ff414042" android:ellipsize="end" android:id="@+id/txtNickname" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <com.mapia.custom.EquitableTextView android:id="@+id/like_tags" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

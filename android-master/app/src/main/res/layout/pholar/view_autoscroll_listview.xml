@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:background="#ffdddddd" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <com.mapia.custom.AutoScrollListView android:id="@+id/val_listview" android:scrollbars="none" android:layout_width="200.0dip" android:layout_height="40.0dip" android:overScrollMode="never" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.myfeed.tag.MyfeedTagRelativeLayout android:id="@+id/fmtr_layout" android:layout_width="fill_parent" android:layout_height="90.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/fmtr_area" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="90.0dip">
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fmtr_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <ImageView android:id="@+id/fmtr_filter" android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.45" />
+        <LinearLayout android:gravity="bottom" android:id="@+id/fmtr_click_area" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="18.0sp" android:textColor="#ffffffff" android:ellipsize="end" android:id="@+id/fmtr_tag" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="6.0dip" android:singleLine="true" android:layout_weight="1.0" />
+            <LinearLayout android:gravity="center" android:id="@+id/fmtr_follow_button" android:layout_width="105.0dip" android:layout_height="44.0dip">
+                <LinearLayout android:gravity="center" android:id="@+id/fmtr_follow_background" android:background="#80000000" android:layout_width="85.0dip" android:layout_height="24.0dip">
+                    <com.mapia.custom.FontSettableTextView android:textSize="12.0sp" android:textColor="#ffffffff" android:id="@+id/fmtr_follow_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:text="@string/myfeed_tag_following" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <ImageView android:id="@+id/fmtr_follow_image" android:layout_width="9.0dip" android:layout_height="9.0dip" android:layout_marginLeft="3.0dip" android:src="@drawable/common_flw_check" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</com.mapia.myfeed.tag.MyfeedTagRelativeLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_marginLeft="7.0dip">
+        <LinearLayout android:orientation="vertical" android:id="@+id/fcf_progressbar" android:background="@drawable/loading_icon_loop" android:layout_width="22.0dip" android:layout_height="22.0dip" android:layout_centerInParent="true" />
+        <ImageView android:id="@+id/fcf_symbol" android:visibility="gone" android:layout_width="29.0dip" android:layout_height="26.0dip" android:src="@drawable/common_symbol_s" android:layout_centerInParent="true" />
+    </RelativeLayout>
+</LinearLayout>

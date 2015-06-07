@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="296.0dip" android:layout_height="159.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="106.0dip">
+        <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ff404142" android:gravity="center" android:id="@+id/du_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <LinearLayout android:gravity="center" android:id="@+id/du_cancel_button" android:background="#ff2c2c2c" android:layout_width="147.5dip" android:layout_height="fill_parent">
+            <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:background="#ff414042" android:layout_width="1.0dip" android:layout_height="53.0dip" />
+        <LinearLayout android:gravity="center" android:id="@+id/du_confirm_button" android:background="#ff2c2c2c" android:layout_width="147.5dip" android:layout_height="53.0dip">
+            <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/confirm" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

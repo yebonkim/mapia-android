@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.custom.RectangleLinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/fhrb_banner" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fhrb_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/fhrb_image_new" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <LinearLayout android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.3" />
+    </RelativeLayout>
+</com.mapia.custom.RectangleLinearLayout>

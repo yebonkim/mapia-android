@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#fff9f9f9" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" android:weightSum="3.0">
+        <Button android:id="@+id/btnChooseVideo" android:layout_width="0.0dip" android:layout_height="50.0dip" android:layout_marginTop="15.0dip" android:layout_marginRight="5.0dip" android:text="동영상 선택" android:layout_weight="1.0" />
+        <Button android:id="@+id/btnUploadVideo" android:layout_width="0.0dip" android:layout_height="50.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="15.0dip" android:text="동영상 업로드" android:layout_weight="1.0" />
+        <Button android:id="@+id/btnComment" android:layout_width="0.0dip" android:layout_height="50.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="15.0dip" android:text="공통댓글" android:layout_weight="1.0" />
+    </LinearLayout>
+    <VideoView android:id="@+id/videoView" android:layout_width="fill_parent" android:layout_height="300.0dip" android:layout_marginTop="15.0dip" />
+</LinearLayout>

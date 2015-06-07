@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:song="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:id="@+id/header" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/license_prev_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:src="@drawable/common_prev" android:layout_centerVertical="true" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/terms_logo" android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <View android:id="@+id/header_underline" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/header" />
+    <RelativeLayout android:id="@+id/licenseAllAgreeLayout" android:layout_width="fill_parent" android:layout_height="@dimen/licence_head_layout_height" android:layout_marginLeft="@dimen/licence_all_margin" android:layout_marginTop="5.0dip" android:layout_marginRight="@dimen/licence_all_margin" android:layout_below="@+id/header_underline">
+        <com.mapia.custom.FontSettableTextView android:id="@+id/txtAllAgree" android:text="@string/license_all_policy" song:customFont="NanumRegular" style="@style/licence_policy_title" />
+        <Button android:id="@+id/checkBtnAllAgree" style="@style/licence_policy_agree_button" />
+    </RelativeLayout>
+    <View android:id="@+id/licenseAllAgreeLayoutUnderLine" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginLeft="@dimen/licence_all_margin" android:layout_marginRight="@dimen/licence_all_margin" android:layout_below="@+id/licenseAllAgreeLayout" />
+    <LinearLayout android:orientation="vertical" android:id="@+id/licenseContentsLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="@dimen/licence_all_margin" android:layout_marginRight="@dimen/licence_all_margin" android:weightSum="3.0" android:layout_above="@+id/bottom" android:layout_below="@+id/licenseAllAgreeLayoutUnderLine">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <RelativeLayout android:id="@+id/agreementHead" android:layout_width="fill_parent" android:layout_height="@dimen/licence_head_layout_height">
+                <com.mapia.custom.FontSettableTextView android:id="@+id/txtAggrement" android:text="@string/license_agreement" song:customFont="NanumRegular" style="@style/licence_policy_title" />
+                <Button android:id="@+id/checkBtnAgreement" style="@style/licence_policy_agree_button" />
+            </RelativeLayout>
+            <ScrollView android:id="@+id/agreement" style="@style/licence_policy_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <View android:layout_width="fill_parent" android:layout_height="@dimen/licence_policy_content_text_top_view_height" />
+                    <com.mapia.custom.FontSettableTextView android:text="@string/license_agreement_contents" song:customFont="NanumRegular" style="@style/licence_policy_content_text" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <RelativeLayout android:id="@+id/privacyPolicyHead" android:layout_width="fill_parent" android:layout_height="@dimen/licence_head_layout_height">
+                <com.mapia.custom.FontSettableTextView android:id="@+id/txtPrivacyPolicy" android:text="@string/license_privacy_policy" song:customFont="NanumRegular" style="@style/licence_policy_title" />
+                <Button android:id="@+id/checkBtnPrivacy" style="@style/licence_policy_agree_button" />
+            </RelativeLayout>
+            <ScrollView android:id="@+id/privacy" style="@style/licence_policy_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <View android:layout_width="fill_parent" android:layout_height="@dimen/licence_policy_content_text_top_view_height" />
+                    <com.mapia.custom.FontSettableTextView android:text="@string/license_privacy_contents" song:customFont="NanumRegular" style="@style/licence_policy_content_text" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <RelativeLayout android:id="@+id/locationPolicyHead" android:layout_width="fill_parent" android:layout_height="@dimen/licence_head_layout_height">
+                <com.mapia.custom.FontSettableTextView android:id="@+id/txtLocationPolicy" android:text="@string/license_location_policy" song:customFont="NanumRegular" style="@style/licence_policy_title" />
+                <Button android:id="@+id/checkBtnLocation" style="@style/licence_policy_agree_button" />
+            </RelativeLayout>
+            <ScrollView android:id="@+id/locationLicense" style="@style/licence_policy_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <View android:layout_width="fill_parent" android:layout_height="@dimen/licence_policy_content_text_top_view_height" />
+                    <com.mapia.custom.FontSettableTextView android:text="@string/license_location_contents" song:customFont="NanumRegular" style="@style/licence_policy_content_text" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/bottom" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginLeft="@dimen/licence_all_margin" android:layout_marginTop="20.0dip" android:layout_marginRight="@dimen/licence_all_margin" android:layout_marginBottom="20.0dip" android:layout_alignParentBottom="true">
+        <com.mapia.custom.FontSettableButton android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/btnAgreement" android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="53.0dip" android:text="@string/agreement" android:layout_centerHorizontal="true" android:alpha="0.3" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/ft_swiperefreshlayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="53.0dip">
+        <com.huewu.pla.lib.MultiColumnListView android:id="@+id/ft_multilistview" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="never" pla:plaColumnNumber="3" pla:plaLandscapeColumnNumber="3" xmlns:pla="http://schemas.android.com/apk/res-auto" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <com.mapia.taggallery.TagGalleryHeaderLayout android:id="@+id/ft_header" android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="242.0dip">
+        <com.mapia.custom.UrlSetableImageView android:id="@+id/ft_header_image" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="#fff3f3f3" android:alpha="0.45" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/ft_info" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="45.0dip" android:layout_marginRight="45.0dip" android:layout_marginBottom="53.0dip">
+            <TextView android:textSize="20.0sp" android:textColor="#ff000000" android:ellipsize="end" android:gravity="center" android:id="@+id/ft_tag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:maxLength="22" />
+            <ImageView android:id="@+id/ft_follow_button" android:visibility="invisible" android:layout_width="119.0dip" android:layout_height="28.0dip" android:layout_marginTop="14.0dip" android:src="@drawable/gallery_follow" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/ft_floating" android:background="#c0ffffff" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_alignParentBottom="true">
+            <RelativeLayout android:layout_width="0.0dip" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip" android:layout_weight="1.0">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/ft_user_list" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="53.0dip">
+                    <RelativeLayout android:layout_width="42.5dip" android:layout_height="wrap_content">
+                        <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/ft_icon1" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="40.0dip" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+                        <ImageView android:id="@+id/ft_icon1_rank" android:visibility="gone" android:layout_width="15.5dip" android:layout_height="15.5dip" android:src="@drawable/gallery_rank" android:layout_alignParentRight="true" />
+                    </RelativeLayout>
+                    <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/ft_icon2" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginLeft="2.5dip" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+                    <com.mapia.custom.UrlSetableRoundedImageView android:id="@+id/ft_icon3" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginLeft="5.0dip" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/ft_scroll_list" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="53.0dip">
+                    <com.mapia.custom.FontSettableTextView android:textSize="14.0sp" android:textColor="#ff9c9c9c" android:id="@+id/ft_tag_rel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/tag_gallery_related" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                    <com.mapia.autoscrolllistview.AutoScrollListView android:id="@+id/ft_tag_listview" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_marginLeft="4.5dip" android:layout_marginRight="20.0dip" android:overScrollMode="never" />
+                </LinearLayout>
+            </RelativeLayout>
+            <ImageView android:id="@+id/ft_order_like_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="7.5dip" android:src="@drawable/common_sort_likeon" />
+            <ImageView android:id="@+id/ft_order_time_button" android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginRight="10.5dip" android:src="@drawable/common_sort_timeoff" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginLeft="50.0dip" android:layout_marginRight="50.0dip">
+            <TextView android:textSize="14.0sp" android:textColor="#ff404040" android:ellipsize="end" android:id="@+id/ft_tag_fold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:maxLength="21" android:alpha="0.0" />
+        </LinearLayout>
+    </com.mapia.taggallery.TagGalleryHeaderLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@+id/ft_header_fold" android:layout_width="fill_parent" android:layout_height="53.0dip">
+        <ImageView android:id="@+id/ft_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/common_prev" />
+        <LinearLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <ImageView android:id="@+id/ft_share_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/common_share" />
+    </LinearLayout>
+    <ImageView android:id="@+id/ft_littledata" android:visibility="gone" android:layout_width="29.0dip" android:layout_height="26.0dip" android:layout_marginBottom="76.0dip" android:src="@drawable/common_symbol_s" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+    <LinearLayout android:gravity="center_horizontal" android:id="@+id/ft_balloon" android:layout_width="fill_parent" android:layout_height="35.0dip" android:layout_marginBottom="68.0dip" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true">
+        <LinearLayout android:background="@drawable/gallery_balloon" android:layout_width="wrap_content" android:layout_height="35.0dip">
+            <com.mapia.custom.FontSettableTextView android:textSize="11.0dip" android:textColor="#ff5566db" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="이 태그로 포스팅 해보세요" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

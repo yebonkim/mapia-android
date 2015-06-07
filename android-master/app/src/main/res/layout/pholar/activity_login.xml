@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/login_bg" android:scaleType="centerCrop" />
+    <RelativeLayout android:background="@drawable/login_title" android:layout_width="231.0dip" android:layout_height="40.0dip" android:layout_marginTop="131.0dip" android:layout_centerHorizontal="true" />
+    <RelativeLayout android:id="@+id/facebookLayout" android:background="#ff3a579d" android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" android:layout_marginBottom="53.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <ImageView android:background="@drawable/login_fb" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="18.0dip" android:layout_centerVertical="true" />
+        <com.mapia.custom.FontSettableTextView android:textSize="16.0dip" android:textColor="#ffffffff" android:id="@+id/txtLoginFacebook" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/login_btn_facebook" android:layout_centerInParent="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="53.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" android:layout_marginBottom="8.0dip" android:layout_above="@+id/facebookLayout" android:layout_centerHorizontal="true">
+        <com.mapia.custom.FontSettableButton android:textSize="16.0dip" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/naver" android:background="#ff2adc46" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/login_btn_naver" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <ImageView android:background="@drawable/login_naver" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="18.0dip" android:layout_centerVertical="true" />
+    </RelativeLayout>
+</RelativeLayout>

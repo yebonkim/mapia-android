@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center" android:background="#ff00d8ff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:id="@+id/root2" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:orientation="vertical" android:id="@+id/moveView" android:background="#ffcccccc" android:layout_width="360.0dip" android:layout_height="400.0dip">
+            <com.mapia.test.TouchImageViewCustom android:id="@+id/touchImage" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/fullbg_myfeed1" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

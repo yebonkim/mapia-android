@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="296.0dip" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/firstRow" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <View android:layout_width="15.0dip" android:layout_height="106.0dip" />
+            <com.mapia.custom.FontSettableTextView android:textSize="15.0sp" android:textColor="#ff404042" android:gravity="center" android:id="@+id/message" android:layout_width="266.0dip" android:layout_height="wrap_content" android:layout_marginTop="23.0dip" android:layout_marginBottom="23.0dip" android:lineSpacingExtra="4.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:background="#ff2c2c2c" android:layout_width="fill_parent" android:layout_height="53.0dip" android:weightSum="2.0" android:layout_below="@+id/firstRow">
+            <com.mapia.custom.FontSettableButton android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/btnLeft" android:background="#ff2c2c2c" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <ImageView android:background="#ff414042" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+            <com.mapia.custom.FontSettableButton android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/btnRight" android:background="#ff2c2c2c" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

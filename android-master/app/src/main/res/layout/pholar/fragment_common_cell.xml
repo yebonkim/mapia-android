@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.custom.HeightableRelativeLayout android:id="@+id/fcc_root" android:background="#ffffffff" android:paddingRight="1.0dip" android:paddingBottom="1.5dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.mapia.custom.SizeableLinearLayout android:gravity="center" android:id="@+id/fcc_background" android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@+id/fcc_noimage" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+    </com.mapia.custom.SizeableLinearLayout>
+    <com.mapia.custom.CollageImageView android:id="@+id/fcc_imageview" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+    <com.mapia.custom.SizeableLinearLayout android:gravity="center" android:id="@+id/fcc_video" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_width="33.0dip" android:layout_height="33.0dip" android:src="@drawable/common_play_small" />
+    </com.mapia.custom.SizeableLinearLayout>
+    <LinearLayout android:gravity="bottom|center|right" android:orientation="horizontal" android:id="@+id/fcc_gradient" android:background="@drawable/gradient_copyright" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_marginRight="1.0dip" android:layout_alignParentBottom="true">
+        <ImageView android:id="@+id/fcc_repic" android:visibility="gone" android:layout_width="14.5dip" android:layout_height="15.0dip" android:layout_marginRight="1.0dip" android:layout_marginBottom="4.0dip" android:src="@drawable/common_repic_small" />
+        <LinearLayout android:layout_width="3.0dip" android:layout_height="fill_parent" />
+    </LinearLayout>
+    <com.mapia.custom.SizeableLinearLayout android:gravity="center" android:id="@+id/fcc_penalty" android:background="#ebf2f2f2" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_width="32.0dip" android:layout_height="32.0dip" android:src="@drawable/error_mark_redsmall2" />
+    </com.mapia.custom.SizeableLinearLayout>
+</com.mapia.custom.HeightableRelativeLayout>

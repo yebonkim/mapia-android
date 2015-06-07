@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:layout_width="296.0dip" android:layout_height="180.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="16.0sp" android:textColor="#ff404042" android:gravity="center" android:id="@+id/video_delete_dialog_text_1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="23.5dip" android:text="@string/video_delete_dialog_text_1" />
+    <TextView android:textSize="14.0sp" android:textColor="#ff404042" android:gravity="center" android:id="@+id/video_delete_dialog_text_2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="19.0dip" android:text="@string/video_delete_dialog_text_2" android:layout_below="@+id/video_delete_dialog_text_1" />
+    <TextView android:textSize="14.0sp" android:textColor="#ff404042" android:gravity="center" android:id="@+id/video_delete_dialog_text_3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/video_delete_dialog_text_3" android:layout_below="@+id/video_delete_dialog_text_2" />
+    <LinearLayout android:orientation="horizontal" android:background="#ff2c2c2c" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_alignParentBottom="true">
+        <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/video_delete_dialog_cancel" android:layout_width="147.5dip" android:layout_height="fill_parent" android:text="@string/video_delete_cancel" android:layout_weight="1.0" />
+        <View android:background="#1affffff" android:layout_width="1.5dip" android:layout_height="60.0dip" android:layout_weight="1.0" />
+        <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/video_delete_dialog_confirm" android:layout_width="147.5dip" android:layout_height="fill_parent" android:text="@string/video_delete_confirm" android:layout_weight="1.0" />
+    </LinearLayout>
+</RelativeLayout>

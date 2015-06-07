@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/video_holder" android:background="#ff1b1b1b" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@+id/apply_filter_bottom_dummy_view">
+        <com.mapia.custom.ResizableImageView android:id="@+id/video_thumbnail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="centerCrop" android:adjustViewBounds="true" android:layout_centerInParent="true" />
+        <ImageView android:id="@+id/btn_play" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/common_play_big" android:layout_centerInParent="true" />
+        <com.mapia.filter.WatermarkView android:id="@+id/watermark_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignRight="@+id/video_thumbnail" android:layout_alignBottom="@+id/video_thumbnail" />
+    </RelativeLayout>
+    <include android:id="@+id/apply_filter_top_layout" layout="@layout/filter_top_common_layout" />
+    <View android:id="@+id/apply_filter_bottom_dummy_view" android:background="@android:color/transparent" android:clickable="true" android:layout_width="fill_parent" android:layout_height="@dimen/video_filter_bottom_height" android:layout_above="@+id/apply_filter_bottom_layout" />
+    <RelativeLayout android:id="@+id/apply_filter_filter_layout" android:background="@color/camera_background" android:clickable="true" android:layout_width="fill_parent" android:layout_height="@dimen/video_filter_bottom_height" android:layout_above="@+id/apply_filter_bottom_layout">
+        <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/filter_bottom_layout" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/apply_filter_section_layout" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="@dimen/video_filter_bottom_height" android:layout_above="@+id/apply_filter_bottom_layout">
+        <ImageView android:id="@+id/section_timeline_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="7.0dip" android:src="@drawable/cam_timeline" android:layout_centerHorizontal="true" />
+        <it.sephiroth.android.library.widget.HListView android:id="@+id/section_control_list_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:listSelector="#00000000" android:layout_below="@+id/section_timeline_view" />
+        <View android:id="@+id/section_control_view" android:background="@drawable/cam_section_ctrl" android:layout_width="wrap_content" android:layout_height="72.0dip" android:layout_marginTop="10.0dip" android:layout_toLeftOf="@+id/section_control_view_right" android:layout_toRightOf="@+id/section_control_view_left" android:layout_below="@+id/section_timeline_view" />
+        <View android:id="@+id/section_control_view_left" android:background="#ff000000" android:layout_width="@dimen/filter_section_control_margin" android:layout_height="70.0dip" android:layout_marginTop="11.0dip" android:layout_below="@+id/section_timeline_view" android:layout_alignParentLeft="true" android:alpha="0.5" />
+        <View android:id="@+id/section_control_view_right" android:background="#ff000000" android:layout_width="@dimen/filter_section_control_margin" android:layout_height="70.0dip" android:layout_marginTop="11.0dip" android:layout_below="@+id/section_timeline_view" android:layout_alignParentRight="true" android:alpha="0.5" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/apply_filter_thumbnail_select_layout" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="@dimen/video_filter_bottom_height" android:layout_above="@+id/apply_filter_bottom_layout">
+        <FrameLayout android:layout_width="fill_parent" android:layout_height="70.0dip" android:layout_marginLeft="22.5dip" android:layout_marginRight="22.5dip" android:layout_centerInParent="true">
+            <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@+id/apply_filter_thumbnail_select_thumbnail_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+                <ImageView style="@style/video_preview_thumbnail_select_thumbnail" />
+            </LinearLayout>
+            <SeekBar android:layout_gravity="center" android:id="@+id/apply_filter_thumbnail_select_thumbnail_seekbar" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/video_preview_thumbnail_select_seekbar" />
+        </FrameLayout>
+    </RelativeLayout>
+    <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@+id/apply_filter_bottom_layout" android:layout_width="fill_parent" android:layout_height="55.0dip" android:layout_alignParentBottom="true">
+        <FrameLayout android:id="@+id/apply_filter_filter_tab" android:layout_width="100.0dip" android:layout_height="fill_parent" android:layout_marginTop="@dimen/filter_bottom_tab_top_margin">
+            <ImageView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_tap_1_sel" />
+            <View android:layout_gravity="bottom" android:background="#ff5566db" android:layout_width="fill_parent" android:layout_height="1.5dip" />
+        </FrameLayout>
+        <FrameLayout android:id="@+id/apply_filter_section_tab" android:layout_width="100.0dip" android:layout_height="fill_parent" android:layout_marginTop="@dimen/filter_bottom_tab_top_margin">
+            <ImageView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_tap_2_nor" />
+            <View android:layout_gravity="bottom" android:background="#ff5566db" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="1.5dip" />
+        </FrameLayout>
+        <FrameLayout android:id="@+id/apply_filter_thumbnail_tab" android:visibility="gone" android:layout_width="100.0dip" android:layout_height="fill_parent">
+            <ImageView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_tap_3_nor" />
+            <View android:layout_gravity="bottom" android:background="#ff5566db" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="1.5dip" />
+        </FrameLayout>
+    </LinearLayout>
+    <com.mapia.filter.WatermarkControlView android:id="@+id/watermark_bottom_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</RelativeLayout>

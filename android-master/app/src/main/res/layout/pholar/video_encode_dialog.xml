@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="#ffffffff" android:layout_width="306.0dip" android:layout_height="43.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@+id/video_encode_progressbar" android:layout_width="245.0dip" android:layout_height="10.0dip" android:layout_marginLeft="16.0dip" android:max="100" android:progress="0" style="@style/video_encode_dialog_style" />
+    <ImageView android:id="@+id/video_encode_cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/cam_small_close" />
+</LinearLayout>

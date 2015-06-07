@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapia.home.taggroup.HomeTaggroupLinearLayout android:orientation="vertical" android:id="@+id/fhr_layout" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="2.0">
+        <LinearLayout android:id="@+id/fhr_tag_area_01" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="2.0">
+            <RelativeLayout android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <ImageView android:id="@+id/fhr_no_01" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+                <com.mapia.custom.UrlSetableImageView android:id="@+id/fhr_thumb_01" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <ImageView android:id="@+id/fhr_thumb_01_new" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fhr_thumb_01_dark" android:background="#26000000" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                    <LinearLayout android:background="@drawable/gradient_home_thumb" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <TextView android:textSize="22.0sp" android:textColor="#ffffffff" android:ellipsize="none" android:id="@+id/fhr_tag_01" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="8.0dip" android:singleLine="true" android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <LinearLayout android:id="@+id/fhr_tag_area_02" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <RelativeLayout android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <ImageView android:id="@+id/fhr_no_02" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+                    <com.mapia.custom.UrlSetableImageView android:id="@+id/fhr_thumb_02" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                    <ImageView android:id="@+id/fhr_thumb_02_new" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                    <LinearLayout android:orientation="vertical" android:id="@+id/fhr_thumb_02_dark" android:background="#26000000" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                        <LinearLayout android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                        <LinearLayout android:background="@drawable/gradient_home_thumb" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                    </LinearLayout>
+                    <TextView android:textSize="14.0sp" android:textColor="#ffffffff" android:ellipsize="none" android:id="@+id/fhr_tag_02" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="8.0dip" android:singleLine="true" android:layout_alignBottom="@+id/fhr_thumb_02" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/fhr_tag_area_03" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <RelativeLayout android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <ImageView android:id="@+id/fhr_no_03" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+                    <com.mapia.custom.UrlSetableImageView android:id="@+id/fhr_thumb_03" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                    <ImageView android:id="@+id/fhr_thumb_03_new" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                    <LinearLayout android:orientation="vertical" android:id="@+id/fhr_thumb_03_dark" android:background="#26000000" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                        <LinearLayout android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                        <LinearLayout android:background="@drawable/gradient_home_thumb" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                    </LinearLayout>
+                    <TextView android:textSize="14.0sp" android:textColor="#ffffffff" android:ellipsize="none" android:id="@+id/fhr_tag_03" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="8.0dip" android:singleLine="true" android:layout_alignBottom="@+id/fhr_thumb_03" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:id="@+id/fhr_tag_area_04" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <RelativeLayout android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <ImageView android:id="@+id/fhr_no_04" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+                <com.mapia.custom.UrlSetableImageView android:id="@+id/fhr_thumb_04" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <ImageView android:id="@+id/fhr_thumb_04_new" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fhr_analog_clock_area" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="6.0">
+                        <com.mapia.custom.AnalogClockView android:id="@+id/fhr_analog_clock" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <View android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/fhr_thumb_04_dark" android:background="#26000000" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                    <LinearLayout android:background="@drawable/gradient_home_thumb" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <TextView android:textSize="14.0sp" android:textColor="#ffffffff" android:ellipsize="none" android:id="@+id/fhr_tag_04" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="8.0dip" android:singleLine="true" android:layout_alignBottom="@+id/fhr_thumb_04" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/fhr_tag_area_05" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <RelativeLayout android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <ImageView android:id="@+id/fhr_no_05" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+                <com.mapia.custom.UrlSetableImageView android:id="@+id/fhr_thumb_05" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <ImageView android:id="@+id/fhr_thumb_05_new" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fhr_thumb_05_dark" android:background="#26000000" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                    <LinearLayout android:background="@drawable/gradient_home_thumb" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <TextView android:textSize="14.0sp" android:textColor="#ffffffff" android:ellipsize="none" android:id="@+id/fhr_tag_05" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="8.0dip" android:singleLine="true" android:layout_alignBottom="@+id/fhr_thumb_05" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/fhr_tag_area_06" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <RelativeLayout android:background="#ffe5e5e5" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <ImageView android:id="@+id/fhr_no_06" android:visibility="gone" android:layout_width="35.0dip" android:layout_height="35.0dip" android:src="@drawable/noimage_big" android:layout_centerInParent="true" />
+                <com.mapia.custom.UrlSetableImageView android:id="@+id/fhr_thumb_06" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <ImageView android:id="@+id/fhr_thumb_06_new" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/fhr_thumb_06_dark" android:background="#26000000" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                    <LinearLayout android:background="@drawable/gradient_home_thumb" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+                </LinearLayout>
+                <TextView android:textSize="14.0sp" android:textColor="#ffffffff" android:ellipsize="none" android:id="@+id/fhr_tag_06" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="8.0dip" android:singleLine="true" android:layout_alignBottom="@+id/fhr_thumb_06" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.mapia.home.taggroup.HomeTaggroupLinearLayout>

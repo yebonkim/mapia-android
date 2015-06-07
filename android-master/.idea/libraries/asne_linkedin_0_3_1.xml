@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="asne-linkedin-0.3.1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.asne/asne-linkedin/0.3.1/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.asne/asne-linkedin/0.3.1/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.asne/asne-linkedin/0.3.1/jars/libs/linkedin-j-android-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
