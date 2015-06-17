@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.mapia.sns.asne.facebook.FacebookSocialNetwork;
 import com.mapia.sns.asne.instagram.InstagramSocialNetwork;
-import com.mapia.sns.asne.twitter.TwitterSocialNetwork;
+//import com.mapia.sns.asne.twitter.TwitterSocialNetwork;
 import com.mapia.sns.model.SocialPerson;
 import com.squareup.picasso.Picasso;
 
@@ -79,10 +79,10 @@ public class FriendsListAdapter extends BaseAdapter {
     private void colorRow(int networkId){
         int color = context.getResources().getColor(com.mapia.R.color.dark);
         switch (networkId) {
-            case TwitterSocialNetwork.ID:
-                color = context.getResources().getColor(com.mapia.R.color.twitter);
-                image = com.mapia.R.drawable.twitter_user;
-                break;
+//            case TwitterSocialNetwork.ID:
+//                color = context.getResources().getColor(com.mapia.R.color.twitter);
+//                image = com.mapia.R.drawable.twitter_user;
+//                break;
             case InstagramSocialNetwork.ID:
                 color = context.getResources().getColor(com.mapia.R.color.instagram);
                 image = com.mapia.R.drawable.instagram_user;

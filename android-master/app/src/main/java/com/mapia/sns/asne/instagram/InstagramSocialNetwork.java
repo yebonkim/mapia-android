@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
-import com.mapia.sns.model.SocialPerson;
+import com.google.gson.JsonObject;
 import com.mapia.sns.asne.core.AccessToken;
 import com.mapia.sns.asne.core.OAuthActivity;
 import com.mapia.sns.asne.core.OAuthSocialNetwork;
@@ -22,9 +22,13 @@ import com.mapia.sns.asne.core.listener.OnRequestAccessTokenCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestAddFriendCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestDetailedSocialPersonCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestGetFriendsCompleteListener;
+import com.mapia.sns.asne.core.listener.OnRequestGetPostsCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestRemoveFriendCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestSocialPersonCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestSocialPersonsCompleteListener;
+import com.mapia.sns.model.SocialComment;
+import com.mapia.sns.model.SocialPerson;
+import com.mapia.sns.model.SocialPost;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -159,8 +163,8 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
     }
 
     /**
-     * Request current user {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
-     * @param onRequestSocialPersonCompleteListener listener for {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * Request current user {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
+     * @param onRequestSocialPersonCompleteListener listener for {@link com.github.gorbin.asne.mapia.sns.SocialPost} request
      */
     @Override
     public void requestCurrentPerson(OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
@@ -169,9 +173,9 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
     }
 
     /**
-     * Request {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by user id
+     * Request {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by user id
      * @param userID id of Instagram user
-     * @param onRequestSocialPersonCompleteListener listener for {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * @param onRequestSocialPersonCompleteListener listener for {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     @Override
     public void requestSocialPerson(String userID, OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
@@ -185,9 +189,9 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
     }
 
     /**
-     * Request ArrayList of {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by array of userIds
+     * Request ArrayList of {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by array of userIds
      * @param userID array of Instagram users id
-     * @param onRequestSocialPersonsCompleteListener listener for array of {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * @param onRequestSocialPersonsCompleteListener listener for array of {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     @Override
     public void requestSocialPersons(String[] userID, OnRequestSocialPersonsCompleteListener onRequestSocialPersonsCompleteListener) {
@@ -251,6 +255,100 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
             }
         }
         return instagramPerson;
+    }
+
+    private InstagramPost getDetailedSocialPost(InstagramPost instagramPost, JSONObject jsonResponse) throws JSONException {
+        getSocialPost(instagramPost, jsonResponse);
+        if(jsonResponse.has("bio")) {
+            instagramPost.bio = jsonResponse.getString("bio");
+        }
+        if(jsonResponse.has("website")) {
+            instagramPost.website = jsonResponse.getString("website");
+        }
+        if(jsonResponse.has("full_name")) {
+            instagramPost.fullName = jsonResponse.getString("full_name");
+        }
+        if(jsonResponse.has("counts")){
+            if(jsonResponse.getJSONObject("counts").has("media")){
+                instagramPost.media = jsonResponse.getJSONObject("counts").getInt("media");
+            }
+            if(jsonResponse.getJSONObject("counts").has("followed_by")) {
+                instagramPost.followedBy = jsonResponse.getJSONObject("counts").getInt("followed_by");
+            }
+            if(jsonResponse.getJSONObject("counts").has("follows")) {
+                instagramPost.follows = jsonResponse.getJSONObject("counts").getInt("follows");
+            }
+        }
+        return instagramPost;
+    }
+
+
+    private SocialPost getSocialPost(SocialPost socialPost, JSONObject jsonResponse) throws JSONException {
+        if(jsonResponse.has("id")) {
+            socialPost.id = jsonResponse.getString("id");
+        }
+        if(jsonResponse.has("user")) {
+            JSONObject userJsonObject = jsonResponse.getJSONObject("user");
+            socialPost.name = userJsonObject.getString("username");
+            socialPost.profileURL = "http://www.instagram.com/" + userJsonObject.getString("username");
+            socialPost.avatarURL = userJsonObject.getString("profile_picture");
+        }
+        if(jsonResponse.has("tags")){
+            JSONArray tagsJsonArray = jsonResponse.getJSONArray("tags");
+            ArrayList<String> tagsList = new ArrayList<String>();
+
+            for(int i=0; i<tagsJsonArray.length(); i++) {
+                tagsList.add(tagsJsonArray.get(i).toString());
+            }
+            socialPost.tags = tagsList;
+        }
+        if(jsonResponse.has("caption")){
+            JSONObject captionJsonObject = jsonResponse.getJSONObject("caption");
+            socialPost.captionCreateTime = captionJsonObject.getString("created_time");
+
+            JSONObject captionFromJson= captionJsonObject.getJSONObject("from");
+            SocialPerson captionFromPerson = new SocialPerson(captionFromJson.getString("id"),
+                    captionFromJson.getString("username"),
+                    captionFromJson.getString("profile_picture"),
+                    "http://www.instagram.com/"+captionFromJson.getString("username"));
+            socialPost.captionFrom = captionFromPerson;
+            socialPost.captionId = captionJsonObject.getString("id");
+            socialPost.captionText = captionJsonObject.getString("text");
+
+        }
+        if(jsonResponse.has("comments")){
+            JSONArray commentsJsonArray = jsonResponse.getJSONObject("comments").getJSONArray("data");
+            ArrayList<SocialComment> socialCommentArrayList = new ArrayList<SocialComment>();
+            for(int i=0; i < commentsJsonArray.length(); i++){
+                JSONObject eachComment = commentsJsonArray.getJSONObject(i);
+                JSONObject commentFromJson = eachComment.getJSONObject("from");
+                SocialPerson commentFromPerson = new SocialPerson(commentFromJson.getString("id"),
+                        commentFromJson.getString("username"),
+                        commentFromJson.getString("profile_picture"),
+                        "http://www.instagram.com/"+commentFromJson.getString("username"));
+                SocialComment socialComment = new SocialComment(eachComment.getString("id"),
+                        eachComment.getString("created_time"),
+                        eachComment.getString("text"),
+                        commentFromPerson);
+                socialCommentArrayList.add(socialComment);
+            }
+            socialPost.comments = socialCommentArrayList;
+        }
+
+        if(jsonResponse.has("likes")){
+            JSONArray likesJsonArray = jsonResponse.getJSONObject("likes").getJSONArray("data");
+            ArrayList<SocialPerson> socialPersonArrayList = new ArrayList<SocialPerson>();
+            for(int i=0; i< likesJsonArray.length(); i++){
+                JSONObject eachPerson = likesJsonArray.getJSONObject(i);
+                SocialPerson likeSocialPerson = new SocialPerson(eachPerson.getString("id"),
+                        eachPerson.getString("username"),
+                        eachPerson.getString("profile_picture"),
+                        "http://www.instagram.com/"+eachPerson.getString("username"));
+                socialPersonArrayList.add(likeSocialPerson);
+            }
+            socialPost.likesPerson = socialPersonArrayList;
+        }
+        return socialPost;
     }
 
     /**
@@ -336,6 +434,12 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
         executeRequest(new RequestGetFriendsAsyncTask(), null, REQUEST_GET_FRIENDS);
     }
 
+
+    @Override
+    public void requestGetPosts(OnRequestGetPostsCompleteListener onRequestGetPostsCompleteListener) {
+        super.requestGetPosts(onRequestGetPostsCompleteListener);
+        executeRequest(new RequestGetPostsAsyncTask(), null, REQUEST_GET_POSTS);
+    }
     /**
      * Invite friend by id to current user
      * @param userID id of user that should be invited
@@ -713,6 +817,7 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
         }
     }
 
+
     private class RequestGetFriendsAsyncTask extends SocialNetworkAsyncTask {
         public static final String RESULT_GET_FRIENDS = "RESULT_GET_FRIENDS";
         public static final String RESULT_GET_FRIENDS_ID = "RESULT_GET_FRIENDS_ID";
@@ -775,6 +880,75 @@ public class InstagramSocialNetwork extends OAuthSocialNetwork {
             ArrayList<SocialPerson> socialPersons = result.getParcelableArrayList(RESULT_GET_FRIENDS);
             ((OnRequestGetFriendsCompleteListener) mLocalListeners.get(REQUEST_GET_FRIENDS))
                     .OnGetFriendsComplete(getID(), socialPersons);
+        }
+    }
+
+
+
+    private class RequestGetPostsAsyncTask extends SocialNetworkAsyncTask {
+        public static final String RESULT_GET_POSTS = "RESULT_GET_POSTS";
+        public static final String RESULT_GET_POSTS_ID = "RESULT_GET_POSTS_ID";
+        public static final String PARAM_USER_ID = "PARAM_USER_ID";
+        @Override
+        protected Bundle doInBackground(Bundle... params) {
+            Bundle args = params[0];
+            Bundle result = new Bundle(args);
+            String userID = args.getString(PARAM_USER_ID);
+            String token = mSharedPreferences.getString(SAVE_STATE_KEY_OAUTH_TOKEN, null);
+            String urlString = INSTAGRAM_APIURL + "/users/self/media/recent/?access_token=" + token;
+            ArrayList<SocialPost> socialPosts = new ArrayList<SocialPost>();
+            ArrayList<String> ids = new ArrayList<String>();
+            try {
+                getAllPosts(urlString, socialPosts, ids);
+                result.putStringArray(RESULT_GET_POSTS_ID, ids.toArray(new String[ids.size()]));
+                result.putParcelableArrayList(RESULT_GET_POSTS, socialPosts);
+            } catch (Exception e) {
+                checkExeption(e, result);
+            }
+
+            return result;
+        }
+
+        private void getAllPosts(String urlString, final ArrayList<SocialPost> socialPosts, final ArrayList<String> ids) throws Exception {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            checkConnectionErrors(connection);
+            InputStream inputStream = connection.getInputStream();
+            String response = streamToString(inputStream);
+            JSONObject jsonObject = (JSONObject) new JSONTokener(response).nextValue();
+
+            JSONObject jsonPagination;
+            String nextToken = null;
+            if(jsonObject.has("pagination")) {
+                jsonPagination = jsonObject.getJSONObject("pagination");
+                if(jsonPagination.has("next_url")) {
+                    nextToken = jsonPagination.getString("next_url");
+                }
+            }
+            JSONArray jsonResponse = jsonObject.getJSONArray("data");
+            for(int i = 0; i < jsonResponse.length()-1; i++){
+                SocialPost socialPost = new SocialPost();
+                getSocialPost(socialPost, jsonResponse.getJSONObject(i));
+                socialPosts.add(socialPost);
+                ids.add(jsonResponse.getJSONObject(i).getString("id"));
+            }
+
+            if((nextToken != null) && (!TextUtils.isEmpty(nextToken))){
+                getAllPosts(nextToken, socialPosts, ids);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Bundle result) {
+            if (checkTokenError(result)){return;}
+            if (!handleRequestResult(result, REQUEST_GET_FRIENDS,
+                    result.getStringArray(RESULT_GET_POSTS_ID))) return;
+
+            ((OnRequestGetPostsCompleteListener) mLocalListeners.get(REQUEST_GET_POSTS))
+                    .OnGetPostsIdComplete(getID(), result.getStringArray(RESULT_GET_POSTS_ID));
+            ArrayList<SocialPost> socialPost = result.getParcelableArrayList(RESULT_GET_POSTS);
+            ((OnRequestGetPostsCompleteListener) mLocalListeners.get(REQUEST_GET_FRIENDS))
+                    .OnGetPostsComplete(getID(), socialPost);
         }
     }
 

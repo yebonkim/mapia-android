@@ -7,6 +7,9 @@ package com.mapia.common;
 import android.graphics.Color;
 import android.os.Build;
 
+import com.mapia.util.BitmapUtils;
+import com.mapia.util.DeviceUtils;
+
 public class CommonConstants
 {
 
@@ -43,7 +46,7 @@ public class CommonConstants
     public static final String EVENT_DELETE_POST = "edp";
     public static final String EVENT_HIDE_POST = "ehp";
     public static final String EVENT_MODIFY_POST = "emp";
-    public static final String EVENT_NEW_POST = "enp";
+    public static final int EVENT_NEW_POST = 100;
     public static final String EVENT_REMOVE_PENALTY = "erp";
     public static final String EVENT_REPIC_ADDED = "era";
     public static final String EVENT_REPIC_HIDE = "erh";
@@ -63,12 +66,12 @@ public class CommonConstants
     public static final int FROM_VIDEO_RATIO_ACTIVITY = 3;
     public static final String GALLERY_SHARE_EXTRA_STEAM_KEY = "galleryShareExtraSteam";
     public static final String GOOGLE_PLAY_DETAIL_LINK = "market://details?id=com.naver.android.mapia";
-//    public static final int HEADER_187_EXPANDED_HEIGHT = BitmapUtils.convertDipToPixelInt(187F);
-//    public static final int HEADER_187_FOLDED_HEIGHT = BitmapUtils.convertDipToPixelInt(53F);
-//    public static final int HEADER_242_EXPANDED_HEIGHT = BitmapUtils.convertDipToPixelInt(242F);
-//    public static final int HEADER_242_FOLDED_HEIGHT = BitmapUtils.convertDipToPixelInt(53F);
-//    public static final int HEADER_293_EXPANDED_HEIGHT = BitmapUtils.convertDipToPixelInt(293F);
-//    public static final int HEADER_293_FOLDED_HEIGHT = BitmapUtils.convertDipToPixelInt(53F);
+    public static final int HEADER_187_EXPANDED_HEIGHT = BitmapUtils.convertDipToPixelInt(187F);
+    public static final int HEADER_187_FOLDED_HEIGHT = BitmapUtils.convertDipToPixelInt(53F);
+    public static final int HEADER_242_EXPANDED_HEIGHT = BitmapUtils.convertDipToPixelInt(242F);
+    public static final int HEADER_242_FOLDED_HEIGHT = BitmapUtils.convertDipToPixelInt(53F);
+    public static final int HEADER_293_EXPANDED_HEIGHT = BitmapUtils.convertDipToPixelInt(293F);
+    public static final int HEADER_293_FOLDED_HEIGHT = BitmapUtils.convertDipToPixelInt(53F);
     public static final int HOTPIC = 1;
     public static final int HOTUSER = 9;
     public static final String HOTUSER_TAGS_TEXTVIEW_WIDTH = "hotuserTagsTextviewWidth";
@@ -123,6 +126,14 @@ public class CommonConstants
     public static final int PROFILE_FOLLOWER = 0;
     public static final int PROFILE_FOLLOWING = 1;
     public static final int PROFILE_LIKE = 5;
+
+
+    public static final int PLACE_PICKER_REQUEST = 10;
+
+
+
+
+
     public static final int PULL_TO_REFRESH_DELAY = 1000;
     public static final String PUSH_APP_KEY_PREFERENCE_NAME = "pushAppKey";
     public static final String PUSH_APP_VERSION = "1.0.01";
@@ -155,7 +166,7 @@ public class CommonConstants
     public static final String REGEX_NICKNAME_CHECK_NO_AT = "@[a-zA-Z0-9\uAC00-\uD7A3\u3131-\u314E\u314F-\u3163\341\351\355\363\372\374\361\301\311\315\323\332\334\321\344\366\337\304\326\337\u3041-\u3093\u30FC\u30A1-\u30F4\u30FC\u4E00-\u9FA0_]{1,15}";
     public static final String REGEX_TAG = "#[a-zA-Z0-9\uAC00-\uD7A3\u3131-\u314E\u314F-\u3163\341\351\355\363\372\374\361\301\311\315\323\332\334\321\344\366\337\304\326\337\u3041-\u3093\u30FC\u30A1-\u30F4\u30FC\u4E00-\u9FA0_]{0,20}";
     public static final String REGEX_TAG_NO_SHARP = "#[a-zA-Z0-9\uAC00-\uD7A3\u3131-\u314E\u314F-\u3163\341\351\355\363\372\374\361\301\311\315\323\332\334\321\344\366\337\304\326\337\u3041-\u3093\u30FC\u30A1-\u30F4\u30FC\u4E00-\u9FA0_]{1,20}";
-    public static final String REGEX_URL = "((https?:\\/\\/)|(www\\.)|(m\\.))([-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\$,%#]+)|\\w+\\.blog\\.me\\/*[\\w\\/]*";
+    public static final String REGEX_URL = "((https?:\\/\\/)|(www\\.)|(m\\.))([-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\.,%#]+)|\\w+\\.blog\\.me\\/*[\\w\\/]*";
     public static final int REPIC_GALLERY = 8;
     public static final int RESOLUTION_480 = 4;
     public static final int RESOLUTION_720 = 7;
@@ -176,29 +187,29 @@ public class CommonConstants
     public static final int SWIPE_COLOR_SCHEME[] = {
         Color.parseColor("#474cfa"), Color.parseColor("#5853EB"), Color.parseColor("#7C77FF"), Color.parseColor("#A09BFF")
     };
-//    public static final int SWIPE_END_POINT_HOME = BitmapUtils.convertDipToPixelInt(10F);
-//    public static final int SWIPE_END_POINT_HOT_PIC = BitmapUtils.convertDipToPixelInt(10F);
-//    public static final int SWIPE_END_POINT_HOT_USER = BitmapUtils.convertDipToPixelInt(10F);
-//    public static final int SWIPE_END_POINT_LOCATIONGALLERY = BitmapUtils.convertDipToPixelInt(145F);
-//    public static final int SWIPE_END_POINT_MYFEED_ONE_COLUMN = BitmapUtils.convertDipToPixelInt(65F);
-//    public static final int SWIPE_END_POINT_MYFEED_THREE_COLUMN = BitmapUtils.convertDipToPixelInt(65F);
-//    public static final int SWIPE_END_POINT_NOTI = BitmapUtils.convertDipToPixelInt(10F);
-//    public static final int SWIPE_END_POINT_PROFILE = BitmapUtils.convertDipToPixelInt(255F);
-//    public static final int SWIPE_END_POINT_TAGGALLERY = BitmapUtils.convertDipToPixelInt(200F);
-//    public static final int SWIPE_START_POINT_HOME = BitmapUtils.convertDipToPixelInt(-50F);
-//    public static final int SWIPE_START_POINT_HOT_PIC = BitmapUtils.convertDipToPixelInt(-50F);
-//    public static final int SWIPE_START_POINT_HOT_USER = BitmapUtils.convertDipToPixelInt(-50F);
-//    public static final int SWIPE_START_POINT_LOCATIONGALLERY = BitmapUtils.convertDipToPixelInt(85F);
-//    public static final int SWIPE_START_POINT_MYFEED_ONE_COLUMN = BitmapUtils.convertDipToPixelInt(5F);
-//    public static final int SWIPE_START_POINT_MYFEED_THREE_COLUMN = BitmapUtils.convertDipToPixelInt(5F);
-//    public static final int SWIPE_START_POINT_NOTI = BitmapUtils.convertDipToPixelInt(-50F);
-//    public static final int SWIPE_START_POINT_PROFILE = BitmapUtils.convertDipToPixelInt(185F);
-//    public static final int SWIPE_START_POINT_TAGGALLERY = BitmapUtils.convertDipToPixelInt(140F);
-//    public static final int SWIPE_TRIGGER_DISTANCE = BitmapUtils.convertDipToPixelInt(60F);
-//    public static final int TAG_ALBUM = 3;
-//    public static final int TAG_GALLERY = 4;
-//    public static final int TAG_LISTVIEW_HEIGHT = BitmapUtils.convertDipToPixelInt(30F);
-//    public static final int THREE_COLUMN_THUMB_WIDTH = (DeviceUtils.getDeviceWidth() - BitmapUtils.convertDipToPixelInt(3F)) / 3;
+    public static final int SWIPE_END_POINT_HOME = BitmapUtils.convertDipToPixelInt(10F);
+    public static final int SWIPE_END_POINT_HOT_PIC = BitmapUtils.convertDipToPixelInt(10F);
+    public static final int SWIPE_END_POINT_HOT_USER = BitmapUtils.convertDipToPixelInt(10F);
+    public static final int SWIPE_END_POINT_LOCATIONGALLERY = BitmapUtils.convertDipToPixelInt(145F);
+    public static final int SWIPE_END_POINT_MYFEED_ONE_COLUMN = BitmapUtils.convertDipToPixelInt(65F);
+    public static final int SWIPE_END_POINT_MYFEED_THREE_COLUMN = BitmapUtils.convertDipToPixelInt(65F);
+    public static final int SWIPE_END_POINT_NOTI = BitmapUtils.convertDipToPixelInt(10F);
+    public static final int SWIPE_END_POINT_PROFILE = BitmapUtils.convertDipToPixelInt(255F);
+    public static final int SWIPE_END_POINT_TAGGALLERY = BitmapUtils.convertDipToPixelInt(200F);
+    public static final int SWIPE_START_POINT_HOME = BitmapUtils.convertDipToPixelInt(-50F);
+    public static final int SWIPE_START_POINT_HOT_PIC = BitmapUtils.convertDipToPixelInt(-50F);
+    public static final int SWIPE_START_POINT_HOT_USER = BitmapUtils.convertDipToPixelInt(-50F);
+    public static final int SWIPE_START_POINT_LOCATIONGALLERY = BitmapUtils.convertDipToPixelInt(85F);
+    public static final int SWIPE_START_POINT_MYFEED_ONE_COLUMN = BitmapUtils.convertDipToPixelInt(5F);
+    public static final int SWIPE_START_POINT_MYFEED_THREE_COLUMN = BitmapUtils.convertDipToPixelInt(5F);
+    public static final int SWIPE_START_POINT_NOTI = BitmapUtils.convertDipToPixelInt(-50F);
+    public static final int SWIPE_START_POINT_PROFILE = BitmapUtils.convertDipToPixelInt(185F);
+    public static final int SWIPE_START_POINT_TAGGALLERY = BitmapUtils.convertDipToPixelInt(140F);
+    public static final int SWIPE_TRIGGER_DISTANCE = BitmapUtils.convertDipToPixelInt(60F);
+    public static final int TAG_ALBUM = 3;
+    public static final int TAG_GALLERY = 4;
+    public static final int TAG_LISTVIEW_HEIGHT = BitmapUtils.convertDipToPixelInt(30F);
+    public static final int THREE_COLUMN_THUMB_WIDTH = (DeviceUtils.getDeviceWidth() - BitmapUtils.convertDipToPixelInt(3F)) / 3;
     public static final int THUMB_RATIO_11 = 0;
     public static final int THUMB_RATIO_34 = 2;
     public static final int THUMB_RATIO_43 = 1;

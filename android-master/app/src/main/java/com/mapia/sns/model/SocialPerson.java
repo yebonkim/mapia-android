@@ -27,8 +27,14 @@ public class SocialPerson implements Parcelable {
     /*** Email of social person from social network if exist.*/
     public String email;
 
-    public SocialPerson() {
+    public SocialPerson(){
 
+    }
+    public SocialPerson(String id, String name, String avatarURL, String profileURL ) {
+        this.id = id;
+        this.name = name;
+        this.avatarURL = avatarURL;
+        this.profileURL = profileURL;
     }
 
     private SocialPerson(Parcel in) {

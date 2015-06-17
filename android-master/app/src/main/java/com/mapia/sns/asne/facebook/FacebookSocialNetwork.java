@@ -194,8 +194,8 @@ public class FacebookSocialNetwork extends SocialNetwork {
     }
 
     /**
-     * Request current user {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
-     * @param onRequestSocialPersonCompleteListener listener for {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * Request current user {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
+     * @param onRequestSocialPersonCompleteListener listener for {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     @Override
     public void requestCurrentPerson(OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
@@ -237,7 +237,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
      * Not supported via Facebook sdk.
      * @throws com.mapia.sns.asne.core.SocialNetworkException
      * @param userID user id in social network
-     * @param onRequestSocialPersonCompleteListener listener for request {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     * @param onRequestSocialPersonCompleteListener listener for request {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
     @Override
     public void requestSocialPerson(String userID, OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
@@ -248,7 +248,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
      * Not supported via Facebook sdk.
      * @throws com.mapia.sns.asne.core.SocialNetworkException
      * @param userID array of user ids in social network
-     * @param onRequestSocialPersonsCompleteListener listener for request ArrayList of {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     * @param onRequestSocialPersonsCompleteListener listener for request ArrayList of {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
 	@Override
     public void requestSocialPersons(String[] userID, OnRequestSocialPersonsCompleteListener onRequestSocialPersonsCompleteListener) {

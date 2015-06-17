@@ -35,7 +35,7 @@ public interface OnRequestSocialPersonsCompleteListener extends SocialNetworkLis
     /**
      * Called when array of social person request complete.
      * @param socialNetworkID id of social network where request was complete
-     * @param socialPersons ArrayList of requested {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     * @param socialPersons ArrayList of requested {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
     public void onRequestSocialPersonsSuccess(int socialNetworkID, ArrayList<SocialPerson> socialPersons);
 }

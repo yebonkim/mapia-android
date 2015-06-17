@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.mapia.cache.realmcache.RealmManager;
 import com.mapia.login.LoginActivity;
 
 /**
@@ -16,13 +17,13 @@ public class SplashActivity extends Activity {
     private LinearLayout filter;
 //    private HomeTagListCahceWrapper homeTagListCacheWrapper;
 //    private mapiaVideoView mapiaVideoView;
-//    private RealmManager realmManager;
+    private RealmManager realmManager;
 //
 //    private void getDataFromServerToPreload(){
 //        this.realmManager = new RealmManager(this);
 //        this.homeTagListCaheWrapper = new HomeTagListCacheWrapper();
 //        mapiaRequest localmapiaRequest = new mapiaRequest(0, QueryManager.makeHomePaiUrl(), null, new Response.Listener(), new Response.ErrorListener{
-//            public
+//            p
 //        })
 //    }
     private void goToNextActivity(){

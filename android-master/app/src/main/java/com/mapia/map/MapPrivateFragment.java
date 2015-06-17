@@ -1,7 +1,11 @@
 package com.mapia.map;
 
 
-import java.util.ArrayList;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
@@ -9,11 +13,7 @@ import com.google.gson.JsonObject;
 import com.mapia.R;
 import com.mapia.network.RestRequestHelper;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -52,7 +52,7 @@ public class MapPrivateFragment extends MapFragment{
 		try {
 			RestRequestHelper requestHelper = RestRequestHelper.newInstance();
 
-			requestHelper.posts("private",MapActivity.cameraLatlng.latitude, MapActivity.cameraLatlng.longitude, MapActivity.cameraZoom,
+			requestHelper.getPosts("private",MapActivity.cameraLatlng.latitude, MapActivity.cameraLatlng.longitude, MapActivity.cameraZoom,
 					new Callback<JsonObject>() {
 				@Override
 				public void success(JsonObject jO, Response response) {

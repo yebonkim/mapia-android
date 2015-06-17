@@ -1,7 +1,6 @@
 package com.mapia.sns;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,12 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mapia.MainFragment;
 import com.mapia.sns.asne.core.SocialNetwork;
 import com.mapia.sns.asne.core.listener.OnPostingCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestSocialPersonCompleteListener;
 import com.mapia.sns.asne.facebook.FacebookSocialNetwork;
-import com.mapia.sns.asne.twitter.TwitterSocialNetwork;
+//import com.mapia.sns.asne.twitter.TwitterSocialNetwork;
 import com.mapia.sns.model.SocialPerson;
 import com.squareup.picasso.Picasso;
 
@@ -39,7 +37,7 @@ public class ProfileFragment extends Fragment implements OnRequestSocialPersonCo
     private TextView id;
     private TextView info;
     private Button friends;
-    private Button share;
+    private Button posts;
     private RelativeLayout frame;
 
     public static ProfileFragment newInstannce(int id) {
@@ -58,7 +56,7 @@ public class ProfileFragment extends Fragment implements OnRequestSocialPersonCo
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         networkId = getArguments().containsKey(NETWORK_ID) ? getArguments().getInt(NETWORK_ID) : 0;
-        ((SNSActivity)getActivity()).getSupportActionBar().setTitle("Profile");
+//        ((SNSActivity)getActivity()).getSupportActionBar().setTitle("Profile");
 
         View rootView = inflater.inflate(com.mapia.R.layout.profile_fragment, container, false);
 
@@ -69,11 +67,11 @@ public class ProfileFragment extends Fragment implements OnRequestSocialPersonCo
         info = (TextView) rootView.findViewById(com.mapia.R.id.info);
         friends = (Button) rootView.findViewById(com.mapia.R.id.friends);
         friends.setOnClickListener(friendsClick);
-        share = (Button) rootView.findViewById(com.mapia.R.id.share);
-        share.setOnClickListener(shareClick);
+        posts = (Button) rootView.findViewById(com.mapia.R.id.posts);
+        posts.setOnClickListener(postsClick);
         colorProfile(networkId);
 
-        socialNetwork = MainFragment.mSocialNetworkManager.getSocialNetwork(networkId);
+        socialNetwork = SNSFragment.mSocialNetworkManager.getSocialNetwork(networkId);
         socialNetwork.setOnRequestCurrentPersonCompleteListener(this);
         socialNetwork.requestCurrentPerson();
 
@@ -129,36 +127,47 @@ public class ProfileFragment extends Fragment implements OnRequestSocialPersonCo
         }
     };
 
-    private View.OnClickListener shareClick = new View.OnClickListener() {
+    private View.OnClickListener postsClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            AlertDialog.Builder ad = alertDialogInit("Would you like to post Link:", link);
-            ad.setPositiveButton("Post link", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Bundle postParams = new Bundle();
-                    postParams.putString(SocialNetwork.BUNDLE_NAME, "Simple and easy way to add social networks for android application");
-                    postParams.putString(SocialNetwork.BUNDLE_LINK, link);
+            PostsListFragment posts = PostsListFragment.newInstannce(networkId);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .addToBackStack("posts")
+                    .replace(com.mapia.R.id.container, posts)
+                    .commit();
+        }
+    };
+
+//    private View.OnClickListener postsClick = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            AlertDialog.Builder ad = alertDialogInit("Would you like to post Link:", link);
+//            ad.setPositiveButton("Post link", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//                    Bundle postParams = new Bundle();
+//                    postParams.putString(SocialNetwork.BUNDLE_NAME, "Simple and easy way to add social networks for android application");
+//                    postParams.putString(SocialNetwork.BUNDLE_LINK, link);
 //                    if(networkId == GooglePlusSocialNetwork.ID) {
 //                        socialNetwork.requestPostDialog(postParams, postingComplete);
 //                    } else {
 //                        socialNetwork.requestPostLink(postParams, message, postingComplete);
 //                    }
-                }
-            });
-            ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                    dialog.cancel();
-                }
-            });
-            ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                public void onCancel(DialogInterface dialog) {
-                    dialog.cancel();
-                }
-            });
-            ad.create().show();
-        }
-    };
+//                }
+//            });
+//            ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int i) {
+//                    dialog.cancel();
+//                }
+//            });
+//            ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                public void onCancel(DialogInterface dialog) {
+//                    dialog.cancel();
+//                }
+//            });
+//            ad.create().show();
+//        }
+//    };
 
     private OnPostingCompleteListener postingComplete = new OnPostingCompleteListener() {
         @Override
@@ -176,10 +185,10 @@ public class ProfileFragment extends Fragment implements OnRequestSocialPersonCo
         int color = getResources().getColor(com.mapia.R.color.dark);
         int image = com.mapia.R.drawable.user;
         switch (networkId) {
-            case TwitterSocialNetwork.ID:
-                color = getResources().getColor(com.mapia.R.color.twitter);
-                image = com.mapia.R.drawable.twitter_user;
-                break;
+//            case TwitterSocialNetwork.ID:
+//                color = getResources().getColor(com.mapia.R.color.twitter);
+//                image = com.mapia.R.drawable.twitter_user;
+//                break;
 //            case LinkedInSocialNetwork.ID:
 //                color = getResources().getColor(R.color.linkedin);
 //                image = R.drawable.linkedin_user;
@@ -196,7 +205,7 @@ public class ProfileFragment extends Fragment implements OnRequestSocialPersonCo
         frame.setBackgroundColor(color);
         name.setTextColor(color);
         friends.setBackgroundColor(color);
-        share.setBackgroundColor(color);
+        posts.setBackgroundColor(color);
         photo.setBackgroundColor(color);
         photo.setImageResource(image);
     }

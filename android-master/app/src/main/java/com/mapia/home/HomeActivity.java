@@ -1,12 +1,19 @@
 package com.mapia.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.mapia.MainActivity;
 import com.mapia.R;
@@ -15,11 +22,12 @@ import com.mapia.map.MapGroupFragment;
 import com.mapia.map.MapPrivateFragment;
 import com.mapia.map.MapPublicFragment;
 import com.mapia.network.NetworkStatusManager;
+import com.mapia.post.PostActivity;
 
 /**
  * Created by daehyun on 15. 5. 31..
  */
-public class HomeActivity extends MainActivity {
+public class HomeActivity extends MainActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private HomeFragment homeFragment = null;
     private boolean isFirstOnResume = true;
 //Map
@@ -37,6 +45,8 @@ public class HomeActivity extends MainActivity {
     MapFollowFragment mapFollowFragment = null;
     MapGroupFragment mapGroupFragment = null;
     Fragment lastFragment = null;
+
+    public GoogleApiClient mGoogleApiClient;
 
 
 
@@ -114,7 +124,30 @@ public class HomeActivity extends MainActivity {
         currentFragmentIndex = 2;
         fragmentReplace(currentFragmentIndex);
 
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
+
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
 
     public void onDestroy(){
         super.onDestroy();
@@ -179,4 +212,52 @@ public class HomeActivity extends MainActivity {
 //            FollowUtils.initFollowTagArrayList();
 //        }
 //    }
+
+    //선택한 이미지 데이터 받기
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Toast.makeText(getBaseContext(), "resultCode : " + resultCode, Toast.LENGTH_LONG).show();
+
+
+
+        if (requestCode == 10) {//PLACE_PICKER_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this.getApplicationContext());
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+
+
+                this.mainApplication.setIsMenubarClicked(true);
+                final Intent intent = new Intent(this.getApplicationContext(), (Class) PostActivity.class);
+
+                intent.putExtra("latlng",place.getLatLng());
+                intent.putExtra("address",place.getAddress());
+                this.startActivity(intent);
+
+            }
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        // Connected to Google Play services!
+        // The good stuff goes here.
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        // The connection has been interrupted.
+        // Disable any UI components that depend on Google APIs
+        // until onConnected() is called.
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        // This callback is important for handling errors that
+        // may occur while attempting to connect with Google.
+        //
+        // More about this in the 'Handle Connection Failures' section.
+
+    }
 }

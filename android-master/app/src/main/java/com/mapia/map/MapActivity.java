@@ -1,15 +1,10 @@
 package com.mapia.map;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.mapia.R;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,13 +12,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MapActivity extends FragmentActivity implements OnClickListener {
+import com.google.android.gms.maps.model.LatLng;
+import com.mapia.R;
+
+public class MapActivity extends FragmentActivity implements OnClickListener{
 
 	int currentFragmentIndex;
 
-	public static LatLng currentLatlng;
-	public static LatLng cameraLatlng = new LatLng(0,0);
-	public static float cameraZoom = 15;
+	public static LatLng currentLatlng= new LatLng(37.498360, 127.027400);
+	public static LatLng cameraLatlng = new LatLng(37.498360, 127.027400);
+	public static float cameraZoom = 8;
 	public static ImageButton imgBtnNav, imgBtnSearch;
 	public static TextView txtMapName;
 	Button btn1, btn2, btn3, btn4;
@@ -32,6 +30,8 @@ public class MapActivity extends FragmentActivity implements OnClickListener {
 	MapFollowFragment mapFollowFragment = null;
 	MapGroupFragment mapGroupFragment = null;
 	Fragment lastFragment = null;
+
+
 
 	@TargetApi(11)
 	@Override
@@ -60,11 +60,17 @@ public class MapActivity extends FragmentActivity implements OnClickListener {
 		btn2.setOnClickListener(this);
 		btn3.setOnClickListener(this);
 		btn4.setOnClickListener(this);
-		
+
+
+
 		currentFragmentIndex = 1;
 		
 		fragmentReplace(currentFragmentIndex);
+
+
+
 	}
+
 
 	private void fragmentReplace(int newFragmentIndex) {
 		Fragment newFragment = null;
@@ -76,6 +82,8 @@ public class MapActivity extends FragmentActivity implements OnClickListener {
 		transaction.replace(R.id.mapShowFragment, newFragment);
 		transaction.commit();
 	}
+
+
 
 	private Fragment getFragment(int index) {
 		Fragment newFragment = null;
@@ -120,4 +128,7 @@ public class MapActivity extends FragmentActivity implements OnClickListener {
 		}
 		fragmentReplace(currentFragmentIndex);
 	}
+
+
+
 }

@@ -17,5 +17,28 @@
         <!--<attr name="plaColumnPaddingLeft" format="dimension" />-->
         <!--<attr name="plaColumnPaddingRight" format="dimension" />-->
 
+
+        <attr name="gapLength" format="dimension" />
+        <attr name="indicatorLength" format="dimension" />
+        <attr name="maxDuration" format="integer" />
+        <attr name="throttle" format="integer" />
+        <attr name="throttleDrawable" format="reference" />
+        <attr name="gapDrawable" format="reference" />
+        <attr name="recordingClipDrawable" format="reference" />
+        <attr name="recordedClipDrawable" format="reference" />
+        <attr name="selectingClipDrawable" format="reference" />
+        <attr name="recordingIndicatorDrawable" format="reference" />
+        <attr name="recordedIndicatorDrawable" format="reference" />
+
+        <attr name="ctitle" format="string" />
+        <attr name="icons" format="reference" />
+
+        <attr name="singleIcon" format="reference" />
+        <attr name="largeIcons" format="reference" />
+        <attr name="key" format="string" />
+        <attr name="defaultValue" format="reference|string" />
+        <attr name="entryValues" format="reference" />
+        <attr name="entries" format="reference" />
+        <attr name="labelList" format="reference" />
     </declare-styleable>
 </resources>

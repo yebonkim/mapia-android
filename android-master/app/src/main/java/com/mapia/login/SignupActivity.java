@@ -8,15 +8,15 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.mapia.network.AsyncHTTP;
 import com.mapia.R;
+import com.mapia.network.AsyncHTTP;
 import com.mapia.network.RestRequestHelper;
 import com.mapia.sns.SNSActivity;
 
@@ -33,7 +33,7 @@ public class SignupActivity extends Activity implements OnClickListener {
     public final static String mytag = "test";
     private EditText edtID, edtPW, edtPWCheck;
     private ImageView imgIDStatus, imgPWStatus, imgPWCheckStatus;
-    private Button btnSignup;
+    private ImageButton btnSignup;
     private Boolean flagIDDup = false, flagIDStatus = false, flagPWStatus = false, flagPWCheckStatus = false;
 
 
@@ -51,7 +51,7 @@ public class SignupActivity extends Activity implements OnClickListener {
         imgPWStatus = (ImageView)findViewById(com.mapia.R.id.imgPWStatus);
         edtPWCheck = (EditText)findViewById(com.mapia.R.id.edtPWCheck);
         imgPWCheckStatus = (ImageView)findViewById(com.mapia.R.id.imgPWCheckStatus);
-        btnSignup = (Button)findViewById(R.id.btnSignup);
+        btnSignup = (ImageButton)findViewById(R.id.btnSignup);
 
 
         btnSignup.setOnClickListener(this);
@@ -59,7 +59,7 @@ public class SignupActivity extends Activity implements OnClickListener {
         edtID.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Nothingㅌ
+                // Nothing
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,

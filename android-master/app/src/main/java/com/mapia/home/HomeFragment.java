@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment {
 //        this.homeTaggroupAdapter = new HomeTaggroupAdapter(this.mainAcitivity, this);
 //        this.homeManager = new HomeManager(this.mainActivity, this, this.homeHotAdapter, this.homeBannerAdapter, this.homeTaggroupAdapter);
         ((HomeActivity)this.mainActivity).setHomeFragment(this);
-    }
+        }
 
 
 

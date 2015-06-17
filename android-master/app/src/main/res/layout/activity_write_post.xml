@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#cfcfcf"
-    tools:context="com.mapia.map.WritePostActivity">
+    tools:context="com.mapia.post.WritePostActivity">
 
     <LinearLayout
         android:id="@+id/llPostLocation"
@@ -16,40 +16,55 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <ImageView
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dot"/>
-
-        <TextView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="장소"
-            android:textSize="16sp"
-            android:textColor="#5f5f5f"
-            android:layout_marginRight="20dp"
-            android:gravity="center"/>
+            android:background="#ff56c6c9">
 
-        <TextView
-            android:id="@+id/txtPostLocation"
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="0dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitCenter"
+                android:src="@drawable/btn_post_location"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="장소"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:autoText="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="이화여자대학교 학관"
-            android:textSize="16sp"
-            android:gravity="center_vertical"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dot"/>
+            <TextView
+                android:id="@+id/txtPostLocation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="이화여자대학교 학관"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dot"/>
+        </LinearLayout>
     </LinearLayout>
 
     <ScrollView

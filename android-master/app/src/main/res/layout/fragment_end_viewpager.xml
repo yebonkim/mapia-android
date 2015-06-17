@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ffffffff" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.view.ViewPager android:id="@+id/endViewPager" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <include android:id="@+id/topNavigationBar" android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height" android:layout_alignParentTop="true" layout="@layout/fragment_end_header" />
+    <FrameLayout android:id="@+id/bottomLayout" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_alignParentBottom="true">
+        <LinearLayout android:orientation="horizontal" android:id="@+id/end_utility_bar" android:background="#ff2c2c2c" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="3.0">
+            <RelativeLayout android:id="@+id/btnLike" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="41.0dip" android:layout_centerInParent="true">
+                    <RelativeLayout android:id="@+id/likeScale" android:layout_width="41.0dip" android:layout_height="41.0dip">
+                        <ImageView android:id="@+id/likeOnLeft" android:visibility="gone" android:layout_width="17.0dip" android:layout_height="17.0dip" android:layout_marginLeft="10.5dip" android:layout_marginTop="13.0dip" android:src="@drawable/end_new_likeon_left" />
+                        <ImageView android:id="@+id/likeOnRight" android:visibility="gone" android:layout_width="9.5dip" android:layout_height="9.5dip" android:layout_marginLeft="21.0dip" android:layout_marginTop="13.0dip" android:src="@drawable/end_new_likeon_right" />
+                        <ImageView android:id="@+id/likeOff" android:layout_width="41.0dip" android:layout_height="41.0dip" android:src="@drawable/end_new_likeoff" />
+                    </RelativeLayout>
+                    <com.mapia.custom.FontSettableTextView android:textSize="17.0dip" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@+id/utilityBarLikeCount" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                </LinearLayout>
+            </RelativeLayout>
+            <ImageView android:background="#ff424242" android:layout_width="1.5dip" android:layout_height="fill_parent" />
+            <RelativeLayout android:id="@+id/btnComment" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_centerInParent="true">
+                    <ImageView android:layout_gravity="center_vertical" android:id="@+id/imgComment" android:background="@drawable/selector_end_comment" android:layout_width="31.0dip" android:layout_height="31.0dip" />
+                    <com.mapia.custom.FontSettableTextView android:textSize="17.0dip" android:textColor="#ffffffff" android:layout_gravity="center_vertical" android:id="@+id/utilityBarCommentCount" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                </LinearLayout>
+            </RelativeLayout>
+            <ImageView android:background="#ff424242" android:layout_width="1.5dip" android:layout_height="fill_parent" />
+            <RelativeLayout android:id="@+id/btnRepic" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_centerInParent="true">
+                    <ImageView android:layout_gravity="center_vertical" android:id="@+id/imgRepic" android:background="@drawable/selector_end_repic" android:layout_width="31.0dip" android:layout_height="31.0dip" />
+                    <com.mapia.custom.FontSettableTextView android:textSize="17.0dip" android:textColor="#ffffffff" android:gravity="center_vertical" android:layout_gravity="center_vertical" android:id="@+id/utilityBarRepicCount" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <RelativeLayout android:id="@+id/commentInputLayout" android:background="#ffb0b0b0" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_alignParentBottom="true">
+            <com.mapia.custom.FontSettableButton android:textSize="13.0dip" android:textColor="#ffffffff" android:id="@+id/btnAddComment" android:background="#ff2c2c2c" android:layout_width="60.0dip" android:layout_height="fill_parent" android:text="@string/comment_add" android:layout_alignParentRight="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+            <ImageView android:id="@+id/commentDivider" android:background="#ff424242" android:layout_width="1.5dip" android:layout_height="fill_parent" android:layout_toLeftOf="@+id/btnAddComment" />
+            <com.mapia.post.MapiaEditText android:textSize="14.5dip" android:textColor="#ffcacaca" android:textColorHint="#ffcacaca" android:gravity="center|left" android:id="@+id/editComment" android:background="#ff2c2c2c" android:paddingLeft="15.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="@string/comment_hint" android:layout_toLeftOf="@+id/commentDivider" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </RelativeLayout>
+    </FrameLayout>
+    <ListView android:id="@+id/listMention" android:background="#fff9f9f9" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="60.0dip" android:divider="#ffededed" android:dividerHeight="0.5dip" android:layout_below="@+id/topNavigationBar" />
+    <LinearLayout android:orientation="vertical" android:id="@+id/loading" android:background="@drawable/loading_icon_loop" android:visibility="gone" android:layout_width="22.0dip" android:layout_height="22.0dip" android:layout_centerInParent="true" />
+    <RelativeLayout android:id="@+id/coach" android:background="#ff191919" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.94">
+        <ImageView android:id="@+id/coachClose" android:background="@drawable/coach_close" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:layout_alignParentRight="true" />
+        <ImageView android:id="@+id/action1" android:background="@drawable/coach_action_1" android:layout_width="163.0dip" android:layout_height="53.0dip" android:layout_marginTop="150.0dip" android:layout_centerHorizontal="true" />
+        <com.mapia.custom.FontSettableTextView android:textSize="14.0dip" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/coach_swipe_action" android:layout_below="@+id/action1" android:layout_centerHorizontal="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        <LinearLayout android:orientation="horizontal" android:id="@+id/coachBottom" android:layout_width="fill_parent" android:layout_height="129.0dip" android:layout_marginBottom="7.0dip" android:weightSum="3.0" android:layout_alignParentBottom="true">
+            <View android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+            <View android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+            <RelativeLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <ImageView android:id="@+id/coachArrow" android:background="@drawable/coach_arrow_2" android:layout_width="45.0dip" android:layout_height="fill_parent" android:layout_marginRight="44.0dip" android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+        </LinearLayout>
+        <com.mapia.custom.FontSettableTextView android:textSize="14.0dip" android:textColor="#ffffffff" android:gravity="right" android:id="@+id/coachText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="22.0dip" android:layout_marginBottom="22.0dip" android:text="@string/repic_coach" android:layout_above="@+id/coachBottom" android:layout_alignParentRight="true" android:lineSpacingExtra="6.0dip" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    </RelativeLayout>
+</RelativeLayout>

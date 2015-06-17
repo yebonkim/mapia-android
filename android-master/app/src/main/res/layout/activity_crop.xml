@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/crop_root_view" android:background="#ff1b1b1b" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@+id/crop_top_layout" layout="@layout/edit_top_common_layout" />
+    <FrameLayout android:id="@+id/crop_center_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="6.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="6.0dip" android:layout_marginBottom="10.0dip" android:layout_above="@+id/crop_bottom_layout" android:layout_below="@+id/crop_top_layout">
+        <FrameLayout android:layout_gravity="center" android:id="@+id/image_view_touch_layout" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <com.mapia.ratio.view.CropImageView android:id="@+id/image_view_touch" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        </FrameLayout>
+    </FrameLayout>
+    <RelativeLayout android:id="@+id/crop_bottom_layout" android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="@dimen/edit_activity_bottom_height" android:layout_alignParentBottom="true">
+        <ImageButton android:id="@+id/crop_ratio11_button" android:background="@drawable/camera_rate_background_pressed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="35.0dip" android:src="@drawable/cam_rate_11_over" android:layout_toLeftOf="@+id/crop_ratio34_button" android:layout_centerVertical="true" />
+        <ImageButton android:id="@+id/crop_ratio34_button" android:background="@drawable/camera_rate_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/cam_rate_34" android:layout_centerInParent="true" />
+        <ImageButton android:id="@+id/crop_ratio43_button" android:background="@drawable/camera_rate_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="35.0dip" android:src="@drawable/cam_rate_43" android:layout_toRightOf="@+id/crop_ratio34_button" android:layout_centerVertical="true" />
+    </RelativeLayout>
+</RelativeLayout>

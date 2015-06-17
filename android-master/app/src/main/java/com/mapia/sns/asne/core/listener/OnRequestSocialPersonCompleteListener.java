@@ -33,7 +33,7 @@ public interface OnRequestSocialPersonCompleteListener extends SocialNetworkList
     /**
      * Called when social person request complete.
      * @param socialNetworkId id of social network where request was complete
-     * @param socialPerson requested {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     * @param socialPerson requested {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
     public void onRequestSocialPersonSuccess(int socialNetworkId, SocialPerson socialPerson);
 }

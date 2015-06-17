@@ -35,10 +35,14 @@ import com.mapia.sns.asne.core.listener.OnPostingCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestAccessTokenCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestAddFriendCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestDetailedSocialPersonCompleteListener;
+import com.mapia.sns.asne.core.listener.OnRequestDetailedSocialPostCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestGetFriendsCompleteListener;
+import com.mapia.sns.asne.core.listener.OnRequestGetPostsCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestRemoveFriendCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestSocialPersonCompleteListener;
 import com.mapia.sns.asne.core.listener.OnRequestSocialPersonsCompleteListener;
+import com.mapia.sns.asne.core.listener.OnRequestSocialPostCompleteListener;
+import com.mapia.sns.asne.core.listener.OnRequestSocialPostsCompleteListener;
 import com.mapia.sns.asne.core.listener.base.SocialNetworkListener;
 
 import java.io.File;
@@ -72,10 +76,17 @@ public abstract class SocialNetwork {
     public static final String REQUEST_ACCESS_TOKEN = "SocialNetwork.REQUEST_ACCESS_TOKEN";
     /*** Used to check is get detailed person request in progress*/
     public static final String REQUEST_GET_DETAIL_PERSON = "SocialNetwork.REQUEST_GET_DETAIL_PERSON";
+
+    public static final String REQUEST_GET_DETAIL_POST = "SocialNetwork.REQUEST_GET_DETAIL_POST";
     /*** Used to check is get person request in progress*/
     public static final String REQUEST_GET_PERSON = "SocialNetwork.REQUEST_GET_PERSON";
     /*** Used to check is get persons request in progress*/
     public static final String REQUEST_GET_PERSONS = "SocialNetwork.REQUEST_GET_PERSONS";
+
+    public static final String REQUEST_GET_POST = "SocialNetwork.REQUEST_GET_POST";
+    /*** Used to check is get persons request in progress*/
+    public static final String REQUEST_GET_POSTS = "SocialNetwork.REQUEST_GET_POSTS";
+
     /*** Used to check is get current person request in progress*/
     public static final String REQUEST_GET_CURRENT_PERSON = "SocialNetwork.REQUEST_GET_CURRENT_PERSON";
     /*** Used to check is post message request in progress*/
@@ -257,22 +268,24 @@ public abstract class SocialNetwork {
     }
 
     /**
-     * Get {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} of current user using global listener
+     * Get {@link com.github.gorbin.asne.mapia.sns.SocialPerson} of current user using global listener
      */
 	public void requestCurrentPerson() {
         requestCurrentPerson(null);
     }
 
     /**
-     * Get {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} of current user using local listener
-     * @param onRequestSocialPersonCompleteListener listener for request {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     * Get {@link com.github.gorbin.asne.mapia.sns.SocialPerson} of current user using local listener
+     * @param onRequestSocialPersonCompleteListener listener for request {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
     public void requestCurrentPerson(OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
         registerListener(REQUEST_GET_CURRENT_PERSON, onRequestSocialPersonCompleteListener);
     }
 
+
+
     /**
-     * Get {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by user id using global listener
+     * Get {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by user id using global listener
      * @param userID user id in social network
      */
     public void requestSocialPerson(String userID) {
@@ -280,26 +293,66 @@ public abstract class SocialNetwork {
     }
 
     /**
-     * Get {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by user id using local listener
+     * Get {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by user id using local listener
      * @param userID user id in social network
-     * @param onRequestSocialPersonCompleteListener listener for request {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     * @param onRequestSocialPersonCompleteListener listener for request {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
     public void requestSocialPerson(String userID, OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
         registerListener(REQUEST_GET_PERSON, onRequestSocialPersonCompleteListener);
     }
 
-    /**
-     * Get arraylist of {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by array of user ids using global listener
-     * @param userID array of user ids in social network
-     */
-    public void requestSocialPersons(String[] userID) {
-        requestSocialPersons(userID, null);
+
+    public void requestSocialPost(String userID) {
+        requestSocialPost(userID, null);
     }
 
     /**
-     * Get arraylist of {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by array of user ids using local listener
+     * Get {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by user id using local listener
+     * @param userID user id in social network
+     * @param onRequestSocialPostCompleteListener listener for request {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
+     */
+    public void requestSocialPost(String userID, OnRequestSocialPostCompleteListener onRequestSocialPostCompleteListener) {
+        registerListener(REQUEST_GET_POST, onRequestSocialPostCompleteListener);
+    }
+
+    /**
+     * Get arraylist of {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by array of user ids using global listener
      * @param userID array of user ids in social network
-     * @param onRequestSocialPersonsCompleteListener listener for request ArrayList of {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}
+     */
+    public void requestSocialPosts(String[] userID) {
+        requestSocialPosts(userID, null);
+    }
+
+
+    public void requestSocialPosts(String[] userID, OnRequestSocialPostsCompleteListener onRequestSocialPostsCompleteListener) {
+        registerListener(REQUEST_GET_POSTS, onRequestSocialPostsCompleteListener);
+    }
+
+    /**
+     * Get detailed profile for user by id using global listener. Look for detailed persons in social networks packages.
+     * @param userID user id in social network
+     */
+    public void requestDetailedSocialPost(String userID) {
+        requestDetailedSocialPost(userID, null);
+    }
+
+    /**
+     * Get detailed profile for user by id using local listener. Look for detailed persons in social networks packages.
+     * @param userID user id in social network
+     * @param onRequestDetailedSocialPostCompleteListener listener for request detailed social person
+     */
+    public void requestDetailedSocialPost(String userID, OnRequestDetailedSocialPostCompleteListener onRequestDetailedSocialPostCompleteListener) {
+        registerListener(REQUEST_GET_DETAIL_POST, onRequestDetailedSocialPostCompleteListener);
+    }
+
+
+
+
+
+    /**
+     * Get arraylist of {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by array of user ids using local listener
+     * @param userID array of user ids in social network
+     * @param onRequestSocialPersonsCompleteListener listener for request ArrayList of {@link com.github.gorbin.asne.mapia.sns.SocialPerson}
      */
     public void requestSocialPersons(String[] userID, OnRequestSocialPersonsCompleteListener onRequestSocialPersonsCompleteListener) {
         registerListener(REQUEST_GET_PERSONS, onRequestSocialPersonsCompleteListener);
@@ -432,14 +485,20 @@ public abstract class SocialNetwork {
         requestGetFriends(null);
     }
 
+    public void requestGetPosts() {
+        requestGetPosts(null);
+    }
     /**
      * Get current user friends list using local listener
      * @param onRequestGetFriendsCompleteListener listener for getting list of current user friends
      */
     public void requestGetFriends(OnRequestGetFriendsCompleteListener onRequestGetFriendsCompleteListener) {
-        registerListener(REQUEST_GET_FRIENDS, onRequestGetFriendsCompleteListener);
+        registerListener(REQUEST_GET_POSTS, onRequestGetFriendsCompleteListener);
     }
 
+    public void requestGetPosts(OnRequestGetPostsCompleteListener onRequestGetPostsCompleteListener) {
+        registerListener(REQUEST_GET_POSTS, onRequestGetPostsCompleteListener);
+    }
     /**
      * Invite friend by id to current user using global listener
      * @param userID id of user that should be invited
@@ -489,14 +548,14 @@ public abstract class SocialNetwork {
     }
 
     /**
-     * Cancel current user {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * Cancel current user {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     public void cancelGetCurrentPersonRequest() {
         mLocalListeners.remove(REQUEST_GET_CURRENT_PERSON);
     }
 
     /**
-     * Cancel user by id {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * Cancel user by id {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     public void cancelGetSocialPersonRequest() {
         mLocalListeners.remove(REQUEST_GET_PERSON);
@@ -633,7 +692,7 @@ public abstract class SocialNetwork {
     }
 
     /**
-     * Register a callback to be invoked when current {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request complete.
+     * Register a callback to be invoked when current {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request complete.
      * @param onRequestCurrentPersonCompleteListener the callback that will run
      */
     public void setOnRequestCurrentPersonCompleteListener(OnRequestSocialPersonCompleteListener onRequestCurrentPersonCompleteListener) {
@@ -641,7 +700,7 @@ public abstract class SocialNetwork {
     }
 
     /**
-     * Register a callback to be invoked when {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} by user id request complete.
+     * Register a callback to be invoked when {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by user id request complete.
      * @param onRequestSocialPersonCompleteListener the callback that will run
      */
     public void setOnRequestSocialPersonCompleteListener(OnRequestSocialPersonCompleteListener onRequestSocialPersonCompleteListener) {
@@ -657,7 +716,24 @@ public abstract class SocialNetwork {
     }
 
     /**
-     * Register a callback to be invoked when {@link com.github.gorbin.asne.mapeen.sns.SocialPerson}s by array of user ids request complete.
+     * Register a callback to be invoked when {@link com.github.gorbin.asne.mapia.sns.SocialPerson} by user id request complete.
+     * @param onRequestSocialPostCompleteListener the callback that will run
+     */
+    public void setOnRequestSocialPostCompleteListener(OnRequestSocialPostCompleteListener onRequestSocialPostCompleteListener) {
+        mGlobalListeners.put(REQUEST_GET_PERSON, onRequestSocialPostCompleteListener);
+    }
+
+    /**
+     * Register a callback to be invoked when detailed social person request complete. Look for detailed persons in social networks packages.
+     * @param onRequestDetailedSocialPostCompleteListener the callback that will run
+     */
+    public void setOnRequestDetailedSocialPostCompleteListener(OnRequestDetailedSocialPostCompleteListener onRequestDetailedSocialPostCompleteListener) {
+        mGlobalListeners.put(REQUEST_GET_DETAIL_PERSON, onRequestDetailedSocialPostCompleteListener);
+    }
+
+
+    /**
+     * Register a callback to be invoked when {@link com.github.gorbin.asne.mapia.sns.SocialPerson}s by array of user ids request complete.
      * @param onRequestSocialPersonsCompleteListener the callback that will run
      */
     public void setOnRequestSocialPersonsCompleteListener(OnRequestSocialPersonsCompleteListener onRequestSocialPersonsCompleteListener) {
@@ -710,6 +786,14 @@ public abstract class SocialNetwork {
      */
     public void setOnRequestGetFriendsCompleteListener(OnRequestGetFriendsCompleteListener onRequestGetFriendsCompleteListener) {
         mGlobalListeners.put(REQUEST_GET_FRIENDS, onRequestGetFriendsCompleteListener);
+    }
+
+    /**
+     * Register a callback to be invoked when get friends list request complete.
+     * @param onRequestGetPostsCompleteListener the callback that will run
+     */
+    public void setOnRequestGetPostsCompleteListener(OnRequestGetPostsCompleteListener onRequestGetPostsCompleteListener) {
+        mGlobalListeners.put(REQUEST_GET_POSTS, onRequestGetPostsCompleteListener);
     }
 
     /**

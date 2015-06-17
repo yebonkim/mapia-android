@@ -12,6 +12,8 @@ import com.mapia.MainActivity;
 import com.mapia.MainApplication;
 import com.mapia.R;
 
+import java.util.Map;
+
 /**
  * Created by daehyun on 15. 6. 2..
  */
@@ -57,5 +59,30 @@ public class BaseFragment extends Fragment {
     }
     public void onBuriedBeforeAnimation(){
 
+    }
+
+
+    public void onEvent(final Map<String, Object> map) {
+    }
+
+    public void onFadeInAfterAnimation() {
+    }
+
+    public void onFadeInBeforeAnimation() {
+    }
+
+    public void onFadeOutBeforeAnimation() {
+    }
+
+    public void refreshInfo() {
+    }
+
+    public void refreshList() {
+    }
+
+    public void scrollToTop() {
+    }
+
+    public void setConnectionCondition(final boolean b) {
     }
 }

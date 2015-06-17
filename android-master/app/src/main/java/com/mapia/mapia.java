@@ -17,7 +17,7 @@ public class mapia extends Application {
     public void onCreate() {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("api.mapeen.com", new AsyncHttpResponseHandler(){
+        client.get("api.mapia.com", new AsyncHttpResponseHandler(){
             @Override
             public void onStart() {
                 // called before request is started

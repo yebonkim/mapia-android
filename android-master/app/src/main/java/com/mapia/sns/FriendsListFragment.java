@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.mapia.MainFragment;
 import com.mapia.R;
 import com.mapia.sns.model.SocialPerson;
 import com.mapia.sns.asne.core.SocialNetwork;
@@ -39,9 +38,10 @@ public class FriendsListFragment extends Fragment implements OnRequestGetFriends
         int networkId = getArguments().containsKey(NETWORK_ID) ? getArguments().getInt(NETWORK_ID) : 0;
 
         View rootView = inflater.inflate(R.layout.friends_list_fragment, container, false);
+
         listView = (ListView) rootView.findViewById(R.id.list);
 
-        SocialNetwork socialNetwork = MainFragment.mSocialNetworkManager.getSocialNetwork(networkId);
+        SocialNetwork socialNetwork = SNSFragment.mSocialNetworkManager.getSocialNetwork(networkId);
         socialNetwork.setOnRequestGetFriendsCompleteListener(this);
         socialNetwork.requestGetFriends();
         SNSActivity.showProgress("Loading friends");
@@ -51,7 +51,7 @@ public class FriendsListFragment extends Fragment implements OnRequestGetFriends
 
     @Override
     public void OnGetFriendsIdComplete(int id, String[] friendsID) {
-        ((SNSActivity)getActivity()).getSupportActionBar().setTitle(friendsID.length + " Friends");
+//        ((SNSActivity)getActivity()).getSupportActionBar().setTitle(friendsID.length + " Friends");
     }
 
     @Override

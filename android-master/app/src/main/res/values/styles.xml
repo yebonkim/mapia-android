@@ -9,5 +9,159 @@
         <item name="android:windowNoDisplay">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+    <style name="CustomProgressDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
 
-</resources>
+    <style name="OnScreenHintTextAppearance">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:textColorHighlight">#ffff9200</item>
+        <item name="android:textColorHint">#ff808080</item>
+        <item name="android:textColorLink">#ff5c5cff</item>
+    </style>
+    <style name="OnScreenHintTextAppearance.Small" parent="@style/OnScreenHintTextAppearance">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
+    </style>
+
+        <style name="Animation_OnScreenHint">
+            <item name="android:windowEnterAnimation">@anim/on_screen_hint_enter</item>
+            <item name="android:windowExitAnimation">@anim/on_screen_hint_exit</item>
+        </style>
+        <style name="AppBaseTheme" parent="@android:style/Theme.Light" />
+
+        <style name="Theme.Camera" parent="@style/Theme.CameraBase">
+            <item name="android:colorBackground">@android:color/black</item>
+            <item name="android:windowBackground">@android:color/black</item>
+            <item name="android:colorBackgroundCacheHint">@android:color/black</item>
+        </style>
+        <style name="Theme.CameraBase" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <style name="camera_exposure_seekbar">
+            <item name="android:background">@drawable/cam_bright_bar</item>
+            <item name="android:indeterminateOnly">false</item>
+            <item name="android:indeterminateDrawable">@android:color/transparent</item>
+            <item name="android:progressDrawable">@android:color/transparent</item>
+            <item name="android:thumb">@drawable/cam_bright_ctrl</item>
+            <item name="android:thumbOffset">0.0dip</item>
+        </style>
+        <style name="camera_square_block_view">
+            <item name="android:background">#99000000</item>
+            <item name="android:layout_width">fill_parent</item>
+            <item name="android:layout_height">0.0dip</item>
+        </style>
+        <style name="camera_top_image_style">
+            <item name="android:background">@null</item>
+            <item name="android:layout_centerVertical">true</item>
+        </style>
+        <style name="camera_video_seekbar">
+            <item name="android:background">#ff181818</item>
+            <item name="android:indeterminateOnly">false</item>
+            <item name="android:indeterminateDrawable">@android:color/transparent</item>
+            <item name="android:progressDrawable">@android:color/white</item>
+            <item name="android:thumbOffset">0.0dip</item>
+        </style>
+        <style name="com_facebook_loginview_default_style" parent="@android:style/Widget.Button">
+            <item name="android:textSize">@dimen/com_facebook_loginview_text_size</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:textColor">@color/com_facebook_loginview_text_color</item>
+            <item name="android:gravity">center</item>
+            <item name="android:background">@drawable/com_facebook_button_blue</item>
+            <item name="android:paddingLeft">@dimen/com_facebook_loginview_padding_left</item>
+            <item name="android:layout_width">wrap_content</item>
+            <item name="android:layout_height">wrap_content</item>
+        </style>
+        <style name="com_facebook_loginview_silver_style" parent="@android:style/Widget.Button">
+            <item name="android:textSize">18.0sp</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:textColor">#ff4b5164</item>
+            <item name="android:gravity">center</item>
+            <item name="android:background">@drawable/com_facebook_loginbutton_silver</item>
+            <item name="android:height">44.0dip</item>
+            <item name="android:width">205.0dip</item>
+        </style>
+        <style name="edit_top_common_arrow_image">
+            <item name="android:background">@null</item>
+            <item name="android:layout_centerVertical">true</item>
+        </style>
+        <style name="filter_intensity_seekbar">
+            <item name="android:background">@drawable/filter_intensity_seekbar_background</item>
+            <item name="android:indeterminateOnly">false</item>
+            <item name="android:indeterminateDrawable">@android:color/transparent</item>
+            <item name="android:progressDrawable">@android:color/transparent</item>
+            <item name="android:thumb">@drawable/cam_filter_ctrl</item>
+            <item name="android:thumbOffset">0.0dip</item>
+        </style>
+        <style name="licence_policy_agree_button">
+            <item name="android:background">@drawable/selector_license_check</item>
+            <item name="android:layout_width">30.0dip</item>
+            <item name="android:layout_height">30.0dip</item>
+            <item name="android:layout_alignParentRight">true</item>
+            <item name="android:layout_centerVertical">true</item>
+        </style>
+        <style name="licence_policy_content">
+            <item name="android:scrollbarThumbVertical">@drawable/license_scrollthumb</item>
+            <item name="android:background">@drawable/license_scroll_background</item>
+            <item name="android:paddingTop">4.0dip</item>
+            <item name="android:paddingRight">3.0dip</item>
+            <item name="android:layout_width">fill_parent</item>
+            <item name="android:layout_height">fill_parent</item>
+        </style>
+        <style name="licence_policy_content_text">
+            <item name="android:textSize">12.0sp</item>
+            <item name="android:textColor">#ff414141</item>
+            <item name="android:layout_width">fill_parent</item>
+            <item name="android:layout_height">fill_parent</item>
+            <item name="android:layout_marginLeft">11.0dip</item>
+            <item name="android:layout_marginRight">11.0dip</item>
+            <item name="android:lineSpacingExtra">6.0dip</item>
+        </style>
+        <style name="licence_policy_title">
+            <item name="android:textSize">16.0sp</item>
+            <item name="android:textColor">#ff000000</item>
+            <item name="android:layout_width">fill_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_centerVertical">true</item>
+        </style>
+        <style name="pholar_default_style">
+            <item name="android:windowBackground">@drawable/mapia_default_color</item>
+            <item name="android:windowNoTitle">true</item>
+        </style>
+        <style name="tooltip_bubble_text">
+            <item name="android:textSize">12.0sp</item>
+            <item name="android:textColor">@android:color/white</item>
+            <item name="android:gravity">left</item>
+            <item name="android:shadowColor">#40000000</item>
+            <item name="android:shadowDy">-1.0</item>
+            <item name="android:shadowRadius">0.25</item>
+        </style>
+        <style name="video_encode_dialog_style" parent="@android:style/Widget.ProgressBar.Horizontal">
+            <item name="android:indeterminateOnly">false</item>
+            <item name="android:progressDrawable">@drawable/video_encode_progress_bar_horizontal</item>
+        </style>
+        <style name="video_preview_thumbnail_select_seekbar">
+            <item name="android:background">@android:color/transparent</item>
+            <item name="android:paddingLeft">35.0dip</item>
+            <item name="android:paddingRight">35.0dip</item>
+            <item name="android:indeterminateOnly">false</item>
+            <item name="android:indeterminateDrawable">@android:color/transparent</item>
+            <item name="android:progressDrawable">@android:color/transparent</item>
+            <item name="android:thumbOffset">0.0dip</item>
+        </style>
+        <style name="video_preview_thumbnail_select_thumbnail">
+            <item name="android:layout_width">@dimen/filter_thumbnail_select_thumbnail_size</item>
+            <item name="android:layout_height">@dimen/filter_thumbnail_select_thumbnail_size</item>
+            <item name="android:src">@drawable/cam_cover_dft</item>
+        </style>
+    </resources>
+

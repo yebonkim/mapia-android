@@ -92,7 +92,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Friends"
+                    android:text="팔로워"
                     android:id="@+id/friends"
                     android:padding="8dp"
                     android:background="@color/dark"
@@ -102,8 +102,8 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Share"
-                    android:id="@+id/share"
+                    android:text="게시글"
+                    android:id="@+id/posts"
                     android:padding="8dp"
                     android:background="@color/dark"
                     android:layout_weight="1"

@@ -4,4 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gorbin.androidsocialnetworksextended.asne.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame"
+    android:background="#ffffff">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="372dp"
+        android:layout_gravity="right|bottom"
+        android:background="#ffffff"></LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_above="@+id/linearLayout"
+        android:background="@drawable/background"
+        android:gravity="bottom">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/sns_welcome"
+            android:textSize="25sp"
+            android:textColor="#efefef"
+            android:layout_above="@+id/linearLayout"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/sns_welcome_notice"
+            android:textSize="15sp"
+            android:textColor="#efefef"
+            android:layout_above="@+id/linearLayout"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal|bottom" />
+    </LinearLayout>
+
+
+</FrameLayout>

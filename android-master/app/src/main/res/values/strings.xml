@@ -5,8 +5,8 @@
     <string name="title_activity_map">MapActivity</string>
         <string name="app_name">mapia</string>
         <string name="item">Item #</string>
-        <string name="facebook_app_id">863112470402085</string>
-        <string name="facebook_app_sercret">b8933d06e9f58989affe30d39d4b29a9</string>
+        <string name="facebook_app_id">1191701004189291</string>
+        <string name="facebook_app_sercret">d94a1510b80ff04334357f3ad79b3460</string>
         <string name="twitter_consumer_key">pgHFETv10XzCbdN9IEiFajszC</string>
         <string name="twitter_consumer_secret">5QhB4AdyjrMp0zWhEWmIWap3JHm96IcMl5PFUMDBQvfrIAGMQi</string>
         <string name="instagram_client_id">036d1554ace5461b973bf54e5c41f854</string>
@@ -23,6 +23,9 @@
         <string name="ok">Okay</string>
         <string name="set">Set</string>
         <string name="cancel">취소</string>
+        <string name="sns_link">사용중인 다른 SNS와 연동할까요?</string>
+        <string name="sns_welcome"><b>환영합니다!</b></string>
+        <string name="sns_welcome_notice">MAPIA를 즐기기 위해 아래 내용을 설정해주세요~</string>
 
         <string name="progress_save_message">Saving</string>
 
@@ -30,6 +33,7 @@
         <string name="social_twitter_button">{icon-twitter} Twitter login</string>
         <string name="social_google_button">{icon-gplus} G+ login</string>
         <string name="social_instagram_button">{icon-instagram} Vk login</string>
+
 
         <!-- Menu -->
         <string name="menu_done_item">Done</string>
@@ -226,7 +230,7 @@ Step out of view for a moment."</string>
         <string name="common_refreshing">새로고침 중 입니다</string>
         <string name="common_signin_button_text">Sign in</string>
         <string name="common_signin_button_text_long">Sign in with Google</string>
-        <string name="complete">완료</string>
+        <string name="complete">게시</string>
         <string name="confirm">확인</string>
         <string name="core_com_kakao_sdk_loading">Loading…</string>
         <string name="crop_image_error">이미지를 읽을 수 없습니다</string>
@@ -646,7 +650,7 @@ Please try again after a while."</string>
         <string name="post">글쓰기</string>
         <string name="post_cancel">취소</string>
         <string name="post_complete">등록 완료하였습니다</string>
-        <string name="post_edittext_hint">사진에 대한 이야기를 나누세요.</string>
+        <string name="post_edittext_hint">장소에 대해 이야기를 나눠보세요.</string>
         <string name="post_exceeded_alert">최대 글자 수를 초과하였습니다 (500자 이내)</string>
         <string name="post_failed">등록 실패하였습니다</string>
         <string name="post_retry">다시시도</string>

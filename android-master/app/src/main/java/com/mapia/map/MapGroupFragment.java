@@ -53,7 +53,7 @@ public class MapGroupFragment extends MapFragment {
 		try {
 			RestRequestHelper requestHelper = RestRequestHelper.newInstance();
 
-			requestHelper.posts("group", this.currentGroupNumber, MapActivity.cameraLatlng.latitude, MapActivity.cameraLatlng.longitude, MapActivity.cameraZoom,
+			requestHelper.getPosts("group", this.currentGroupNumber, MapActivity.cameraLatlng.latitude, MapActivity.cameraLatlng.longitude, MapActivity.cameraZoom,
 					new Callback<JsonObject>() {
 				@Override
 				public void success(JsonObject jO, Response response) {

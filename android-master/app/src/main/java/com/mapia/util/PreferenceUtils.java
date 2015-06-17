@@ -15,11 +15,13 @@ public class PreferenceUtils {
     }
 
     public static String getPreference(String paramString){
-        mapiaLocalCache = MainApplication.getContext().getSharedPreferences("mapia_shared_preferences",0);
+        MainApplication mainApplication = new MainApplication();
+        mapiaLocalCache = mainApplication.getContext().getSharedPreferences("mapia_shared_preferences",0);
         return mapiaLocalCache.getString(paramString, "");
     }
     public static void putPreference(String paramString1, String paramString2){
-        mapiaLocalCache = MainApplication.getContext().getSharedPreferences("mapia_shared_preferences",0);
+        MainApplication mainApplication = new MainApplication();
+        mapiaLocalCache = mainApplication.getContext().getSharedPreferences("mapia_shared_preferences",0);
         SharedPreferences.Editor localEditor = mapiaLocalCache.edit();
         localEditor.putString(paramString1, paramString2);
         localEditor.commit();

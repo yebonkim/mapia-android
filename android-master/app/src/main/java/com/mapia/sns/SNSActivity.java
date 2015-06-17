@@ -8,14 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mapia.MainFragment;
+import com.mapia.MainActivity;
 
 
-public class SNSActivity extends ActionBarActivity implements FragmentManager.OnBackStackChangedListener {
+public class SNSActivity extends MainActivity implements FragmentManager.OnBackStackChangedListener {
     public static final String SOCIAL_NETWORK_TAG = "SocialIntegrationMain.SOCIAL_NETWORK_TAG";
     private static ProgressDialog pd;
     static Context context;
@@ -29,7 +28,7 @@ public class SNSActivity extends ActionBarActivity implements FragmentManager.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(com.mapia.R.id.container, new MainFragment())
+                    .add(com.mapia.R.id.container, new SNSFragment())
                     .commit();
         }
     }
@@ -46,11 +45,11 @@ public class SNSActivity extends ActionBarActivity implements FragmentManager.On
 
     private void homeAsUpByBackStack() {
         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-        if (backStackEntryCount > 0) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+//        if (backStackEntryCount > 0) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        } else {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        }
     }
 
     @Override

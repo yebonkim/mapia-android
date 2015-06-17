@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/count_down_to_capture" />
+    <ViewStub android:id="@+id/face_view_stub" android:visibility="gone" android:layout="@layout/face_view" android:inflatedId="@+id/face_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.mapia.camera.ui.RenderOverlay android:id="@+id/render_overlay" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</merge>

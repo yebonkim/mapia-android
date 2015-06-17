@@ -2,21 +2,49 @@ package com.mapia;
 
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.mapia.camera.CameraActivity;
 import com.mapia.common.BaseFragment;
+import com.mapia.common.CommonConstants;
 import com.mapia.common.FragmentTagStack;
+import com.mapia.custom.FontSettableTextView;
 import com.mapia.home.HomeFragment;
+import com.mapia.myfeed.MyfeedActivity;
+import com.mapia.myfeed.MyfeedFragment;
 import com.mapia.network.NetworkStatusManager;
+import com.mapia.post.PostFragment;
 import com.mapia.search.SearchFragment;
+import com.mapia.util.MapiaToast;
+import com.mapia.util.RequestUtils;
+import com.volley.MapiaRequest;
+import com.volley.MapiaVolley;
+
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -83,14 +111,13 @@ public abstract class MainActivity extends FragmentActivity {
 //        localEndFragment.setArguments(localBundle);
 //        addFragment(localEndFragment, true, true, false);
 //    }
-
-    public void hideMenuBar(Boolean paramBoolean){
-        if(!this.isShowMenubar){
-            do{
-                this.isShowMenubar = false;
-                this.menubar.setVisibility(View.INVISIBLE);
-            }while(!paramBoolean);
-            this.menubar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.menubar_exit_to_bottom));
+    public void hideMenuBar(final boolean b) {
+        if (this.isShowMenubar) {
+            this.isShowMenubar = false;
+            this.menubar.setVisibility(View.INVISIBLE);
+            if (b) {
+                this.menubar.startAnimation(AnimationUtils.loadAnimation((Context)this, R.anim.menubar_exit_to_bottom));
+            }
         }
     }
     public boolean isShowMenubar(){
@@ -214,6 +241,10 @@ public abstract class MainActivity extends FragmentActivity {
         this.currentFragment = currentFragment;
 
     }
+
+    public BaseFragment getCurrFragment() {
+        return this.currentFragment;
+    }
     public void showNoConnection(boolean b){
         if(b){
             this.noConnection.setVisibility(View.INVISIBLE);
@@ -249,6 +280,22 @@ public abstract class MainActivity extends FragmentActivity {
         return string;
     }
 
+    protected void addPostFragment(final Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        final Bundle arguments = new Bundle();
+        arguments.putString("watermark_path", intent.getStringExtra("watermark_path"));
+        arguments.putBoolean("isApplyWatermark", intent.getBooleanExtra("isApplyWatermark", false));
+        arguments.putDouble("media_latitude", intent.getDoubleExtra("media_latitude", 200.0));
+        arguments.putDouble("media_longitude", intent.getDoubleExtra("media_longitude", 200.0));
+        arguments.putSerializable("clip_filter_type", intent.getSerializableExtra("clip_filter_type"));
+        arguments.putString("intentTextBody", intent.getStringExtra("intentTextBody"));
+        final PostFragment postFragment = new PostFragment();
+        postFragment.setArguments(arguments);
+        this.hideMenuBar(false);
+        this.addFragment(postFragment, false);
+    }
 
     protected void init(final int menuNo){
         this.menuNo = menuNo;
@@ -257,15 +304,35 @@ public abstract class MainActivity extends FragmentActivity {
         final MainApplication mainApplication = this.mainApplication;
         this.alarmButton = (ImageView)this.findViewById(R.id.am_button_alarm);
         this.writeButton = (ImageView)this.findViewById(R.id.am_button_write);
-        this.alarmButton.setOnClickListener(new View.OnClickListener(){
-           public void onClick(View view){
+        this.menubar = (LinearLayout)this.findViewById(R.id.am_menubar);
 
-           }
+        this.alarmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+//                AceUtils.nClick(NClicks.GNB_MYFEED);
+                if (menuNo != 1) {
+                    MainActivity.this.mainApplication.setIsMenubarClicked(true);
+                    final Intent intent = new Intent(MainActivity.this.getApplicationContext(), (Class) MyfeedActivity.class);
+//                    intent.setFlags(537001984);
+                    MainActivity.this.startActivity(intent);
+                    return;
+                }
+                if (MainActivity.this.fragmentTagStack.getSize() == 1) {
+                    MainActivity.this.currentFragment.scrollToTop();
+                    return;
+                }
+                MainActivity.this.removeAllFragement();
+            }
         });
 
-        this.writeButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-
+        this.writeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                try {
+                    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                    Context context = getApplicationContext();
+                    startActivityForResult(builder.build(context), CommonConstants.PLACE_PICKER_REQUEST);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -274,14 +341,345 @@ public abstract class MainActivity extends FragmentActivity {
                 this.menuRootFragmentClass = HomeFragment.class;
                 this.addFragment(new HomeFragment(), false);
                 break;
+            case 1: {
+                this.menuRootFragmentClass = MyfeedFragment.class;
+                this.addFragment(new MyfeedFragment(), false);
+                break;
+            }
             case 4:
                 this.menuRootFragmentClass = SearchFragment.class;
                 this.addFragment(new SearchFragment(), false);
                 break;
 
+            case 5: {
+                this.menuRootFragmentClass = PostFragment.class;
+                this.addPostFragment(this.getIntent());
+            }
+
         }
 
 
     }
+
+    public void setSchemeUrl(final String mSchemeUrl) {
+        this.mSchemeUrl = mSchemeUrl;
+    }
+
+    private void resumeFragment(final BaseFragment baseFragment, final boolean b) {
+//        if (baseFragment != null) {
+//            if (baseFragment instanceof ProfileFollowFragment) {
+//                if (!b) {
+//                    ((ProfileFollowFragment)baseFragment).mIsShown = true;
+//                    return;
+//                }
+//                ((ProfileFollowFragment)baseFragment).resume();
+//            }
+//            else if (baseFragment instanceof EndViewPagerFragment) {
+//                if (b) {
+//                    AceUtils.site("EndFragment");
+//                }
+//            }
+//            else if (baseFragment.getClass() != null) {
+//                AceUtils.site(baseFragment.getClass().getSimpleName());
+//            }
+//        }
+    }
+
+    public Toast showCustomToast(final String text, final int duration) {
+        final long currentTimeMillis = System.currentTimeMillis();
+        if (this.mLastToastTime + 1000L >= currentTimeMillis) {
+            return null;
+        }
+        this.mLastToastTime = currentTimeMillis;
+        final View inflate = this.getLayoutInflater().inflate(R.layout.layout_toast, (ViewGroup)this.findViewById(R.id.layoutToast));
+        ((FontSettableTextView)inflate.findViewById(R.id.txtToast)).setText((CharSequence)text);
+        final Toast toast = new Toast((Context)this);
+        toast.setGravity(16, 0, 0);
+        toast.setDuration(duration);
+        toast.setView(inflate);
+        toast.show();
+        return toast;
+    }
+
+    protected void clearBackStack() {
+        for (int i = 0; i < this.fragmentManager.getBackStackEntryCount() - 1; ++i) {
+            this.fragmentManager.popBackStack();
+        }
+    }
+    public void refreshMenuRootFragment(final boolean b, final int n, final boolean b2, final int n2) {
+        if (b) {
+            if (n == 0) {
+                this.currentFragment.refreshInfo();
+            }
+            else {
+                new Handler().postDelayed((Runnable)new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.this.currentFragment.refreshInfo();
+                    }
+                }, (long)n);
+            }
+        }
+        if (b2) {
+            if (n2 != 0) {
+                new Handler().postDelayed((Runnable)new Runnable() {
+                    @Override
+                    public void run() {
+                        MainActivity.this.currentFragment.refreshList();
+                    }
+                }, (long)n2);
+                return;
+            }
+            this.currentFragment.refreshList();
+        }
+    }
+
+    public void removeAllFragement() {
+        this.removeAllFragement(false, 0, false, 0, true);
+    }
+
+    public void removeAllFragement(final boolean b, final int n, final boolean b2, final int n2, final boolean b3) {
+        if (this.fragmentTagStack.getSize() != 1) {
+            int n3 = 1;
+            do {
+                final String pop = this.fragmentTagStack.pop();
+                final FragmentTransaction beginTransaction = this.fragmentManager.beginTransaction();
+                int n4;
+                if ((n4 = n3) != 0) {
+                    beginTransaction.setCustomAnimations(2130968604, 2130968605);
+                    n4 = 0;
+                }
+                beginTransaction.remove(this.fragmentManager.findFragmentByTag(pop));
+                beginTransaction.commit();
+                n3 = n4;
+            } while (this.fragmentTagStack.getSize() != 1);
+            final BaseFragment currentFragment = (BaseFragment)this.fragmentManager.findFragmentByTag(this.menuRootFragmentTag);
+            final View view = currentFragment.getView();
+            view.setVisibility(View.VISIBLE);
+            view.startAnimation(AnimationUtils.loadAnimation((Context)this, R.anim.fragment_fade_in));
+            this.clearBackStack();
+            this.setCurrentFragment(currentFragment);
+            this.resumeFragment(currentFragment, true);
+            this.setPrevFragment(null);
+            if (b3) {
+                this.showMenuBar(true);
+            }
+            if (b) {
+                if (n == 0) {
+                    currentFragment.refreshInfo();
+                }
+                else {
+                    new Handler().postDelayed((Runnable)new Runnable() {
+                        @Override
+                        public void run() {
+                            currentFragment.refreshInfo();
+                        }
+                    }, (long)n);
+                }
+            }
+            if (b2) {
+                if (n2 == 0) {
+                    currentFragment.refreshList();
+                }
+                else {
+                    new Handler().postDelayed((Runnable)new Runnable() {
+                        @Override
+                        public void run() {
+                            currentFragment.refreshList();
+                        }
+                    }, (long)n2);
+                }
+            }
+            if (this.isAdding) {
+                this.isAdding = false;
+            }
+        }
+    }
+
+    public void removeFragment() {
+        this.removeFragment(true);
+    }
+
+    public void removeFragment(final boolean b) {
+        this.removeFragment(b, false);
+    }
+
+    public void removeFragment(final boolean b, final boolean b2) {
+        final String pop = this.fragmentTagStack.pop();
+        if (!StringUtils.isBlank(pop)) {
+            final BaseFragment baseFragment = (BaseFragment)this.fragmentManager.findFragmentByTag(pop);
+            if (baseFragment != null) {
+                baseFragment.onFadeOutBeforeAnimation();
+                final FragmentTransaction beginTransaction = this.fragmentManager.beginTransaction();
+                if (b) {
+                    beginTransaction.setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_right);
+                }
+                beginTransaction.remove(baseFragment);
+                if (b2) {
+                    beginTransaction.commitAllowingStateLoss();
+                }
+                else {
+                    beginTransaction.commit();
+                }
+                final String front = this.fragmentTagStack.getFront();
+                if (StringUtils.isNotBlank(front)) {
+                    final BaseFragment currentFragment = (BaseFragment)this.fragmentManager.findFragmentByTag(front);
+                    this.setCurrentFragment(currentFragment);
+                    this.resumeFragment(currentFragment, true);
+                    currentFragment.onFadeInBeforeAnimation();
+                    final View view = currentFragment.getView();
+                    view.setVisibility(View.VISIBLE);
+                    if (b) {
+                        final Animation loadAnimation = AnimationUtils.loadAnimation((Context)this, R.anim.fragment_fade_in);
+                        loadAnimation.setAnimationListener((Animation.AnimationListener)new Animation.AnimationListener() {
+                            public void onAnimationEnd(final Animation animation) {
+                                currentFragment.onFadeInAfterAnimation();
+                            }
+
+                            public void onAnimationRepeat(final Animation animation) {
+                            }
+
+                            public void onAnimationStart(final Animation animation) {
+                            }
+                        });
+                        view.startAnimation(loadAnimation);
+                    }
+                    else {
+                        currentFragment.onFadeInAfterAnimation();
+                    }
+                    if (currentFragment.getDefaultMenuBarShow()) {
+                        this.showMenuBar(true);
+                    }
+                    else {
+                        this.hideMenuBar(true);
+                    }
+                    final String prev = this.fragmentTagStack.getPrev();
+                    if (StringUtils.isNotBlank(prev)) {
+                        this.setPrevFragment((BaseFragment)this.fragmentManager.findFragmentByTag(prev));
+                        return;
+                    }
+                    this.setPrevFragment(null);
+                }
+            }
+        }
+    }
+
+    public void startCameraActivity() {
+        if (MainApplication.getInstance().getUploadingStatus() != -1) {
+            MapiaToast.show(this, "\ub3d9\uc601\uc0c1 \uc804\uc1a1\uc644\ub8cc \ud6c4 \uc9c4\ud589\uac00\ub2a5\ud569\ub2c8\ub2e4", 0);
+            return;
+        }
+        this.startActivityForResult(new Intent((Context)this, (Class)CameraActivity.class), 0);
+        this.overridePendingTransition(0, 0);
+    }
+
+
+    public MapiaRequest makeRequest(final int n, final String s, final Response.Listener<JSONObject> listener) {
+        if (s == null || listener == null) {
+            return null;
+        }
+        final MapiaRequest mapiaRequest = new MapiaRequest(n, s, (JSONObject)null, listener, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(final VolleyError volleyError) {
+                if (volleyError instanceof TimeoutError || volleyError instanceof NoConnectionError || volleyError instanceof NetworkError) {
+                    MainActivity.this.showNoConnection(true);
+                    new Handler().postDelayed((Runnable)new Runnable() {
+                        @Override
+                        public void run() {
+                            if (NetworkStatusManager.getIsAvailableNetwork()) {
+                                MainActivity.this.showNoConnection(false);
+                            }
+                        }
+                    }, 3000L);
+                }
+                else if (!(volleyError instanceof AuthFailureError) && !(volleyError instanceof ServerError) && volleyError instanceof ParseError) {
+                    return;
+                }
+            }
+        });
+        mapiaRequest.setRetryPolicy(RequestUtils.getNoRetryPolicy());
+        MapiaVolley.getRequestQueue().add(mapiaRequest);
+        return mapiaRequest;
+    }
+
+    public MapiaRequest makeRequest(final String s, final Response.Listener<JSONObject> listener) {
+        if (s == null || listener == null) {
+            return null;
+        }
+        final MapiaRequest mapiaRequest = new MapiaRequest(s, (JSONObject)null, listener, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(final VolleyError volleyError) {
+                if (volleyError instanceof TimeoutError || volleyError instanceof NoConnectionError || volleyError instanceof NetworkError) {
+                    MainActivity.this.showNoConnection(true);
+                    new Handler().postDelayed((Runnable)new Runnable() {
+                        @Override
+                        public void run() {
+                            if (NetworkStatusManager.getIsAvailableNetwork()) {
+                                MainActivity.this.showNoConnection(false);
+                            }
+                        }
+                    }, 3000L);
+                }
+                else if (!(volleyError instanceof AuthFailureError) && !(volleyError instanceof ServerError) && volleyError instanceof ParseError) {
+                    return;
+                }
+            }
+        });
+        mapiaRequest.setRetryPolicy(RequestUtils.getNoRetryPolicy());
+        MapiaVolley.getRequestQueue().add(mapiaRequest);
+        return mapiaRequest;
+    }
+
+    public MapiaRequest makeRequest(final String s, final RetryPolicy retryPolicy, final Response.Listener<JSONObject> listener) {
+        if (s == null || retryPolicy == null || listener == null) {
+            return null;
+        }
+        final MapiaRequest mapiaRequest = new MapiaRequest(s, (JSONObject)null, listener, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(final VolleyError volleyError) {
+                if (volleyError instanceof TimeoutError || volleyError instanceof NoConnectionError || volleyError instanceof NetworkError) {
+                    MainActivity.this.showNoConnection(true);
+                    new Handler().postDelayed((Runnable)new Runnable() {
+                        @Override
+                        public void run() {
+                            if (NetworkStatusManager.getIsAvailableNetwork()) {
+                                MainActivity.this.showNoConnection(false);
+                            }
+                        }
+                    }, 3000L);
+                }
+                else if (!(volleyError instanceof AuthFailureError) && !(volleyError instanceof ServerError) && volleyError instanceof ParseError) {
+                    return;
+                }
+            }
+        });
+        mapiaRequest.setRetryPolicy(retryPolicy);
+        MapiaVolley.getRequestQueue().add( mapiaRequest);
+        return mapiaRequest;
+    }
+
+
+    public void showError(final VolleyError volleyError) {
+        if (volleyError instanceof TimeoutError || volleyError instanceof NoConnectionError || volleyError instanceof NetworkError) {
+            this.showNoConnection(true);
+            new Handler().postDelayed((Runnable)new Runnable() {
+                @Override
+                public void run() {
+                    if (NetworkStatusManager.getIsAvailableNetwork()) {
+                        MainActivity.this.showNoConnection(false);
+                    }
+                }
+            }, 3000L);
+        }
+        else if (!(volleyError instanceof AuthFailureError) && !(volleyError instanceof ServerError) && volleyError instanceof ParseError) {
+            return;
+        }
+    }
+
+    public boolean isNoConnectionVisible() {
+        return this.noConnection.getVisibility() == View.VISIBLE;
+    }
+
+
 
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="53.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageButton android:id="@+id/edit_top_common_arrow_prev_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.5dip" android:src="@drawable/cam_arrow_prev" style="@style/edit_top_common_arrow_image" />
+    <com.mapia.custom.FontSettableTextView android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@+id/edit_top_common_title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+    <ImageButton android:id="@+id/edit_top_common_arrow_next_button" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginTop="3.5dip" android:layout_marginRight="5.0dip" android:src="@drawable/cam_arrow_next" android:layout_alignParentRight="true" style="@style/edit_top_common_arrow_image" />
+</RelativeLayout>

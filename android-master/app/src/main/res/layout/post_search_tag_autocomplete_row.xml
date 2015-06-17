@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@+id/padding" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="7.0dip" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="38.0dip">
+        <LinearLayout android:gravity="center_vertical" android:id="@+id/fstar_tag_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <com.mapia.myfeed.tag.MapiaTextView android:textSize="14.0dip" android:textColor="#ff252525" android:ellipsize="end" android:id="@+id/tag" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_marginRight="22.0dip" android:singleLine="true" android:maxLength="21" android:layout_toLeftOf="@+id/repicAndMore" android:layout_alignParentTop="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center|right" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ffb7b7b7" android:id="@+id/fstar_tag_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="16.0dip" android:text="0" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

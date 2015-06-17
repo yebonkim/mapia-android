@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginTop="350dp"
+    android:background="#FFFFFF">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/sns_link"
+            android:id="@+id/textView"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp">
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Facebook"
+            android:id="@+id/facebook"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff"
+            android:layout_margin="5dp"
+            android:src="@drawable/facebook_logo"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"
+            android:padding="-20dp" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Twitter"
+            android:id="@+id/twitter"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff"
+            android:layout_margin="5dp"
+            android:src="@drawable/twitter_logo"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"
+            android:padding="-20dp" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Instagram"
+            android:id="@+id/instagram"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff"
+            android:src="@drawable/instagram_logo"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:padding="-20dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

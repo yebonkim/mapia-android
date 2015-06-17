@@ -806,7 +806,7 @@
         -->
         <attr name="fastScrollAlwaysVisible" format="boolean" />
     </declare-styleable>
-    
+
     <declare-styleable name="ListView">
 
         <!-- Drawable or color to draw between list items. -->
@@ -829,7 +829,7 @@
         <!-- Drawable to draw above list content. -->
         <attr name="overScrollHeader" format="reference|color" />
         <!-- Drawable to draw below list content. -->
-        
+
         <attr name="overScrollFooter" format="reference|color" />
     </declare-styleable>
 

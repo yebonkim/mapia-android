@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,8 @@ import retrofit.client.Response;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     EditText edtID, edtPW;
-    Button btnLogin, btnSignup;
+    ImageButton btnLogin;
+    Button btnSignup;
     TextView txtHelp;
 
 
@@ -60,19 +62,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         edtID = (EditText)findViewById(com.mapia.R.id.edtID);
         edtPW = (EditText)findViewById(com.mapia.R.id.edtPW);
 
-        btnLogin = (Button)findViewById(com.mapia.R.id.btnLogin);
+        btnLogin = (ImageButton)findViewById(com.mapia.R.id.btnLogin);
         btnSignup = (Button) findViewById(R.id.btnSignup);
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
 
-        txtHelp = (TextView)findViewById(com.mapia.R.id.txtHelpRequest);
-        txtHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Call Website ./Help
-            }
-        });
 
 
         RestRequestHelper requestHelper = RestRequestHelper.newInstance();

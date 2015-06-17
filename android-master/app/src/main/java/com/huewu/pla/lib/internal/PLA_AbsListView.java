@@ -451,7 +451,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
 
 		setVerticalScrollBarEnabled(true);
 		TypedArray a = context.obtainStyledAttributes(R.styleable.View);
-		initializeScrollbars(a);
+//		initializeScrollbars(a);
 		a.recycle();
 	}
 

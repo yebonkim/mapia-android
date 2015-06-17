@@ -54,7 +54,7 @@ public abstract class OAuthSocialNetwork extends SocialNetwork {
     }
 
     /**
-     * Cancel current user {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * Cancel current user {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     @Override
     public void cancelGetCurrentPersonRequest() {
@@ -64,7 +64,7 @@ public abstract class OAuthSocialNetwork extends SocialNetwork {
     }
 
     /**
-     * Cancel user by id {@link com.github.gorbin.asne.mapeen.sns.SocialPerson} request
+     * Cancel user by id {@link com.github.gorbin.asne.mapia.sns.SocialPerson} request
      */
     @Override
     public void cancelGetSocialPersonRequest() {

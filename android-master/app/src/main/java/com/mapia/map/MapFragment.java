@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.JsonObject;
 import com.mapia.R;
 import com.mapia.network.RestRequestHelper;
+import com.mapia.post.PostActivity;
 
 import java.util.ArrayList;
 
@@ -37,10 +40,13 @@ import retrofit.client.Response;
 public class MapFragment extends Fragment implements OnClickListener, LocationListener, OnMapClickListener, GoogleMap.OnCameraChangeListener{
 
 
-	/*protected LatLng currentLatlng;
+	protected LatLng currentLatlng;
 	protected LatLng cameraLatlng;
-	protected float cameraZoom = 15;*/
+	protected float cameraZoom = 15;
 	ImageButton btnLocCurrent;
+
+	public static int PLACE_PICKER_REQUEST = 1;
+
 	protected int type_num;
 	private String[] type_string = {"","Private","Public","Follow","Group"};
 	protected ArrayList<MarkerData> markerDatas = new ArrayList<MarkerData>();
@@ -49,6 +55,9 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	protected static final long MIN_TIME = 400;
 	protected static final float MIN_DISTANCE = 1000;
 	protected boolean cameraMoveWhenCreate = false;
+	private GoogleApiClient mGoogleApiClient;
+	private PlacePicker.IntentBuilder builder;
+	RestRequestHelper requestHelper = RestRequestHelper.newInstance();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +74,8 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 
 		btnLocCurrent = (ImageButton)view.findViewById(R.id.btnLocCurrent);
 		btnLocCurrent.setOnClickListener(this);
+
+
 		return view;
 	}
 
@@ -77,13 +88,17 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 
 	protected void drawMarker(ArrayList<MarkerData> markerDatas){
 		for(int i=0;i<markerDatas.size();i++){
-			markerDatas.get(i).marker = this.backgroundMap.addMarker(new MarkerOptions().position(markerDatas.get(i).location).title(type_string[type_num]));
+			markerDatas.get(i).marker = this.backgroundMap.addMarker(new MarkerOptions().position(markerDatas.get(i).location)
+					.title(markerDatas.get(i).letter)
+					.snippet(markerDatas.get(i).user));
 		}
 	}
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
 			case R.id.btnLocCurrent:
+
+
 				if(MapActivity.currentLatlng!=null) this.backgroundMap.moveCamera((CameraUpdate)CameraUpdateFactory.newLatLngZoom(MapActivity.currentLatlng, MapActivity.cameraZoom));
 				break;
 		}
@@ -116,33 +131,42 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 		
 	}
 
+
+
 	@Override
 	public void onMapClick(LatLng point) {
-		Intent intent = new Intent(getActivity(), WritePostActivity.class);
+		Intent intent = new Intent(getActivity(), PostActivity.class);
+
+//		String address = ConvertPointToLocation(point);
 		intent.putExtra("latlng",point);
+//		String placeName = getPlaceName();
+
+
 		startActivityForResult(intent, 0);
 		// TODO Auto-generated method stub
 	}
-
 	@Override
 	public void onCameraChange(CameraPosition cameraPosition) {
 		MapActivity.cameraLatlng = cameraPosition.target;
 		MapActivity.cameraZoom = cameraPosition.zoom;
 	}
 
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+
 		switch(requestCode){
 			case 0:
 				if(resultCode== Activity.RESULT_OK) {
-					RestRequestHelper requestHelper = RestRequestHelper.newInstance();
+
 					final LatLng postLatlng = (LatLng)data.getParcelableExtra("latlng");
 					final String postComment = (String)data.getStringExtra("comment");
+					final String mapType = (String)data.getStringExtra("maptype");
                     final ArrayList<String> fileList;
                     if((ArrayList<String>)data.getStringArrayListExtra("filelist") != null) {
                         fileList = (ArrayList<String>) data.getStringArrayListExtra("filelist");
                         requestHelper.posts(
-                                postComment, postLatlng, fileList, new Callback<JsonObject>() {
+                                mapType, postComment, postLatlng, fileList, new Callback<JsonObject>() {
                                     @Override
                                     public void success(JsonObject jsonObject, Response response) {
                                         markerDatas.add(new MarkerData(postLatlng, postComment));
@@ -169,7 +193,7 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
                     }
                     else{
                             requestHelper.posts(
-                                    postComment, postLatlng, new Callback<JsonObject>() {
+                                    mapType, postComment, postLatlng, new Callback<JsonObject>() {
                                         @Override
                                         public void success(JsonObject jsonObject, Response response) {
                                             markerDatas.add(new MarkerData(postLatlng, postComment));
@@ -191,4 +215,6 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 				break;
 		}
 	}
+
+
 }

@@ -16,7 +16,7 @@
                     android:id="@+id/am_button_alarm"
                     android:layout_width="46.0dip"
                     android:layout_height="46.0dip"
-                    android:src="@drawable/n_myfeed_off"
+                    android:src="@drawable/n_notice_off"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -40,7 +40,7 @@
                     android:id="@+id/am_button_write"
                     android:layout_width="46.0dip"
                     android:layout_height="46.0dip"
-                    android:src="@drawable/n_notice_off"
+                    android:src="@drawable/n_post_off"
                     android:layout_centerVertical="true"/>
 
                 <TextView

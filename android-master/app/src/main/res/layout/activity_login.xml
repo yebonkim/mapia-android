@@ -3,100 +3,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2c3e50"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:background="@drawable/background"
+    tools:context="${relativePackage}.${activityClass}"
+    android:id="@+id/login_background">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:text="MAPIA"
-        android:textSize="40sp"
         android:textColor="#efefef"
         android:layout_gravity="center"
-        android:id="@+id/textView"
-        android:layout_above="@+id/edtID"
-        android:layout_marginBottom="20dp"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/login_logo"
+        android:src="@drawable/mapia_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
 
-    <TextView
-        android:id="@+id/txtHelpRequest"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Help?"
-        android:textSize="13dp"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/btnSignup"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_marginTop="200dp">
 
-    <EditText
-        android:id="@+id/edtID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:minHeight="@null"
-        android:hint="User ID"
-        android:text="admin"
-        android:padding="15dp"
-        android:background="@drawable/round_corner_top"
-        android:textSize="13sp"
-        android:layout_above="@+id/edtPW"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_marginTop="20dp"
+            >
 
-        <requestFocus />
-    </EditText>
+            <EditText
+                android:id="@+id/edtID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:minHeight="@null"
+                android:hint="아이디"
 
-    <EditText
-        android:id="@+id/edtPW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:minHeight="@null"
-        android:hint="Password"
-        android:text="admin"
-        android:inputType="textPassword"
-        android:padding="15dp"
-        android:background="@drawable/round_corner_bot"
-        android:textSize="13sp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                android:padding="15dp"
+                android:background="#ffffff"
+                android:textSize="13sp"
+                android:layout_above="@+id/edtPW"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:minHeight="@null"
-        android:padding="10dp"
-        android:background="#13212f"
-        android:text="로그인"
-        android:textColor="#efefef"
-        android:textSize="15sp"
-        android:layout_below="@+id/edtPW"
-        android:layout_centerHorizontal="true" />
+                <requestFocus />
+            </EditText>
 
-    <Button
-        android:id="@+id/btnSignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="60dp"
-        android:minHeight="@null"
-        android:padding="10dp"
-        android:background="#43576b"
-        android:text="가입하기"
-        android:textColor="#13212f"
-        android:textSize="13sp"
-        android:layout_below="@+id/btnLogin"
-        android:layout_centerHorizontal="true" />
+            <ImageView android:id="@+id/login_divider" android:background="#88888888" android:layout_height="1.5dip" android:layout_width="fill_parent" android:layout_alignBottom="@+id/edtID" android:alpha="0.9" />
+
+            <EditText
+                android:id="@+id/edtPW"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:minHeight="@null"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:background="#ffffff"
+                android:textSize="13sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnLogin"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/btn_login"
+            android:layout_below="@+id/edtPW"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:background="#ffffff"
+            android:padding="-20dp" />
+
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:minHeight="@null"
+            android:padding="10dp"
+            android:text="회원가입하기"
+            android:textColor="#13212f"
+            android:textSize="13sp"
+            android:layout_below="@+id/btnLogin"
+            android:layout_centerHorizontal="true"
+            android:background="#ffffff"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_above="@+id/textView"
+            android:layout_alignLeft="@+id/btnSignup"
+            android:layout_alignStart="@+id/btnSignup" />
+    </LinearLayout>
+
 
 </RelativeLayout>

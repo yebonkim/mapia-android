@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mapia.MainFragment;
 import com.mapia.R;
 import com.mapia.sns.model.SocialPerson;
 import com.mapia.sns.asne.core.SocialNetwork;
@@ -52,14 +51,14 @@ public class DetailedSocialInfoFragment extends Fragment implements OnRequestDet
         setHasOptionsMenu(true);
         loadingDialog = new ADialogs(getActivity());
         loadingDialog.progress(false, "Loading social person...");
-        ((SNSActivity)getActivity()).getSupportActionBar().setTitle("Social Person");
+//        ((SNSActivity)getActivity()).getSupportActionBar().setTitle("Social Person");
         View rootView = inflater.inflate(R.layout.card_social_fragment, container, false);
         infoCard = (SocialCard) rootView.findViewById(R.id.info_card);
         int darkColor = getResources().getColor(Constants.color_light[socialNetworkID - 1]);
         int textColor = getResources().getColor(Constants.color[socialNetworkID - 1]);
         int color = getResources().getColor(Constants.color[socialNetworkID - 1]);
         int image = Constants.userPhoto[socialNetworkID - 1];
-        socialNetwork = MainFragment.mSocialNetworkManager.getSocialNetwork(socialNetworkID);
+        socialNetwork = SNSFragment.mSocialNetworkManager.getSocialNetwork(socialNetworkID);
 
         infoCard.setColors(color, textColor, darkColor);
         infoCard.setImageResource(image);

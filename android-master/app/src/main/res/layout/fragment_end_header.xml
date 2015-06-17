@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/common_title_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@+id/btnPostCancel" android:background="@drawable/common_prev" android:layout_width="46.0dip" android:layout_height="46.0dip" android:layout_marginLeft="5.0dip" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/right" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_alignParentRight="true" android:layout_centerVertical="true">
+        <RelativeLayout android:id="@+id/followYn" android:layout_width="31.0dip" android:layout_height="fill_parent" android:layout_toLeftOf="@+id/btnRight1">
+            <ImageView android:background="@drawable/selector_end_header_follow" android:duplicateParentState="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="fitXY" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <ImageView android:layout_gravity="center_vertical" android:id="@+id/btnRight1" android:background="@drawable/end_share" android:layout_width="40.0dip" android:layout_height="46.0dip" android:layout_marginRight="5.0dip" />
+    </LinearLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_toLeftOf="@+id/right" android:layout_toRightOf="@+id/btnPostCancel">
+        <LinearLayout android:orientation="horizontal" android:id="@+id/btnTopProfile" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_centerHorizontal="true">
+            <com.makeramen.RoundedImageView android:layout_gravity="center_vertical" android:id="@+id/topProfile" android:layout_width="39.0dip" android:layout_height="39.0dip" android:src="@drawable/common_noneprofile_ss" android:scaleType="fitCenter" app:riv_border_width="0.5dip" app:riv_border_color="#4d909090" app:riv_oval="true" xmlns:app="http://schemas.android.com/apk/res-auto" />
+            <com.mapia.custom.FontSettableTextView android:textSize="14.0dip" android:textColor="#ff000000" android:ellipsize="end" android:gravity="center" android:layout_gravity="center_vertical" android:id="@+id/txtCenter" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="6.0dip" android:singleLine="true" android:maxLength="15" song:customFont="NanumBold" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </LinearLayout>
+    </RelativeLayout>
+    <ImageView android:id="@+id/headerBottomLine" android:background="#33808080" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_alignParentBottom="true" />
+</RelativeLayout>
