@@ -7,269 +7,314 @@ package com.mapia.camera;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-import com.mapia.camera.util.UsageStatistics;
-
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
-public class ComboPreferences implements SharedPreferences, SharedPreferences.OnSharedPreferenceChangeListener
-{
-    private static WeakHashMap<Context, ComboPreferences> sMap;
+public class ComboPreferences implements
+        SharedPreferences,
+        OnSharedPreferenceChangeListener {
+    private SharedPreferences mPrefGlobal;  // global preferences
+    private SharedPreferences mPrefLocal;  // per-camera preferences
+    private BackupManager mBackupManager;
     private CopyOnWriteArrayList<OnSharedPreferenceChangeListener> mListeners;
-    private String mPackageName;
-    private SharedPreferences mPrefGlobal;
-    private SharedPreferences mPrefLocal;
+    private static WeakHashMap<Context, ComboPreferences> sMap =
+            new WeakHashMap<Context, ComboPreferences>();
 
-    static {
-        ComboPreferences.sMap = new WeakHashMap<Context, ComboPreferences>();
-    }
+    public ComboPreferences(Context context) {
+        mPrefGlobal = context.getSharedPreferences(
+                getGlobalSharedPreferencesName(context), Context.MODE_PRIVATE);
+        mPrefGlobal.registerOnSharedPreferenceChangeListener(this);
 
-    public ComboPreferences(final Context context) {
-        super();
-        this.mPackageName = context.getPackageName();
-        (this.mPrefGlobal = context.getSharedPreferences(getGlobalSharedPreferencesName(context), 0)).registerOnSharedPreferenceChangeListener((SharedPreferences.OnSharedPreferenceChangeListener)this);
-        synchronized (ComboPreferences.sMap) {
-            ComboPreferences.sMap.put(context, this);
-            // monitorexit(ComboPreferences.sMap)
-            this.mListeners = new CopyOnWriteArrayList<SharedPreferences.OnSharedPreferenceChangeListener>();
-            final SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            if (!this.mPrefGlobal.contains("pref_version_key") && defaultSharedPreferences.contains("pref_version_key")) {
-                this.moveGlobalPrefsFrom(defaultSharedPreferences);
-            }
+        synchronized (sMap) {
+            sMap.put(context, this);
+        }
+        mBackupManager = new BackupManager(context);
+        mListeners = new CopyOnWriteArrayList<OnSharedPreferenceChangeListener>();
+
+        // The global preferences was previously stored in the default
+        // shared preferences file. They should be stored in the camera-specific
+        // shared preferences file so we can backup them solely.
+        SharedPreferences oldprefs =
+                PreferenceManager.getDefaultSharedPreferences(context);
+        if (!mPrefGlobal.contains(CameraSettings.KEY_VERSION)
+                && oldprefs.contains(CameraSettings.KEY_VERSION)) {
+            moveGlobalPrefsFrom(oldprefs);
         }
     }
 
-    public static ComboPreferences get(final Context context) {
-        synchronized (ComboPreferences.sMap) {
-            return ComboPreferences.sMap.get(context);
+    public static ComboPreferences get(Context context) {
+        synchronized (sMap) {
+            return sMap.get(context);
         }
     }
 
-    private static String getGlobalSharedPreferencesName(final Context context) {
+    private static String getLocalSharedPreferencesName(
+            Context context, int cameraId) {
+        return context.getPackageName() + "_preferences_" + cameraId;
+    }
+
+    private static String getGlobalSharedPreferencesName(Context context) {
         return context.getPackageName() + "_preferences_camera";
     }
 
-    private static String getLocalSharedPreferencesName(final Context context, final int n) {
-        return context.getPackageName() + "_preferences_" + n;
-    }
-
-    public static String[] getSharedPreferencesNames(final Context context) {
-        final int numberOfCameras = CameraHolder.instance().getNumberOfCameras();
-        final String[] array = new String[numberOfCameras + 1];
-        array[0] = getGlobalSharedPreferencesName(context);
-        for (int i = 0; i < numberOfCameras; ++i) {
-            array[i + 1] = getLocalSharedPreferencesName(context, i);
-        }
-        return array;
-    }
-
-    private static boolean isGlobal(final String s) {
-        return s.equals("pref_video_time_lapse_frame_interval_key") || s.equals("pref_camera_id_key") || s.equals("pref_camera_recordlocation_key") || s.equals("pref_camera_first_use_hint_shown_key") || s.equals("pref_video_first_use_hint_shown_key") || s.equals("pref_camera_timer_key") || s.equals("pref_camera_timer_sound_key") || s.equals("pref_photosphere_picturesize_key");
-    }
-
-    private void moveGlobalPrefsFrom(final SharedPreferences sharedPreferences) {
-        final Map all = sharedPreferences.getAll();
-        this.movePrefFrom(all, "pref_version_key", sharedPreferences);
-        this.movePrefFrom(all, "pref_video_time_lapse_frame_interval_key", sharedPreferences);
-        this.movePrefFrom(all, "pref_camera_id_key", sharedPreferences);
-        this.movePrefFrom(all, "pref_camera_recordlocation_key", sharedPreferences);
-        this.movePrefFrom(all, "pref_camera_first_use_hint_shown_key", sharedPreferences);
-        this.movePrefFrom(all, "pref_video_first_use_hint_shown_key", sharedPreferences);
-    }
-
-    private void movePrefFrom(final Map<String, ?> map, final String s, final SharedPreferences sharedPreferences) {
-        if (map.containsKey(s)) {
-            final Object value = map.get(s);
-            if (value instanceof String) {
-                this.mPrefGlobal.edit().putString(s, (String)value).apply();
+    private void movePrefFrom(
+            Map<String, ?> m, String key, SharedPreferences src) {
+        if (m.containsKey(key)) {
+            Object v = m.get(key);
+            if (v instanceof String) {
+                mPrefGlobal.edit().putString(key, (String) v).apply();
+            } else if (v instanceof Integer) {
+                mPrefGlobal.edit().putInt(key, (Integer) v).apply();
+            } else if (v instanceof Long) {
+                mPrefGlobal.edit().putLong(key, (Long) v).apply();
+            } else if (v instanceof Float) {
+                mPrefGlobal.edit().putFloat(key, (Float) v).apply();
+            } else if (v instanceof Boolean) {
+                mPrefGlobal.edit().putBoolean(key, (Boolean) v).apply();
             }
-            else if (value instanceof Integer) {
-                this.mPrefGlobal.edit().putInt(s, (int)value).apply();
-            }
-            else if (value instanceof Long) {
-                this.mPrefGlobal.edit().putLong(s, (long)value).apply();
-            }
-            else if (value instanceof Float) {
-                this.mPrefGlobal.edit().putFloat(s, (float)value).apply();
-            }
-            else if (value instanceof Boolean) {
-                this.mPrefGlobal.edit().putBoolean(s, (boolean)value).apply();
-            }
-            sharedPreferences.edit().remove(s).apply();
+            src.edit().remove(key).apply();
         }
     }
 
-    public boolean contains(final String s) {
-        return this.mPrefLocal.contains(s) || this.mPrefGlobal.contains(s);
+    private void moveGlobalPrefsFrom(SharedPreferences src) {
+        Map<String, ?> prefMap = src.getAll();
+        movePrefFrom(prefMap, CameraSettings.KEY_VERSION, src);
+        movePrefFrom(prefMap, CameraSettings.KEY_VIDEO_TIME_LAPSE_FRAME_INTERVAL, src);
+        movePrefFrom(prefMap, CameraSettings.KEY_CAMERA_ID, src);
+        movePrefFrom(prefMap, CameraSettings.KEY_RECORD_LOCATION, src);
+        movePrefFrom(prefMap, CameraSettings.KEY_CAMERA_FIRST_USE_HINT_SHOWN, src);
+        movePrefFrom(prefMap, CameraSettings.KEY_VIDEO_FIRST_USE_HINT_SHOWN, src);
+        movePrefFrom(prefMap, CameraSettings.KEY_VIDEO_EFFECT, src);
     }
 
-    public SharedPreferences.Editor edit() {
-        return (SharedPreferences.Editor)new MyEditor();
-    }
-
-    public Map<String, ?> getAll() {
-        throw new UnsupportedOperationException();
-    }
-
-    public boolean getBoolean(final String s, final boolean b) {
-        if (isGlobal(s) || !this.mPrefLocal.contains(s)) {
-            return this.mPrefGlobal.getBoolean(s, b);
+    public static String[] getSharedPreferencesNames(Context context) {
+        int numOfCameras = CameraHolder.instance().getNumberOfCameras();
+        String prefNames[] = new String[numOfCameras + 1];
+        prefNames[0] = getGlobalSharedPreferencesName(context);
+        for (int i = 0; i < numOfCameras; i++) {
+            prefNames[i + 1] = getLocalSharedPreferencesName(context, i);
         }
-        return this.mPrefLocal.getBoolean(s, b);
+        return prefNames;
     }
 
-    public float getFloat(final String s, final float n) {
-        if (isGlobal(s) || !this.mPrefLocal.contains(s)) {
-            return this.mPrefGlobal.getFloat(s, n);
+    // Sets the camera id and reads its preferences. Each camera has its own
+    // preferences.
+    public void setLocalId(Context context, int cameraId) {
+        String prefName = getLocalSharedPreferencesName(context, cameraId);
+        if (mPrefLocal != null) {
+            mPrefLocal.unregisterOnSharedPreferenceChangeListener(this);
         }
-        return this.mPrefLocal.getFloat(s, n);
+        mPrefLocal = context.getSharedPreferences(
+                prefName, Context.MODE_PRIVATE);
+        mPrefLocal.registerOnSharedPreferenceChangeListener(this);
     }
 
     public SharedPreferences getGlobal() {
-        return this.mPrefGlobal;
-    }
-
-    public int getInt(final String s, final int n) {
-        if (isGlobal(s) || !this.mPrefLocal.contains(s)) {
-            return this.mPrefGlobal.getInt(s, n);
-        }
-        return this.mPrefLocal.getInt(s, n);
+        return mPrefGlobal;
     }
 
     public SharedPreferences getLocal() {
-        return this.mPrefLocal;
+        return mPrefLocal;
     }
 
-    public long getLong(final String s, final long n) {
-        if (isGlobal(s) || !this.mPrefLocal.contains(s)) {
-            return this.mPrefGlobal.getLong(s, n);
+    @Override
+    public Map<String, ?> getAll() {
+        throw new UnsupportedOperationException(); // Can be implemented if needed.
+    }
+
+    private static boolean isGlobal(String key) {
+        return key.equals(CameraSettings.KEY_VIDEO_TIME_LAPSE_FRAME_INTERVAL)
+                || key.equals(CameraSettings.KEY_CAMERA_ID)
+                || key.equals(CameraSettings.KEY_RECORD_LOCATION)
+                || key.equals(CameraSettings.KEY_CAMERA_FIRST_USE_HINT_SHOWN)
+                || key.equals(CameraSettings.KEY_VIDEO_FIRST_USE_HINT_SHOWN)
+                || key.equals(CameraSettings.KEY_VIDEO_EFFECT)
+                || key.equals(CameraSettings.KEY_TIMER)
+                || key.equals(CameraSettings.KEY_TIMER_SOUND_EFFECTS);
+    }
+
+    @Override
+    public String getString(String key, String defValue) {
+        if (isGlobal(key) || !mPrefLocal.contains(key)) {
+            return mPrefGlobal.getString(key, defValue);
+        } else {
+            return mPrefLocal.getString(key, defValue);
         }
-        return this.mPrefLocal.getLong(s, n);
     }
 
-    public String getString(final String s, final String s2) {
-        if (isGlobal(s) || !this.mPrefLocal.contains(s)) {
-            return this.mPrefGlobal.getString(s, s2);
+    @Override
+    public int getInt(String key, int defValue) {
+        if (isGlobal(key) || !mPrefLocal.contains(key)) {
+            return mPrefGlobal.getInt(key, defValue);
+        } else {
+            return mPrefLocal.getInt(key, defValue);
         }
-        return this.mPrefLocal.getString(s, s2);
     }
 
-    public Set<String> getStringSet(final String s, final Set<String> set) {
+    @Override
+    public long getLong(String key, long defValue) {
+        if (isGlobal(key) || !mPrefLocal.contains(key)) {
+            return mPrefGlobal.getLong(key, defValue);
+        } else {
+            return mPrefLocal.getLong(key, defValue);
+        }
+    }
+
+    @Override
+    public float getFloat(String key, float defValue) {
+        if (isGlobal(key) || !mPrefLocal.contains(key)) {
+            return mPrefGlobal.getFloat(key, defValue);
+        } else {
+            return mPrefLocal.getFloat(key, defValue);
+        }
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defValue) {
+        if (isGlobal(key) || !mPrefLocal.contains(key)) {
+            return mPrefGlobal.getBoolean(key, defValue);
+        } else {
+            return mPrefLocal.getBoolean(key, defValue);
+        }
+    }
+
+    // This method is not used.
+    @Override
+    public Set<String> getStringSet(String key, Set<String> defValues) {
         throw new UnsupportedOperationException();
     }
 
-    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String s) {
-        final Iterator<OnSharedPreferenceChangeListener> iterator = this.mListeners.iterator();
-        while (iterator.hasNext()) {
-            iterator.next().onSharedPreferenceChanged((SharedPreferences)this, s);
-        }
-        BackupManager.dataChanged(this.mPackageName);
-        UsageStatistics.onEvent("CameraSettingsChange", null, s);
+    @Override
+    public boolean contains(String key) {
+        if (mPrefLocal.contains(key)) return true;
+        if (mPrefGlobal.contains(key)) return true;
+        return false;
     }
 
-    public void registerOnSharedPreferenceChangeListener(final SharedPreferences.OnSharedPreferenceChangeListener sharedPreferencesOnSharedPreferenceChangeListener) {
-        this.mListeners.add(sharedPreferencesOnSharedPreferenceChangeListener);
-    }
-
-    public void setLocalId(final Context context, final int n) {
-        final String localSharedPreferencesName = getLocalSharedPreferencesName(context, n);
-        if (this.mPrefLocal != null) {
-            this.mPrefLocal.unregisterOnSharedPreferenceChangeListener((SharedPreferences.OnSharedPreferenceChangeListener)this);
-        }
-        (this.mPrefLocal = context.getSharedPreferences(localSharedPreferencesName, 0)).registerOnSharedPreferenceChangeListener((SharedPreferences.OnSharedPreferenceChangeListener)this);
-    }
-
-    public void unregisterOnSharedPreferenceChangeListener(final SharedPreferences.OnSharedPreferenceChangeListener sharedPreferencesOnSharedPreferenceChangeListener) {
-        this.mListeners.remove(sharedPreferencesOnSharedPreferenceChangeListener);
-    }
-
-    private class MyEditor implements SharedPreferences.Editor
-    {
-        private SharedPreferences.Editor mEditorGlobal;
-        private SharedPreferences.Editor mEditorLocal;
+    private class MyEditor implements Editor {
+        private Editor mEditorGlobal;
+        private Editor mEditorLocal;
 
         MyEditor() {
-            super();
-            this.mEditorGlobal = ComboPreferences.this.mPrefGlobal.edit();
-            this.mEditorLocal = ComboPreferences.this.mPrefLocal.edit();
+            mEditorGlobal = mPrefGlobal.edit();
+            mEditorLocal = mPrefLocal.edit();
         }
 
-        public void apply() {
-            this.mEditorGlobal.apply();
-            this.mEditorLocal.apply();
-        }
-
-        public SharedPreferences.Editor clear() {
-            this.mEditorGlobal.clear();
-            this.mEditorLocal.clear();
-            return (SharedPreferences.Editor)this;
-        }
-
+        @Override
         public boolean commit() {
-            final boolean commit = this.mEditorGlobal.commit();
-            final boolean commit2 = this.mEditorLocal.commit();
-            return commit && commit2;
+            boolean result1 = mEditorGlobal.commit();
+            boolean result2 = mEditorLocal.commit();
+            return result1 && result2;
         }
 
-        public SharedPreferences.Editor putBoolean(final String s, final boolean b) {
-            if (isGlobal(s)) {
-                this.mEditorGlobal.putBoolean(s, b);
-                return (SharedPreferences.Editor)this;
+        @Override
+        public void apply() {
+            mEditorGlobal.apply();
+            mEditorLocal.apply();
+        }
+
+        // Note: clear() and remove() affects both local and global preferences.
+        @Override
+        public Editor clear() {
+            mEditorGlobal.clear();
+            mEditorLocal.clear();
+            return this;
+        }
+
+        @Override
+        public Editor remove(String key) {
+            mEditorGlobal.remove(key);
+            mEditorLocal.remove(key);
+            return this;
+        }
+
+        @Override
+        public Editor putString(String key, String value) {
+            if (isGlobal(key)) {
+                mEditorGlobal.putString(key, value);
+            } else {
+                mEditorLocal.putString(key, value);
             }
-            this.mEditorLocal.putBoolean(s, b);
-            return (SharedPreferences.Editor)this;
+            return this;
         }
 
-        public SharedPreferences.Editor putFloat(final String s, final float n) {
-            if (isGlobal(s)) {
-                this.mEditorGlobal.putFloat(s, n);
-                return (SharedPreferences.Editor)this;
+        @Override
+        public Editor putInt(String key, int value) {
+            if (isGlobal(key)) {
+                mEditorGlobal.putInt(key, value);
+            } else {
+                mEditorLocal.putInt(key, value);
             }
-            this.mEditorLocal.putFloat(s, n);
-            return (SharedPreferences.Editor)this;
+            return this;
         }
 
-        public SharedPreferences.Editor putInt(final String s, final int n) {
-            if (isGlobal(s)) {
-                this.mEditorGlobal.putInt(s, n);
-                return (SharedPreferences.Editor)this;
+        @Override
+        public Editor putLong(String key, long value) {
+            if (isGlobal(key)) {
+                mEditorGlobal.putLong(key, value);
+            } else {
+                mEditorLocal.putLong(key, value);
             }
-            this.mEditorLocal.putInt(s, n);
-            return (SharedPreferences.Editor)this;
+            return this;
         }
 
-        public SharedPreferences.Editor putLong(final String s, final long n) {
-            if (isGlobal(s)) {
-                this.mEditorGlobal.putLong(s, n);
-                return (SharedPreferences.Editor)this;
+        @Override
+        public Editor putFloat(String key, float value) {
+            if (isGlobal(key)) {
+                mEditorGlobal.putFloat(key, value);
+            } else {
+                mEditorLocal.putFloat(key, value);
             }
-            this.mEditorLocal.putLong(s, n);
-            return (SharedPreferences.Editor)this;
+            return this;
         }
 
-        public SharedPreferences.Editor putString(final String s, final String s2) {
-            if (isGlobal(s)) {
-                this.mEditorGlobal.putString(s, s2);
-                return (SharedPreferences.Editor)this;
+        @Override
+        public Editor putBoolean(String key, boolean value) {
+            if (isGlobal(key)) {
+                mEditorGlobal.putBoolean(key, value);
+            } else {
+                mEditorLocal.putBoolean(key, value);
             }
-            this.mEditorLocal.putString(s, s2);
-            return (SharedPreferences.Editor)this;
+            return this;
         }
 
-        public SharedPreferences.Editor putStringSet(final String s, final Set<String> set) {
+        // This method is not used.
+        @Override
+        public Editor putStringSet(String key, Set<String> values) {
             throw new UnsupportedOperationException();
         }
+    }
 
-        public SharedPreferences.Editor remove(final String s) {
-            this.mEditorGlobal.remove(s);
-            this.mEditorLocal.remove(s);
-            return (SharedPreferences.Editor)this;
+    // Note the remove() and clear() of the returned Editor may not work as
+    // expected because it doesn't touch the global preferences at all.
+    @Override
+    public Editor edit() {
+        return new MyEditor();
+    }
+
+    @Override
+    public void registerOnSharedPreferenceChangeListener(
+            OnSharedPreferenceChangeListener listener) {
+        mListeners.add(listener);
+    }
+
+    @Override
+    public void unregisterOnSharedPreferenceChangeListener(
+            OnSharedPreferenceChangeListener listener) {
+        mListeners.remove(listener);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+                                          String key) {
+        for (OnSharedPreferenceChangeListener listener : mListeners) {
+            listener.onSharedPreferenceChanged(this, key);
         }
+        mBackupManager.dataChanged();
     }
 }

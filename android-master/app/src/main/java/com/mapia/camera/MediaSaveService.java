@@ -9,12 +9,13 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.location.Location;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.mapia.camera.exif.ExifInterface;
 
 import java.io.File;
 
@@ -48,7 +49,7 @@ public class MediaSaveService extends Service
         }
     }
 
-    public void addImage(final byte[] array, final String s, final long n, Location location, final int n2, final int n3, final int n4, final ExifInterface exifInterface, final OnMediaSavedListener onMediaSavedListener, final ContentResolver contentResolver) {
+    public void addImage(final byte[] array, final String s, final long n, Location location, final int n2, final int n3, final int n4, final com.mapia.camera.exif.ExifInterface exifInterface, final OnMediaSavedListener onMediaSavedListener, final ContentResolver contentResolver) {
         if (this.isQueueFull()) {
             Log.e(MediaSaveService.TAG, "Cannot add image when the queue is full");
             return;
@@ -111,7 +112,7 @@ public class MediaSaveService extends Service
         private String title;
         private int width;
 
-        public ImageSaveTask(final byte[] data, final String title, final long date, final Location loc, final int width, final int height, final int orientation, final ExifInterface exif, final ContentResolver resolver, final OnMediaSavedListener listener) {
+        public ImageSaveTask(final byte[] data, final String title, final long date, final Location loc, final int width, final int height, final int orientation, final com.mapia.camera.exif.ExifInterface exif, final ContentResolver resolver, final OnMediaSavedListener listener) {
             super();
             this.data = data;
             this.title = title;

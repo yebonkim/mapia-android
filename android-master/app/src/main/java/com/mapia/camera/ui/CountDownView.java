@@ -4,16 +4,17 @@ package com.mapia.camera.ui;
  * Created by daehyun on 15. 6. 16..
  */
 
+import android.content.Context;
+import android.media.SoundPool;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-        import android.os.Message;
-        import android.util.Log;
-        import android.util.AttributeSet;
-        import android.content.Context;
-        import android.media.SoundPool;
-        import android.widget.ImageView;
-        import android.os.Handler;
-        import android.widget.FrameLayout;
+import com.mapia.R;
 
 public class CountDownView extends FrameLayout
 {
@@ -33,36 +34,36 @@ public class CountDownView extends FrameLayout
         this.mRemainingSecs = 0;
         this.mHandler = new MainHandler();
         this.mSoundPool = new SoundPool(1, 5, 0);
-        this.mBeepOnce = this.mSoundPool.load(context, 2131099650, 1);
-        this.mBeepTwice = this.mSoundPool.load(context, 2131099651, 1);
+        this.mBeepOnce = this.mSoundPool.load(context, R.drawable.cam_thumbnail, 1);
+        this.mBeepTwice = this.mSoundPool.load(context, R.raw.beep_twice, 1);
     }
 
     private void remainingSecondsChanged(final int mRemainingSecs) {
         this.mRemainingSecs = mRemainingSecs;
         if (mRemainingSecs == 0) {
-            this.setVisibility(4);
+            this.setVisibility(View.VISIBLE);
             this.mListener.onCountDownFinished();
             return;
         }
         switch (mRemainingSecs) {
             case 1: {
-                this.mRemainingSecondsView.setImageResource(2130837584);
+                this.mRemainingSecondsView.setImageResource(R.drawable.cam_timer_n1);
                 break;
             }
             case 2: {
-                this.mRemainingSecondsView.setImageResource(2130837585);
+                this.mRemainingSecondsView.setImageResource(R.drawable.cam_timer_n2);
                 break;
             }
             case 3: {
-                this.mRemainingSecondsView.setImageResource(2130837586);
+                this.mRemainingSecondsView.setImageResource(R.drawable.cam_timer_n3);
                 break;
             }
             case 4: {
-                this.mRemainingSecondsView.setImageResource(2130837587);
+                this.mRemainingSecondsView.setImageResource(R.drawable.cam_timer_n4);
                 break;
             }
             case 5: {
-                this.mRemainingSecondsView.setImageResource(2130837588);
+                this.mRemainingSecondsView.setImageResource(R.drawable.cam_timer_n5);
                 break;
             }
         }
@@ -81,7 +82,7 @@ public class CountDownView extends FrameLayout
         if (this.mRemainingSecs > 0) {
             this.mRemainingSecs = 0;
             this.mHandler.removeMessages(1);
-            this.setVisibility(4);
+            this.setVisibility(View.VISIBLE);
         }
     }
 
@@ -91,7 +92,7 @@ public class CountDownView extends FrameLayout
 
     protected void onFinishInflate() {
         super.onFinishInflate();
-        this.mRemainingSecondsView = (ImageView)this.findViewById(2131362050);
+        this.mRemainingSecondsView = (ImageView)this.findViewById(R.id.remaining_seconds);
     }
 
     public void setCountDownFinishedListener(final OnCountDownFinishedListener mListener) {
@@ -103,7 +104,7 @@ public class CountDownView extends FrameLayout
             Log.w("CAM_CountDownView", "Invalid input for countdown timer: " + n + " seconds");
             return;
         }
-        this.setVisibility(0);
+        this.setVisibility(View.VISIBLE);
         this.mPlaySound = mPlaySound;
         this.remainingSecondsChanged(n);
     }

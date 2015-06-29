@@ -189,7 +189,7 @@ public class MainApplication extends Application {//MultiDexApplication {
 
     public void setPostActivity(PostActivity postactivity)
     {
-        postActivity = postactivity;
+        this.postActivity = postactivity;
     }
 
 

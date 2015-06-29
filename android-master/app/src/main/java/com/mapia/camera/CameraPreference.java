@@ -6,45 +6,46 @@ package com.mapia.camera;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
+import com.mapia.R;
 
-public abstract class CameraPreference
-{
-    private final Context mContext;
+/**
+ * The base class of all Preferences used in Camera. The preferences can be
+ * loaded from XML resource by <code>PreferenceInflater</code>.
+ */
+public abstract class CameraPreference {
+
+    private final String mTitle;
     private SharedPreferences mSharedPreferences;
-//    private final String mTitle;
+    private final Context mContext;
 
-    public CameraPreference(final Context mContext, final AttributeSet set) {
-        super();
-        this.mContext = mContext;
-//        final TypedArray obtainStyledAttributes = mContext.obtainStyledAttributes(set, R.styleable.CameraPreference, 0, 0);
-//        this.mTitle = obtainStyledAttributes.getString(0);
-//        obtainStyledAttributes.recycle();
+    static public interface OnPreferenceChangedListener {
+        public void onSharedPreferenceChanged();
+        public void onRestorePreferencesClicked();
+        public void onOverriddenPreferencesClicked();
+        public void onCameraPickerClicked(int cameraId);
     }
 
-    public SharedPreferences getSharedPreferences() {
-        if (this.mSharedPreferences == null) {
-            this.mSharedPreferences = (SharedPreferences)ComboPreferences.get(this.mContext);
-        }
-        return this.mSharedPreferences;
+    public CameraPreference(Context context, AttributeSet attrs) {
+        mContext = context;
+        TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.CameraPreference, 0, 0);
+        mTitle = a.getString(R.styleable.CameraPreference_ctitle);
+        a.recycle();
     }
 
     public String getTitle() {
-        return "";
-//        return this.mTitle;
+        return mTitle;
+    }
+
+    public SharedPreferences getSharedPreferences() {
+        if (mSharedPreferences == null) {
+            mSharedPreferences = ComboPreferences.get(mContext);
+        }
+        return mSharedPreferences;
     }
 
     public abstract void reloadValue();
-
-    public interface OnPreferenceChangedListener
-    {
-        void onCameraPickerClicked(int p0);
-
-        void onOverriddenPreferencesClicked();
-
-        void onRestorePreferencesClicked();
-
-        void onSharedPreferenceChanged();
-    }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="#ff1b1b1b" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@+id/apply_filter_intensity_layout">
+        <RelativeLayout android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <com.mapia.custom.ResizableImageView android:id="@+id/apply_filter_original_image_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+            <com.mapia.custom.ResizableImageView android:id="@+id/apply_filter_image_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+            <!--<com.mapia.filter.WatermarkView android:id="@+id/watermark_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignRight="@+id/apply_filter_image_view" android:layout_alignBottom="@+id/apply_filter_image_view" />-->
+            <com.mapia.filter.PhotoFilterGestureView android:id="@+id/apply_filter_gesture_view" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </FrameLayout>
+    <include android:id="@+id/apply_filter_top_layout" layout="@layout/filter_top_common_layout" />
+    <FrameLayout android:id="@+id/apply_filter_intensity_layout" android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="@dimen/filter_intensity_height" android:layout_above="@+id/apply_filter_bottom_layout">
+        <include android:layout_gravity="bottom" android:id="@+id/apply_filter_intensity" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="17.0dip" layout="@layout/filter_intensity" />
+    </FrameLayout>
+    <FrameLayout android:id="@+id/apply_filter_bottom_layout" android:background="@color/camera_background" android:layout_width="fill_parent" android:layout_height="@dimen/photo_filter_bottom_height" android:layout_alignParentBottom="true">
+        <include android:layout_gravity="bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="22.0dip" layout="@layout/filter_bottom_layout" />
+    </FrameLayout>
+    <View android:id="@+id/apply_filter_touch_block_view" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <!--<com.mapia.filter.WatermarkControlView android:id="@+id/watermark_bottom_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />-->
+</RelativeLayout>

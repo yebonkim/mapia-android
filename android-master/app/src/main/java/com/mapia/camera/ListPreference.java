@@ -6,137 +6,127 @@ package com.mapia.camera;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
+
+import com.mapia.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPreference extends CameraPreference
-{
+/**
+ * A type of <code>CameraPreference</code> whose number of possible values
+ * is limited.
+ */
+public class ListPreference extends CameraPreference {
     private static final String TAG = "ListPreference";
-//    private final CharSequence[] mDefaultValues;
+    private final String mKey;
+    private String mValue;
+    private final CharSequence[] mDefaultValues;
+
     private CharSequence[] mEntries;
     private CharSequence[] mEntryValues;
-//    private final String mKey;
-    private CharSequence[] mLabels;
-    private boolean mLoaded;
-    private String mValue;
+    private boolean mLoaded = false;
 
-    public ListPreference(final Context context, final AttributeSet set) {
-        super(context, set);
-        this.mLoaded = false;
-//        final TypedArray obtainStyledAttributes = context.obtainStyledAttributes(set, R.styleable.ListPreference, 0, 0);
-//        this.mKey = Util.checkNotNull(obtainStyledAttributes.getString(0));
-//        final TypedValue peekValue = obtainStyledAttributes.peekValue(1);
-//        if (peekValue != null && peekValue.type == 1) {
-//            this.mDefaultValues = obtainStyledAttributes.getTextArray(1);
-//        }
-//        else {
-//            (this.mDefaultValues = new CharSequence[1])[0] = obtainStyledAttributes.getString(1);
-//        }
-//        this.setEntries(obtainStyledAttributes.getTextArray(3));
-//        this.setEntryValues(obtainStyledAttributes.getTextArray(2));
-//        this.setLabels(obtainStyledAttributes.getTextArray(4));
-//        obtainStyledAttributes.recycle();
+    public ListPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.ListPreference, 0, 0);
+
+        mKey = Util.checkNotNull(
+                a.getString(R.styleable.ListPreference_key));
+
+        // We allow the defaultValue attribute to be a string or an array of
+        // strings. The reason we need multiple default values is that some
+        // of them may be unsupported on a specific platform (for example,
+        // continuous auto-focus). In that case the first supported value
+        // in the array will be used.
+        int attrDefaultValue = R.styleable.ListPreference_defaultValue;
+        TypedValue tv = a.peekValue(attrDefaultValue);
+        if (tv != null && tv.type == TypedValue.TYPE_REFERENCE) {
+            mDefaultValues = a.getTextArray(attrDefaultValue);
+        } else {
+            mDefaultValues = new CharSequence[1];
+            mDefaultValues[0] = a.getString(attrDefaultValue);
+        }
+
+        setEntries(a.getTextArray(R.styleable.ListPreference_entries));
+        setEntryValues(a.getTextArray(
+                R.styleable.ListPreference_entryValues));
+        a.recycle();
     }
 
+    public String getKey() {
+        return mKey;
+    }
+
+    public CharSequence[] getEntries() {
+        return mEntries;
+    }
+
+    public CharSequence[] getEntryValues() {
+        return mEntryValues;
+    }
+
+    public void setEntries(CharSequence entries[]) {
+        mEntries = entries == null ? new CharSequence[0] : entries;
+    }
+
+    public void setEntryValues(CharSequence values[]) {
+        mEntryValues = values == null ? new CharSequence[0] : values;
+    }
+
+    public String getValue() {
+        if (!mLoaded) {
+            mValue = getSharedPreferences().getString(mKey,
+                    findSupportedDefaultValue());
+            mLoaded = true;
+        }
+        return mValue;
+    }
+
+    // Find the first value in mDefaultValues which is supported.
     private String findSupportedDefaultValue() {
-//        for (int i = 0; i < this.mDefaultValues.length; ++i) {
-//            for (int j = 0; j < this.mEntryValues.length; ++j) {
-//                if (this.mEntryValues[j].equals(this.mDefaultValues[i])) {
-//                    return this.mDefaultValues[i].toString();
-//                }
-//            }
-//        }
+        for (int i = 0; i < mDefaultValues.length; i++) {
+            for (int j = 0; j < mEntryValues.length; j++) {
+                // Note that mDefaultValues[i] may be null (if unspecified
+                // in the xml file).
+                if (mEntryValues[j].equals(mDefaultValues[i])) {
+                    return mDefaultValues[i].toString();
+                }
+            }
+        }
         return null;
     }
 
-    public void filterDuplicated() {
-        final ArrayList<CharSequence> list = new ArrayList<CharSequence>();
-        final ArrayList<CharSequence> list2 = new ArrayList<CharSequence>();
-        for (int i = 0; i < this.mEntryValues.length; ++i) {
-            if (!list.contains(this.mEntries[i])) {
-                list.add(this.mEntries[i]);
-                list2.add(this.mEntryValues[i]);
-            }
-        }
-        final int size = list.size();
-        this.mEntries = list.toArray(new CharSequence[size]);
-        this.mEntryValues = list2.toArray(new CharSequence[size]);
+    public void setValue(String value) {
+        if (findIndexOfValue(value) < 0) throw new IllegalArgumentException();
+        mValue = value;
+        persistStringValue(value);
     }
 
-    public void filterUnsupported(List<String> list) {
-        final ArrayList<CharSequence> list2 = new ArrayList<CharSequence>();
-        final ArrayList<CharSequence> list3 = new ArrayList<CharSequence>();
-        for (int i = 0; i < this.mEntryValues.length; ++i) {
-            if (list.indexOf(this.mEntryValues[i].toString()) >= 0) {
-                list2.add(this.mEntries[i]);
-                list3.add(this.mEntryValues[i]);
-            }
-        }
-        final int size = list2.size();
-        this.mEntries = list2.toArray(new CharSequence[size]);
-        this.mEntryValues = list3.toArray(new CharSequence[size]);
+    public void setValueIndex(int index) {
+        setValue(mEntryValues[index].toString());
     }
 
-    public int findIndexOfValue(final String s) {
-        for (int i = 0; i < this.mEntryValues.length; ++i) {
-            if (Util.equals(this.mEntryValues[i], s)) {
-                return i;
-            }
+    public int findIndexOfValue(String value) {
+        for (int i = 0, n = mEntryValues.length; i < n; ++i) {
+            if (Util.equals(mEntryValues[i], value)) return i;
         }
         return -1;
     }
 
-    public int getCurrentIndex() {
-        return this.findIndexOfValue(this.getValue());
-    }
-
-    public CharSequence[] getEntries() {
-        return this.mEntries;
-    }
-
     public String getEntry() {
-        return this.mEntries[this.findIndexOfValue(this.getValue())].toString();
+        return mEntries[findIndexOfValue(getValue())].toString();
     }
 
-    public CharSequence[] getEntryValues() {
-        return this.mEntryValues;
-    }
-
-    public String getKey() {
-//        return this.mKey;
-        return "";
-    }
-
-    public String getLabel() {
-        return this.mLabels[this.findIndexOfValue(this.getValue())].toString();
-    }
-
-    public CharSequence[] getLabels() {
-        return this.mLabels;
-    }
-
-    public String getValue() {
-        if (!this.mLoaded) {
-//            this.mValue = this.getSharedPreferences().getString(this.mKey, this.findSupportedDefaultValue());
-            this.mLoaded = true;
-        }
-        return this.mValue;
-    }
-
-    protected void persistStringValue(final String s) {
-        final SharedPreferences.Editor edit = this.getSharedPreferences().edit();
-//        edit.putString(this.mKey, s);
-        edit.apply();
-    }
-
-    public void print() {
-        Log.v("ListPreference", "Preference key=" + this.getKey() + ". value=" + this.getValue());
-        for (int i = 0; i < this.mEntryValues.length; ++i) {
-            Log.v("ListPreference", "entryValues[" + i + "]=" + (Object)this.mEntryValues[i]);
-        }
+    protected void persistStringValue(String value) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString(mKey, value);
+        editor.apply();
     }
 
     @Override
@@ -144,38 +134,44 @@ public class ListPreference extends CameraPreference
         this.mLoaded = false;
     }
 
-    public void setEntries(final CharSequence[] array) {
-        CharSequence[] mEntries = array;
-        if (array == null) {
-            mEntries = new CharSequence[0];
+    public void filterUnsupported(List<String> supported) {
+        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> entryValues = new ArrayList<CharSequence>();
+        for (int i = 0, len = mEntryValues.length; i < len; i++) {
+            if (supported.indexOf(mEntryValues[i].toString()) >= 0) {
+                entries.add(mEntries[i]);
+                entryValues.add(mEntryValues[i]);
+            }
         }
-        this.mEntries = mEntries;
+        int size = entries.size();
+        mEntries = entries.toArray(new CharSequence[size]);
+        mEntryValues = entryValues.toArray(new CharSequence[size]);
     }
 
-    public void setEntryValues(final CharSequence[] array) {
-        CharSequence[] mEntryValues = array;
-        if (array == null) {
-            mEntryValues = new CharSequence[0];
+    public void filterDuplicated() {
+        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> entryValues = new ArrayList<CharSequence>();
+        for (int i = 0, len = mEntryValues.length; i < len; i++) {
+            if (!entries.contains(mEntries[i])) {
+                entries.add(mEntries[i]);
+                entryValues.add(mEntryValues[i]);
+            }
         }
-        this.mEntryValues = mEntryValues;
+        int size = entries.size();
+        mEntries = entries.toArray(new CharSequence[size]);
+        mEntryValues = entryValues.toArray(new CharSequence[size]);
     }
 
-    public void setLabels(final CharSequence[] array) {
-        CharSequence[] mLabels = array;
-        if (array == null) {
-            mLabels = new CharSequence[0];
+    public void print() {
+        Log.v(TAG, "Preference key=" + getKey() + ". value=" + getValue());
+        for (int i = 0; i < mEntryValues.length; i++) {
+            Log.v(TAG, "entryValues[" + i + "]=" + mEntryValues[i]);
         }
-        this.mLabels = mLabels;
     }
 
-    public void setValue(final String mValue) {
-        if (this.findIndexOfValue(mValue) < 0) {
-            throw new IllegalArgumentException();
-        }
-        this.persistStringValue(this.mValue = mValue);
+
+    public int getCurrentIndex() {
+        return this.findIndexOfValue(this.getValue());
     }
 
-    public void setValueIndex(final int n) {
-        this.setValue(this.mEntryValues[n].toString());
-    }
 }

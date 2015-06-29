@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/filter_thumbnail_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/filter_thumbnail_side_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@+id/filter_select_image_view" android:layout_width="@dimen/filter_thumbnail_size" android:layout_height="@dimen/filter_thumbnail_size" android:scaleType="center" />
+        <FrameLayout android:id="@+id/filter_select_image_layout" android:background="@color/filter_thumbnail_deselected" android:layout_width="@dimen/filter_thumbnail_size" android:layout_height="24.0dip">
+            <com.mapia.custom.FontSettableTextView android:textSize="10.0sp" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@+id/filter_select_text_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip" android:singleLine="true" song:customFont="NanumRegular" xmlns:song="http://schemas.android.com/apk/res-auto" />
+        </FrameLayout>
+    </LinearLayout>
+    <ProgressBar android:layout_gravity="center_horizontal" android:id="@+id/filter_select_progressbar" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/filter_thumbnail_half_size" style="?android:attr/progressBarStyleSmall" />
+</FrameLayout>

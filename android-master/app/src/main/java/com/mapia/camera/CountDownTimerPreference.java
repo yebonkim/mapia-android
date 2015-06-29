@@ -9,32 +9,31 @@ import android.util.AttributeSet;
 
 import com.mapia.R;
 
-public class CountDownTimerPreference extends ListPreference
-{
-    private static final int[] DURATIONS;
-
-    static {
-        DURATIONS = new int[] { 0, 2, 5 };
+/* CountDownTimerPreference generates entries (i.e. what users see in the UI),
+ * and entry values (the actual value recorded in preference) in
+ * initCountDownTimeChoices(Context context), rather than reading the entries
+ * from a predefined list. When the entry values are a continuous list of numbers,
+ * (e.g. 0-60), it is more efficient to auto generate the list than to predefine it.*/
+public class CountDownTimerPreference extends ListPreference {
+    private final static int MAX_DURATION = 60;
+    public CountDownTimerPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initCountDownDurationChoices(context);
     }
 
-    public CountDownTimerPreference(final Context context, final AttributeSet set) {
-        super(context, set);
-        this.initCountDownDurationChoices(context);
-    }
-
-    private void initCountDownDurationChoices(final Context context) {
-        final CharSequence[] entryValues = new CharSequence[CountDownTimerPreference.DURATIONS.length];
-        final CharSequence[] entries = new CharSequence[CountDownTimerPreference.DURATIONS.length];
-        for (int i = 0; i < CountDownTimerPreference.DURATIONS.length; ++i) {
-            entryValues[i] = Integer.toString(CountDownTimerPreference.DURATIONS[i]);
+    private void initCountDownDurationChoices(Context context) {
+        CharSequence[] entryValues = new CharSequence[MAX_DURATION + 1];
+        CharSequence[] entries = new CharSequence[MAX_DURATION + 1];
+        for (int i = 0; i <= MAX_DURATION; i++) {
+            entryValues[i] = Integer.toString(i);
             if (i == 0) {
-                entries[0] = context.getString(R.string.setting_off);
-            }
-            else {
-                entries[i] = context.getResources().getQuantityString(R.plurals.pref_camera_timer_entry, i, new Object[] { i });
+                entries[0] = context.getString(R.string.setting_off); // Off
+            } else {
+                entries[i] = context.getResources()
+                        .getQuantityString(R.plurals.pref_camera_timer_entry, i, i);
             }
         }
-        this.setEntries(entries);
-        this.setEntryValues(entryValues);
+        setEntries(entries);
+        setEntryValues(entryValues);
     }
 }

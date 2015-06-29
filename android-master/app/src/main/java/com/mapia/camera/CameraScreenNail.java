@@ -67,8 +67,8 @@ public class CameraScreenNail extends SurfaceTextureScreenNail {
             }
 
             @Override
-            public void onDraw(final GLCanvas glCanvas, final int n, final int n2, final int n3, final int n4) {
-                CameraScreenNail.this.draw(glCanvas, n, n2, n3, n4);
+            public void onDraw(final GLCanvas glCanvas, final int x, final int y, final int width, final int height) {
+                CameraScreenNail.super.draw(glCanvas, x, y, width, height);
             }
 
             @Override
@@ -211,95 +211,84 @@ public class CameraScreenNail extends SurfaceTextureScreenNail {
         }
     }
 
-    public void directDraw(final GLCanvas glCanvas, final int n, final int n2, final int n3, final int n4) {
-        synchronized (this.mLock) {
-            final DrawClient mDraw = this.mDraw;
-            // monitorexit(this.mLock)
-            mDraw.onDraw(glCanvas, n, n2, n3, n4);
+    public void directDraw(GLCanvas canvas, int x, int y, int width, int height) {
+        DrawClient draw;
+        synchronized (mLock) {
+            draw = mDraw;
         }
+        draw.onDraw(canvas, x, y, width, height);
     }
 
-    @Override
-    public void draw(final GLCanvas glCanvas, final int n, final int n2, final int n3, final int n4) {
-        while (true) {
-            SurfaceTexture surfaceTexture = null;
-            float alpha;
-            boolean b;
 
-            synchronized (this.mLock) {
-                this.allocateTextureIfRequested(glCanvas);
-                if (!this.mVisible) {
-                    this.mVisible = true;
+
+    @Override
+    public void draw(GLCanvas canvas, int x, int y, int width, int height) {
+        synchronized (mLock) {
+            allocateTextureIfRequested(canvas);
+            if (!mVisible) mVisible = true;
+            SurfaceTexture surfaceTexture = getSurfaceTexture();
+            if (mDraw.requiresSurfaceTexture() && (surfaceTexture == null || !mFirstFrameArrived)) {
+                return;
+            }
+
+            switch (mAnimState) {
+                case ANIM_NONE:
+                    directDraw(canvas, x, y, width, height);
+                    break;
+                case ANIM_SWITCH_COPY_TEXTURE:
+                    copyPreviewTexture(canvas);
+                    mSwitchAnimManager.setReviewDrawingSize(width, height);
+                    mListener.onPreviewTextureCopied();
+                    mAnimState = ANIM_SWITCH_DARK_PREVIEW;
+                    break;
+                    // The texture is ready. Fall through to draw darkened
+                    // preview.
+                case ANIM_SWITCH_DARK_PREVIEW:
+                    break;
+                case ANIM_SWITCH_WAITING_FIRST_FRAME:
+                    // Consume the frame. If the buffers are full,
+                    // onFrameAvailable will not be called. Animation state
+                    // relies on onFrameAvailable.
+                    surfaceTexture.updateTexImage();
+                    mSwitchAnimManager.drawDarkPreview(canvas, x, y, width,
+                            height, mAnimTexture);
+                    break;
+                case ANIM_SWITCH_START:
+                    mSwitchAnimManager.startAnimation();
+                    mAnimState = ANIM_SWITCH_RUNNING;
+                    break;
+                case ANIM_CAPTURE_START:
+                    copyPreviewTexture(canvas);
+                    mListener.onCaptureTextureCopied();
+                    mCaptureAnimManager.startAnimation(x, y, width, height);
+                    mAnimState = ANIM_CAPTURE_RUNNING;
+                    break;
+            }
+
+            if (mAnimState == ANIM_CAPTURE_RUNNING || mAnimState == ANIM_SWITCH_RUNNING) {
+                boolean drawn;
+                if (mAnimState == ANIM_CAPTURE_RUNNING) {
+                    if (!mFullScreen) {
+                        // Skip the animation if no longer in full screen mode
+                        drawn = false;
+                    } else {
+                        drawn = mCaptureAnimManager.drawAnimation(canvas, this, mAnimTexture);
+                    }
+                } else {
+                    drawn = mSwitchAnimManager.drawAnimation(canvas, x, y,
+                            width, height, this, mAnimTexture);
                 }
-                surfaceTexture = this.getSurfaceTexture();
-                if (this.mDraw.requiresSurfaceTexture() && (surfaceTexture == null || !this.mFirstFrameArrived)) {
-                    return;
-                }
-                if (this.mOnFrameDrawnListener != null) {
-                    this.mOnFrameDrawnListener.run();
-                    this.mOnFrameDrawnListener = null;
-                }
-                alpha = glCanvas.getAlpha();
-                glCanvas.setAlpha(this.mAlpha);
-                switch (this.mAnimState) {
-                    case 2: {
-                        if (this.mAnimState == 2 || this.mAnimState == 7) {
-                            if (this.mAnimState != 2) {
-                                b = this.mSwitchAnimManager.drawAnimation(glCanvas, n, n2, n3, n4, this, this.mAnimTexture);
-                                break;
-                            }
-                            if (this.mFullScreen) {
-                                b = this.mCaptureAnimManager.drawAnimation(glCanvas, this, this.mAnimTexture, n, n2, n3, n4);
-                                break;
-                            }
-                            b = false;
-                            if (!b) {
-                                this.mAnimState = 0;
-                                this.directDraw(glCanvas, n, n2, n3, n4);
-                                break;
-                            }
-                            this.mListener.requestRender();
-                        }
-                        glCanvas.setAlpha(alpha);
-                        this.callbackIfNeeded();
-                        return;
-                    }
-                    case 0: {
-                        break;
-                    }
-                    case 3: {
-                        this.copyPreviewTexture(glCanvas);
-                        this.mSwitchAnimManager.setReviewDrawingSize(n3, n4);
-                        this.mListener.onPreviewTextureCopied();
-                        this.mAnimState = 4;
-                    }
-                    case 4:
-                    case 5: {
-                        surfaceTexture.updateTexImage();
-                        this.mSwitchAnimManager.drawDarkPreview(glCanvas, n, n2, n3, n4, this.mAnimTexture);
-                        break;
-                    }
-                    case 6: {
-                        this.mSwitchAnimManager.startAnimation();
-                        this.mAnimState = 7;
-                        break;
-                    }
-                    case 1: {
-                        this.copyPreviewTexture(glCanvas);
-                        this.mListener.onCaptureTextureCopied();
-                        this.mCaptureAnimManager.startAnimation();
-                        this.mAnimState = 2;
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
+                if (drawn) {
+                    mListener.requestRender();
+                } else {
+                    // Continue to the normal draw procedure if the animation is
+                    // not drawn.
+                    mAnimState = ANIM_NONE;
+                    directDraw(canvas, x, y, width, height);
                 }
             }
-            this.directDraw(glCanvas, n, n2, n3, n4);
-
-
-        }
+            callbackIfNeeded();
+        } // mLock
     }
 
 

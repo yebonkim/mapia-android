@@ -53,6 +53,7 @@ import com.google.gson.JsonObject;
 import com.mapia.MainApplication;
 import com.mapia.R;
 import com.mapia.api.QueryManager;
+import com.mapia.camera.CameraActivity;
 import com.mapia.common.BaseFragment;
 import com.mapia.common.CommonConstants;
 import com.mapia.custom.CustomProgressDialog;
@@ -67,6 +68,7 @@ import com.mapia.setting.MapiaOneBtnDialog;
 import com.mapia.util.BitmapUtils;
 import com.mapia.util.DeviceUtils;
 import com.mapia.util.FontUtils;
+import com.mapia.util.MapiaToast;
 import com.mapia.util.TextUtils;
 import com.mapia.videoplayer.MapiaVideoPlayer;
 import com.volley.MapiaMultipartRequest;
@@ -170,7 +172,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     private ImageButton btnPostPhoto, btnPostVideo, btnPostGallery;
     private TextView textPostLocation;
     private LatLng latLng;
-    final int REQ_CODE_SELECT_IMAGE=100;
+    final int REQ_CODE_SELECT_IMAGE = 100;
 
     public PostFragment() {
         super();
@@ -186,7 +188,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         this.INPUTHELPER_MENTION = 4;
         this.COLOR_TEXT_TAG = Color.parseColor("#474cfa");
 
-        this.mBtnUpload = (View.OnClickListener)new View.OnClickListener() {
+        this.mBtnUpload = (View.OnClickListener) new View.OnClickListener() {
             public void onClick(final View view) {
 
                 RestRequestHelper requestHelper = RestRequestHelper.newInstance();
@@ -195,23 +197,23 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
                 final ArrayList<String> fileList;
                 String mapType = "public";
 
-                    requestHelper.posts(
-                            mapType, postComment, postLatlng, new Callback<JsonObject>() {
-                                @Override
-                                public void success(JsonObject jsonObject, retrofit.client.Response response) {
-                                    Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
+                requestHelper.posts(
+                        mapType, postComment, postLatlng, new Callback<JsonObject>() {
+                            @Override
+                            public void success(JsonObject jsonObject, retrofit.client.Response response) {
+                                Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
 //                                    ((MainApplication) getActivity().getApplication()).getMapPublicFragment();
 
-                                    getActivity().finish();
-                                }
+                                getActivity().finish();
+                            }
 
-                                @Override
-                                public void failure(RetrofitError error) {
-                                    Log.i("Post 등록 실패", error.getMessage().toString());
-                                    Toast.makeText(getActivity(), "Post 등록 실패".toString(), Toast.LENGTH_LONG).show();
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Log.i("Post 등록 실패", error.getMessage().toString());
+                                Toast.makeText(getActivity(), "Post 등록 실패".toString(), Toast.LENGTH_LONG).show();
 
-                                }
-                            });
+                            }
+                        });
 
 
 //                AceUtils.nClick(NClicks.WRITING_OK);
@@ -224,20 +226,20 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 //                PostFragment.this.post();
             }
         };
-        this.mPostPhotoClickListener = (View.OnClickListener)new View.OnClickListener(){
+        this.mPostPhotoClickListener = (View.OnClickListener) new View.OnClickListener() {
             public void onClick(View view) {
 //                if (mainActivity.getCurrFragment() instanceof TagGalleryFragment) {
 //                    mPostingInfo.mode = 3;
 //                    mPostingInfo.tag = ((TagGalleryFragment)MainActivity.this.getCurrFragment()).getTagName();
 //                }
 //                else {
-                    mPostingInfo.mode = 0;
+                mPostingInfo.mode = 0;
 //                }
-                mainActivity.startCameraActivity();
+                startCameraActivity();
             }
         };
 
-        this.mPostGalleryClickListener = (View.OnClickListener)new View.OnClickListener(){
+        this.mPostGalleryClickListener = (View.OnClickListener) new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intentImage = new Intent(Intent.ACTION_GET_CONTENT);
                 intentImage.setType("image/*");
@@ -246,23 +248,23 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         };
 
 
-        this.mLocationClickListener = (View.OnClickListener)new View.OnClickListener(){
+        this.mLocationClickListener = (View.OnClickListener) new View.OnClickListener() {
             public void onClick(View view) {
 
                 try {
                     PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                     Context context = getActivity().getApplicationContext();
                     startActivityForResult(builder.build(context), CommonConstants.PLACE_PICKER_REQUEST);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         };
-        this.mUtilityBarItemClickListener = (View.OnClickListener)new View.OnClickListener() {
+        this.mUtilityBarItemClickListener = (View.OnClickListener) new View.OnClickListener() {
             public void onClick(final View view) {
                 switch (view.getId()) {
-                    default: {}
+                    default: {
+                    }
                     case 2131362490: {
 //                        AceUtils.nClick(NClicks.WRITING_TAG);
                         if (PostFragment.this.mRootInterceptTouchView.isExpanded()) {
@@ -289,19 +291,20 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
                 }
             }
         };
-        this.mRecommendedTagClickListener = (View.OnClickListener)new View.OnClickListener() {
+        this.mRecommendedTagClickListener = (View.OnClickListener) new View.OnClickListener() {
             public void onClick(final View view) {
 //                AceUtils.nClick(NClicks.WRITING_RECOMMEND);
-                final String string = ((Button)view).getText().toString();
+                final String string = ((Button) view).getText().toString();
                 PostFragment.this.mBlockInputHelper = true;
                 PostFragment.this.mEdtPost.addText(string + " ");
                 PostFragment.this.mEdtPost.setOnTagging(false);
             }
         };
-        this.mTagClickListener = (AdapterView.OnItemClickListener)new AdapterView.OnItemClickListener() {
+        this.mTagClickListener = (AdapterView.OnItemClickListener) new AdapterView.OnItemClickListener() {
             public void onItemClick(final AdapterView adapterView, final View view, int selectionStart, final long n) {
                 String s = null;
-                Label_0053: {
+                Label_0053:
+                {
                     switch (PostFragment.this.mInputMode) {
                         case 2: {
                             if (selectionStart == 0) {
@@ -314,14 +317,14 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
                             break;
                         }
                         case 3: {
-                            s = ((SearchTagModel)PostFragment.this.mAutoCompleteAdapter.getItem(selectionStart)).getTag();
+                            s = ((SearchTagModel) PostFragment.this.mAutoCompleteAdapter.getItem(selectionStart)).getTag();
                             break Label_0053;
                         }
                     }
                     return;
                 }
-                PostFragment.this.mEdtPost.getText().replace(PostFragment.this.mEdtPost.getLeftTag() + 1, PostFragment.this.mEdtPost.getSelectionStart(), (CharSequence)s);
-                PostFragment.this.mEdtPost.getText().insert(PostFragment.this.mEdtPost.getSelectionStart(), (CharSequence)" ");
+                PostFragment.this.mEdtPost.getText().replace(PostFragment.this.mEdtPost.getLeftTag() + 1, PostFragment.this.mEdtPost.getSelectionStart(), (CharSequence) s);
+                PostFragment.this.mEdtPost.getText().insert(PostFragment.this.mEdtPost.getSelectionStart(), (CharSequence) " ");
                 selectionStart = PostFragment.this.mEdtPost.getSelectionStart();
                 PostFragment.this.mEdtPost.setText((CharSequence) PostFragment.this.mEdtPost.getText());
                 PostFragment.this.mEdtPost.setSelection(selectionStart);
@@ -332,12 +335,22 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         this.defaultMenuBarShow = false;
     }
 
+
+    public void startCameraActivity() {
+        if (MainApplication.getInstance().getUploadingStatus() != -1) {
+            MapiaToast.show(mainApplication.getPostActivity(), "\ub3d9\uc601\uc0c1 \uc804\uc1a1\uc644\ub8cc \ud6c4 \uc9c4\ud589\uac00\ub2a5\ud569\ub2c8\ub2e4", 0);
+            return;
+        }
+        this.startActivityForResult(new Intent(mainActivity.mainApplication.getPostActivity(), CameraActivity.class), CommonConstants.POST_PIC);
+//        this.overridePendingTransition(0, 0);
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
 
         }
     }
+
     @Override
     public void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
@@ -359,7 +372,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
     private void showSoftKeyboard() {
         if (this.mEdtPost != null) {
-            this.inputMethodManager.showSoftInput((View)this.mEdtPost, 1);
+            this.inputMethodManager.showSoftInput((View) this.mEdtPost, 1);
         }
     }
 
@@ -368,10 +381,10 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         if (this.mThumbnail == null) {
             return;
         }
-        this.mainActivity.runOnUiThread((Runnable)new Runnable() {
+        this.mainActivity.runOnUiThread((Runnable) new Runnable() {
             @Override
             public void run() {
-                final MapiaVideoPlayer mapiaVideoPlayer = (MapiaVideoPlayer)PostFragment.this.mThumbnail;
+                final MapiaVideoPlayer mapiaVideoPlayer = (MapiaVideoPlayer) PostFragment.this.mThumbnail;
                 mapiaVideoPlayer.setFrom(12);
                 mapiaVideoPlayer.hideLoading();
                 mapiaVideoPlayer.setVideoPath(PostFragment.this.mPostingInfo.file.getAbsolutePath());
@@ -382,14 +395,14 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
     private void initThumbnail() {
         switch (this.mPostingInfo.mode) {
-            default: {}
+            default: {
+            }
             case 0:
             case 2:
             case 3: {
                 if (this.mPostingInfo.mediaType.equals("PIC")) {
                     this.mBitmapThumb = BitmapUtils.decodeSampledBitmapFromFilePath(this.mPostingInfo.file.getAbsolutePath(), DeviceUtils.getDeviceHeight(), DeviceUtils.getDeviceHeight());
-                }
-                else {
+                } else {
                     this.mBitmapThumb = this.getBitmapFromVideo();
                 }
                 if (this.mBitmapThumb == null) {
@@ -405,18 +418,18 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     }
 
     private RequestListener<String, Bitmap> requestListener = new RequestListener<String, Bitmap>() {
-            @Override
-            public boolean onException(final Exception ex, final String s, final Target<Bitmap> target, final boolean b) {
-                return false;
-            }
+        @Override
+        public boolean onException(final Exception ex, final String s, final Target<Bitmap> target, final boolean b) {
+            return false;
+        }
 
-            @Override
-            public boolean onResourceReady(final Bitmap bitmap, final String s, final Target<Bitmap> target, final boolean b, final boolean b2) {
-                if (bitmap != null) {
-                    PostFragment.this.initThumbnail(bitmap);
-                }
-                return false;
+        @Override
+        public boolean onResourceReady(final Bitmap bitmap, final String s, final Target<Bitmap> target, final boolean b, final boolean b2) {
+            if (bitmap != null) {
+                PostFragment.this.initThumbnail(bitmap);
             }
+            return false;
+        }
     };
 
     private void initThumbnail(final Bitmap bitmap) {
@@ -426,35 +439,32 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         final int deviceWidth = DeviceUtils.getDeviceWidth();
         int n = 0;
         if ("PIC".equals(this.mPostingInfo.mediaType)) {
-            n = (int)Math.ceil(deviceWidth * bitmap.getHeight() / bitmap.getWidth());
-        }
-        else if ("CLIP".equals(this.mPostingInfo.mediaType)) {
-            n = (int)Math.ceil(deviceWidth * this.mPostingInfo.vidHeight / this.mPostingInfo.vidWidth);
+            n = (int) Math.ceil(deviceWidth * bitmap.getHeight() / bitmap.getWidth());
+        } else if ("CLIP".equals(this.mPostingInfo.mediaType)) {
+            n = (int) Math.ceil(deviceWidth * this.mPostingInfo.vidHeight / this.mPostingInfo.vidWidth);
         }
         final int convertDipToPixelInt = BitmapUtils.convertDipToPixelInt(33.0f);
         final int dimensionPixelSize = this.mainActivity.getResources().getDimensionPixelSize(R.dimen.common_title_height);
-        this.mThumbnail = (View)new ImageView((Context)this.mainActivity);
+        this.mThumbnail = (View) new ImageView((Context) this.mainActivity);
         if (this.mPostingInfo.mediaType.equalsIgnoreCase("PIC") || this.mPostingInfo.mode == 1) {
-            ((ImageView)this.mThumbnail).setImageBitmap(bitmap);
-        }
-        else {
-            final MapiaVideoPlayer mThumbnail = new MapiaVideoPlayer((Context)this.mainActivity);
+            ((ImageView) this.mThumbnail).setImageBitmap(bitmap);
+        } else {
+            final MapiaVideoPlayer mThumbnail = new MapiaVideoPlayer((Context) this.mainActivity);
             mThumbnail.setFrom(12);
             mThumbnail.updateTextureViewSize(deviceWidth, n);
             mThumbnail.setThumbnail(bitmap);
             mThumbnail.setSound(true);
             if (MainApplication.getInstance().getUploadingStatus() != 5) {
                 mThumbnail.showLoading();
-            }
-            else {
+            } else {
                 mThumbnail.setVideoPath(this.mPostingInfo.file.getAbsolutePath());
             }
-            this.mThumbnail = (View)mThumbnail;
+            this.mThumbnail = (View) mThumbnail;
         }
         final RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(deviceWidth, n);
         layoutParams.setMargins(0, -(n - (convertDipToPixelInt + dimensionPixelSize)), 0, 0);
-        this.mThumbnail.setLayoutParams((ViewGroup.LayoutParams)layoutParams);
-        this.mThumbnail.setOnTouchListener((View.OnTouchListener)new View.OnTouchListener() {
+        this.mThumbnail.setLayoutParams((ViewGroup.LayoutParams) layoutParams);
+        this.mThumbnail.setOnTouchListener((View.OnTouchListener) new View.OnTouchListener() {
             public boolean onTouch(final View view, final MotionEvent motionEvent) {
                 final int action = motionEvent.getAction();
                 PostFragment.this.mRootView.onTouchEvent(motionEvent);
@@ -469,16 +479,16 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
                 }
             }
         });
-        ((RelativeLayout)this.mRootView).addView(this.mThumbnail);
+        ((RelativeLayout) this.mRootView).addView(this.mThumbnail);
         this.mNavigationBar.bringToFront();
         this.mRootInterceptTouchView.setThumbnailView(this.mThumbnail);
-        this.mRootInterceptTouchView.setEditPostView((View)this.mEdtPost, this.inputMethodManager);
+        this.mRootInterceptTouchView.setEditPostView((View) this.mEdtPost, this.inputMethodManager);
         this.mRootInterceptTouchView.setNavigationBar(this.mNavigationBar);
     }
 
 
     private void initialize() {
-        this.mRootInterceptTouchView = (InterceptTouchViewGroup)this.mRootView;
+        this.mRootInterceptTouchView = (InterceptTouchViewGroup) this.mRootView;
         this.mInputMode = 0;
         this.latLng = ((PostActivity) getActivity()).getLatLng();
         this.mPostingInfo = new PostingInfo();
@@ -492,7 +502,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 //        this.initMentionListView();
         this.getParameter();
 //        this.initRecommendedTag();
-//        this.initThumbnail();
+
         this.initSns();
 //        if (this.mPostingInfo.locationData != null) {
 //            this.showLocationLayout(this.mPostingInfo.locationData);
@@ -503,16 +513,16 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         this.applyFont();
 //        this.reorderingView();
 
-        new Handler().postDelayed((Runnable)new SoftInputShowHandler(), 200L);
+        new Handler().postDelayed((Runnable) new SoftInputShowHandler(), 200L);
     }
 
     private void setEventListener() {
 //        this.mBtnUtilityTag.setOnClickListener(this.mUtilityBarItemClickListener);
         this.mBtnLocation.setOnClickListener(this.mLocationClickListener);
         this.mRootInterceptTouchView.setIntercept(true);
-        this.mLineIcon = (ImageView)this.mUtilityBar.findViewById(R.id.imgShareLine);
-        this.mTwitterIcon = (ImageView)this.mUtilityBar.findViewById(R.id.imgShareTwitter);
-        this.mFacebookIcon = (ImageView)this.mUtilityBar.findViewById(R.id.imgShareFacebook);
+        this.mLineIcon = (ImageView) this.mUtilityBar.findViewById(R.id.imgShareLine);
+        this.mTwitterIcon = (ImageView) this.mUtilityBar.findViewById(R.id.imgShareTwitter);
+        this.mFacebookIcon = (ImageView) this.mUtilityBar.findViewById(R.id.imgShareFacebook);
         this.mUtilityBar.findViewById(R.id.btnShareLine).setOnClickListener(this.mUtilityBarItemClickListener);
         this.mUtilityBar.findViewById(R.id.btnShareTwitter).setOnClickListener(this.mUtilityBarItemClickListener);
         this.mUtilityBar.findViewById(R.id.btnShareFacebook).setOnClickListener(this.mUtilityBarItemClickListener);
@@ -521,17 +531,17 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
 
     private void initView() {
-        this.textPostLocation = (TextView)this.mRootView.findViewById(R.id.text_post_location);
-        this.mBtnLocation = (LinearLayout)this.mRootView.findViewById(R.id.btn_post_location);
+        this.textPostLocation = (TextView) this.mRootView.findViewById(R.id.text_post_location);
+        this.mBtnLocation = (LinearLayout) this.mRootView.findViewById(R.id.btn_post_location);
 
-        this.mEdtPost = (HighlightEditText)this.mRootView.findViewById(R.id.edit_post);
+        this.mEdtPost = (HighlightEditText) this.mRootView.findViewById(R.id.edit_post);
         this.mBottomBar = this.mRootView.findViewById(R.id.bottomBar);
         this.mUtilityBar = this.mRootView.findViewById(R.id.utility_bar);
         this.mNavigationBar = this.mRootView.findViewById(R.id.topNavigationBar);
 //        this.mBtnUtilityTag = this.mRootView.findViewById(R.id.btnUtilityTag);
         this.mNoTagHistoryView = this.mRootView.findViewById(R.id.noContents);
-        this.mTagInputHelperListView = (ListView)this.mRootView.findViewById(R.id.listTagInputHelper);
-        this.mRecommendedTagLayout = (LinearLayout)this.mRootView.findViewById(R.id.recommendedTagHolder);
+        this.mTagInputHelperListView = (ListView) this.mRootView.findViewById(R.id.listTagInputHelper);
+        this.mRecommendedTagLayout = (LinearLayout) this.mRootView.findViewById(R.id.recommendedTagHolder);
         this.mLocationLayout = this.mBottomBar.findViewById(R.id.gpsLayer);
         this.mLocation = (FontSettableTextView) this.mLocationLayout.findViewById(R.id.location);
         this.mTagInputHelper = this.mRootView.findViewById(R.id.tagInputLayout);
@@ -556,8 +566,8 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     private void initSns() {
 
         mLineIcon = (ImageView) this.mUtilityBar.findViewById(R.id.imgShareLine);
-        mTwitterIcon = (ImageView)this.mUtilityBar.findViewById(R.id.imgShareTwitter);
-        mFacebookIcon = (ImageView)this.mUtilityBar.findViewById(R.id.imgShareFacebook);
+        mTwitterIcon = (ImageView) this.mUtilityBar.findViewById(R.id.imgShareTwitter);
+        mFacebookIcon = (ImageView) this.mUtilityBar.findViewById(R.id.imgShareFacebook);
 
         if (this.mPostingInfo.snsParam == null) {
             return;
@@ -569,15 +579,13 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     }
 
 
-
     public void showSplash(final boolean b) {
         if (b) {
             if (this.mUploading == null || !this.mUploading.isShowing()) {
-                (this.mUploading = CustomProgressDialog.show((Context)this.mainActivity, null, null, true, false)).setCancelable(false);
+                (this.mUploading = CustomProgressDialog.show((Context) this.mainActivity, null, null, true, false)).setCancelable(false);
                 this.mUploading.setContentView(R.layout.mapia_progress_dialog);
             }
-        }
-        else {
+        } else {
             this.hideSoftKeyboard();
             if (this.mUploading != null && this.mUploading.isShowing()) {
                 this.mUploading.dismiss();
@@ -588,6 +596,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     public boolean isSplashOn() {
         return this.mUploading != null && this.mUploading.isShowing();
     }
+
     public boolean onBackPressed() {
         if (this.mPostingInfo == null) {
             this.mainActivity.finish();
@@ -616,8 +625,8 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
     private int addRecommendedTag(final String s) {
         final int childCount = this.mRecommendedTagLayout.getChildCount();
-        final Button button = new Button((Context)this.mainActivity);
-        button.setText((CharSequence)("#" + s));
+        final Button button = new Button((Context) this.mainActivity);
+        button.setText((CharSequence) ("#" + s));
         button.setTextColor(-16777216);
         button.setBackgroundResource(R.drawable.selector_recommended_tag_bg);
         button.setTextSize(2, 13.0f);
@@ -625,9 +634,9 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         button.setTypeface(FontUtils.getNanumRegular());
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, BitmapUtils.convertDipToPixelInt(25.0f));
         layoutParams.setMargins(0, 0, BitmapUtils.convertDipToPixelInt(5.5f), 0);
-        button.setLayoutParams((ViewGroup.LayoutParams)layoutParams);
+        button.setLayoutParams((ViewGroup.LayoutParams) layoutParams);
         button.setOnClickListener(this.mRecommendedTagClickListener);
-        this.mRecommendedTagLayout.addView((View)button);
+        this.mRecommendedTagLayout.addView((View) button);
         return childCount;
     }
 
@@ -652,7 +661,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         }
         this.mTagInputHelperListView.setVisibility(View.VISIBLE);
         this.mNoTagHistoryView.setVisibility(View.INVISIBLE);
-        this.mTagInputHelperListView.setAdapter((ListAdapter)this.mTagHistoryAdapter);
+        this.mTagInputHelperListView.setAdapter((ListAdapter) this.mTagHistoryAdapter);
         this.mTagInputHelperListView.setOnItemClickListener(this.mTagClickListener);
         this.mInputMode = 2;
     }
@@ -760,7 +769,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     }
 
     private void fillCenter() {
-        final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)this.mEdtPost.getLayoutParams();
+        final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) this.mEdtPost.getLayoutParams();
         layoutParams.height = -1;
         layoutParams.addRule(2, 2131362481);
         this.mEdtPost.setLayoutParams((ViewGroup.LayoutParams) layoutParams);
@@ -842,22 +851,23 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     }
 
     private void getParameter() {
-//        this.mPostingInfo = MainApplication.getInstance().getPostingInfo();
+
         final Bundle arguments = this.getArguments();
         if (arguments != null) {
             this.isApplyWatermark = arguments.getBoolean("isApplyWatermark");
             final String string = arguments.getString("intentTextBody");
-//            if (string.length() > 0) {
-//                this.mPostingInfo.body = string;
-//            }
-//            if ("PIC".equals(this.mPostingInfo.mediaType)) {
-//                if (this.mPostingInfo.postingMediaPath != null) {
-//                    this.mPostingInfo.file = new File(this.mPostingInfo.postingMediaPath);
-//                }
-//            }
-//            else if ("CLIP".equals(this.mPostingInfo.mediaType) && this.mPostingInfo.originalMediaPath != null) {
-//                this.mPostingInfo.file = new File(this.mPostingInfo.originalMediaPath);
-//            }
+            if ((this.mPostingInfo = MainApplication.getInstance().getPostingInfo()).postingMediaPath != null && string != null) {
+                if (string.length() > 0) {
+                    this.mPostingInfo.body = string;
+                }
+                if ("PIC".equals(this.mPostingInfo.mediaType)) {
+                    if (this.mPostingInfo.postingMediaPath != null) {
+                        this.mPostingInfo.file = new File(this.mPostingInfo.postingMediaPath);
+                    }
+                } else if ("CLIP".equals(this.mPostingInfo.mediaType) && this.mPostingInfo.originalMediaPath != null) {
+                    this.mPostingInfo.file = new File(this.mPostingInfo.originalMediaPath);
+                }
+            }
             this.mWatermarkPath = arguments.getString("watermark_path");
             if (this.mWatermarkPath != null) {
                 this.mWatermarkFile = new File(this.mWatermarkPath);
@@ -866,7 +876,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     }
 
     private String getRealPathFromURI(final Uri uri) {
-        final Cursor loadInBackground = new CursorLoader((Context)this.mainActivity, uri, new String[] { "_data" }, null, null, null).loadInBackground();
+        final Cursor loadInBackground = new CursorLoader((Context) this.mainActivity, uri, new String[]{"_data"}, null, null, null).loadInBackground();
         final int columnIndexOrThrow = loadInBackground.getColumnIndexOrThrow("_data");
         loadInBackground.moveToFirst();
         return loadInBackground.getString(columnIndexOrThrow);
@@ -895,27 +905,26 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
     private SpannableString getTagStyleString(final CharSequence charSequence) {
         final SpannableString spannableString = new SpannableString(charSequence);
-        spannableString.setSpan((Object)new ForegroundColorSpan(this.COLOR_TEXT_TAG), 0, spannableString.length(), 33);
+        spannableString.setSpan((Object) new ForegroundColorSpan(this.COLOR_TEXT_TAG), 0, spannableString.length(), 33);
         spannableString.setSpan((Object) new StyleSpan(1), 0, spannableString.length(), 33);
         return spannableString;
     }
 
     private SpannableString getTagStyleString(final String s) {
-        final SpannableString spannableString = new SpannableString((CharSequence)s);
-        spannableString.setSpan((Object)new ForegroundColorSpan(this.COLOR_TEXT_TAG), 0, spannableString.length(), 33);
-        spannableString.setSpan((Object)new StyleSpan(1), 0, spannableString.length(), 33);
+        final SpannableString spannableString = new SpannableString((CharSequence) s);
+        spannableString.setSpan((Object) new ForegroundColorSpan(this.COLOR_TEXT_TAG), 0, spannableString.length(), 33);
+        spannableString.setSpan((Object) new StyleSpan(1), 0, spannableString.length(), 33);
         return spannableString;
     }
 
     private void goToMyfeed() {
         this.hideSoftKeyboard();
         if (this.mainApplication.getMyfeedActivity() == null) {
-            final Intent intent = new Intent((Context)this.mainActivity, MyfeedActivity.class);
+            final Intent intent = new Intent((Context) this.mainActivity, MyfeedActivity.class);
             intent.setFlags(537001984);
             this.startActivity(intent);
-        }
-        else {
-            final Intent intent2 = new Intent((Context)this.mainActivity, MyfeedActivity.class);
+        } else {
+            final Intent intent2 = new Intent((Context) this.mainActivity, MyfeedActivity.class);
             intent2.setFlags(537001984);
             intent2.putExtra("from", "postFragment");
             this.startActivity(intent2);
@@ -929,18 +938,19 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         this.hideSoftKeyboard();
         final Intent intent = new Intent();
         intent.putExtra("mediaType", this.mPostingInfo.mediaType);
-        intent.putExtra("linkedTags", (Serializable)list);
+        intent.putExtra("linkedTags", (Serializable) list);
         this.mainActivity.setResult(2, intent);
         this.mainActivity.finish();
     }
 
     private void handleErrorResponse(final JSONObject jsonObject) throws JSONException, IOException {
         switch (jsonObject.getInt("errorCode")) {
-            default: {}
+            default: {
+            }
             case 7077: {
-                final MapiaOneBtnDialog MapiaOneBtnDialog = new MapiaOneBtnDialog((Context)this.mainActivity, jsonObject.getString("errorMessage"), this.getString(2131558426));
+                final MapiaOneBtnDialog MapiaOneBtnDialog = new MapiaOneBtnDialog((Context) this.mainActivity, jsonObject.getString("errorMessage"), this.getString(2131558426));
                 MapiaOneBtnDialog.show();
-                MapiaOneBtnDialog.setBtnClick((View.OnClickListener)new View.OnClickListener() {
+                MapiaOneBtnDialog.setBtnClick((View.OnClickListener) new View.OnClickListener() {
                     public void onClick(final View view) {
                         MapiaOneBtnDialog.dismiss();
                     }
@@ -1007,13 +1017,13 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         if (this.mTagInputHelper == null || this.mTagInputHelper.getVisibility() != View.VISIBLE) {
             return;
         }
-        final ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object)this.mThumbnail, "translationY", new float[] { 0.0f });
-        final ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat((Object)this.mEdtPost, "translationY", new float[] { 0.0f });
-        final ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat((Object)this.mBottomBar, "translationY", new float[] { 0.0f });
-        final ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat((Object)this.mTagInputHelper, "translationY", new float[] { 0.0f, this.mTagInputHelper.getHeight() });
+        final ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) this.mThumbnail, "translationY", new float[]{0.0f});
+        final ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat((Object) this.mEdtPost, "translationY", new float[]{0.0f});
+        final ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat((Object) this.mBottomBar, "translationY", new float[]{0.0f});
+        final ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat((Object) this.mTagInputHelper, "translationY", new float[]{0.0f, this.mTagInputHelper.getHeight()});
         final AnimatorSet set = new AnimatorSet();
         set.setDuration(300L);
-        set.play((Animator)ofFloat).with((Animator)ofFloat2).with((Animator)ofFloat3).with((Animator)ofFloat4);
+        set.play((Animator) ofFloat).with((Animator) ofFloat2).with((Animator) ofFloat3).with((Animator) ofFloat4);
         set.addListener((Animator.AnimatorListener) new Animator.AnimatorListener() {
             public void onAnimationCancel(final Animator animator) {
             }
@@ -1046,12 +1056,11 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         });
     }
 
-    private class SoftInputShowHandler implements Runnable
-    {
+    private class SoftInputShowHandler implements Runnable {
         @Override
         public void run() {
             PostFragment.this.mEdtPost.requestFocus();
-            PostFragment.this.inputMethodManager.showSoftInput((View)PostFragment.this.mEdtPost, 1);
+            PostFragment.this.inputMethodManager.showSoftInput((View) PostFragment.this.mEdtPost, 1);
         }
     }
 
@@ -1135,8 +1144,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     private void parsePostResponse(final String s) {
         try {
             this.parsePostResponse(new JSONObject(s));
-        }
-        catch (JSONException ex) {
+        } catch (JSONException ex) {
             this.neloLog("nelo_posting_err", this.mPostingInfo.mediaType, "nelo_err_parsing");
             this.showRetryDialog();
             ex.printStackTrace();
@@ -1153,12 +1161,10 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
             if (!this.handlePenalty(jsonObject2)) {
 //                this.leavePost(jsonObject2);
             }
-        }
-        catch (JSONException ex) {
+        } catch (JSONException ex) {
             this.neloLog("nelo_posting_err", this.mPostingInfo.mediaType, "nelo_err_parsing");
             this.showRetryDialog();
-        }
-        catch (IOException ex2) {
+        } catch (IOException ex2) {
             this.neloLog("nelo_posting_err", this.mPostingInfo.mediaType, "nelo_err_parsing");
             this.showRetryDialog();
         }
@@ -1221,11 +1227,6 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 //    }
 
 
-
-
-
-
-
     private void requestReadPenaltyAlert(final long n) {
         this.mainActivity.makeRequest(1, QueryManager.makeReadPenaltyAlert(n), new Response.Listener<JSONObject>() {
             public void onResponse(final JSONObject jsonObject) {
@@ -1236,18 +1237,18 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
     private void showRetryDialog() {
         this.saveTag();
-        final MapiaConfirmDialog mapiaConfirmDialog = new MapiaConfirmDialog((Context)this.mainActivity);
+        final MapiaConfirmDialog mapiaConfirmDialog = new MapiaConfirmDialog((Context) this.mainActivity);
         mapiaConfirmDialog.setMessage(this.getString(R.string.post_failed));
         mapiaConfirmDialog.setLeft(this.getString(R.string.cancel));
-        mapiaConfirmDialog.setLeftBtnClick((View.OnClickListener)new View.OnClickListener() {
+        mapiaConfirmDialog.setLeftBtnClick((View.OnClickListener) new View.OnClickListener() {
             public void onClick(final View view) {
                 mapiaConfirmDialog.dismiss();
             }
         });
-        final SpannableString right = new SpannableString((CharSequence)this.getString(R.string.post_retry));
-        right.setSpan((Object)new ForegroundColorSpan(this.mainActivity.getResources().getColor(R.color.point_color)), 0, right.length(), 33);
+        final SpannableString right = new SpannableString((CharSequence) this.getString(R.string.post_retry));
+        right.setSpan((Object) new ForegroundColorSpan(this.mainActivity.getResources().getColor(R.color.point_color)), 0, right.length(), 33);
         mapiaConfirmDialog.setRight(right);
-        mapiaConfirmDialog.setRightBtnClick((View.OnClickListener)new View.OnClickListener() {
+        mapiaConfirmDialog.setRightBtnClick((View.OnClickListener) new View.OnClickListener() {
             public void onClick(final View view) {
                 final ArrayList<String> mentionList = TextUtils.makeMentionList(PostFragment.this.mEdtPost.getText().toString());
                 if (mentionList.size() > 0) {
@@ -1287,6 +1288,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         });
         mapiaConfirmDialog.show();
     }
+
     private void requestRepic(final Map map, final File file) {
         final String postEpicUrl = QueryManager.makePostEpicUrl(this.getSnsParam());
         this.neloLog("nelo_posting", this.mPostingInfo.mediaType, "nelo_posting");
@@ -1316,8 +1318,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         String body;
         if (this.mReplacedBody != null) {
             body = this.mReplacedBody;
-        }
-        else {
+        } else {
             body = this.mEdtPost.getText().toString();
         }
         mPostingInfo.body = body;
@@ -1377,8 +1378,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         hashMap.put("copyrightYn", this.mPostingInfo.copyrightYn);
         if (this.mReplacedBody != null) {
             hashMap.put("body", this.mReplacedBody);
-        }
-        else {
+        } else {
             hashMap.put("body", this.mEdtPost.getText().toString());
         }
         if (this.mPostingInfo.locationData != null) {
@@ -1396,8 +1396,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         hashMap.put("picNo", String.valueOf(this.mPostingInfo.picNo));
         if (this.mReplacedBody != null) {
             hashMap.put("body", this.mReplacedBody);
-        }
-        else {
+        } else {
             hashMap.put("body", this.mEdtPost.getText().toString());
         }
         if (this.mPostingInfo.locationData != null) {
@@ -1418,8 +1417,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         hashMap.put("parentMemberNo", String.valueOf(this.mPostingInfo.parentMemberNo));
         if (this.mReplacedBody != null) {
             hashMap.put("body", this.mReplacedBody);
-        }
-        else {
+        } else {
             hashMap.put("body", this.mEdtPost.getText().toString());
         }
         if (this.mPostingInfo.locationData != null) {
@@ -1439,12 +1437,20 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     private void neloLog(final String s, String s2, final String s3) {
         if (this.mPostingInfo.file == null) {
             s2 = String.format("postingMode : %d, memberNo : %d, mediaType : %s, fileName : %s", this.mPostingInfo.mode, LoginInfo.getInstance().getMemberNo(), s2, "null");
-        }
-        else {
+        } else {
             s2 = String.format("postingMode : %d, memberNo : %d, mediaType : %s, fileName : %s", this.mPostingInfo.mode, LoginInfo.getInstance().getMemberNo(), s2, this.mPostingInfo.file.getName());
         }
 //        NeloLog.debug(s, s2, s3);
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CommonConstants.POST_PIC) {
+            if (resultCode == CommonConstants.POST_PIC_SUC) {
+                initThumbnail();
+            }
+        }
+    }
 //
 }

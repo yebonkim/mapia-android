@@ -2,7 +2,7 @@
 <resources>
     <color name="bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
     <color name="bright_foreground_holo_dark">#fff3f3f3</color>
-    <color name="camera_background">#ff292929</color>
+    <color name="camera_background">#86CED0</color>
     <color name="camera_video_timeline_background">#ff181818</color>
     <color name="com_facebook_blue">#ff3b5998</color>
     <color name="com_facebook_likeboxcountview_border_color">#ff6a7180</color>

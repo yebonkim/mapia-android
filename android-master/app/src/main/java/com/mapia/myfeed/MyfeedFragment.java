@@ -497,8 +497,8 @@ public class MyfeedFragment extends BaseFragment
         this.layout.findViewById(R.id.fm_make_my_pic).setOnClickListener((View.OnClickListener)new View.OnClickListener() {
             public void onClick(final View view) {
 //                AceUtils.nClick(NClicks.MYFEED_CAMERA);
-                MainApplication.getInstance().getPostingInfo().mode = 0;
-                MyfeedFragment.this.mainActivity.startCameraActivity();
+//                MainApplication.getInstance().getPostingInfo().mode = 0;
+//                MyfeedFragment.this.mainActivity.startCameraActivity();
             }
         });
         this.viewPager.setVisibility(View.INVISIBLE);
@@ -519,8 +519,8 @@ public class MyfeedFragment extends BaseFragment
         this.layout.findViewById(R.id.fm_make_my_pic).setOnClickListener((View.OnClickListener)new View.OnClickListener() {
             public void onClick(final View view) {
 //                AceUtils.nClick(NClicks.MYFEED_CAMERA);
-                MainApplication.getInstance().getPostingInfo().mode = 0;
-                MyfeedFragment.this.mainActivity.startCameraActivity();
+//                MainApplication.getInstance().getPostingInfo().mode = 0;
+//                MyfeedFragment.this.mainActivity.startCameraActivity();
             }
         });
         this.viewPager.setVisibility(View.INVISIBLE);

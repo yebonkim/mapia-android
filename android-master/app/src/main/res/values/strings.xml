@@ -34,6 +34,8 @@
         <string name="social_google_button">{icon-gplus} G+ login</string>
         <string name="social_instagram_button">{icon-instagram} Vk login</string>
 
+        <string name="continuous_picture">continuous-picture</string>
+        <string name="auto">auto</string>
 
         <!-- Menu -->
         <string name="menu_done_item">Done</string>

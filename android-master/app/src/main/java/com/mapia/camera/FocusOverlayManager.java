@@ -9,10 +9,15 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Camera;
+import android.hardware.Camera.Area;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
+import com.mapia.camera.common.ApiHelper;
+import com.mapia.camera.ui.FaceView;
+import com.mapia.camera.ui.PieRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,37 +25,86 @@ import java.util.List;
 
 public class FocusOverlayManager
 {
+    private boolean mFocusDefault;
+    private boolean mPreviousMoving;
+
+    private FocusUI mUI;
+
+
+    private static final String TAG = "CAM_FocusManager";
+
     private static final int RESET_TOUCH_FOCUS = 0;
     private static final int RESET_TOUCH_FOCUS_DELAY = 3000;
-    private static final int STATE_FAIL = 4;
-    private static final int STATE_FOCUSING = 1;
+
+    private int mState = STATE_IDLE;
+    private static final int STATE_IDLE = 0; // Focus is not active.
+    private static final int STATE_FOCUSING = 1; // Focus is in progress.
+    // Focus is in progress and the camera should take a picture after focus finishes.
     private static final int STATE_FOCUSING_SNAP_ON_FINISH = 2;
-    private static final int STATE_IDLE = 0;
-    private static final int STATE_SUCCESS = 3;
-    private static final String TAG = "CAM_FocusManager";
-    private boolean mAeAwbLock;
-    private String[] mDefaultFocusModes;
-    private int mDisplayOrientation;
-    private List<Object> mFocusArea;
-    private boolean mFocusAreaSupported;
-    private boolean mFocusDefault;
-    private String mFocusMode;
-    private Handler mHandler;
+    private static final int STATE_SUCCESS = 3; // Focus finishes and succeeds.
+    private static final int STATE_FAIL = 4; // Focus finishes and fails.
+
     private boolean mInitialized;
-    Listener mListener;
-    private boolean mLockAeAwbNeeded;
-    private android.graphics.Matrix mMatrix;
-    private List<Object> mMeteringArea;
+    private boolean mFocusAreaSupported;
     private boolean mMeteringAreaSupported;
-    private boolean mMirror;
+    private boolean mLockAeAwbNeeded;
+    private boolean mAeAwbLock;
+    private Matrix mMatrix;
+
+    private PieRenderer mPieRenderer;
+
+    private int mPreviewWidth; // The width of the preview frame layout.
+    private int mPreviewHeight; // The height of the preview frame layout.
+    private boolean mMirror; // true if the camera is front-facing.
+    private int mDisplayOrientation;
+    private FaceView mFaceView;
+    private List<Object> mFocusArea; // focus area in driver format
+    private List<Object> mMeteringArea; // metering area in driver format
+    private String mFocusMode;
+    private String[] mDefaultFocusModes;
     private String mOverrideFocusMode;
     private Camera.Parameters mParameters;
     private ComboPreferences mPreferences;
-    private int mPreviewHeight;
-    private int mPreviewWidth;
-    private boolean mPreviousMoving;
-    private int mState;
-    private FocusUI mUI;
+    private Handler mHandler;
+    Listener mListener;
+
+    public interface Listener {
+        public void autoFocus();
+        public void cancelAutoFocus();
+        public boolean capture();
+        public void startFaceDetection();
+        public void stopFaceDetection();
+        public void setFocusParameters();
+    }
+
+    private class MainHandler extends Handler {
+        public MainHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case RESET_TOUCH_FOCUS: {
+                    cancelAutoFocus();
+                    mListener.startFaceDetection();
+                    break;
+                }
+            }
+        }
+    }
+
+    public FocusOverlayManager(ComboPreferences preferences, String[] defaultFocusModes,
+                               Camera.Parameters parameters, Listener listener,
+                               boolean mirror, Looper looper) {
+        mHandler = new MainHandler(looper);
+        mMatrix = new Matrix();
+        mPreferences = preferences;
+        mDefaultFocusModes = defaultFocusModes;
+        setParameters(parameters);
+        mListener = listener;
+        setMirror(mirror);
+    }
 
     public FocusOverlayManager(final ComboPreferences mPreferences, final String[] mDefaultFocusModes, final Camera.Parameters parameters, final Listener mListener, final boolean mirror, final Looper looper, final FocusUI mui) {
         super();
@@ -110,7 +164,7 @@ public class FocusOverlayManager
         if (this.mFocusArea == null) {
             (this.mFocusArea = new ArrayList<Object>()).add(new Camera.Area(new Rect(), 1));
         }
-        this.calculateTapArea(n, n2, 1.0f, ((Camera.Area)this.mFocusArea.get(0)).rect);
+        this.calculateTapArea(n, n2, 1.0f, ((Camera.Area) this.mFocusArea.get(0)).rect);
     }
 
     @TargetApi(14)
@@ -118,7 +172,7 @@ public class FocusOverlayManager
         if (this.mMeteringArea == null) {
             (this.mMeteringArea = new ArrayList<Object>()).add(new Camera.Area(new Rect(), 1));
         }
-        this.calculateTapArea(n, n2, 1.5f, ((Camera.Area)this.mMeteringArea.get(0)).rect);
+        this.calculateTapArea(n, n2, 1.5f, ((Camera.Area) this.mMeteringArea.get(0)).rect);
     }
 
     private void lockAeAwbIfNeeded() {
@@ -430,6 +484,9 @@ public class FocusOverlayManager
         }
     }
 
+
+
+
     public interface FocusUI
     {
         void clearFocus();
@@ -451,35 +508,62 @@ public class FocusOverlayManager
         void setFocusPosition(int p0, int p1);
     }
 
-    public interface Listener
-    {
-        void autoFocus();
 
-        void cancelAutoFocus();
 
-        boolean capture();
 
-        void setFocusParameters();
-
-        void startFaceDetection();
-
-        void stopFaceDetection();
+    public void setFocusRenderer(PieRenderer renderer) {
+        mPieRenderer = renderer;
+        mInitialized = (mMatrix != null);
     }
 
-    private class MainHandler extends Handler
-    {
-        public MainHandler(final Looper looper) {
-            super(looper);
+
+    public void setFaceView(FaceView faceView) {
+        mFaceView = faceView;
+    }
+
+
+
+    @TargetApi(ApiHelper.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private void initializeFocusAreas(int focusWidth, int focusHeight,
+                                      int x, int y, int previewWidth, int previewHeight) {
+        if (mFocusArea == null) {
+            mFocusArea = new ArrayList<Object>();
+            mFocusArea.add(new Area(new Rect(), 1));
         }
 
-        public void handleMessage(final Message message) {
-            switch (message.what) {
-                default: {}
-                case 0: {
-                    FocusOverlayManager.this.cancelAutoFocus();
-                    FocusOverlayManager.this.mListener.startFaceDetection();
-                }
-            }
-        }
+        // Convert the coordinates to driver format.
+        calculateTapArea(focusWidth, focusHeight, 1f, x, y, previewWidth, previewHeight,
+                ((Area) mFocusArea.get(0)).rect);
     }
+
+    @TargetApi(ApiHelper.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private void initializeMeteringAreas(int focusWidth, int focusHeight,
+                                         int x, int y, int previewWidth, int previewHeight) {
+        if (mMeteringArea == null) {
+            mMeteringArea = new ArrayList<Object>();
+            mMeteringArea.add(new Area(new Rect(), 1));
+        }
+
+        // Convert the coordinates to driver format.
+        // AE area is bigger because exposure is sensitive and
+        // easy to over- or underexposure if area is too small.
+        calculateTapArea(focusWidth, focusHeight, 1.5f, x, y, previewWidth, previewHeight,
+                ((Area) mMeteringArea.get(0)).rect);
+    }
+
+
+
+
+    private void calculateTapArea(int focusWidth, int focusHeight, float areaMultiple,
+                                  int x, int y, int previewWidth, int previewHeight, Rect rect) {
+        int areaWidth = (int) (focusWidth * areaMultiple);
+        int areaHeight = (int) (focusHeight * areaMultiple);
+        int left = Util.clamp(x - areaWidth / 2, 0, previewWidth - areaWidth);
+        int top = Util.clamp(y - areaHeight / 2, 0, previewHeight - areaHeight);
+
+        RectF rectF = new RectF(left, top, left + areaWidth, top + areaHeight);
+        mMatrix.mapRect(rectF);
+        Util.rectFToRect(rectF, rect);
+    }
+
 }

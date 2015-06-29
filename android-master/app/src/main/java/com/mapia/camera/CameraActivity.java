@@ -45,6 +45,7 @@ import com.mapia.camera.viewmodel.RatioManager;
 import com.mapia.common.data.PhotoData;
 import com.mapia.custom.rotatableview.OnRotateEndListener;
 import com.mapia.custom.rotatableview.RotatableImageButton;
+import com.mapia.filter.ApplyFilterActivity;
 import com.mapia.ratio.PhotoRatioActivity;
 import com.mapia.util.BitmapUtils;
 import com.mapia.util.CameraUtils;
@@ -673,16 +674,19 @@ public class CameraActivity extends ActivityBase implements ImageChooserListener
                         (this.imageChooserManager = new ImageChooserManager(this, 291, "mapia_tmp", false)).setImageChooserListener(this);
                     }
                     this.imageChooserManager.submit(n, intent);
+                    break;
                 }
                 case 295: {
                     if (this.videoChooserManager == null) {
                         (this.videoChooserManager = new VideoChooserManager(this, 295, "mapia_tmp", false)).setVideoChooserListener(this);
                     }
                     this.videoChooserManager.submit(n, intent);
+                    break;
                 }
                 case 10000: {
                     BitmapUtils.deleteImageChooserTemp();
                     MainApplication.getInstance().getPostingInfo().copyrightYn = "N";
+                    break;
                 }
             }
         }
@@ -696,6 +700,7 @@ public class CameraActivity extends ActivityBase implements ImageChooserListener
                 }
                 default: {}
                 case 291:
+                    break;
                 case 295: {
                     if (this.progressDialog != null) {
                         this.progressDialog.dismiss();
@@ -780,33 +785,33 @@ public class CameraActivity extends ActivityBase implements ImageChooserListener
         this.init();
         this.mCurrentModule = new PhotoModule();
         this.mCurrentModuleIndex = 0;
-        this.mCurrentModule.init(this, (View)this.mFrame);
+        this.mCurrentModule.init(this, this.mFrame);
         this.initGridGuideView();
         this.initListener();
         this.mOrientationListener = new MyOrientationEventListener((Context)this);
         this.bindMediaSaveService();
-        this.cameraPreviewLayout.post((Runnable)new Runnable() {
+        this.cameraPreviewLayout.post(new Runnable() {
             @Override
             public void run() {
-                final int width = CameraActivity.this.cameraPreviewLayout.getWidth();
-                final int height = CameraActivity.this.cameraPreviewLayout.getHeight();
-                CameraActivity.this.ratioManager = new RatioManager(width, height);
+                final int width = cameraPreviewLayout.getWidth();
+                final int height = cameraPreviewLayout.getHeight();
+                ratioManager = new RatioManager(width, height);
                 final int n = (height - width) / 2;
-                CameraActivity.this.squareBlockView1.getLayoutParams().height = n;
-                CameraActivity.this.squareBlockView2.getLayoutParams().height = n;
-                if (!CameraActivity.this.isOnlyPhoto) {
-                    CameraActivity.this.mIsSquare = CameraActivity.this.mCurrentModule.getComboPreferences().getLocal().getBoolean("pref_square_view_key", true);
-                    if (CameraActivity.this.mIsSquare) {
-                        CameraActivity.this.ratioManager.setCurrentRect(0);
+                squareBlockView1.getLayoutParams().height = n;
+                squareBlockView2.getLayoutParams().height = n;
+                if (!isOnlyPhoto) {
+                    mIsSquare = mCurrentModule.getComboPreferences().getLocal().getBoolean("pref_square_view_key", true);
+                    if (mIsSquare) {
+                        ratioManager.setCurrentRect(0);
                     }
                     else {
-                        CameraActivity.this.set34RatioView();
+                        set34RatioView();
                     }
                 }
                 else {
-                    CameraActivity.this.ratioManager.setCurrentRect(0);
+                    ratioManager.setCurrentRect(0);
                 }
-                CameraActivity.this.gridGuideView.getGridGuideBase().setRect(CameraActivity.this.ratioManager.getCurrentRect());
+                gridGuideView.getGridGuideBase().setRect(ratioManager.getCurrentRect());
             }
         });
         this.mIsSquare = true;
@@ -947,10 +952,10 @@ public class CameraActivity extends ActivityBase implements ImageChooserListener
             this.finish();
             return;
         }
-//        final Intent intent = new Intent((Context)this, (Class)ApplyFilterActivity.class);
-//        intent.putExtra("cameraFrom", 0);
-//        intent.putExtra("videoRatio", this.ratioManager.getCurrentRatio());
-//        this.startActivityForResult(intent, 10001);
+        final Intent intent = new Intent((Context)this, (Class)ApplyFilterActivity.class);
+        intent.putExtra("cameraFrom", 0);
+        intent.putExtra("videoRatio", this.ratioManager.getCurrentRatio());
+        this.startActivityForResult(intent, 10001);
     }
 
     public void startFilterActivity(final String s) {

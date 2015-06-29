@@ -2,7 +2,7 @@
 <resources>
     <integer name="camera_focus_fail_alpha">77</integer>
     <integer name="camera_focus_success_alpha">204</integer>
-    <integer name="google_play_services_version">6587000</integer>
+    <integer name="google_play_services_version">7327000</integer>
     <integer name="max_video_recording_length">15000</integer>
     <integer name="throttle_video_recording_length">5000</integer>
 </resources>

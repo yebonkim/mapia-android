@@ -92,8 +92,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                         Response response) {
                         String resultMessage =
                                 jsonObject.get("message").toString();
-                        Toast.makeText(LoginActivity.this,
-                                resultMessage, Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(LoginActivity.this, MapActivity.class);
                         startActivity(i);
@@ -102,8 +100,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void failure(RetrofitError error) {
-                        Toast.makeText(LoginActivity.this, "토큰 불일치"
-                                .toString(), Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 });

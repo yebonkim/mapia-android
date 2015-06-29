@@ -27,6 +27,7 @@ import com.mapia.MainApplication;
 import com.mapia.R;
 import com.mapia.camera.viewmodel.RatioManager;
 import com.mapia.common.data.PhotoData;
+import com.mapia.filter.ApplyFilterActivity;
 import com.mapia.ratio.view.CropImageView;
 import com.mapia.util.BitmapUtils;
 import com.mapia.util.FileUtils;
@@ -70,6 +71,7 @@ public class PhotoRatioActivity extends Activity
         this.deleteCroppedFile();
         this.setResult(0);
         this.finish();
+
     }
 
     private void crop() {
@@ -250,11 +252,11 @@ public class PhotoRatioActivity extends Activity
         protected void onPostExecute(final Void void1) {
             if (PhotoRatioActivity.photoData.getPhoto() != null) {
                 MainApplication.getInstance().getPostingInfo().copyrightYn = "N";
-//                final Intent intent = new Intent((Context)PhotoRatioActivity.this, (Class)ApplyFilterActivity.class);
-//                intent.putExtra("cameraFrom", 1);
-//                intent.putExtra("videoRatio", PhotoRatioActivity.this.ratioManager.getCurrentRatio());
-//                intent.putExtra("intentTextBody", PhotoRatioActivity.this.getIntent().getStringExtra("intentTextBody"));
-//                PhotoRatioActivity.this.startActivityForResult(intent, 100);
+                final Intent intent = new Intent((Context)PhotoRatioActivity.this, (Class)ApplyFilterActivity.class);
+                intent.putExtra("cameraFrom", 1);
+                intent.putExtra("videoRatio", PhotoRatioActivity.this.ratioManager.getCurrentRatio());
+                intent.putExtra("intentTextBody", PhotoRatioActivity.this.getIntent().getStringExtra("intentTextBody"));
+                PhotoRatioActivity.this.startActivityForResult(intent, 100);
             }
             else {
                 Toast.makeText(PhotoRatioActivity.this.mContext, (CharSequence) this.errorMessage, Toast.LENGTH_SHORT).show();

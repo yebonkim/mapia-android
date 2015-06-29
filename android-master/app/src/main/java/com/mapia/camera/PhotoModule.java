@@ -10,9 +10,16 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
+import android.hardware.Camera.ErrorCallback;
+import android.hardware.Camera.FaceDetectionListener;
+import android.hardware.Camera.Parameters;
+import android.hardware.Camera.PictureCallback;
+import android.hardware.Camera.Size;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -26,7 +33,7 @@ import android.os.ConditionVariable;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.MessageQueue;
+import android.os.MessageQueue.IdleHandler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,20 +42,22 @@ import android.view.SurfaceHolder;
 import android.view.View;
 
 import com.mapia.R;
+import com.mapia.camera.common.ApiHelper;
+import com.mapia.camera.exif.ExifInterface;
+import com.mapia.camera.exif.ExifTag;
+import com.mapia.camera.exif.Rational;
 import com.mapia.camera.ui.CountDownView;
 import com.mapia.camera.util.UsageStatistics;
+import com.mapia.common.data.PhotoData;
 import com.mapia.util.BitmapUtils;
 import com.mapia.util.CameraUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Formatter;
 import java.util.List;
 
-
-public class PhotoModule implements CameraModule, PhotoController, FocusOverlayManager.Listener, CameraPreference.OnPreferenceChangedListener, ShutterButton.OnShutterButtonListener, MediaSaveService.Listener, CountDownView.OnCountDownFinishedListener, SensorEventListener
-{
+public class PhotoModule implements CameraModule, PhotoController, FocusOverlayManager.Listener, CameraPreference.OnPreferenceChangedListener, ShutterButton.OnShutterButtonListener, MediaSaveService.Listener, CountDownView.OnCountDownFinishedListener, SensorEventListener {
     private static final int CAMERA_DISABLED = 12;
     private static final int CAMERA_OPEN_DONE = 9;
     private static final int CHECK_DISPLAY_ROTATION = 5;
@@ -74,7 +83,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private CameraActivity mActivity;
     private boolean mAeLockSupported;
     private final AutoFocusCallback mAutoFocusCallback;
-    private final Object mAutoFocusMoveCallback;
+    private final Camera.AutoFocusMoveCallback mAutoFocusMoveCallback;
     public long mAutoFocusTime;
     private boolean mAwbLockSupported;
     private final StringBuilder mBuilder;
@@ -103,7 +112,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private float[] mGData;
     private final Handler mHandler;
     private int mHeading;
-    private Camera.Parameters mInitialParams;
+    private Parameters mInitialParams;
     private boolean mIsImageCaptureIntent;
     public long mJpegCallbackFinishTime;
     private byte[] mJpegImageData;
@@ -118,7 +127,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private long mOnResumeTime;
     private boolean mOpenCameraFail;
     private int mOrientation;
-    private Camera.Parameters mParameters;
+    private Parameters mParameters;
     private boolean mPaused;
     protected int mPendingSwitchCameraId;
     public long mPictureDisplayedToJpegCallbackTime;
@@ -167,10 +176,9 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         this.mRawPictureCallback = new RawPictureCallback();
         this.mAutoFocusCallback = new AutoFocusCallback();
         AutoFocusMoveCallback mAutoFocusMoveCallback;
-        if (true){//ApiHelper.HAS_AUTO_FOCUS_MOVE_CALLBACK) {
+        if (ApiHelper.HAS_AUTO_FOCUS_MOVE_CALLBACK) {
             mAutoFocusMoveCallback = new AutoFocusMoveCallback();
-        }
-        else {
+        } else {
             mAutoFocusMoveCallback = null;
         }
         this.mAutoFocusMoveCallback = mAutoFocusMoveCallback;
@@ -192,7 +200,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     }
 
     private void addIdleHandler() {
-        Looper.myQueue().addIdleHandler((MessageQueue.IdleHandler)new MessageQueue.IdleHandler() {
+        Looper.myQueue().addIdleHandler((IdleHandler) new IdleHandler() {
             public boolean queueIdle() {
                 Storage.ensureOSXCompatible();
                 return false;
@@ -201,8 +209,8 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     }
 
     private void animateFlash() {
-        if ( !this.mIsImageCaptureIntent && this.mActivity.mShowCameraAppView) { //ApiHelper.HAS_SURFACE_TEXTURE &&
-            ((CameraScreenNail)this.mActivity.mCameraScreenNail).animateFlash(this.mDisplayRotation);
+        if (ApiHelper.HAS_SURFACE_TEXTURE && !this.mIsImageCaptureIntent && this.mActivity.mShowCameraAppView) {
+            ((CameraScreenNail) this.mActivity.mCameraScreenNail).animateFlash(this.mDisplayRotation);
         }
     }
 
@@ -214,7 +222,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private void closeCamera() {
         if (this.mCameraDevice != null) {
             this.mCameraDevice.setZoomChangeListener(null);
-            if (false) {//ApiHelper.HAS_FACE_DETECTION
+            if (ApiHelper.HAS_FACE_DETECTION) {
                 this.mCameraDevice.setFaceDetectionListener(null);
             }
             this.mCameraDevice.setErrorCallback(null);
@@ -231,7 +239,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         if (cameraFacingIntentExtras != -1) {
             return cameraFacingIntentExtras;
         }
-        return CameraSettings.readPreferredCameraId((SharedPreferences)comboPreferences);
+        return CameraSettings.readPreferredCameraId((SharedPreferences) comboPreferences);
     }
 
     private void initializeCapabilities() {
@@ -247,12 +255,12 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         if (this.mFirstTimeInitialized) {
             return;
         }
-        this.mLocationManager.recordLocation(RecordLocationPreference.get((SharedPreferences)this.mPreferences, this.mContentResolver));
+        this.mLocationManager.recordLocation(RecordLocationPreference.get((SharedPreferences) this.mPreferences, this.mContentResolver));
         this.keepMediaProviderInstance();
         this.mUI.initializeFirstTime();
         final MediaSaveService mediaSaveService = this.mActivity.getMediaSaveService();
         if (mediaSaveService != null) {
-            mediaSaveService.setListener((MediaSaveService.Listener)this);
+            mediaSaveService.setListener((MediaSaveService.Listener) this);
         }
         this.mNamedImages = new NamedImages();
         this.mFirstTimeInitialized = true;
@@ -269,14 +277,14 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         if (CameraHolder.instance().getCameraInfo()[this.mCameraId].facing != 1) {
             b = false;
         }
-        this.mFocusManager = new FocusOverlayManager(this.mPreferences, this.mActivity.getResources().getStringArray(R.array.pref_camera_focusmode_default_array), this.mInitialParams, (FocusOverlayManager.Listener)this, b, this.mActivity.getMainLooper(), (FocusOverlayManager.FocusUI)this.mUI);
+        this.mFocusManager = new FocusOverlayManager(this.mPreferences, this.mActivity.getResources().getStringArray(R.array.pref_camera_focusmode_default_array), this.mInitialParams, (FocusOverlayManager.Listener) this, b, this.mActivity.getMainLooper(), (FocusOverlayManager.FocusUI) this.mUI);
     }
 
     private void initializeSecondTime() {
-        this.mLocationManager.recordLocation(RecordLocationPreference.get((SharedPreferences)this.mPreferences, this.mContentResolver));
+        this.mLocationManager.recordLocation(RecordLocationPreference.get((SharedPreferences) this.mPreferences, this.mContentResolver));
         final MediaSaveService mediaSaveService = this.mActivity.getMediaSaveService();
         if (mediaSaveService != null) {
-            mediaSaveService.setListener((MediaSaveService.Listener)this);
+            mediaSaveService.setListener((MediaSaveService.Listener) this);
         }
         this.mNamedImages = new NamedImages();
         this.mUI.initializeSecondTime(this.mParameters);
@@ -296,11 +304,11 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     }
 
     private void loadCameraPreferences() {
-        this.mPreferenceGroup = new CameraSettings(this.mActivity, this.mInitialParams, this.mCameraId, CameraHolder.instance().getCameraInfo()).getPreferenceGroup(2131034112);
+        this.mPreferenceGroup = new CameraSettings(this.mActivity, this.mInitialParams, this.mCameraId, CameraHolder.instance().getCameraInfo()).getPreferenceGroup(R.xml.camera_preferences);
     }
 
     private void locationFirstRun() {
-        if (!RecordLocationPreference.isSet((SharedPreferences)this.mPreferences) && CameraHolder.instance().getBackCameraId() != -1) {
+        if (!RecordLocationPreference.isSet((SharedPreferences) this.mPreferences) && CameraHolder.instance().getBackCameraId() != -1) {
             this.setLocationPreference("off");
         }
     }
@@ -311,10 +319,9 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         final int height = rootView.getHeight();
         this.mFocusManager.setPreviewSize(width, height);
         if (Util.getDisplayRotation(this.mActivity) % 180 == 0) {
-            ((CameraScreenNail)this.mActivity.mCameraScreenNail).setPreviewFrameLayoutSize(width, height);
-        }
-        else {
-            ((CameraScreenNail)this.mActivity.mCameraScreenNail).setPreviewFrameLayoutSize(height, width);
+            ((CameraScreenNail) this.mActivity.mCameraScreenNail).setPreviewFrameLayoutSize(width, height);
+        } else {
+            ((CameraScreenNail) this.mActivity.mCameraScreenNail).setPreviewFrameLayoutSize(height, width);
         }
         this.mActivity.setSingleTapUpListener(rootView);
         this.openCameraCommon();
@@ -324,7 +331,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private void onPreviewStarted() {
         this.mCameraStartUpThread = null;
         this.setCameraState(1);
-        if (!true) {//ApiHelper.HAS_SURFACE_TEXTURE
+        if (!ApiHelper.HAS_SURFACE_TEXTURE) {
             this.mCameraDevice.setPreviewDisplayAsync(this.mUI.getSurfaceHolder());
         }
         this.startFaceDetection();
@@ -344,7 +351,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
 
     private void resetExposureCompensation() {
         if (!"0".equals(this.mPreferences.getString("pref_camera_exposure_key", "0"))) {
-            final SharedPreferences.Editor edit = this.mPreferences.edit();
+            final Editor edit = this.mPreferences.edit();
             edit.putString("pref_camera_exposure_key", "0");
             edit.apply();
         }
@@ -386,8 +393,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         this.mUpdateSet |= n;
         if (this.mCameraDevice == null) {
             this.mUpdateSet = 0;
-        }
-        else {
+        } else {
             if (this.isCameraIdle()) {
                 this.setCameraParameters(this.mUpdateSet);
                 this.updateSceneMode();
@@ -403,10 +409,14 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private void setCameraState(final int mCameraState) {
         switch (this.mCameraState = mCameraState) {
             case 0:
+                break;
             case 2:
+                break;
             case 3:
+                break;
             case 4: {
                 this.mUI.enableGestures(false);
+                break;
             }
             case 1: {
                 if (this.mActivity.isInCameraApp()) {
@@ -454,7 +464,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private void setupCaptureParams() {
         final Bundle extras = this.mActivity.getIntent().getExtras();
         if (extras != null) {
-            this.mSaveUri = (Uri)extras.getParcelable("output");
+            this.mSaveUri = (Uri) extras.getParcelable("output");
             this.mCropValue = extras.getString("crop");
         }
     }
@@ -473,7 +483,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     }
 
     private void startPreview() {
-        this.mCameraDevice.setErrorCallback((Camera.ErrorCallback) this.mErrorCallback);
+        this.mCameraDevice.setErrorCallback((ErrorCallback) this.mErrorCallback);
         if (this.mCameraState != 0) {
             this.stopPreview();
         }
@@ -485,19 +495,19 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             this.mFocusManager.setAeAwbLock(false);
         }
         this.setCameraParameters(-1);
-        while(true) {
-            if (!true) {//ApiHelper.HAS_SURFACE_TEXTURE
+        Label_0212:
+        {
+            if (!ApiHelper.HAS_SURFACE_TEXTURE) {
                 this.mCameraDevice.setDisplayOrientation(this.mDisplayOrientation);
                 this.mCameraDevice.setPreviewDisplayAsync(this.mUI.getSurfaceHolder());
-                break;
+                break Label_0212;
             }
-            final CameraScreenNail cameraScreenNail = (CameraScreenNail)this.mActivity.mCameraScreenNail;
+            final CameraScreenNail cameraScreenNail = (CameraScreenNail) this.mActivity.mCameraScreenNail;
             if (this.mUI.getSurfaceTexture() == null) {
-                final Camera.Size previewSize = this.mParameters.getPreviewSize();
+                final Size previewSize = this.mParameters.getPreviewSize();
                 if (this.mCameraDisplayOrientation % 180 == 0) {
                     cameraScreenNail.setSize(previewSize.width, previewSize.height);
-                }
-                else {
+                } else {
                     cameraScreenNail.setSize(previewSize.height, previewSize.width);
                 }
                 cameraScreenNail.enableAspectRatioClamping();
@@ -507,16 +517,15 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                     return;
                 }
                 this.mUI.setSurfaceTexture(cameraScreenNail.getSurfaceTexture());
-            }
-            else {
+            } else {
                 this.updatePreviewSize(cameraScreenNail);
             }
             this.mCameraDevice.setDisplayOrientation(this.mCameraDisplayOrientation);
             final Object surfaceTexture = this.mUI.getSurfaceTexture();
             if (surfaceTexture != null) {
-                this.mCameraDevice.setPreviewTextureAsync((SurfaceTexture)surfaceTexture);
+                this.mCameraDevice.setPreviewTextureAsync((SurfaceTexture) surfaceTexture);
             }
-            break;
+            break Label_0212;
         }
         Log.v("CAM_PhotoModule", "startPreview");
         this.mCameraDevice.startPreviewAsync();
@@ -538,6 +547,8 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             if (this.mFocusManager != null) {
                 this.mFocusManager.removeMessages();
             }
+
+
             while (true) {
                 this.mPreferences.setLocalId((Context)this.mActivity, this.mCameraId);
                 CameraSettings.upgradeLocalPreferences(this.mPreferences.getLocal());
@@ -551,7 +562,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                             this.mFocusManager.setParameters(this.mInitialParams);
                             this.setupPreview();
                             this.openCameraCommon();
-                            if (false) {//ApiHelper.HAS_SURFACE_TEXTURE
+                            if (ApiHelper.HAS_SURFACE_TEXTURE) {
                                 this.mHandler.sendEmptyMessage(8);
                                 return;
                             }
@@ -559,11 +570,10 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                         }
                     }
                     catch (CameraHardwareException ex) {
-                        Util.showErrorAndFinish(this.mActivity, 2131558443);
+                        Util.showErrorAndFinish(this.mActivity, R.string.cannot_connect_camera);
                         return;
-                    }
-                    catch (CameraDisabledException ex2) {
-                        Util.showErrorAndFinish(this.mActivity, 2131558430);
+                    } catch (CameraDisabledException ex2) {
+                        Util.showErrorAndFinish(this.mActivity, R.string.camera_disabled);
                         return;
                     }
                     mirror = false;
@@ -576,7 +586,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     @TargetApi(16)
     private void updateAutoFocusMoveCallback() {
         if (this.mParameters.getFocusMode().equals("continuous-picture")) {
-            this.mCameraDevice.setAutoFocusMoveCallback((Camera.AutoFocusMoveCallback)this.mAutoFocusMoveCallback);
+            this.mCameraDevice.setAutoFocusMoveCallback(mAutoFocusMoveCallback);
             return;
         }
         this.mCameraDevice.setAutoFocusMoveCallback(null);
@@ -585,7 +595,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     private void updateCameraParametersInitialize() {
         final List supportedPreviewFrameRates = this.mParameters.getSupportedPreviewFrameRates();
         if (supportedPreviewFrameRates != null) {
-            this.mParameters.setPreviewFrameRate((int)Collections.max((Collection<Integer>)supportedPreviewFrameRates));
+            this.mParameters.setPreviewFrameRate((int) Collections.max(supportedPreviewFrameRates));
         }
         this.mParameters.set("recording-hint", "false");
         if ("true".equals(this.mParameters.get("video-stabilization-supported"))) {
@@ -600,19 +610,17 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         this.setMeteringAreasIfSupported();
         final String string = this.mPreferences.getString("pref_camera_picturesize_key", null);
         if (string == null) {
-            CameraSettings.initialCameraPictureSize((Context)this.mActivity, this.mParameters);
-        }
-        else {
+            CameraSettings.initialCameraPictureSize((Context) this.mActivity, this.mParameters);
+        } else {
             CameraSettings.setCameraPictureSize(string, this.mParameters.getSupportedPictureSizes(), this.mParameters);
         }
-        final Camera.Size pictureSize = this.mParameters.getPictureSize();
-        final Camera.Size optimalPreviewSize = Util.getOptimalPreviewSize(this.mActivity, this.mParameters.getSupportedPreviewSizes(), pictureSize.width / pictureSize.height);
-        if (!this.mParameters.getPreviewSize().equals((Object)optimalPreviewSize)) {
+        final Size pictureSize = this.mParameters.getPictureSize();
+        final Size optimalPreviewSize = Util.getOptimalPreviewSize(this.mActivity, this.mParameters.getSupportedPreviewSizes(), pictureSize.width / pictureSize.height);
+        if (!this.mParameters.getPreviewSize().equals((Object) optimalPreviewSize)) {
             this.mParameters.setPreviewSize(optimalPreviewSize.width, optimalPreviewSize.height);
             if (this.mHandler.getLooper() == Looper.myLooper()) {
                 this.setupPreview();
-            }
-            else {
+            } else {
                 this.mCameraDevice.setParameters(this.mParameters);
             }
             this.mParameters = this.mCameraDevice.getParameters();
@@ -620,8 +628,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         Log.v("CAM_PhotoModule", "Preview size is " + optimalPreviewSize.width + "x" + optimalPreviewSize.height);
         if (this.mActivity.getString(R.string.setting_on_value).equals(this.mPreferences.getString("pref_camera_hdr_key", this.mActivity.getString(R.string.pref_camera_hdr_default)))) {
             this.mSceneMode = "hdr";
-        }
-        else {
+        } else {
             this.mSceneMode = this.mPreferences.getString("pref_camera_scenemode_key", this.mActivity.getString(R.string.pref_camera_scenemode_default));
         }
         if (Util.isSupported(this.mSceneMode, this.mParameters.getSupportedSceneModes())) {
@@ -630,8 +637,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                 this.mCameraDevice.setParameters(this.mParameters);
                 this.mParameters = this.mCameraDevice.getParameters();
             }
-        }
-        else {
+        } else {
             this.mSceneMode = this.mParameters.getSceneMode();
             if (this.mSceneMode == null) {
                 this.mSceneMode = "auto";
@@ -642,30 +648,27 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         final int maxExposureCompensation = this.mParameters.getMaxExposureCompensation();
         if (exposure >= this.mParameters.getMinExposureCompensation() && exposure <= maxExposureCompensation) {
             this.mParameters.setExposureCompensation(exposure);
-        }
-        else {
+        } else {
             Log.w("CAM_PhotoModule", "invalid exposure range: " + exposure);
         }
         if ("auto".equals(this.mSceneMode)) {
             final String string2 = this.mPreferences.getString("pref_camera_flashmode_key", this.mActivity.getString(R.string.pref_camera_flashmode_default));
             if (Util.isSupported(string2, this.mParameters.getSupportedFlashModes())) {
                 this.mParameters.setFlashMode(string2);
-            }
-            else if (this.mParameters.getFlashMode() == null) {
+            } else if (this.mParameters.getFlashMode() == null) {
                 this.mActivity.getString(R.string.pref_camera_flashmode_no_flash);
             }
             final String string3 = this.mPreferences.getString("pref_camera_whitebalance_key", this.mActivity.getString(R.string.pref_camera_whitebalance_default));
             if (Util.isSupported(string3, this.mParameters.getSupportedWhiteBalance())) {
                 this.mParameters.setWhiteBalance(string3);
+            } else if (this.mParameters.getWhiteBalance() == null) {
             }
-            else if (this.mParameters.getWhiteBalance() == null) {}
             this.mFocusManager.overrideFocusMode(null);
             this.mParameters.setFocusMode(this.mFocusManager.getFocusMode());
-        }
-        else {
+        } else {
             this.mFocusManager.overrideFocusMode(this.mParameters.getFocusMode());
         }
-        if (this.mContinousFocusSupported && true) {//ApiHelper.HAS_AUTO_FOCUS_MOVE_CALLBACK
+        if (this.mContinousFocusSupported && ApiHelper.HAS_AUTO_FOCUS_MOVE_CALLBACK) {
             this.updateAutoFocusMoveCallback();
         }
     }
@@ -677,7 +680,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     }
 
     private void updatePreviewSize(final CameraScreenNail cameraScreenNail) {
-        final Camera.Size previewSize = this.mParameters.getPreviewSize();
+        final Size previewSize = this.mParameters.getPreviewSize();
         int n = previewSize.width;
         int n2 = previewSize.height;
         if (this.mCameraDisplayOrientation % 180 != 0) {
@@ -701,7 +704,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     @Override
     public void autoFocus() {
         this.mFocusStartTime = System.currentTimeMillis();
-        this.mCameraDevice.autoFocus((Camera.AutoFocusCallback)this.mAutoFocusCallback);
+        this.mCameraDevice.autoFocus(this.mAutoFocusCallback);
         this.setCameraState(2);
     }
 
@@ -723,8 +726,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         boolean b;
         if (this.mSceneMode == "hdr") {
             b = true;
-        }
-        else {
+        } else {
             b = false;
         }
         while (true) {
@@ -735,7 +737,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                 final Location currentLocation = this.mLocationManager.getCurrentLocation();
                 Util.setGpsParameters(this.mParameters, currentLocation);
                 this.mCameraDevice.setParameters(this.mParameters);
-                this.mCameraDevice.takePicture2((Camera.ShutterCallback)new ShutterCallback(!b), (Camera.PictureCallback)this.mRawPictureCallback, (Camera.PictureCallback)this.mPostViewPictureCallback, (Camera.PictureCallback)new JpegPictureCallback(currentLocation), this.mCameraState, this.mFocusManager.getFocusState());
+                this.mCameraDevice.takePicture2(new ShutterCallback(!b), (PictureCallback) this.mRawPictureCallback, (PictureCallback) this.mPostViewPictureCallback, (PictureCallback) new JpegPictureCallback(currentLocation), this.mCameraState, this.mFocusManager.getFocusState());
                 this.mNamedImages.nameNewImage(this.mContentResolver, this.mCaptureStartTime);
                 this.mFaceDetectionStarted = false;
                 this.setCameraState(3);
@@ -769,7 +771,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     public void init(CameraActivity mActivity, final View view) {
         this.mActivity = mActivity;
         this.mUI = new PhotoUI(mActivity, this, view);
-        this.mPreferences = new ComboPreferences((Context)this.mActivity);
+        this.mPreferences = new ComboPreferences((Context) this.mActivity);
         CameraSettings.upgradeGlobalPreferences(this.mPreferences.getGlobal());
         this.mCameraId = this.getPreferredCameraId(this.mPreferences);
         this.mContentResolver = this.mActivity.getContentResolver();
@@ -777,12 +779,12 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         this.mIsImageCaptureIntent = this.isImageCaptureIntent();
         mActivity = this.mActivity;
         mActivity.reuseCameraScreenNail(!this.mIsImageCaptureIntent);
-        this.mPreferences.setLocalId((Context)this.mActivity, this.mCameraId);
+        this.mPreferences.setLocalId((Context) this.mActivity, this.mCameraId);
         CameraSettings.upgradeLocalPreferences(this.mPreferences.getLocal());
         this.resetExposureCompensation();
         this.mStartPreviewPrerequisiteReady.open();
-        this.mLocationManager = new LocationManager((Context)this.mActivity, (LocationManager.Listener)this.mUI);
-        this.mSensorManager = (SensorManager)this.mActivity.getSystemService("sensor");
+        this.mLocationManager = new LocationManager((Context) this.mActivity, (LocationManager.Listener) this.mUI);
+        this.mSensorManager = (SensorManager) this.mActivity.getSystemService(Context.SENSOR_SERVICE);
         this.isDone = false;
     }
 
@@ -845,9 +847,9 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             return;
         }
         this.mPendingSwitchCameraId = mPendingSwitchCameraId;
-        if (false) {//ApiHelper.HAS_SURFACE_TEXTURE
+        if (ApiHelper.HAS_SURFACE_TEXTURE) {
             Log.v("CAM_PhotoModule", "Start to copy texture. cameraId=" + mPendingSwitchCameraId);
-            ((CameraScreenNail)this.mActivity.mCameraScreenNail).copyTexture();
+            ((CameraScreenNail) this.mActivity.mCameraScreenNail).copyTexture();
             this.setCameraState(4);
             return;
         }
@@ -901,8 +903,8 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     @Override
     public void onFullScreenChanged(final boolean fullScreen) {
         this.mUI.onFullScreenChanged(fullScreen);
-        if (true && this.mActivity.mCameraScreenNail != null) {//ApiHelper.HAS_SURFACE_TEXTURE
-            ((CameraScreenNail)this.mActivity.mCameraScreenNail).setFullScreen(fullScreen);
+        if (ApiHelper.HAS_SURFACE_TEXTURE && this.mActivity.mCameraScreenNail != null) {
+            ((CameraScreenNail) this.mActivity.mCameraScreenNail).setFullScreen(fullScreen);
         }
     }
 
@@ -987,7 +989,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     @Override
     public void onMediaSaveServiceConnected(final MediaSaveService mediaSaveService) {
         if (this.mFirstTimeInitialized) {
-            mediaSaveService.setListener((MediaSaveService.Listener)this);
+            mediaSaveService.setListener((MediaSaveService.Listener) this);
         }
     }
 
@@ -1016,7 +1018,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             this.mCameraDevice.cancelAutoFocus();
         }
         this.stopPreview();
-        ((CameraScreenNail)this.mActivity.mCameraScreenNail).releaseSurfaceTexture();
+        ((CameraScreenNail) this.mActivity.mCameraScreenNail).releaseSurfaceTexture();
         this.mNamedImages = null;
         if (this.mLocationManager != null) {
             this.mLocationManager.recordLocation(false);
@@ -1049,11 +1051,11 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         this.mPaused = true;
         final Sensor defaultSensor = this.mSensorManager.getDefaultSensor(1);
         if (defaultSensor != null) {
-            this.mSensorManager.unregisterListener((SensorEventListener)this, defaultSensor);
+            this.mSensorManager.unregisterListener((SensorEventListener) this, defaultSensor);
         }
         final Sensor defaultSensor2 = this.mSensorManager.getDefaultSensor(2);
         if (defaultSensor2 != null) {
-            this.mSensorManager.unregisterListener((SensorEventListener)this, defaultSensor2);
+            this.mSensorManager.unregisterListener((SensorEventListener) this, defaultSensor2);
         }
     }
 
@@ -1082,19 +1084,18 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             }
             if (!this.mFirstTimeInitialized) {
                 this.mHandler.sendEmptyMessage(2);
-            }
-            else {
+            } else {
                 this.initializeSecondTime();
             }
             this.keepScreenOnAwhile();
             UsageStatistics.onContentViewChanged("Camera", "PhotoModule");
             final Sensor defaultSensor = this.mSensorManager.getDefaultSensor(1);
             if (defaultSensor != null) {
-                this.mSensorManager.registerListener((SensorEventListener)this, defaultSensor, 3);
+                this.mSensorManager.registerListener((SensorEventListener) this, defaultSensor, 3);
             }
             final Sensor defaultSensor2 = this.mSensorManager.getDefaultSensor(2);
             if (defaultSensor2 != null) {
-                this.mSensorManager.registerListener((SensorEventListener)this, defaultSensor2, 3);
+                this.mSensorManager.registerListener((SensorEventListener) this, defaultSensor2, 3);
             }
         }
     }
@@ -1110,7 +1111,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         if (this.mFocusManager != null) {
             this.mFocusManager.setPreviewSize(n, n2);
         }
-        ((CameraScreenNail)this.mActivity.mCameraScreenNail).setPreviewFrameLayoutSize(n3, n4);
+        ((CameraScreenNail) this.mActivity.mCameraScreenNail).setPreviewFrameLayoutSize(n3, n4);
     }
 
     public void onSensorChanged(final SensorEvent sensorEvent) {
@@ -1118,8 +1119,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         float[] array;
         if (type == 1) {
             array = this.mGData;
-        }
-        else {
+        } else {
             if (type != 2) {
                 return;
             }
@@ -1129,9 +1129,9 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             array[i] = sensorEvent.values[i];
         }
         final float[] array2 = new float[3];
-        SensorManager.getRotationMatrix(this.mR, (float[])null, this.mGData, this.mMData);
+        SensorManager.getRotationMatrix(this.mR, (float[]) null, this.mGData, this.mMData);
         SensorManager.getOrientation(this.mR, array2);
-        this.mHeading = (int)(array2[0] * 180.0f / 3.141592653589793) % 360;
+        this.mHeading = (int) (array2[0] * 180.0f / 3.141592653589793) % 360;
         if (this.mHeading < 0) {
             this.mHeading += 360;
         }
@@ -1142,7 +1142,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         if (this.mPaused) {
             return;
         }
-        this.mLocationManager.recordLocation(RecordLocationPreference.get((SharedPreferences)this.mPreferences, this.mContentResolver));
+        this.mLocationManager.recordLocation(RecordLocationPreference.get((SharedPreferences) this.mPreferences, this.mContentResolver));
         this.setCameraParametersWhenIdle(4);
         this.mUI.updateOnScreenIndicators(this.mParameters, this.mPreferenceGroup, this.mPreferences);
     }
@@ -1236,7 +1236,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             if (this.mParameters != null && this.mCameraDevice != null) {
                 this.mParameters.setZoom(this.mZoomValue);
                 this.mCameraDevice.setParameters(this.mParameters);
-                final Camera.Parameters parameters = this.mCameraDevice.getParameters();
+                final Parameters parameters = this.mCameraDevice.getParameters();
                 if (parameters != null) {
                     return parameters.getZoom();
                 }
@@ -1258,16 +1258,16 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     @Override
     public void startFaceDetection() {
         boolean b = true;
-        if (true && !this.mFaceDetectionStarted && this.mParameters.getMaxNumDetectedFaces() > 0) {//ApiHelper.HAS_FACE_DETECTION
+        if (ApiHelper.HAS_FACE_DETECTION && !this.mFaceDetectionStarted && this.mParameters.getMaxNumDetectedFaces() > 0) {
             this.mFaceDetectionStarted = true;
-            final Camera.CameraInfo cameraCameraInfo = CameraHolder.instance().getCameraInfo()[this.mCameraId];
+            final CameraInfo camera$CameraInfo = CameraHolder.instance().getCameraInfo()[this.mCameraId];
             final PhotoUI mui = this.mUI;
             final int mDisplayOrientation = this.mDisplayOrientation;
-            if (cameraCameraInfo.facing != 1) {
+            if (camera$CameraInfo.facing != 1) {
                 b = false;
             }
             mui.onStartFaceDetection(mDisplayOrientation, b);
-            this.mCameraDevice.setFaceDetectionListener((Camera.FaceDetectionListener)this.mUI);
+            this.mCameraDevice.setFaceDetectionListener((FaceDetectionListener) this.mUI);
             this.mCameraDevice.startFaceDetection();
         }
     }
@@ -1275,7 +1275,7 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     @TargetApi(14)
     @Override
     public void stopFaceDetection() {
-        if (true && this.mFaceDetectionStarted && this.mParameters.getMaxNumDetectedFaces() > 0) {//ApiHelper.HAS_FACE_DETECTION
+        if (ApiHelper.HAS_FACE_DETECTION && this.mFaceDetectionStarted && this.mParameters.getMaxNumDetectedFaces() > 0) {
             this.mFaceDetectionStarted = false;
             this.mCameraDevice.setFaceDetectionListener(null);
             this.mCameraDevice.stopFaceDetection();
@@ -1313,12 +1313,11 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                 this.mCameraStartUpThread = null;
                 this.setCameraState(1);
             }
+        } catch (InterruptedException ex) {
         }
-        catch (InterruptedException ex) {}
     }
 
-    private final class AutoFocusCallback implements Camera.AutoFocusCallback
-    {
+    private final class AutoFocusCallback implements Camera.AutoFocusCallback {
         public void onAutoFocus(final boolean b, final Camera camera) {
             if (PhotoModule.this.mPaused) {
                 return;
@@ -1331,15 +1330,13 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
     }
 
     @TargetApi(16)
-    private final class AutoFocusMoveCallback implements Camera.AutoFocusMoveCallback
-    {
+    private final class AutoFocusMoveCallback implements Camera.AutoFocusMoveCallback {
         public void onAutoFocusMoving(final boolean b, final Camera camera) {
             PhotoModule.this.mFocusManager.onAutoFocusMoving(b);
         }
     }
 
-    private class CameraStartUpThread extends Thread
-    {
+    private class CameraStartUpThread extends Thread {
         private volatile boolean mCancelled;
 
         public void cancel() {
@@ -1374,18 +1371,15 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                         PhotoModule.this.mHandler.sendEmptyMessage(5);
                     }
                 }
-            }
-            catch (CameraHardwareException ex) {
+            } catch (CameraHardwareException ex) {
                 PhotoModule.this.mHandler.sendEmptyMessage(11);
-            }
-            catch (CameraDisabledException ex2) {
+            } catch (CameraDisabledException ex2) {
                 PhotoModule.this.mHandler.sendEmptyMessage(12);
             }
         }
     }
 
-    private final class JpegPictureCallback implements Camera.PictureCallback
-    {
+    private final class JpegPictureCallback implements PictureCallback {
         Location mLocation;
 
         public JpegPictureCallback(final Location mLocation) {
@@ -1401,60 +1395,56 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             if (PhotoModule.this.mPostViewPictureCallbackTime != 0L) {
                 PhotoModule.this.mShutterToPictureDisplayedTime = PhotoModule.this.mPostViewPictureCallbackTime - PhotoModule.this.mShutterCallbackTime;
                 PhotoModule.this.mPictureDisplayedToJpegCallbackTime = PhotoModule.this.mJpegPictureCallbackTime - PhotoModule.this.mPostViewPictureCallbackTime;
-            }
-            else {
+            } else {
                 PhotoModule.this.mShutterToPictureDisplayedTime = PhotoModule.this.mRawPictureCallbackTime - PhotoModule.this.mShutterCallbackTime;
                 PhotoModule.this.mPictureDisplayedToJpegCallbackTime = PhotoModule.this.mJpegPictureCallbackTime - PhotoModule.this.mRawPictureCallbackTime;
             }
             Log.v("CAM_PhotoModule", "mPictureDisplayedToJpegCallbackTime = " + PhotoModule.this.mPictureDisplayedToJpegCallbackTime + "ms");
-            if (true && !PhotoModule.this.mIsImageCaptureIntent && PhotoModule.this.mActivity.mShowCameraAppView) {//ApiHelper.HAS_SURFACE_TEXTURE
-                ((CameraScreenNail)PhotoModule.this.mActivity.mCameraScreenNail).animateSlide();
+            if (ApiHelper.HAS_SURFACE_TEXTURE && !PhotoModule.this.mIsImageCaptureIntent && PhotoModule.this.mActivity.mShowCameraAppView) {
+                ((CameraScreenNail) PhotoModule.this.mActivity.mCameraScreenNail).animateSlide();
             }
             PhotoModule.this.mFocusManager.updateFocusUI();
             if (!PhotoModule.this.mIsImageCaptureIntent) {
-                if (true){//ApiHelper.CAN_START_PREVIEW_IN_JPEG_CALLBACK
+                if (ApiHelper.CAN_START_PREVIEW_IN_JPEG_CALLBACK) {
                     PhotoModule.this.setupPreview();
-                }
-                else {
+                } else {
                     PhotoModule.this.mHandler.sendEmptyMessageDelayed(1, 300L);
                 }
             }
-            final Camera.Size pictureSize = PhotoModule.this.mParameters.getPictureSize();
-//            final ExifInterface exif = Exif.getExif(array);
-//            final int orientation = Exif.getOrientation(exif);
+            final Size pictureSize = PhotoModule.this.mParameters.getPictureSize();
+            final ExifInterface exif = Exif.getExif(array);
+            final int orientation = Exif.getOrientation(exif);
             int n;
             int n2;
-//            if ((PhotoModule.this.mJpegRotation + orientation) % 180 == 0) {
-//                n = pictureSize.width;
-//                n2 = pictureSize.height;
-//            }
-
+            if ((PhotoModule.this.mJpegRotation + orientation) % 180 == 0) {
+                n = pictureSize.width;
+                n2 = pictureSize.height;
+            } else {
                 n = pictureSize.height;
                 n2 = pictureSize.width;
-
+            }
             final String title = PhotoModule.this.mNamedImages.getTitle();
             final long date = PhotoModule.this.mNamedImages.getDate();
             if (title == null) {
                 Log.e("CAM_PhotoModule", "Unbalanced name/data pair");
-            }
-            else if ("Y".equals(CameraUtils.getSaveOriginalPhotoYn())) {
+            } else if ("Y".equals(CameraUtils.getSaveOriginalPhotoYn())) {
                 long mCaptureStartTime = date;
                 if (date == -1L) {
                     mCaptureStartTime = PhotoModule.this.mCaptureStartTime;
                 }
                 if (PhotoModule.this.mHeading >= 0) {
-//                    final ExifTag buildTag = exif.buildTag(ExifInterface.TAG_GPS_IMG_DIRECTION_REF, "M");
-//                    final ExifTag buildTag2 = exif.buildTag(ExifInterface.TAG_GPS_IMG_DIRECTION, new Rational(PhotoModule.this.mHeading, 1L));
-//                    exif.setTag(buildTag);
-//                    exif.setTag(buildTag2);
+                    final ExifTag buildTag = exif.buildTag(ExifInterface.TAG_GPS_IMG_DIRECTION_REF, "M");
+                    final ExifTag buildTag2 = exif.buildTag(ExifInterface.TAG_GPS_IMG_DIRECTION, new Rational(PhotoModule.this.mHeading, 1L));
+                    exif.setTag(buildTag);
+                    exif.setTag(buildTag2);
                 }
-//                PhotoModule.this.mActivity.getMediaSaveService().addImage(array, title, mCaptureStartTime, this.mLocation, n, n2, orientation, exif, PhotoModule.this.mOnMediaSavedListener, PhotoModule.this.mContentResolver);
+                PhotoModule.this.mActivity.getMediaSaveService().addImage(array, title, mCaptureStartTime, this.mLocation, n, n2, orientation, exif, PhotoModule.this.mOnMediaSavedListener, PhotoModule.this.mContentResolver);
             }
             PhotoModule.this.mActivity.updateStorageSpaceAndHint();
             PhotoModule.this.mJpegCallbackFinishTime = System.currentTimeMillis() - PhotoModule.this.mJpegPictureCallbackTime;
             Log.v("CAM_PhotoModule", "mJpegCallbackFinishTime = " + PhotoModule.this.mJpegCallbackFinishTime + "ms");
             PhotoModule.this.mJpegPictureCallbackTime = 0L;
-//            CameraActivity.photoData = new PhotoData(BitmapUtils.convertByteToBitmap(array), orientation, PhotoModule.this.mActivity.isSquare());
+            CameraActivity.photoData = new PhotoData(BitmapUtils.convertByteToBitmap(array), orientation, PhotoModule.this.mActivity.isSquare());
             if (CameraHolder.instance().getCameraInfo()[PhotoModule.this.mCameraId].facing == 1) {
                 CameraActivity.photoData.setPhoto(BitmapUtils.getLeftRightInversionBitmap(CameraActivity.photoData.getPhoto()));
             }
@@ -1462,21 +1452,24 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
         }
     }
 
-    private class MainHandler extends Handler
-    {
+    private class MainHandler extends Handler {
         public void handleMessage(final Message message) {
             switch (message.what) {
                 case 1: {
                     PhotoModule.this.setupPreview();
+                    break;
                 }
                 case 3: {
                     PhotoModule.this.mActivity.getWindow().clearFlags(128);
+                    break;
                 }
                 case 2: {
                     PhotoModule.this.initializeFirstTime();
+                    break;
                 }
                 case 4: {
                     PhotoModule.this.setCameraParametersWhenIdle(0);
+                    break;
                 }
                 case 5: {
                     if (Util.getDisplayRotation(PhotoModule.this.mActivity) != PhotoModule.this.mDisplayRotation) {
@@ -1490,32 +1483,37 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
                 }
                 case 7: {
                     PhotoModule.this.switchCamera();
+                    break;
                 }
                 case 8: {
-                    ((CameraScreenNail)PhotoModule.this.mActivity.mCameraScreenNail).animateSwitchCamera();
+                    ((CameraScreenNail) PhotoModule.this.mActivity.mCameraScreenNail).animateSwitchCamera();
+                    break;
                 }
                 case 9: {
                     PhotoModule.this.onCameraOpened();
+                    break;
                 }
                 case 10: {
                     PhotoModule.this.onPreviewStarted();
+                    break;
                 }
                 case 11: {
                     PhotoModule.this.mCameraStartUpThread = null;
                     PhotoModule.this.mOpenCameraFail = true;
-                    Util.showErrorAndFinish(PhotoModule.this.mActivity, 2131558443);
+                    Util.showErrorAndFinish(PhotoModule.this.mActivity, R.string.cannot_connect_camera);
+                    break;
                 }
                 case 12: {
                     PhotoModule.this.mCameraStartUpThread = null;
                     PhotoModule.this.mCameraDisabled = true;
-                    Util.showErrorAndFinish(PhotoModule.this.mActivity, 2131558430);
+                    Util.showErrorAndFinish(PhotoModule.this.mActivity, R.string.camera_disabled);
+                    break;
                 }
             }
         }
     }
 
-    private static class NamedImages
-    {
+    private static class NamedImages {
         private NamedEntity mNamedEntity;
         private ArrayList<NamedEntity> mQueue;
         private boolean mStop;
@@ -1549,31 +1547,27 @@ public class PhotoModule implements CameraModule, PhotoController, FocusOverlayM
             this.mQueue.add(namedEntity);
         }
 
-        private static class NamedEntity
-        {
+        private static class NamedEntity {
             long date;
             String title;
         }
     }
 
-    private final class PostViewPictureCallback implements Camera.PictureCallback
-    {
+    private final class PostViewPictureCallback implements PictureCallback {
         public void onPictureTaken(final byte[] array, final Camera camera) {
             PhotoModule.this.mPostViewPictureCallbackTime = System.currentTimeMillis();
             Log.v("CAM_PhotoModule", "mShutterToPostViewCallbackTime = " + (PhotoModule.this.mPostViewPictureCallbackTime - PhotoModule.this.mShutterCallbackTime) + "ms");
         }
     }
 
-    private final class RawPictureCallback implements Camera.PictureCallback
-    {
+    private final class RawPictureCallback implements PictureCallback {
         public void onPictureTaken(final byte[] array, final Camera camera) {
             PhotoModule.this.mRawPictureCallbackTime = System.currentTimeMillis();
             Log.v("CAM_PhotoModule", "mShutterToRawCallbackTime = " + (PhotoModule.this.mRawPictureCallbackTime - PhotoModule.this.mShutterCallbackTime) + "ms");
         }
     }
 
-    private final class ShutterCallback implements Camera.ShutterCallback
-    {
+    private final class ShutterCallback implements Camera.ShutterCallback {
         private boolean mAnimateFlash;
 
         public ShutterCallback(final boolean mAnimateFlash) {

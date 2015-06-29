@@ -27,6 +27,8 @@ public class CommonConstants
     public static final String CAMERA_SAVE_mapia_PHOTO_YN_NAME = "savemapiaPhotoYn";
     public static final String CAMERA_SAVE_mapia_VIDEO_YN_NAME = "savemapiaVideoYn";
     public static final String CHOSEN_FILE_PATH_KEY = "chosenFile";
+    public static final int POST_PIC = 11;
+    public static final int POST_PIC_SUC = 111;
 //    public static final int CROP_ICON_GUIDE_RADIUS = BitmapUtils.convertDipToPixelInt(170F);
     public static final int END = 0;
     public static final String EVENT_ACTIVITY_READ = "ear";

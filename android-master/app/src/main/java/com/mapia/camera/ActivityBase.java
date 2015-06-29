@@ -270,7 +270,7 @@ public abstract class ActivityBase extends AbstractGalleryActivity implements La
     }
 
     protected ScreenNail reuseCameraScreenNail(final boolean b) {
-        this.mCameraAppView = this.findViewById(2131361995);
+        this.mCameraAppView = this.findViewById(R.id.camera_app_root);
         this.cameraView.setScreenNail(this.mCameraScreenNail);
         return this.mCameraScreenNail;
     }
@@ -368,7 +368,7 @@ public abstract class ActivityBase extends AbstractGalleryActivity implements La
     private class HideCameraAppView implements Animation.AnimationListener
     {
         public void onAnimationEnd(final Animation animation) {
-            ActivityBase.this.mCameraAppView.setVisibility(4);
+            ActivityBase.this.mCameraAppView.setVisibility(View.VISIBLE);
         }
 
         public void onAnimationRepeat(final Animation animation) {

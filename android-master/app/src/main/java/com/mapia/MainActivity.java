@@ -27,7 +27,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.mapia.camera.CameraActivity;
 import com.mapia.common.BaseFragment;
 import com.mapia.common.CommonConstants;
 import com.mapia.common.FragmentTagStack;
@@ -38,7 +37,6 @@ import com.mapia.myfeed.MyfeedFragment;
 import com.mapia.network.NetworkStatusManager;
 import com.mapia.post.PostFragment;
 import com.mapia.search.SearchFragment;
-import com.mapia.util.MapiaToast;
 import com.mapia.util.RequestUtils;
 import com.volley.MapiaRequest;
 import com.volley.MapiaVolley;
@@ -77,7 +75,7 @@ public abstract class MainActivity extends FragmentActivity {
     protected KeyguardManager keyguaredManager;
     private long mLastToastTime = 0L;
     protected String mSchemeUrl;
-    protected MainApplication mainApplication;
+    public MainApplication mainApplication;
     protected int menuNo;
     protected Class<?> menuRootFragmentClass;
     protected String menuRootFragmentTag;
@@ -564,14 +562,7 @@ public abstract class MainActivity extends FragmentActivity {
         }
     }
 
-    public void startCameraActivity() {
-        if (MainApplication.getInstance().getUploadingStatus() != -1) {
-            MapiaToast.show(this, "\ub3d9\uc601\uc0c1 \uc804\uc1a1\uc644\ub8cc \ud6c4 \uc9c4\ud589\uac00\ub2a5\ud569\ub2c8\ub2e4", 0);
-            return;
-        }
-        this.startActivityForResult(new Intent((Context)this, (Class)CameraActivity.class), 0);
-        this.overridePendingTransition(0, 0);
-    }
+
 
 
     public MapiaRequest makeRequest(final int n, final String s, final Response.Listener<JSONObject> listener) {

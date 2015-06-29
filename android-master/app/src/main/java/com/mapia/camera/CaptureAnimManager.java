@@ -46,6 +46,8 @@ public class CaptureAnimManager
     private final Interpolator mSlideInterpolator;
     private float mX;
     private float mY;
+    private float mDelta;
+
 
     public CaptureAnimManager(final Context context) {
         super();
@@ -108,30 +110,29 @@ public class CaptureAnimManager
             n6 = n5 + 400L;
         }
         long n7 = 0L;
-        Label_0120: {
             if (this.mAnimType != 2) {
                 n7 = n6;
-                if (this.mAnimType != 0) {
-                    break Label_0120;
+                if (this.mAnimType == 0) {
+                    if (n6 < 400L) {
+                        n = 1;
+                        n7 = n6;
+                    }
+                    else if (n6 < 800L) {
+                        n = 2;
+                        n7 = n6 - 400L;
+                    }
+                    else if (n6 < 3300L) {
+                        n = 3;
+                        n7 = n6 - 800L;
+                    }
+                    else {
+                        n = 4;
+                        n7 = n6 - 3300L;
+                    }
                 }
             }
-            if (n6 < 400L) {
-                n = 1;
-                n7 = n6;
-            }
-            else if (n6 < 800L) {
-                n = 2;
-                n7 = n6 - 400L;
-            }
-            else if (n6 < 3300L) {
-                n = 3;
-                n7 = n6 - 800L;
-            }
-            else {
-                n = 4;
-                n7 = n6 - 3300L;
-            }
-        }
+
+
         if (n == 1) {
             rawTexture.draw(glCanvas, (int)this.mX, (int)this.mY, this.mDrawWidth, this.mDrawHeight);
             if (n7 < 200L) {
@@ -139,6 +140,32 @@ public class CaptureAnimManager
                 glCanvas.fillRect(this.mX, this.mY, this.mDrawWidth, this.mDrawHeight, n);
             }
         }
+
+//        else if (n == ANIM_FLASH) {
+//            rawTexture.draw(glCanvas, (int) mX, (int) mY, mDrawWidth, mDrawHeight);
+//            if (n5 < TIME_FLASH) {
+//                float f = 0.3f - 0.3f * n5 / TIME_FLASH;
+//                int color = Color.argb((int) (255 * f), 255, 255, 255);
+//                glCanvas.fillRect(mX, mY, mDrawWidth, mDrawHeight, color);
+//            }
+//        }
+//    else if (n == ANIM_SLIDE) {
+//            float fraction = (float) (n5) / TIME_SLIDE;
+//            float x = mX;
+//            float y = mY;
+//            if (mAnimOrientation == 0 || mAnimOrientation == 180) {
+//                x = x + mDelta * mSlideInterpolator.getInterpolation(fraction);
+//            } else {
+//                y = y + mDelta * mSlideInterpolator.getInterpolation(fraction);
+//            }
+//             float alpha = glCanvas.getAlpha();
+//             glCanvas.setAlpha(fraction);
+//            cameraScreenNail.directDraw(glCanvas, (int) mX, (int) mY,
+//                    mDrawWidth, mDrawHeight);
+//             glCanvas.setAlpha(alpha);
+//
+//            rawTexture.draw(glCanvas, (int) x, (int) y, mDrawWidth, mDrawHeight);
+//        }
         else if (n == 2) {
             final float interpolation = this.mSlideInterpolator.getInterpolation(n7 / 400.0f);
             final float mx = this.mX;
@@ -183,11 +210,80 @@ public class CaptureAnimManager
         return true;
     }
 
+
+    public boolean drawAnimation(GLCanvas canvas, CameraScreenNail preview,
+                                 RawTexture review) {
+        long timeDiff = SystemClock.uptimeMillis() - mAnimStartTime;
+        // Check if the animation is over
+        if (mAnimType == ANIM_SLIDE && timeDiff > TIME_SLIDE) return false;
+        if (mAnimType == ANIM_BOTH && timeDiff > TIME_HOLD + TIME_SLIDE) return false;
+
+        int animStep = mAnimType;
+        if (mAnimType == ANIM_BOTH) {
+            animStep = (timeDiff < TIME_HOLD) ? ANIM_FLASH : ANIM_SLIDE;
+            if (animStep == ANIM_SLIDE) {
+                timeDiff -= TIME_HOLD;
+            }
+        }
+
+        if (animStep == ANIM_FLASH) {
+            review.draw(canvas, (int) mX, (int) mY, mDrawWidth, mDrawHeight);
+            if (timeDiff < TIME_FLASH) {
+                float f = 0.3f - 0.3f * timeDiff / TIME_FLASH;
+                int color = Color.argb((int) (255 * f), 255, 255, 255);
+                canvas.fillRect(mX, mY, mDrawWidth, mDrawHeight, color);
+            }
+        } else if (animStep == ANIM_SLIDE) {
+            float fraction = (float) (timeDiff) / TIME_SLIDE;
+            float x = mX;
+            float y = mY;
+            if (mAnimOrientation == 0 || mAnimOrientation == 180) {
+                x = x + mDelta * mSlideInterpolator.getInterpolation(fraction);
+            } else {
+                y = y + mDelta * mSlideInterpolator.getInterpolation(fraction);
+            }
+            // float alpha = canvas.getAlpha();
+            // canvas.setAlpha(fraction);
+            preview.directDraw(canvas, (int) mX, (int) mY,
+                    mDrawWidth, mDrawHeight);
+            // canvas.setAlpha(alpha);
+
+            review.draw(canvas, (int) x, (int) y, mDrawWidth, mDrawHeight);
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+
     public void setOrientation(final int n) {
         this.mAnimOrientation = (360 - n) % 360;
     }
 
     public void startAnimation() {
         this.mAnimStartTime = SystemClock.uptimeMillis();
+    }
+
+    public void startAnimation(int x, int y, int w, int h) {
+        mAnimStartTime = SystemClock.uptimeMillis();
+        // Set the views to the initial positions.
+        mDrawWidth = w;
+        mDrawHeight = h;
+        mX = x;
+        mY = y;
+        switch (mAnimOrientation) {
+            case 0:  // Preview is on the left.
+                mDelta = w;
+                break;
+            case 90:  // Preview is below.
+                mDelta = -h;
+                break;
+            case 180:  // Preview on the right.
+                mDelta = -w;
+                break;
+            case 270:  // Preview is above.
+                mDelta = h;
+                break;
+        }
     }
 }

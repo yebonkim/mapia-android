@@ -30,15 +30,27 @@
         <attr name="recordingIndicatorDrawable" format="reference" />
         <attr name="recordedIndicatorDrawable" format="reference" />
 
-        <attr name="ctitle" format="string" />
         <attr name="icons" format="reference" />
 
-        <attr name="singleIcon" format="reference" />
-        <attr name="largeIcons" format="reference" />
+
+        <attr name="labelList" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CameraPreference">
+        <attr name="ctitle" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ListPreference">
         <attr name="key" format="string" />
-        <attr name="defaultValue" format="reference|string" />
+        <attr name="defaultValue" format="string|reference" />
         <attr name="entryValues" format="reference" />
         <attr name="entries" format="reference" />
-        <attr name="labelList" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="IconListPreference">
+        <!-- If a preference does not have individual icons for each entry, it can has a single icon to represent it. -->
+        <attr name="singleIcon" format="reference" />
+        <attr name="icons" />
+        <attr name="largeIcons" format="reference" />
+        <attr name="images" format="reference" />
     </declare-styleable>
 </resources>

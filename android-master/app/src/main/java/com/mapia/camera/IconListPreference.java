@@ -9,105 +9,98 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
+import com.mapia.R;
 import com.mapia.camera.util.IntArray;
 
 import java.util.List;
 
-
-public class IconListPreference extends com.mapia.camera.ListPreference
-{
-    private int[] mIconIds;
-    private int[] mImageIds;
-    private int[] mLargeIconIds;
+/** A {@code ListPreference} where each entry has a corresponding icon. */
+public class IconListPreference extends ListPreference {
     private int mSingleIconId;
+    private int mIconIds[];
+    private int mLargeIconIds[];
+    private int mImageIds[];
     private boolean mUseSingleIcon;
 
-    public IconListPreference(final Context context, final AttributeSet set) {
-        super(context, set);
-//        final TypedArray obtainStyledAttributes = context.obtainStyledAttributes(set, R.styleable.IconListPreference, 0, 0);
-//        final Resources resources = context.getResources();
-//        this.mSingleIconId = obtainStyledAttributes.getResourceId(1, 0);
-//        this.mIconIds = this.getIds(resources, obtainStyledAttributes.getResourceId(0, 0));
-//        this.mLargeIconIds = this.getIds(resources, obtainStyledAttributes.getResourceId(2, 0));
-//        this.mImageIds = this.getIds(resources, obtainStyledAttributes.getResourceId(3, 0));
-//        obtainStyledAttributes.recycle();
-    }
-
-    private int[] getIds(final Resources resources, int i) {
-        if (i == 0) {
-            return null;
-        }
-        final TypedArray obtainTypedArray = resources.obtainTypedArray(i);
-        final int length = obtainTypedArray.length();
-        final int[] array = new int[length];
-        for (i = 0; i < length; ++i) {
-            array[i] = obtainTypedArray.getResourceId(i, 0);
-        }
-        obtainTypedArray.recycle();
-        return array;
-    }
-
-    @Override
-    public void filterUnsupported(List<String> list) {
-        final CharSequence[] entryValues = this.getEntryValues();
-        final IntArray intArray = new IntArray();
-        final IntArray intArray2 = new IntArray();
-        final IntArray intArray3 = new IntArray();
-        for (int i = 0; i < entryValues.length; ++i) {
-            if (list.indexOf(entryValues[i].toString()) >= 0) {
-                if (this.mIconIds != null) {
-                    intArray.add(this.mIconIds[i]);
-                }
-                if (this.mLargeIconIds != null) {
-                    intArray2.add(this.mLargeIconIds[i]);
-                }
-                if (this.mImageIds != null) {
-                    intArray3.add(this.mImageIds[i]);
-                }
-            }
-        }
-        if (this.mIconIds != null) {
-            this.mIconIds = intArray.toArray(new int[intArray.size()]);
-        }
-        if (this.mLargeIconIds != null) {
-            this.mLargeIconIds = intArray2.toArray(new int[intArray2.size()]);
-        }
-        if (this.mImageIds != null) {
-            this.mImageIds = intArray3.toArray(new int[intArray3.size()]);
-        }
-
-        super.filterUnsupported(list);
-    }
-
-    public int[] getIconIds() {
-        return this.mIconIds;
-    }
-
-    public int[] getImageIds() {
-        return this.mImageIds;
-    }
-
-    public int[] getLargeIconIds() {
-        return this.mLargeIconIds;
+    public IconListPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.IconListPreference, 0, 0);
+        Resources res = context.getResources();
+        mSingleIconId = a.getResourceId(
+                R.styleable.IconListPreference_singleIcon, 0);
+        mIconIds = getIds(res, a.getResourceId(
+                R.styleable.IconListPreference_icons, 0));
+        mLargeIconIds = getIds(res, a.getResourceId(
+                R.styleable.IconListPreference_largeIcons, 0));
+        mImageIds = getIds(res, a.getResourceId(
+                R.styleable.IconListPreference_images, 0));
+        a.recycle();
     }
 
     public int getSingleIcon() {
-        return this.mSingleIconId;
+        return mSingleIconId;
+    }
+
+    public int[] getIconIds() {
+        return mIconIds;
+    }
+
+    public int[] getLargeIconIds() {
+        return mLargeIconIds;
+    }
+
+    public int[] getImageIds() {
+        return mImageIds;
     }
 
     public boolean getUseSingleIcon() {
-        return this.mUseSingleIcon;
+        return mUseSingleIcon;
     }
 
-    public void setIconIds(final int[] mIconIds) {
-        this.mIconIds = mIconIds;
+    public void setIconIds(int[] iconIds) {
+        mIconIds = iconIds;
     }
 
-    public void setLargeIconIds(final int[] mLargeIconIds) {
-        this.mLargeIconIds = mLargeIconIds;
+    public void setLargeIconIds(int[] largeIconIds) {
+        mLargeIconIds = largeIconIds;
     }
 
-    public void setUseSingleIcon(final boolean mUseSingleIcon) {
-        this.mUseSingleIcon = mUseSingleIcon;
+    public void setUseSingleIcon(boolean useSingle) {
+        mUseSingleIcon = useSingle;
+    }
+
+    private int[] getIds(Resources res, int iconsRes) {
+        if (iconsRes == 0) return null;
+        TypedArray array = res.obtainTypedArray(iconsRes);
+        int n = array.length();
+        int ids[] = new int[n];
+        for (int i = 0; i < n; ++i) {
+            ids[i] = array.getResourceId(i, 0);
+        }
+        array.recycle();
+        return ids;
+    }
+
+    @Override
+    public void filterUnsupported(List<String> supported) {
+        CharSequence entryValues[] = getEntryValues();
+        IntArray iconIds = new IntArray();
+        IntArray largeIconIds = new IntArray();
+        IntArray imageIds = new IntArray();
+
+        for (int i = 0, len = entryValues.length; i < len; i++) {
+            if (supported.indexOf(entryValues[i].toString()) >= 0) {
+                if (mIconIds != null) iconIds.add(mIconIds[i]);
+                if (mLargeIconIds != null) largeIconIds.add(mLargeIconIds[i]);
+                if (mImageIds != null) imageIds.add(mImageIds[i]);
+            }
+        }
+        if (mIconIds != null) mIconIds = iconIds.toArray(new int[iconIds.size()]);
+        if (mLargeIconIds != null) {
+            mLargeIconIds = largeIconIds.toArray(new int[largeIconIds.size()]);
+        }
+        if (mImageIds != null) mImageIds = imageIds.toArray(new int[imageIds.size()]);
+        super.filterUnsupported(supported);
     }
 }

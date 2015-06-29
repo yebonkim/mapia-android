@@ -45,6 +45,7 @@ public class CameraSettings
     public static final String KEY_TIMER = "pref_camera_timer_key";
     public static final String KEY_TIMER_SOUND_EFFECTS = "pref_camera_timer_sound_key";
     public static final String KEY_VERSION = "pref_version_key";
+    public static final String KEY_VIDEO_EFFECT = "pref_video_effect_key";
     public static final String KEY_VIDEOCAMERA_FLASH_MODE = "pref_camera_video_flashmode_key";
     public static final String KEY_VIDEO_FIRST_USE_HINT_SHOWN = "pref_video_first_use_hint_shown_key";
     public static final String KEY_VIDEO_QUALITY = "pref_video_quality_key";

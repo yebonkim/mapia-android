@@ -325,7 +325,7 @@ public class GLRootView extends GLSurfaceView implements GLSurfaceView.Renderer,
             GLES20.glFlush();
         }
         finally {
-            this.mRenderLock.unlock();
+//            this.mRenderLock.unlock();
         }
     }
 
@@ -370,7 +370,7 @@ public class GLRootView extends GLSurfaceView implements GLSurfaceView.Renderer,
             this.checkAndUpdateTextureSize();
         }
         finally {
-            this.mRenderLock.unlock();
+//            this.mRenderLock.unlock();
         }
     }
 

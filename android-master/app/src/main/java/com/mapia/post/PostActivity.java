@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.mapia.MainActivity;
 import com.mapia.R;
+import com.mapia.common.CommonConstants;
 import com.mapia.s3.Util;
 import com.mapia.s3.network.TransferController;
 
@@ -70,6 +71,11 @@ public class PostActivity extends MainActivity{
         Toast.makeText(getBaseContext(), "resultCode : " + resultCode, Toast.LENGTH_LONG).show();
 
 
+        if(requestCode == CommonConstants.POST_PIC){
+            if(resultCode == CommonConstants.POST_PIC_SUC){
+
+            }
+        }
         if(requestCode == REQ_CODE_SELECT_IMAGE)
         {
             if(resultCode== Activity.RESULT_OK && data != null)

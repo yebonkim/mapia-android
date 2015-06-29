@@ -305,16 +305,16 @@ public class BitmapUtils
     }
 
     public static void deleteImageChooserTemp() {
-//        final File file = new File(FileUtils.getDirectory("mapia_tmp"));
-//        if (file.isDirectory()) {
-//            final File[] listFiles = file.listFiles();
-//            for (int length = listFiles.length, i = 0; i < length; ++i) {
-//                listFiles[i].delete();
-//            }
-//            file.delete();
-//            return;
-//        }
-//        file.delete();
+        final File file = new File(com.kbeanie.imagechooser.api.FileUtils.getDirectory("mapia_tmp"));
+        if (file.isDirectory()) {
+            final File[] listFiles = file.listFiles();
+            for (int length = listFiles.length, i = 0; i < length; ++i) {
+                listFiles[i].delete();
+            }
+            file.delete();
+            return;
+        }
+        file.delete();
     }
 
     public static int exifToDegrees(final int n) {
