@@ -1,6 +1,7 @@
 package com.mapia.home;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -109,7 +110,7 @@ public class HomeFragment extends BaseFragment {
 
             // enable all of menu view
             FrameLayout viewGroup = (FrameLayout) layout.findViewById(R.id.llMenuMap).getParent();
-            enableDisableViewGroup(viewGroup, true);
+            //enableDisableViewGroup(viewGroup, true);
 
             // enable empty view
             layout.findViewById(R.id.ll_empty).setVisibility(View.VISIBLE);
@@ -133,9 +134,9 @@ public class HomeFragment extends BaseFragment {
 
 
             // enable all of menu view
-            FrameLayout viewGroup = (FrameLayout) layout.findViewById(R.id.mapShowFragment)
+            FrameLayout viewGroup = (FrameLayout) layout.findViewById(R.id.llMenuMap)
                     .getParent();
-            enableDisableViewGroup(viewGroup, false);
+           // enableDisableViewGroup(viewGroup, false);
 
             // disable empty view
             layout.findViewById(R.id.ll_empty).setVisibility(View.GONE);

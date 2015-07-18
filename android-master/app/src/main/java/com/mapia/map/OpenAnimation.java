@@ -1,5 +1,6 @@
 package com.mapia.map;
 
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -34,6 +35,7 @@ public class OpenAnimation extends TranslateAnimation implements
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mainLayout.getLayoutParams();
         params.leftMargin = panelWidth;
+        params.width = panelWidth/3*4;
         params.gravity = Gravity.LEFT;
         mainLayout.clearAnimation();
         mainLayout.setLayoutParams(params);
