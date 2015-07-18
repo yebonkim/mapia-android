@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,9 +15,6 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.mapia.MainActivity;
 import com.mapia.R;
-import com.mapia.common.CommonConstants;
-import com.mapia.s3.Util;
-import com.mapia.s3.network.TransferController;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +32,8 @@ public class PostActivity extends MainActivity{
     RelativeLayout btnPostSubmit;
     ImageView btnPostCancel;
     ImageButton btnPostPhoto, btnPostVideo;
-    private ArrayList<String> mFileNameList = new ArrayList<String>();
+    public ArrayList<String> mFileNameList = new ArrayList<String>();
+    public ArrayList<Uri> mFileUriList = new ArrayList<Uri>();
 
 
     public LatLng getLatLng(){
@@ -71,51 +69,53 @@ public class PostActivity extends MainActivity{
         Toast.makeText(getBaseContext(), "resultCode : " + resultCode, Toast.LENGTH_LONG).show();
 
 
-        if(requestCode == CommonConstants.POST_PIC){
-            if(resultCode == CommonConstants.POST_PIC_SUC){
-
-            }
-        }
-        if(requestCode == REQ_CODE_SELECT_IMAGE)
+        if(resultCode== Activity.RESULT_OK && data != null)
         {
-            if(resultCode== Activity.RESULT_OK && data != null)
+
+
+            Uri uri = data.getData();
+            if (uri != null) {
+                mFileUriList.add(uri);
+            }
+
+            try {
+                //Dynamic 하게 바꿔야함
+
+                //Uri에서 이미지 이름을 얻어온다.
+                //String name_Str = getImageNameToUri(data.getData());
+
+                //이미지 데이터를 비트맵으로 받아온다.
+                Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+
+
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                int width = metrics.widthPixels;
+                int height = metrics.heightPixels;
+
+                RelativeLayout imgHolder = (RelativeLayout) findViewById(R.id.image_view_holder);
+
+                ImageView image = new ImageView(this);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width/2, height/2);
+
+                //배치해놓은 ImageView에 set
+                image.setLayoutParams(params);
+                image.setImageBitmap(image_bitmap);
+
+                imgHolder.addView(image);
+
+                //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
+
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (Exception e)
             {
-
-                Uri uri = data.getData();
-                if (uri != null) {
-                    TransferController.upload(this, uri);
-
-                    String uriString = uri.toString();
-                    mFileNameList.add(Util.getFileName(uriString));
-                    Log.i("file", uriString);
-                    Log.i("file", mFileNameList.toString());
-                }
-
-                try {
-                    //Uri에서 이미지 이름을 얻어온다.
-                    //String name_Str = getImageNameToUri(data.getData());
-
-                    //이미지 데이터를 비트맵으로 받아온다.
-                    Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    ImageView image = (ImageView)findViewById(R.id.imageView1);
-
-                    //배치해놓은 ImageView에 set
-                    image.getLayoutParams().height = 200;
-                    image.setImageBitmap(image_bitmap);
-
-
-                    //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+                e.printStackTrace();
             }
         }
     }
