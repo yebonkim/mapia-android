@@ -57,6 +57,7 @@ public class DownloadActivity extends Activity {
                 // download all the objects that were selected
                 String[] keys = new String[mSelectedObjects.size()];
                 int i = 0;
+
                 for (S3ObjectSummary obj : mSelectedObjects) {
                     keys[i] = obj.getKey();
                     i++;

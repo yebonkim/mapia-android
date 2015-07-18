@@ -1,5 +1,7 @@
 package com.mapia.map;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -11,7 +13,7 @@ class MarkerData{
     String letter;
     Timestamp time;
     String user;
-
+    Bitmap image;
 	Marker marker;
 
 	public MarkerData(LatLng location){
@@ -40,6 +42,14 @@ class MarkerData{
         this.user = user;
     }
 
+    public MarkerData(LatLng location, Timestamp time, String letter, String user, Bitmap image){
+        super();
+        this.location = location;
+        this.time = time;
+        this.letter = letter;
+        this.user = user;
+        this.image = image;
+    }
     public MarkerData(LatLng location, String letter, String user){
         super();
         this.location = location;

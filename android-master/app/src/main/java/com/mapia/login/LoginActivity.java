@@ -17,6 +17,8 @@ import com.mapia.R;
 import com.mapia.home.HomeActivity;
 import com.mapia.map.MapActivity;
 import com.mapia.network.RestRequestHelper;
+import com.mapia.post.PostActivity;
+import com.mapia.s3.S3Activity;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -44,7 +46,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void loginCheck(String id, String pw){
 
         if(id.compareTo("admin")==0 && pw.compareTo("admin")==0){
-            Intent i = new Intent(LoginActivity.this, MapActivity.class);
+            Intent i = new Intent(LoginActivity.this, PostActivity.class);//Originally MapActivity
             startActivity(i);
             finish();
         }
@@ -67,6 +69,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
+
+//temp
+        Intent i = new Intent(LoginActivity.this, S3Activity.class);
+        startActivity(i);
+        finish();
 
 
 
@@ -152,7 +159,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                             .toString(), Toast.LENGTH_LONG).show();
 
 
-                                    Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                                    Intent i = new Intent(LoginActivity.this, MapActivity.class);
                                     startActivity(i);
                                     finish();
                                 }

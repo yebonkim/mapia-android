@@ -32,7 +32,6 @@ public class MapActivity extends FragmentActivity implements OnClickListener{
 	Fragment lastFragment = null;
 
 
-
 	@TargetApi(11)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

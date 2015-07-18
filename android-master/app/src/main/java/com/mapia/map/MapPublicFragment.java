@@ -63,10 +63,21 @@ public class MapPublicFragment extends MapFragment {
 							Toast.makeText(getActivity(), "Public 글 읽어오기 성공".toString(), Toast.LENGTH_LONG).show();
 							for (int i = 0; i < jsonArray.size(); i++) {
 								JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-								MarkerData markerData = new MarkerData(new LatLng(jsonObject.get("lat").getAsDouble(),
-										jsonObject.get("lng").getAsDouble()),
-										jsonObject.get("content").getAsString(),
-										jsonObject.get("username").getAsString());
+								MarkerData markerData;
+								if(jsonObject.has("image")){
+
+									markerData = new MarkerData(new LatLng(jsonObject.get("lat").getAsDouble(),
+											jsonObject.get("lng").getAsDouble()),
+											jsonObject.get("content").getAsString(),
+											jsonObject.get("username").getAsString());
+									//add image to parameter
+								}
+								else {
+									markerData = new MarkerData(new LatLng(jsonObject.get("lat").getAsDouble(),
+											jsonObject.get("lng").getAsDouble()),
+											jsonObject.get("content").getAsString(),
+											jsonObject.get("username").getAsString());
+								}
 								markerList.add(markerData);
 							}
 							markerDatas = markerList;

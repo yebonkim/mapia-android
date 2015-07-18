@@ -7,6 +7,7 @@ package com.mapia.post;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,11 +18,13 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -63,6 +66,8 @@ import com.mapia.login.LoginInfo;
 import com.mapia.mention.MentionModel;
 import com.mapia.myfeed.MyfeedActivity;
 import com.mapia.network.RestRequestHelper;
+import com.mapia.s3.Util;
+import com.mapia.s3.network.TransferController;
 import com.mapia.search.tag.SearchTagModel;
 import com.mapia.setting.MapiaOneBtnDialog;
 import com.mapia.util.BitmapUtils;
@@ -78,8 +83,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -172,6 +179,8 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     private ImageButton btnPostPhoto, btnPostVideo, btnPostGallery;
     private TextView textPostLocation;
     private LatLng latLng;
+    private ArrayList<String> mFileNameList = new ArrayList<String>();
+    private ArrayList<Uri> mFileUriList = new ArrayList<Uri>();
     final int REQ_CODE_SELECT_IMAGE = 100;
 
     public PostFragment() {
@@ -194,27 +203,55 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
                 RestRequestHelper requestHelper = RestRequestHelper.newInstance();
                 final LatLng postLatlng = latLng;
                 final String postComment = mEdtPost.getText().toString();
-                final ArrayList<String> fileList;
                 String mapType = "public";
 
-                requestHelper.posts(
-                        mapType, postComment, postLatlng, new Callback<JsonObject>() {
-                            @Override
-                            public void success(JsonObject jsonObject, retrofit.client.Response response) {
-                                Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
+
+
+                if (mFileUriList.size() > 0){
+                    for(Uri eachUri : mFileUriList) {
+                        TransferController.upload(getActivity().getApplicationContext(), eachUri);
+
+                        String uriString = eachUri.toString();
+                        mFileNameList.add(Util.getFileName(uriString));
+                        Log.i("file", uriString);
+                        Log.i("file", mFileNameList.toString());
+                    }
+                    requestHelper.posts(
+                            mapType, postComment, postLatlng, mFileNameList, new Callback<JsonObject>() {
+                                @Override
+                                public void success(JsonObject jsonObject, retrofit.client.Response response) {
+                                    Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
 //                                    ((MainApplication) getActivity().getApplication()).getMapPublicFragment();
+                                    getActivity().finish();
+                                }
 
-                                getActivity().finish();
-                            }
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Log.i("Post 등록 실패", error.getMessage().toString());
+                                    Toast.makeText(getActivity(), "Post 등록 실패".toString(), Toast.LENGTH_LONG).show();
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                Log.i("Post 등록 실패", error.getMessage().toString());
-                                Toast.makeText(getActivity(), "Post 등록 실패".toString(), Toast.LENGTH_LONG).show();
+                                }
+                            });
 
-                            }
-                        });
+                }
+                else {
+                    requestHelper.posts(
+                            mapType, postComment, postLatlng, new Callback<JsonObject>() {
+                                @Override
+                                public void success(JsonObject jsonObject, retrofit.client.Response response) {
+                                    Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
+//                                    ((MainApplication) getActivity().getApplication()).getMapPublicFragment();
+                                    getActivity().finish();
+                                }
 
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Log.i("Post 등록 실패", error.getMessage().toString());
+                                    Toast.makeText(getActivity(), "Post 등록 실패".toString(), Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+                }
 
 //                AceUtils.nClick(NClicks.WRITING_OK);
                 // 임시로 이전 리퀘스트 패턴 사용
@@ -344,6 +381,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         this.startActivityForResult(new Intent(mainActivity.mainApplication.getPostActivity(), CameraActivity.class), CommonConstants.POST_PIC);
 //        this.overridePendingTransition(0, 0);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -356,12 +394,14 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         super.onCreate(bundle);
     }
 
+
     @Override
     public View onCreateView(final LayoutInflater layoutInflater, final ViewGroup viewGroup, final Bundle bundle) {
         this.mRootView = layoutInflater.inflate(R.layout.fragment_post, viewGroup, false);
         this.initialize();
         return this.mRootView;
     }
+
 
     @Override
     public void onResume() {
@@ -1449,6 +1489,56 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
         if (requestCode == CommonConstants.POST_PIC) {
             if (resultCode == CommonConstants.POST_PIC_SUC) {
                 initThumbnail();
+            }
+        }
+        if(resultCode== Activity.RESULT_OK && data != null)
+        {
+
+
+            Uri uri = data.getData();
+            if (uri != null) {
+                mFileUriList.add(uri);
+            }
+
+            try {
+                //Dynamic 하게 바꿔야함
+
+                //Uri에서 이미지 이름을 얻어온다.
+                //String name_Str = getImageNameToUri(data.getData());
+
+                //이미지 데이터를 비트맵으로 받아온다.
+                Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+
+
+                DisplayMetrics metrics = new DisplayMetrics();
+                getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                int width = metrics.widthPixels;
+                int height = metrics.heightPixels;
+
+                RelativeLayout imgHolder = (RelativeLayout) getActivity().findViewById(R.id.image_view_holder);
+
+                ImageView image = new ImageView(this.getActivity());
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width/2, height/2);
+
+                //배치해놓은 ImageView에 set
+                image.getLayoutParams().height = 200;
+                image.setImageBitmap(image_bitmap);
+
+                image.setLayoutParams(params);
+                imgHolder.addView(image);
+
+                //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
+
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (Exception e)
+            {
+                e.printStackTrace();
             }
         }
     }

@@ -66,6 +66,7 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 		final SupportMapFragment smf = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map_background);
 
 		backgroundMap = smf.getMap();
+
 		backgroundMap.setOnMapClickListener(this);
 		backgroundMap.setOnCameraChangeListener(this);
 

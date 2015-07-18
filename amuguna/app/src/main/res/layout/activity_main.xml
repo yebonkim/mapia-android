@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp" tools:context=".MainActivity"
+    android:padding="0dp">
+    <LinearLayout android:orientation="vertical" android:id="@+id/fh_header" android:background="#2e3e4f" android:layout_width="fill_parent" android:layout_height="53.5dip" android:layout_alignParentTop="true">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="53.0dip"
+            android:background="#ffffff">
+            <LinearLayout android:gravity="center|right" android:id="@+id/fh_button_menu" android:layout_width="51.0dip" android:layout_height="fill_parent">
+                <ImageView android:layout_width="46.0dip" android:layout_height="46.0dip"
+                    android:id="@+id/backBtn" />
+            </LinearLayout>
+
+            <LinearLayout android:gravity="center" android:id="@+id/fh_title" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginLeft="0dip" android:layout_weight="1.0">
+                <TextView android:id="@+id/fh_title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AMUGUNA" android:textColor="#56C6C9" android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center|left" android:id="@+id/fh_button_search" android:layout_width="51.0dip" android:layout_height="fill_parent">
+                <ImageView android:layout_width="46.0dip" android:layout_height="46.0dip" android:src="@drawable/btn_refresh"
+                    android:id="@+id/refreshBtn" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:background="#ffe6e6e6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_below="@+id/fh_header" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/fh_header"
+        android:layout_above="@+id/ad_image">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/firstBtn"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:padding="0dp" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+
+            android:id="@+id/secondBtn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:padding="0dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/level_text"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/black_circle"
+        android:gravity="center"
+        android:text="32강"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="245dp" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/ad_image"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="0dp" />
+
+</RelativeLayout>
