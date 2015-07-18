@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -59,6 +60,14 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	private PlacePicker.IntentBuilder builder;
 	RestRequestHelper requestHelper = RestRequestHelper.newInstance();
 
+	private void mapInit(){
+		if(backgroundMap!=null) {
+			backgroundMap.setOnMapClickListener(this);
+			backgroundMap.setOnCameraChangeListener(this);
+		}
+		else Toast.makeText(getActivity().getApplicationContext(),"NotMapLoaded",Toast.LENGTH_LONG);
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -66,9 +75,13 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 		final SupportMapFragment smf = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map_background);
 
 		backgroundMap = smf.getMap();
+		smf.getMapAsync(new OnMapReadyCallback() {
+			@Override
+			public void onMapReady(GoogleMap googleMap) {
+				mapInit();
+			}
+		});
 
-		backgroundMap.setOnMapClickListener(this);
-		backgroundMap.setOnCameraChangeListener(this);
 
 		locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this);

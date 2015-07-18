@@ -1,49 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:id="@+id/dl_activity_main_drawer"
+    tools:context=".MainActivity" >
+
     <LinearLayout
-    	android:id="@+id/mapShowFragment"
-    	android:orientation="vertical"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:layout_weight="1">
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/mapShowFragment"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="10">
-
-        <Button
-            android:id="@+id/btn_Fragment1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="1" />
-
-        <Button
-            android:id="@+id/btn_Fragment2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="2" />
-
-        <Button
-            android:id="@+id/btn_Fragment3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="3" />
-
-        <Button
-            android:id="@+id/btn_Fragment4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="4" />
-
+        android:layout_weight="1">
     </LinearLayout>
-</LinearLayout>
+
+    <ListView
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_activity_main_nav_list"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#EDEDED"/>
+
+</android.support.v4.widget.DrawerLayout>

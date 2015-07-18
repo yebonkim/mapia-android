@@ -8,14 +8,17 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.mapia.R;
 
-public class MapActivity extends FragmentActivity implements OnClickListener{
+public class MapActivity extends FragmentActivity{
 
 	int currentFragmentIndex;
 
@@ -24,6 +27,8 @@ public class MapActivity extends FragmentActivity implements OnClickListener{
 	public static float cameraZoom = 8;
 	public static ImageButton imgBtnNav, imgBtnSearch;
 	public static TextView txtMapName;
+
+	private ListView lvNavList;
 	Button btn1, btn2, btn3, btn4;
 	MapPrivateFragment mapPrivateFragment = null;
 	MapPublicFragment mapPublicFragment = null;
@@ -31,6 +36,7 @@ public class MapActivity extends FragmentActivity implements OnClickListener{
 	MapGroupFragment mapGroupFragment = null;
 	Fragment lastFragment = null;
 
+    private String[] navItems = {"PrivateMap","PublicMap","FollowMap","GroupMap"};
 
 	@TargetApi(11)
 	@Override
@@ -51,25 +57,17 @@ public class MapActivity extends FragmentActivity implements OnClickListener{
 		mActionBar.setCustomView(mCustomView);
 		mActionBar.setDisplayShowCustomEnabled(true);
 
-		btn1 = (Button)findViewById(R.id.btn_Fragment1);
-		btn2 = (Button)findViewById(R.id.btn_Fragment2);
-		btn3 = (Button)findViewById(R.id.btn_Fragment3);
-		btn4 = (Button)findViewById(R.id.btn_Fragment4);
-		btn1.setOnClickListener(this);
-		btn2.setOnClickListener(this);
-		btn3.setOnClickListener(this);
-		btn4.setOnClickListener(this);
-
-
-
+        lvNavList.setAdapter(
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
+        lvNavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               // if(position>=0 && position<=3) fragmentReplace(position+1);
+            }
+        });
 		currentFragmentIndex = 1;
-		
 		fragmentReplace(currentFragmentIndex);
-
-
-
 	}
-
 
 	private void fragmentReplace(int newFragmentIndex) {
 		Fragment newFragment = null;
@@ -81,8 +79,6 @@ public class MapActivity extends FragmentActivity implements OnClickListener{
 		transaction.replace(R.id.mapShowFragment, newFragment);
 		transaction.commit();
 	}
-
-
 
 	private Fragment getFragment(int index) {
 		Fragment newFragment = null;
@@ -108,26 +104,6 @@ public class MapActivity extends FragmentActivity implements OnClickListener{
 		}
 		return newFragment;
 	}
-
-	@Override
-	public void onClick(View v) {
-		switch(v.getId()){
-		case R.id.btn_Fragment1:
-			currentFragmentIndex = 1;
-			break;
-		case R.id.btn_Fragment2:
-			currentFragmentIndex = 2;
-			break;
-		case R.id.btn_Fragment3:
-			currentFragmentIndex = 3;
-			break;
-		case R.id.btn_Fragment4:
-			currentFragmentIndex = 4;
-			break;
-		}
-		fragmentReplace(currentFragmentIndex);
-	}
-
 
 
 }
