@@ -91,7 +91,6 @@ public class HomeActivity extends MainActivity implements GoogleApiClient.Connec
         if (homeFragment != null && NetworkStatusManager.getIsAvailableNetwork()){
             long currentTimeMillis = System.currentTimeMillis();
             if(currentTimeMillis-HomeUtils.beforeHomeLoadingTime >= 3600000L){
-                homeFragment.refreshHome();
                 HomeUtils.beforeHomeLoadingTime = currentTimeMillis;
             }
         }

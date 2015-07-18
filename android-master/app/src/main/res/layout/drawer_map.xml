@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="360dp"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/drawerLlProfile"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/drawerProfileNameKor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserNameKor"
+            android:textSize="20dp"
+            android:layout_above="@+id/drawerProfileNameEng"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/drawerProfileNameEng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserNameEng"
+            android:textSize="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true" />
+        <ImageView
+            android:id="@+id/drawerProfileEdit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dot"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/drawerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/drawerStatusFollowing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/drawerStatusFollower"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/drawerStatusPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        </LinearLayout>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawerLvItems"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#EDEDED"/>
+
+</LinearLayout>

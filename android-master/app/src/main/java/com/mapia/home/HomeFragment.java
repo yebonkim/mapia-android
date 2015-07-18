@@ -2,15 +2,21 @@ package com.mapia.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ListView;
 
 import com.mapia.R;
 import com.mapia.common.BaseFragment;
-import com.mapia.custom.ListenableScrollView;
+import com.mapia.map.CloseAnimation;
+import com.mapia.map.OpenAnimation;
 import com.mapia.search.SearchActivity;
 
 import java.util.Timer;
@@ -26,27 +32,15 @@ public class HomeFragment extends BaseFragment {
     private boolean firstDragFlag = false;
     private int[] groupResourceIdArray = {};
     private LinearLayout header;
-//    private HomeBannerAdapter homeBannerAdapter;
-//    private HomeHotAdapter homeHotAdapter;
-//    private HomeManager homeManager;
-//    private HomeTaggroupAdapter homeTaggroupAdapter;
-    private RelativeLayout layout;
-    private ListenableScrollView scrollView;
-//    private listenableSrollView scrollView;
-//    private float startYPosition;
-//    private HomeSwiperRefreshLayout swipeRefreshLayout;
+    private static boolean isMenuExpanded = false;
+    private int menuWidth;
+    private ListView lvNavList;
+    private LinearLayout layout;
+    LinearLayout llMenuMap = null, llMainMap = null;
     private Timer timer;
     private TimerTask timerTask;
+    View mMapView;
 
-//    private void setMyfeedPicTextViewWidth(final ViewparamView){
-//        paramView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
-//            @SuppressLint({"NewApi"})
-//            public void onGlobalLayout(){
-//               MyfeedPicUtils.bodyTextViewWidth = paramView.getWidth();
-//
-//            }
-//        })
-//    }
     @Override
     public void onCreate(Bundle paramBundle){
         super.onCreate(paramBundle);
@@ -55,46 +49,115 @@ public class HomeFragment extends BaseFragment {
 //        this.homeTaggroupAdapter = new HomeTaggroupAdapter(this.mainAcitivity, this);
 //        this.homeManager = new HomeManager(this.mainActivity, this, this.homeHotAdapter, this.homeBannerAdapter, this.homeTaggroupAdapter);
         ((HomeActivity)this.mainActivity).setHomeFragment(this);
-        }
-
-
-
-    public void refreshHome(){
-        this.scrollView.scrollTo(0,0);
-
     }
+
+
     @Override
     public View onCreateView(final LayoutInflater paramLayoutInflater, ViewGroup paramViewGroup, Bundle paramBundle){
-        this.layout = ((RelativeLayout)paramLayoutInflater.inflate(R.layout.fragment_home, paramViewGroup, false));
+
+
+        this.layout = ((LinearLayout)paramLayoutInflater.inflate(R.layout.fragment_home, paramViewGroup, false));
 //        if(!"Y".equals(PreferenceUtils.getPreference("alreadyHomeCoachShowYn"))){
 //            this.mainActivity.showHomeCoach();
 //        }
         this.header = ((LinearLayout)this.layout.findViewById(R.id.fh_header));
-        this.header.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View paramAnonymousView){
-                HomeFragment.this.scrollToTop();
-            }
-        });
+
         this.layout.findViewById(R.id.fh_title_text).setOnClickListener(new View.OnClickListener() {
             public void onClick(View paramAnonymousView) {
             }
         });
-        this.layout.findViewById(R.id.fh_button_search).setOnClickListener(new View.OnClickListener(){
-            public void onClick(View paramAnonymousView){
+        this.layout.findViewById(R.id.fh_button_menu).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View paramAnonymousView) {
+                menuAnimationToggle();
+            }
+        });
+        this.layout.findViewById(R.id.fh_button_search).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View paramAnonymousView) {
                 Intent intent = new Intent(HomeFragment.this.mainActivity, SearchActivity.class);
                 HomeFragment.this.startActivity(intent);
             }
         });
+        initSildeMenu();
         return this.layout;
 
     }
 
-    public void scrollToTop(){
-        this.scrollView.smoothScrollTo(0,0);
-        this.scrollView.post(new Runnable(){
-            public void run(){
-                HomeFragment.this.mainActivity.showMenuBar(true);
-            }
-        });
+
+
+    private void initSildeMenu() {
+        /* init menu layout size */
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        menuWidth = (int) ((metrics.widthPixels) * 0.75);
+
+        llMainMap = (LinearLayout) layout.findViewById(R.id.llMainMap);
+
+        llMenuMap = (LinearLayout) layout.findViewById(R.id.llMenuMap);
+        FrameLayout.LayoutParams MenuLayoutPrams = (FrameLayout.LayoutParams) llMenuMap.getLayoutParams();
+        MenuLayoutPrams.width = menuWidth;
+        llMenuMap.setLayoutParams(MenuLayoutPrams);
+
     }
+
+    private void menuAnimationToggle() {
+        if (!isMenuExpanded) {
+            isMenuExpanded = true;
+            // Expand
+            new OpenAnimation(llMainMap, menuWidth,
+                    Animation.RELATIVE_TO_SELF, 0.0f,
+                    Animation.RELATIVE_TO_SELF, 0.75f, 0, 0.0f, 0, 0.0f);
+
+            // enable all of menu view
+            FrameLayout viewGroup = (FrameLayout) layout.findViewById(R.id.llMenuMap).getParent();
+            enableDisableViewGroup(viewGroup, true);
+
+            // enable empty view
+            layout.findViewById(R.id.ll_empty).setVisibility(View.VISIBLE);
+            layout.findViewById(R.id.ll_empty).setEnabled(true);
+            layout.findViewById(R.id.ll_empty).setOnTouchListener(
+                    new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View arg0, MotionEvent arg1) {
+                            menuAnimationToggle();
+                            return true;
+                        }
+                    });
+
+        } else {
+            isMenuExpanded = false;
+
+            // Collapse
+            new CloseAnimation(llMainMap, menuWidth,
+                    TranslateAnimation.RELATIVE_TO_SELF, 0.75f,
+                    TranslateAnimation.RELATIVE_TO_SELF, 0.0f, 0, 0.0f, 0, 0.0f);
+
+
+            // enable all of menu view
+            FrameLayout viewGroup = (FrameLayout) layout.findViewById(R.id.mapShowFragment)
+                    .getParent();
+            enableDisableViewGroup(viewGroup, false);
+
+            // disable empty view
+            layout.findViewById(R.id.ll_empty).setVisibility(View.GONE);
+            layout.findViewById(R.id.ll_empty).setEnabled(false);
+
+        }
+    }
+
+    public static void enableDisableViewGroup(ViewGroup viewGroup,
+                                              boolean enabled) {
+        int childCount = viewGroup.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+
+
+            View view = viewGroup.getChildAt(i);
+            view.setEnabled(enabled);
+
+            if (view instanceof ViewGroup) {
+                enableDisableViewGroup((ViewGroup) view, enabled);
+            }
+        }
+    }
+
+
 }
