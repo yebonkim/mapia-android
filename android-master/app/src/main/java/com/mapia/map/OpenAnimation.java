@@ -35,7 +35,7 @@ public class OpenAnimation extends TranslateAnimation implements
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mainLayout.getLayoutParams();
         params.leftMargin = panelWidth;
-        params.width = panelWidth/3*4;
+        params.width = panelWidth/8*10;
         params.gravity = Gravity.LEFT;
         mainLayout.clearAnimation();
         mainLayout.setLayoutParams(params);

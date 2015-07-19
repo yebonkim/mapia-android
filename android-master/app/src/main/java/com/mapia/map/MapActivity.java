@@ -36,7 +36,6 @@ public class MapActivity extends FragmentActivity{
 	public static TextView txtMapName;
     private static boolean isMenuExpanded = false;
     private int menuWidth;
-	private ListView lvNavList;
 	Button btn1, btn2, btn3, btn4;
     LinearLayout llMenuMap = null, llMainMap = null;
 	MapPrivateFragment mapPrivateFragment = null;
@@ -94,15 +93,6 @@ public class MapActivity extends FragmentActivity{
         llMenuMap.setLayoutParams(MenuLayoutPrams);
 
         /* init menu */
-        lvNavList = (ListView)findViewById(R.id.drawerLvItems);
-        lvNavList.setAdapter(
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
-        lvNavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position >= 0 && position <= 3) fragmentReplace(position + 1);
-            }
-        });
 
     }
 

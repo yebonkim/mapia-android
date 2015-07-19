@@ -89,7 +89,7 @@ public class HomeFragment extends BaseFragment {
         /* init menu layout size */
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        menuWidth = (int) ((metrics.widthPixels) * 0.75);
+        menuWidth = (int) ((metrics.widthPixels) * 0.8);
 
         llMainMap = (LinearLayout) layout.findViewById(R.id.llMainMap);
 
@@ -106,7 +106,7 @@ public class HomeFragment extends BaseFragment {
             // Expand
             new OpenAnimation(llMainMap, menuWidth,
                     Animation.RELATIVE_TO_SELF, 0.0f,
-                    Animation.RELATIVE_TO_SELF, 0.75f, 0, 0.0f, 0, 0.0f);
+                    Animation.RELATIVE_TO_SELF, 0.8f, 0, 0.0f, 0, 0.0f);
 
             // enable all of menu view
             FrameLayout viewGroup = (FrameLayout) layout.findViewById(R.id.llMenuMap).getParent();
@@ -129,7 +129,7 @@ public class HomeFragment extends BaseFragment {
 
             // Collapse
             new CloseAnimation(llMainMap, menuWidth,
-                    TranslateAnimation.RELATIVE_TO_SELF, 0.75f,
+                    TranslateAnimation.RELATIVE_TO_SELF, 0.8f,
                     TranslateAnimation.RELATIVE_TO_SELF, 0.0f, 0, 0.0f, 0, 0.0f);
 
 
