@@ -1059,6 +1059,8 @@ Other apps can access this information along with your saved images."</string>
         <string name="video_recording_stopped">Video recording has stopped.</string>
         <string name="video_snapshot_hint">Touch to take photo while recording.</string>
         <string name="wait">Please wait…</string>
+    <string name="title_activity_profile_setting">ProfileSetting</string>
+    <string name="title_activity_prof_setting">ProfSettingActivity</string>
 
 
 

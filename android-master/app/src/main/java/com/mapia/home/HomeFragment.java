@@ -15,10 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.mapia.R;
+import com.mapia.api.model.Activity;
 import com.mapia.common.BaseFragment;
 import com.mapia.map.CloseAnimation;
 import com.mapia.map.OpenAnimation;
 import com.mapia.search.SearchActivity;
+import com.mapia.setting.ProfSettingActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,6 +72,19 @@ public class HomeFragment extends BaseFragment {
         this.layout.findViewById(R.id.fh_button_menu).setOnClickListener(new View.OnClickListener() {
             public void onClick(View paramAnonymousView) {
                 menuAnimationToggle();
+            }
+        });
+        this.layout.findViewById(R.id.btnProfSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfSettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        this.layout.findViewById(R.id.btnAccntSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Accnt Setting Activity Intent
             }
         });
         this.layout.findViewById(R.id.fh_button_search).setOnClickListener(new View.OnClickListener() {
