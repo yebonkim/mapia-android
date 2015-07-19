@@ -113,19 +113,19 @@ public class ProfSettingActivity extends Activity{
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
-            if (convertView == null) {
                 holder = new ViewHolder();
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.item_listview_profile_setting, null);
+                if(mListData.get(position).txtMain!="") {
+                    convertView = inflater.inflate(R.layout.item_listview_profile_setting, null);
+                }
+                else convertView = inflater.inflate(R.layout.item_listview_profile_setting1,null);
 
                 holder.mainText = (TextView) convertView.findViewById(R.id.itemTxtMain);
                 holder.titleText = (TextView) convertView.findViewById(R.id.itemTxtTitle);
 
                 convertView.setTag(holder);
-            }else{
-                holder = (ViewHolder) convertView.getTag();
-            }
+
             ProfSettingListData mData = mListData.get(position);
             holder.mainText.setText(mData.txtMain);
             holder.titleText.setText(mData.txtTitle);

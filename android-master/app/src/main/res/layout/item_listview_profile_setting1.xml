@@ -4,13 +4,13 @@
     android:layout_height="50dp">
     <TextView
         android:id="@+id/itemTxtTitle"
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/itemTxtMain"
-        android:layout_weight="1"
+        android:layout_weight="10"
         android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
