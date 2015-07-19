@@ -7,7 +7,6 @@ package com.mapia.post;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,13 +17,11 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -83,10 +80,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -179,8 +174,6 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
     private ImageButton btnPostPhoto, btnPostVideo, btnPostGallery;
     private TextView textPostLocation;
     private LatLng latLng;
-    private ArrayList<String> mFileNameList = new ArrayList<String>();
-    private ArrayList<Uri> mFileUriList = new ArrayList<Uri>();
     final int REQ_CODE_SELECT_IMAGE = 100;
 
     public PostFragment() {
@@ -207,17 +200,17 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 
 
 
-                if (mFileUriList.size() > 0){
-                    for(Uri eachUri : mFileUriList) {
+                if (mainActivity.mainApplication.getPostActivity().mFileUriList.size() > 0){
+                    for(Uri eachUri : mainActivity.mainApplication.getPostActivity().mFileUriList) {
                         TransferController.upload(getActivity().getApplicationContext(), eachUri);
 
                         String uriString = eachUri.toString();
-                        mFileNameList.add(Util.getFileName(uriString));
+                        mainActivity.mainApplication.getPostActivity().mFileNameList.add(Util.getFileName(uriString));
                         Log.i("file", uriString);
-                        Log.i("file", mFileNameList.toString());
+                        Log.i("file", mainActivity.mainApplication.getPostActivity().mFileNameList.toString());
                     }
                     requestHelper.posts(
-                            mapType, postComment, postLatlng, mFileNameList, new Callback<JsonObject>() {
+                            mapType, postComment, postLatlng, mainActivity.mainApplication.getPostActivity().mFileNameList, new Callback<JsonObject>() {
                                 @Override
                                 public void success(JsonObject jsonObject, retrofit.client.Response response) {
                                     Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
@@ -271,18 +264,21 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
 //                }
 //                else {
                 mPostingInfo.mode = 0;
-//                }
-                startCameraActivity();
-            }
-        };
-
-        this.mPostGalleryClickListener = (View.OnClickListener) new View.OnClickListener() {
-            public void onClick(View view) {
                 Intent intentImage = new Intent(Intent.ACTION_GET_CONTENT);
                 intentImage.setType("image/*");
                 startActivityForResult(intentImage, REQ_CODE_SELECT_IMAGE); //REQ_CODE_SELECT_IMAGE);
+//                }
+//                startCameraActivity();
             }
         };
+
+//        this.mPostGalleryClickListener = (View.OnClickListener) new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Intent intentImage = new Intent(Intent.ACTION_GET_CONTENT);
+//                intentImage.setType("image/*");
+//                startActivityForResult(intentImage, REQ_CODE_SELECT_IMAGE); //REQ_CODE_SELECT_IMAGE);
+//            }
+//        };
 
 
         this.mLocationClickListener = (View.OnClickListener) new View.OnClickListener() {
@@ -1491,56 +1487,7 @@ public class PostFragment extends BaseFragment implements View.OnClickListener /
                 initThumbnail();
             }
         }
-        if(resultCode== Activity.RESULT_OK && data != null)
-        {
 
-
-            Uri uri = data.getData();
-            if (uri != null) {
-                mFileUriList.add(uri);
-            }
-
-            try {
-                //Dynamic 하게 바꿔야함
-
-                //Uri에서 이미지 이름을 얻어온다.
-                //String name_Str = getImageNameToUri(data.getData());
-
-                //이미지 데이터를 비트맵으로 받아온다.
-                Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-
-
-                DisplayMetrics metrics = new DisplayMetrics();
-                getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-                int width = metrics.widthPixels;
-                int height = metrics.heightPixels;
-
-                RelativeLayout imgHolder = (RelativeLayout) getActivity().findViewById(R.id.image_view_holder);
-
-                ImageView image = new ImageView(this.getActivity());
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width/2, height/2);
-
-                //배치해놓은 ImageView에 set
-                image.getLayoutParams().height = 200;
-                image.setImageBitmap(image_bitmap);
-
-                image.setLayoutParams(params);
-                imgHolder.addView(image);
-
-                //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 //
 }

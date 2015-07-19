@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="9">
+    <RelativeLayout
+        android:background="#000000"
+        android:alpha="0.5"
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:id="@+id/btnAccntSetting"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dot"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/linearLayout2">
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dot"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:id="@+id/txtProfileKor"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="19dp"
+                    android:textColor="#FFFFFF"
+                    android:text="후꾸선장" />
+
+                <TextView
+                    android:id="@+id/txtProfileEng"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13dp"
+                    android:textColor="#FFFFFF"
+                    android:text="hookoorookoo"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingTop="10dp"
+            android:weightSum="4"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout2">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팔로잉"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/txtFollowing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="108"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팔로워"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/txtFollower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="247"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게시글"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/txtPost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="149"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="관심글"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/txtInterested"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="279"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/txtPrivateMap"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:textSize="21dp"
+                android:text="PRIVATE\nMAP"
+                android:background="#FF6666"
+                android:textColor="#FFFFFF"
+                android:gravity="bottom"></TextView>
+            <TextView
+                android:id="@+id/txtFollowMap"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:textSize="21dp"
+                android:text="FOLLOW\nMAP"
+                android:background="#FFCC66"
+                android:textColor="#FFFFFF"
+                android:gravity="bottom"></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/txtGroupMap"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:textSize="21dp"
+                android:text="GROUP\nMAP"
+                android:background="#6699FF"
+                android:textColor="#FFFFFF"
+                android:gravity="bottom"></TextView>
+            <TextView
+                android:id="@+id/txtPublicMap"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:textSize="21dp"
+                android:text="PUBLIC\nMAP"
+                android:background="#00CC99"
+                android:textColor="#FFFFFF"
+                android:gravity="bottom"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

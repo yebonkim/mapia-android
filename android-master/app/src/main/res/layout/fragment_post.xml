@@ -69,13 +69,15 @@
         </LinearLayout>
     </LinearLayout>
     <com.mapia.post.HighlightEditText android:textSize="14.0sp" android:textColor="#ff252525" android:textColorHint="#ffdcdcdc" android:gravity="start" android:id="@+id/edit_post" android:background="#ffffffff" android:paddingLeft="16.0dip" android:paddingTop="16.0dip" android:paddingRight="16.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="90.5dip" android:hint="@string/post_edittext_hint" android:maxLength="500" android:inputType="textMultiLine|textNoSuggestions" android:privateImeOptions="inputType=PredictionOff" android:textCursorDrawable="@null" />
-
     <RelativeLayout
-        android:id="@+id/image_view_holder"
+
+        android:layout_alignLeft="@+id/edit_post"
+        android:layout_alignRight="@+id/edit_post"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/edit_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical">
-    </RelativeLayout>
+        android:id="@+id/image_view_holder"/>
 
     <LinearLayout android:orientation="vertical" android:id="@+id/bottomBar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
         <RelativeLayout android:id="@+id/gpsLayer" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="36.0dip">
@@ -92,9 +94,9 @@
             </HorizontalScrollView>
         </RelativeLayout>
         <RelativeLayout android:id="@+id/utility_bar" android:background="#efefef" android:layout_width="fill_parent" android:layout_height="50.0dip">
-            <ImageButton android:id="@+id/btnPostGallery" android:background="@drawable/gallery_icon" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginLeft="10dip" android:layout_marginRight="0dp" android:layout_centerVertical="true"
-                android:layout_alignParentStart="false" />
-            <ImageView android:id="@+id/util_divider" android:background="#ffffffff" android:layout_width="1.5dip" android:layout_height="fill_parent" android:layout_toRightOf="@+id/btnPostGallery" android:alpha="0.1" />
+
+            <ImageView android:id="@+id/util_divider" android:background="#ffffffff" android:layout_width="1.5dip" android:layout_height="fill_parent"
+                android:alpha="0.1" />
 
 
             <ImageButton android:id="@+id/btnPostPhoto" android:background="@drawable/selector_post_photo" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginLeft="5dip" android:layout_marginRight="0dp" android:layout_centerVertical="true" android:layout_toRightOf="@+id/util_divider"/>
