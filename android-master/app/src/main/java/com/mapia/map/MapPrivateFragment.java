@@ -39,8 +39,8 @@ public class MapPrivateFragment extends MapFragment{
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(MapActivity.txtMapName!=null) MapActivity.txtMapName.setText("Private");
-		getMarker("private");
-		drawMarker(markerDatas);
+		super.mapType = "private";
+		getMarker();
 		drawCircle(circleDatas);
 	}
 }

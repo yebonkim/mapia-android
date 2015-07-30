@@ -40,7 +40,8 @@ public class MapGroupFragment extends MapFragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(MapActivity.txtMapName!=null) MapActivity.txtMapName.setText("Group");
-		getMarker("group");
+		super.mapType="group";
+		getMarker();
 		drawMarker(markerDatas);
 	}
 }

@@ -37,7 +37,8 @@ public class MapFollowFragment extends MapFragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		getMarker("follow");
+		super.mapType = "follow";
+		getMarker();
 		drawMarker(markerDatas);
 	}
 }

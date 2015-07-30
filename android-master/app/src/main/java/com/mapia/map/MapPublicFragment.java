@@ -42,7 +42,8 @@ public class MapPublicFragment extends MapFragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(MapActivity.txtMapName!=null) MapActivity.txtMapName.setText("Public");
-		getMarker("public");
+		super.mapType = "public";
+		getMarker();
 		drawMarker(markerDatas);
 		drawCircle(circleDatas);
 	}

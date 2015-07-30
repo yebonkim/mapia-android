@@ -44,6 +44,7 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 
 
 	protected LatLng currentLatlng;
+	protected float currentZoom=-1, lastZoom=-1;
 	protected LatLng cameraLatlng;
 	protected float cameraZoom = 15;
 	ImageButton btnLocCurrent;
@@ -51,6 +52,7 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	public static int PLACE_PICKER_REQUEST = 1;
 
 	protected int type_num;
+	protected String mapType;
 	private String[] type_string = {"","Private","Public","Follow","Group"};
 	protected ArrayList<MarkerData> markerDatas = new ArrayList<MarkerData>();
 	protected ArrayList<CircleData> circleDatas = new ArrayList<CircleData>();
@@ -100,9 +102,9 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	public void onResume() {
 		if(MapActivity.currentLatlng!=null) this.backgroundMap.moveCamera((CameraUpdate)CameraUpdateFactory.newLatLngZoom(MapActivity.cameraLatlng, MapActivity.cameraZoom));
 
-		for(int i=0;i<markerDatas.size();i++){
+		/*for(int i=0;i<markerDatas.size();i++){
 			markerDatas.get(i).marker.remove();
-		}
+		}*/
 		for(int i=0;i<circleDatas.size();i++){
 			circleDatas.get(i).circle.remove();
 		}
@@ -111,8 +113,7 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 		super.onResume();
 	}
 
-	protected void getMarker(String type) {
-		final String mapType = type;
+	protected void getMarker() {
 		final ArrayList<MarkerData> markerList = new ArrayList<MarkerData>();
 		final ArrayList<CircleData> circleList = new ArrayList<CircleData>();
 		try {
@@ -223,6 +224,26 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	public void onCameraChange(CameraPosition cameraPosition) {
 		MapActivity.cameraLatlng = cameraPosition.target;
 		MapActivity.cameraZoom = cameraPosition.zoom;
+		if(currentLatlng==null) currentLatlng = cameraPosition.target;
+		if(currentZoom==-1){
+			currentZoom = cameraPosition.zoom;
+			lastZoom = currentZoom;
+			return;
+		}
+
+		if(cameraPosition.zoom!=lastZoom && cameraPosition.zoom-currentZoom<2){
+			lastZoom = cameraPosition.zoom;
+			return;
+		}
+
+		currentZoom = cameraPosition.zoom;
+		lastZoom = currentZoom;
+		for(int i=0;i<circleDatas.size();i++){
+			circleDatas.get(i).circle.remove();
+		}
+		circleDatas.clear();
+		getMarker();
+		drawCircle(circleDatas);
 	}
 
 
