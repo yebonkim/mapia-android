@@ -28,7 +28,7 @@ import java.util.TimerTask;
 /**
  * Created by daehyun on 15. 5. 31..
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment{
 //    private AnalogClockView analogClockView;
     private int[] bannerResourceIdArray = {};
     private boolean dragFlag = false;

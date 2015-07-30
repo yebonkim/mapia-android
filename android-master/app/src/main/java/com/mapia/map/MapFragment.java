@@ -25,8 +25,10 @@ import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mapia.R;
 import com.mapia.network.RestRequestHelper;
@@ -51,6 +53,7 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	protected int type_num;
 	private String[] type_string = {"","Private","Public","Follow","Group"};
 	protected ArrayList<MarkerData> markerDatas = new ArrayList<MarkerData>();
+	protected ArrayList<CircleData> circleDatas = new ArrayList<CircleData>();
 	protected GoogleMap backgroundMap;
 	protected LocationManager locationManager;
 	protected static final long MIN_TIME = 400;
@@ -96,17 +99,74 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
 	@Override
 	public void onResume() {
 		if(MapActivity.currentLatlng!=null) this.backgroundMap.moveCamera((CameraUpdate)CameraUpdateFactory.newLatLngZoom(MapActivity.cameraLatlng, MapActivity.cameraZoom));
-		drawMarker(markerDatas);
+
+		for(int i=0;i<markerDatas.size();i++){
+			markerDatas.get(i).marker.remove();
+		}
+		for(int i=0;i<circleDatas.size();i++){
+			circleDatas.get(i).circle.remove();
+		}
+		markerDatas.clear();
+		circleDatas.clear();
 		super.onResume();
 	}
 
+	protected void getMarker(String type) {
+		final String mapType = type;
+		final ArrayList<MarkerData> markerList = new ArrayList<MarkerData>();
+		final ArrayList<CircleData> circleList = new ArrayList<CircleData>();
+		try {
+			RestRequestHelper requestHelper = RestRequestHelper.newInstance();
+
+			requestHelper.getPosts(mapType, MapActivity.cameraLatlng.latitude, MapActivity.cameraLatlng.longitude, MapActivity.cameraZoom,
+					new Callback<JsonObject>() {
+						@Override
+						public void success(JsonObject jO, Response response) {
+							JsonArray jsonArray = jO.get("posts").getAsJsonArray();
+							Toast.makeText(getActivity(),mapType + " 글 읽어오기 성공", Toast.LENGTH_LONG).show();
+							for(int i=0;i<jsonArray.size();i++){
+								JsonObject jsonObject = (JsonObject)jsonArray.get(i);
+								MarkerData markerData = new MarkerData(new LatLng(jsonObject.get("lat").getAsDouble(),
+										jsonObject.get("lng").getAsDouble()), jsonObject.get("content").getAsString());
+								markerList.add(markerData);
+								CircleData circleData = new CircleData(new LatLng(jsonObject.get("lat").getAsDouble(),
+										jsonObject.get("lng").getAsDouble()));
+								circleList.add(circleData);
+							}
+							markerDatas = markerList;
+							drawMarker(markerDatas);
+							circleDatas = circleList;
+							drawCircle(circleDatas);
+						}
+
+						@Override
+						public void failure(RetrofitError error) {
+							Toast.makeText(getActivity(),"글 읽어오기실패".toString(), Toast.LENGTH_LONG).show();
+							error.printStackTrace();
+						}
+					});
+		}  catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	protected void drawMarker(ArrayList<MarkerData> markerDatas){
-		for(int i=0;i<markerDatas.size();i++){
+		/*for(int i=0;i<markerDatas.size();i++){
 			markerDatas.get(i).marker = this.backgroundMap.addMarker(new MarkerOptions().position(markerDatas.get(i).location)
 					.title(markerDatas.get(i).letter)
 					.snippet(markerDatas.get(i).user));
+		}*/
+	}
+
+	protected void drawCircle(ArrayList<CircleData> circleDatas){
+		for(int i=0;i<circleDatas.size();i++){
+			circleDatas.get(i).circle = this.backgroundMap.addCircle(new CircleOptions().center(circleDatas.get(i).location)
+			.radius(circleDatas.get(i).radius)
+			.fillColor(circleDatas.get(i).color)
+			.strokeWidth(0));
 		}
 	}
+
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
@@ -185,8 +245,9 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
                                     public void success(JsonObject jsonObject, Response response) {
                                         markerDatas.add(new MarkerData(postLatlng, postComment));
                                         markerDatas.get(markerDatas.size() - 1).marker = backgroundMap.addMarker(new MarkerOptions().position(markerDatas.get(markerDatas.size() - 1).location).title(markerDatas.get(markerDatas.size() - 1).letter));
-
-                                        String filename = ((ArrayList<String>)data.getStringArrayListExtra("filelist")).get(0);
+										circleDatas.add(new CircleData(postLatlng));
+										circleDatas.get(circleDatas.size() - 1).circle = backgroundMap.addCircle(new CircleOptions().center(circleDatas.get(circleDatas.size() - 1).location).radius(circleDatas.get(circleDatas.size()-1).radius).fillColor(circleDatas.get(circleDatas.size()-1).color));
+										String filename = ((ArrayList<String>)data.getStringArrayListExtra("filelist")).get(0);
                                         String keyPrefix = "us-east-1:6638a26e-2810-4e4b-8d50-11cce837133f/";
                                         String[] keyArr = new String[1];
                                         keyArr[0] = keyPrefix+filename;
@@ -212,7 +273,9 @@ public class MapFragment extends Fragment implements OnClickListener, LocationLi
                                         public void success(JsonObject jsonObject, Response response) {
                                             markerDatas.add(new MarkerData(postLatlng, postComment));
                                             markerDatas.get(markerDatas.size() - 1).marker = backgroundMap.addMarker(new MarkerOptions().position(markerDatas.get(markerDatas.size() - 1).location).title(markerDatas.get(markerDatas.size() - 1).letter));
-                                            Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
+											circleDatas.add(new CircleData(postLatlng));
+											circleDatas.get(circleDatas.size() - 1).circle = backgroundMap.addCircle(new CircleOptions().center(circleDatas.get(circleDatas.size() - 1).location).radius(circleDatas.get(circleDatas.size() - 1).radius).fillColor(circleDatas.get(circleDatas.size() - 1).color));
+											Toast.makeText(getActivity(), "Post 등록 성공".toString(), Toast.LENGTH_LONG).show();
                                         }
 
                                         @Override

@@ -42,45 +42,8 @@ public class MapPublicFragment extends MapFragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(MapActivity.txtMapName!=null) MapActivity.txtMapName.setText("Public");
-		for(int i=0;i<markerDatas.size();i++){
-			markerDatas.get(i).marker.remove();
-		}
-		markerDatas.clear();
-		getMarker();
+		getMarker("public");
 		drawMarker(markerDatas);
-	}
-
-	public void getMarker() {
-		final ArrayList<MarkerData> markerList = new ArrayList<MarkerData>();
-		try {
-			RestRequestHelper requestHelper = RestRequestHelper.newInstance();
-
-			requestHelper.getPosts("public", MapActivity.cameraLatlng.latitude, MapActivity.cameraLatlng.longitude, MapActivity.cameraZoom,
-					new Callback<JsonObject>() {
-						@Override
-						public void success(JsonObject jO, Response response) {
-							JsonArray jsonArray = jO.get("posts").getAsJsonArray();
-							Toast.makeText(getActivity(), "Public 글 읽어오기 성공".toString(), Toast.LENGTH_LONG).show();
-							for (int i = 0; i < jsonArray.size(); i++) {
-								JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-								MarkerData markerData = new MarkerData(new LatLng(jsonObject.get("lat").getAsDouble(),
-										jsonObject.get("lng").getAsDouble()),
-										jsonObject.get("content").getAsString(),
-										jsonObject.get("username").getAsString());
-								markerList.add(markerData);
-							}
-							markerDatas = markerList;
-							drawMarker(markerDatas);
-						}
-
-						@Override
-						public void failure(RetrofitError error) {
-							Toast.makeText(getActivity(), "글 읽어오기실패".toString(), Toast.LENGTH_LONG).show();
-							error.printStackTrace();
-						}
-					});
-		}  catch (Exception e) {
-			e.printStackTrace();
-		}
+		drawCircle(circleDatas);
 	}
 }

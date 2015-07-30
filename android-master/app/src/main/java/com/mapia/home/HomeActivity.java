@@ -50,7 +50,7 @@ public class HomeActivity extends MainActivity implements GoogleApiClient.Connec
 
 
 
-    private void fragmentReplace(int newFragmentIndex) {
+    public void fragmentReplace(int newFragmentIndex) {
         Fragment newFragment = null;
         newFragment = getFragment(newFragmentIndex);
         if(newFragment == lastFragment) return;
