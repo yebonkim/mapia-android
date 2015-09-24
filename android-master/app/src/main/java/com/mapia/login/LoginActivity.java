@@ -19,6 +19,7 @@ import com.mapia.map.MapActivity;
 import com.mapia.network.RestRequestHelper;
 import com.mapia.post.PostActivity;
 import com.mapia.s3.S3Activity;
+import com.volley.MapiaPostRequest;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -55,6 +56,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,13 +71,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
+//
+//        Intent i = new Intent(LoginActivity.this, S3Activity.class);
+//        startActivity(i);
+//        finish();
 
-//temp
-        Intent i = new Intent(LoginActivity.this, S3Activity.class);
-        startActivity(i);
-        finish();
 
-
+        MapiaPostRequest mapiaPostRequest = MapiaPostRequest.newInstance();
 
         RestRequestHelper requestHelper = RestRequestHelper.newInstance();
         // RSA 공개키를 받아오기 위한 요청
@@ -91,6 +93,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 error.printStackTrace();
             }
         });
+
 
         requestHelper.profile(
                 new Callback<JsonObject>() {

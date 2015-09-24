@@ -31,9 +31,7 @@ public class HomeActivity extends MainActivity implements GoogleApiClient.Connec
     private HomeFragment homeFragment = null;
     private boolean isFirstOnResume = true;
 //Map
-
     int currentFragmentIndex;
-
     public static LatLng currentLatlng;
     public static LatLng cameraLatlng = new LatLng(0,0);
     public static float cameraZoom = 15;
