@@ -5,6 +5,8 @@
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.asne/asne-instagram/0.3.3/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asne/asne-instagram/0.3.3/dad359f666bdca6386da9c1b2195d09b49b6eb4b/asne-instagram-0.3.3-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

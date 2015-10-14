@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
-import com.mapia.R;
 import com.mapia.cache.realmcache.RealmManager;
 import com.mapia.login.LoginActivity;
 
@@ -26,7 +25,7 @@ public class SplashActivity extends Activity {
 //        mapiaRequest localmapiaRequest = new mapiaRequest(0, QueryManager.makeHomePaiUrl(), null, new Response.Listener(), new Response.ErrorListener{
 //            p
 //        })
-
+//    }
     private void goToNextActivity(){
         Intent localIntent;
 
@@ -44,8 +43,6 @@ public class SplashActivity extends Activity {
         startActivity(localIntent);
         finish();
     }
-
-
     public void onCreate(Bundle paramBundle){
         super.onCreate(paramBundle);
 
@@ -62,16 +59,10 @@ public class SplashActivity extends Activity {
             return;
         }
         this.goToNextActivity();
-        SplashUtils.setIsShowSplash(true);
-        this.setContentView(R.layout.activity_splash);
-        this.filter = (LinearLayout)this.findViewById(R.id.as_filter);
+//        SplashUtils.setIsShowSplash(true);
+//        ((SplashActivity)(this.context)).setContentView(R.layout.activity_splash);
+//        this.filter = (LinearLayout)this.findViewById(R.id.as_filter);
+
 
     }
 }
-
-
-
-
-
-
-

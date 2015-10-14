@@ -22,7 +22,7 @@ public class MACManager
     private static final long DEFAULT_CORRECTION_CONDITION_MILLIS = 600000L;
     private static final long DEFAULT_CORRECTION_MILLIS = 0L;
     private static final int DEFAULT_READ_TIMEOUT_MS = 30000;
-    private static final String DEFAULT_REMOTE_CURRENTTIME_URL = "http://global.apis.naver.com/currentTime";
+    private static final String DEFAULT_REMOTE_CURRENTTIME_URL = "http://global.apis.mapsns.com/currentTime";
     private static final String KEY_FILENAME = "/NHNAPIGatewayKey.properties";
     private static final int THREAD_COUNT = 2;
     private static int connectionTimeoutMs;
@@ -41,7 +41,7 @@ public class MACManager
         MACManager.connectionTimeoutMs = 30000;
         MACManager.readTimeoutMs = 30000;
         MACManager.correctionWhenConditionMs = 600000L;
-        MACManager.remoteCurrentTimeUrl = "http://global.apis.naver.com/currentTime";
+        MACManager.remoteCurrentTimeUrl = "http://global.apis.mapsns.com/currentTime";
         MACManager.isThreadRunning = false;
         MACManager.correctionMillis = 0L;
         executor = Executors.newFixedThreadPool(2);

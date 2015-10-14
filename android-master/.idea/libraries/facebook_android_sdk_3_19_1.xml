@@ -5,6 +5,8 @@
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/3.19.1/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.android/facebook-android-sdk/3.19.1/c252f8a51fce8eda2edfe5ce8876260edb9b62c6/facebook-android-sdk-3.19.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

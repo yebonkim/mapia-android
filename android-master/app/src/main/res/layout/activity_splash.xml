@@ -2,7 +2,7 @@
 <RelativeLayout android:id="@+id/as_root" android:background="#ff2d325c" android:layout_width="fill_parent" android:layout_height="fill_parent"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:gravity="top|right|center" android:layout_width="160.0dip" android:layout_height="171.0dip" android:layout_centerInParent="true">
-        <!--<com.mapia.videoplayer.mapiaVideoView android:id="@+id/as_video_view" android:layout_width="145.0dip" android:layout_height="145.0dip" />-->
+        <com.mapia.videoplayer.mapiaVideoView android:id="@+id/as_video_view" android:layout_width="145.0dip" android:layout_height="145.0dip" />
     </LinearLayout>
     <ImageView android:layout_width="160.0dip" android:layout_height="171.0dip" android:src="@drawable/and_splash" android:layout_centerInParent="true" />
     <LinearLayout android:orientation="vertical" android:id="@+id/as_filter" android:background="#ff000000" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />

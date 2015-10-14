@@ -115,7 +115,7 @@ public class QueryManager
     public static final int SEARVER_REQUEST_TIMEOUT = 10000;
     public static final int SEARVER_REQUEST_TIMEOUT_POST = 100000;
     public static final int SEARVER_REQUEST_TIMEOUT_VIDEO = 1000000;
-    public static final String URI_AUTHORITY = "apis.naver.com";
+    public static final String URI_AUTHORITY = "apis.mapsns.com";
     public static final String URI_MAPIA_WEB_END = "http://www.mapia.co/pic/";
     public static final String URI_MAPIA_WEB_LOCATION = "http://www.mapia.co/location/";
     public static final String URI_MAPIA_WEB_PROFILE = "http://www.mapia.co/my/";
@@ -123,11 +123,11 @@ public class QueryManager
     public static final String URI_MAPIA_WEB_TAG = "http://www.mapia.co/tag/";
     public static final String URI_SCHEME = "https";
     public static final String URI_SCHEME_HTTP = "http";
-    private static final String URL_COMMENT_CREATE = "https://apis.naver.com/mapiaApp/cbox/v2_neo_create_json.json";
-    private static final String URL_COMMENT_DELETE = "https://apis.naver.com/mapiaApp/cbox/v2_neo_delete_json.json";
-    private static final String URL_COMMENT_LIST = "https://apis.naver.com/mapiaApp/cbox/v2_neo_list_json.json";
-    private static final String URL_COMMENT_REPORT = "https://apis.naver.com/mapiaApp/cbox/v2_neo_report_json.json";
-    private static final String URL_COMMENT_UPDATE = "https://apis.naver.com/mapiaApp/cbox/v2_neo_update_json.json";
+    private static final String URL_COMMENT_CREATE = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_create_json.json";
+    private static final String URL_COMMENT_DELETE = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_delete_json.json";
+    private static final String URL_COMMENT_LIST = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_list_json.json";
+    private static final String URL_COMMENT_REPORT = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_report_json.json";
+    private static final String URL_COMMENT_UPDATE = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_update_json.json";
     private static final String URL_GET_UPLOAD_KEY = "http://uploader.nmv.naver.com/upload/getUploadKey.nhn";
     private static final String URL_GET_VIDEO_INFO = "http://uploader.nmv.naver.com/upload/getVideoInfo.nhn";
     private static final String URL_GET_VIDEO_PLAY_KEY = "http://serviceapi.nmv.naver.com/flash/createInKey.nhn";
@@ -146,18 +146,18 @@ public class QueryManager
 
     public static String makeAddComment() {
         try {
-            return MACManager.getEncryptUrl("https://apis.naver.com/mapiaApp/cbox/v2_neo_create_json.json");
+            return MACManager.getEncryptUrl("https://apis.mapsns.com/mapiaApp/cbox/v2_neo_create_json.json");
         }
         catch (Exception ex) {
             ex.printStackTrace();
-            return "https://apis.naver.com/mapiaApp/cbox/v2_neo_create_json.json";
+            return "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_create_json.json";
         }
     }
 
     public static String makeAllowSearchingApiUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -174,7 +174,7 @@ public class QueryManager
     public static String makeBlockMemberUrl(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("block.json");
@@ -191,7 +191,7 @@ public class QueryManager
     public static String makeBlockUserCountApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getBlockMemberTotalCount.json");
@@ -206,7 +206,7 @@ public class QueryManager
     public static String makeBlockUserListApiUrl(final int n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getBlockMemberList.json");
@@ -220,10 +220,44 @@ public class QueryManager
         }
     }
 
+    public static String makeLoginTokenApiUrl() {
+        final Uri.Builder uriBuilder = new Uri.Builder();
+        uriBuilder.scheme("https");
+        uriBuilder.authority("apis.mapsns.com");
+        uriBuilder.appendPath("mapiaApp");
+        uriBuilder.appendPath("mapia");
+        uriBuilder.appendPath("getLoginToken.json");
+        try {
+            return MACManager.getEncryptUrl(uriBuilder.toString());
+        }
+        catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public static String makeLoginUrl(final String id, final String pw) {
+        final Uri.Builder uriBuilder = new Uri.Builder();
+        uriBuilder.scheme("https");
+        uriBuilder.authority("apis.mapsns.com");
+        uriBuilder.appendPath("mapiaApp");
+        uriBuilder.appendPath("mapia");
+        uriBuilder.appendPath("login.json");
+        uriBuilder.appendQueryParameter("id", id);
+        uriBuilder.appendQueryParameter("pw", pw);
+        try {
+            return MACManager.getEncryptUrl(uriBuilder.toString());
+        }
+        catch (Exception ex) {
+            return null;
+        }
+    }
+
+
+
     public static String makeCheckAllowSearchingApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getConfig.json");
@@ -238,7 +272,7 @@ public class QueryManager
     public static String makeCheckMember(String encryptUrl, final String s, final String s2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("tokenCheck.json");
@@ -270,7 +304,7 @@ public class QueryManager
     }
 
     public static String makeCommentList(final long n, final long n2, String string, final int n3) {
-        string = "https://apis.naver.com/mapiaApp/cbox/v2_neo_list_json.json?lang=" + string + "&clientType=app-android" + "&objectId=" + n + "_" + n2 + "&snsCode=" + LoginInfo.getInstance().getSnsCd() + "&ticket=" + "mapia" + "&pageSize=20" + "&page=" + n3;
+        string = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_list_json.json?lang=" + string + "&clientType=app-android" + "&objectId=" + n + "_" + n2 + "&snsCode=" + LoginInfo.getInstance().getSnsCd() + "&ticket=" + "mapia" + "&pageSize=20" + "&page=" + n3;
         try {
             return MACManager.getEncryptUrl(string);
         }
@@ -281,7 +315,7 @@ public class QueryManager
     }
 
     public static String makeDeleteComment(final long n, final long n2, final long n3, Comment o, String encryptUrl) {
-        final String s = (String)("https://apis.naver.com/mapiaApp/cbox/v2_neo_delete_json.json?lang=ko&clientType=app-android&objectId=" + n + "_" + n2 + "&snsCode=" + LoginInfo.getInstance().getSnsCd() + "&ticket=" + "mapia" + "&commentType=txt" + "&objectUrl=XX" + "&commentNo=" + ((Comment)o).commentNo + "&resultType=comment" + "&groupId=" + n3);
+        final String s = (String)("https://apis.mapsns.com/mapiaApp/cbox/v2_neo_delete_json.json?lang=ko&clientType=app-android&objectId=" + n + "_" + n2 + "&snsCode=" + LoginInfo.getInstance().getSnsCd() + "&ticket=" + "mapia" + "&commentType=txt" + "&objectUrl=XX" + "&commentNo=" + ((Comment)o).commentNo + "&resultType=comment" + "&groupId=" + n3);
 //        if (encryptUrl != null) {
 //            o = s + "&userType=" + encryptUrl;
 //        }
@@ -299,7 +333,7 @@ public class QueryManager
     public static String makeEndUrl(final long n, final long n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("viewPic.json");
@@ -330,7 +364,7 @@ public class QueryManager
     public static String makeEntireFollowingListUrl(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getFollowings.json");
@@ -351,7 +385,7 @@ public class QueryManager
     public static String makeFollowTagApiUrl(String encryptUrl, final String s) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("subscribeTag.json");
@@ -369,7 +403,7 @@ public class QueryManager
     public static String makeFollowUserApiUrl(final long n, String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("followUser.json");
@@ -417,7 +451,7 @@ public class QueryManager
     public static String makeGetVideoUrl(final Long n, final Long n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("picVideoPlayPath.json");
@@ -469,7 +503,7 @@ public class QueryManager
     public static String makeHidePostingUrl(final long n, final long n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("block.json");
@@ -487,7 +521,7 @@ public class QueryManager
     public static String makeHomeApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("home.json");
@@ -503,7 +537,7 @@ public class QueryManager
     public static String makeHomeBannerApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("homeBanner.json");
@@ -519,7 +553,7 @@ public class QueryManager
     public static String makeHotPicApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("hotPics.json");
@@ -534,7 +568,7 @@ public class QueryManager
     public static String makeHotUserApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("hotUser.json");
@@ -569,7 +603,7 @@ public class QueryManager
     public static String makeLeaveUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("leave.json");
@@ -585,7 +619,7 @@ public class QueryManager
     public static String makeLikeListUrl(String encryptUrl, final String s, final int n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("profileListOfPicLikes.json");
@@ -610,7 +644,7 @@ public class QueryManager
         if (n == 0L || n2 == 0L) {
             return null;
         }
-        final String string = "https://apis.naver.com/mapiaApp/likeit/mapiaApp_neo_like_json.json?contentsId=" + (n + "_" + n2) + "&serviceId=MAPIA" + "&countCallbackYn=Y";
+        final String string = "https://apis.mapsns.com/mapiaApp/likeit/mapiaApp_neo_like_json.json?contentsId=" + (n + "_" + n2) + "&serviceId=MAPIA" + "&countCallbackYn=Y";
         try {
             return MACManager.getEncryptUrl(string);
         }
@@ -623,7 +657,7 @@ public class QueryManager
     public static String makeLocationApiUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("locationInfo.json");
@@ -640,7 +674,7 @@ public class QueryManager
     public static String makeLocationGalleryApiUrl(final int n, final int n2, String encryptUrl, final String s) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("locationPics.json");
@@ -678,18 +712,18 @@ public class QueryManager
 
     public static String makeModifyComment() {
         try {
-            return MACManager.getEncryptUrl("https://apis.naver.com/mapiaApp/cbox/v2_neo_update_json.json");
+            return MACManager.getEncryptUrl("https://apis.mapsns.com/mapiaApp/cbox/v2_neo_update_json.json");
         }
         catch (Exception ex) {
             ex.printStackTrace();
-            return "https://apis.naver.com/mapiaApp/cbox/v2_neo_update_json.json";
+            return "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_update_json.json";
         }
     }
 
     public static String makeModifyEpicUrl(final LocationData locationData, final String s) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         if (locationData != null) {
             uriBuilder.appendQueryParameter("latitude", String.valueOf(locationData.latitude));
             uriBuilder.appendQueryParameter("longitude", String.valueOf(locationData.longitude));
@@ -720,7 +754,7 @@ public class QueryManager
     public static String makeModifyProfileUrl(String encryptUrl, final String s) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyProfile.json");
@@ -751,7 +785,7 @@ public class QueryManager
     public static String makeMyfeedInfoApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMyFeeds.json");
@@ -767,7 +801,7 @@ public class QueryManager
     public static String makeMyfeedListApiUrl(final long n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMyFeeds.json");
@@ -786,7 +820,7 @@ public class QueryManager
     public static String makeMyfeedTagListApiUrl(final long n, final int n2, final boolean b) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMySubTagList.json");
@@ -808,8 +842,8 @@ public class QueryManager
     public static String makeNicknameToMemberno(final ArrayList<String> list) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMemberNoByNickname.json");
@@ -829,7 +863,7 @@ public class QueryManager
     public static String makeNotiApiUrl(String encryptUrl, final long n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getActivities.json");
@@ -850,7 +884,7 @@ public class QueryManager
     public static String makeNotiHasNewApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("hasNewActivity.json");
@@ -865,7 +899,7 @@ public class QueryManager
     public static String makeNotiReadAllApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("readActivity.json");
@@ -881,7 +915,7 @@ public class QueryManager
     public static String makeNotiReadApiUrl(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("readActivity.json");
@@ -901,7 +935,7 @@ public class QueryManager
         }
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("activateDeviceToken.json");
@@ -929,7 +963,7 @@ public class QueryManager
         }
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("destroyDeviceToken.json");
@@ -954,7 +988,7 @@ public class QueryManager
     public static String makeNpushFirstInitApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("firstInitialize.json");
@@ -981,7 +1015,7 @@ public class QueryManager
         }
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getAllConfigs.json");
@@ -1006,7 +1040,7 @@ public class QueryManager
     public static String makeNpushGetReceiveConfigUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getConfig.json");
@@ -1024,7 +1058,7 @@ public class QueryManager
         }
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("inactivateDeviceToken.json");
@@ -1052,7 +1086,7 @@ public class QueryManager
         }
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("initialize.json");
@@ -1077,7 +1111,7 @@ public class QueryManager
     public static String makeNpushReceiveCommentUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -1094,7 +1128,7 @@ public class QueryManager
     public static String makeNpushReceiveFollowerUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -1111,7 +1145,7 @@ public class QueryManager
     public static String makeNpushReceiveFollowingUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -1128,7 +1162,7 @@ public class QueryManager
     public static String makeNpushReceiveLikeUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -1145,7 +1179,7 @@ public class QueryManager
     public static String makeNpushReceiveMentionUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -1162,7 +1196,7 @@ public class QueryManager
     public static String makeNpushReceiveRepicUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyConfig.json");
@@ -1182,7 +1216,7 @@ public class QueryManager
         }
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("saveEtiquetteTimeConfig.json");
@@ -1235,7 +1269,7 @@ public class QueryManager
     public static String makeProfileAlbumApiUrl(final int n, final int n2, String encryptUrl, final String s, final long n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("tagPics.json");
@@ -1257,7 +1291,7 @@ public class QueryManager
     public static String makeProfileApiUrl(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getUserInfo.json");
@@ -1273,7 +1307,7 @@ public class QueryManager
     public static String makeProfileFollowerApiUrl(final long n, final long n2, final int n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getFollowers.json");
@@ -1293,7 +1327,7 @@ public class QueryManager
     public static String makeProfileFollowingApiUrl(final long n, final long n2, final int n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getFollowings.json");
@@ -1313,7 +1347,7 @@ public class QueryManager
     public static String makeProfileIconApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("uploadProfileImage.json");
@@ -1328,7 +1362,7 @@ public class QueryManager
     public static String makeProfileIconApiUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("modifyIntroduceDesc.json");
@@ -1345,7 +1379,7 @@ public class QueryManager
     public static String makeProfileLikeApiUrl(final int n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("myLikePics.json");
@@ -1363,7 +1397,7 @@ public class QueryManager
     public static String makeProfilePicGridApiUrl(final long n, final int n2, final int n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMyPics.json");
@@ -1381,7 +1415,7 @@ public class QueryManager
     public static String makeProfilePicListApiUrl(final long n, final int n2, final int n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMyPics.json");
@@ -1399,7 +1433,7 @@ public class QueryManager
     public static String makeProfileTagApiUrl(final long n, final int n2, final int n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getMyTags.json");
@@ -1417,7 +1451,7 @@ public class QueryManager
     public static String makeRandomTagApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getRandomTag.json");
@@ -1432,7 +1466,7 @@ public class QueryManager
     public static String makeReadPenaltyAlert(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("readPenalty.json");
@@ -1448,7 +1482,7 @@ public class QueryManager
     public static String makeRecommendedTagUrl(String encryptUrl, final String s, final String s2, final String s3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getRecommendedTags.json");
@@ -1477,7 +1511,7 @@ public class QueryManager
     public static String makeRelatedContentUrl(final long n, String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getLinkedTags.json");
@@ -1496,7 +1530,7 @@ public class QueryManager
     public static String makeRelatedContentUrlMock(final long n, final long n2, final int n3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getLinkedTags.json");
@@ -1515,7 +1549,7 @@ public class QueryManager
     public static String makeRemovePenaltyAlert(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("removePenalty.json");
@@ -1531,7 +1565,7 @@ public class QueryManager
     public static String makeRemovePostUrl(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("removePic.json");
@@ -1561,7 +1595,7 @@ public class QueryManager
     public static String makeRepicListUrl(final long n, final long n2, final int n3, final int n4) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getRepics.json");
@@ -1581,7 +1615,7 @@ public class QueryManager
     public static String makeReportAccountUrl(final long n, String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("reportMember.json");
@@ -1597,7 +1631,7 @@ public class QueryManager
     }
 
     public static String makeReportCommentUrl(final long n, final long n2, final long n3) {
-        final String string = "https://apis.naver.com/mapiaApp/cbox/v2_neo_report_json.json?lang=ko&objectId=" + n + "_" + n2 + "&ticket=" + "mapia" + "&commentNo=" + n3;
+        final String string = "https://apis.mapsns.com/mapiaApp/cbox/v2_neo_report_json.json?lang=ko&objectId=" + n + "_" + n2 + "&ticket=" + "mapia" + "&commentNo=" + n3;
         try {
             return MACManager.getEncryptUrl(string);
         }
@@ -1629,7 +1663,7 @@ public class QueryManager
     public static String makeSearchPicApiUrl(String encryptUrl, final int n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("searchPics.json");
@@ -1661,7 +1695,7 @@ public class QueryManager
     public static String makeSearchTagApiUrl(String encryptUrl, final int n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("searchTags.json");
@@ -1693,7 +1727,7 @@ public class QueryManager
     public static String makeSearchUserApiUrl(String encryptUrl, final int n, final int n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("searchMember.json");
@@ -1729,7 +1763,7 @@ public class QueryManager
     public static String makeSnsMappingInfoUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getSnsRelationInfo.json");
@@ -1747,7 +1781,7 @@ public class QueryManager
     public static String makeSnsMappingUrl(String encryptUrl, final String s, final String s2, final String s3) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("snsLoginBeginWithMapping.json");
@@ -1768,7 +1802,7 @@ public class QueryManager
     public static String makeSnsUnMappingInfoUrl(String encryptUrl, final String s) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("deleteSnsToken.json");
@@ -1787,7 +1821,7 @@ public class QueryManager
     public static String makeSuddenTagApiUrl() {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getSuddenTag.json");
@@ -1802,7 +1836,7 @@ public class QueryManager
     public static String makeTagApiUrl(final long n, String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("tagInfo.json");
@@ -1820,7 +1854,7 @@ public class QueryManager
     public static String makeTagApiUrl(String encryptUrl) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("tagInfo.json");
@@ -1837,7 +1871,7 @@ public class QueryManager
     public static String makeTagByPicApiUrl(final long n, final long n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("getTagsByPic.json");
@@ -1854,7 +1888,7 @@ public class QueryManager
     public static String makeTagGalleryApiUrl(final int n, final int n2, String encryptUrl, final String s) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("tagPics.json");
@@ -1900,7 +1934,7 @@ public class QueryManager
     }
 
     public static String makeUnLikeUrl(final long n, final long n2) {
-        final String string = "https://apis.naver.com/mapiaApp/likeit/mapiaApp_neo_unlike_json.json?contentsId=" + (n + "_" + n2) + "&serviceId=MAPIA" + "&countCallbackYn=Y";
+        final String string = "https://apis.mapsns.com/mapiaApp/likeit/mapiaApp_neo_unlike_json.json?contentsId=" + (n + "_" + n2) + "&serviceId=MAPIA" + "&countCallbackYn=Y";
         try {
             return MACManager.getEncryptUrl(string);
         }
@@ -1913,7 +1947,7 @@ public class QueryManager
     public static String makeUnblockMemberUrl(final long n) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("unBlock.json");
@@ -1930,7 +1964,7 @@ public class QueryManager
     public static String makeUnrepicUrl(final long n, final long n2) {
         final Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("apis.naver.com");
+        uriBuilder.authority("apis.mapsns.com");
         uriBuilder.appendPath("mapiaApp");
         uriBuilder.appendPath("mapia");
         uriBuilder.appendPath("unrepic.json");

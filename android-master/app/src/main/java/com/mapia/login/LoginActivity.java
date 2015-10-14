@@ -13,13 +13,20 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.loopj.android.http.Base64;
+import com.mapia.MainActivity;
 import com.mapia.R;
+import com.mapia.api.QueryManager;
 import com.mapia.home.HomeActivity;
 import com.mapia.map.MapActivity;
 import com.mapia.network.RestRequestHelper;
 import com.mapia.post.PostActivity;
+import com.mapia.post.PostFragment;
 import com.mapia.s3.S3Activity;
-import com.volley.MapiaPostRequest;
+import com.mapia.util.TextUtils;
+import com.volley.MapiaRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -33,7 +40,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class LoginActivity extends Activity implements View.OnClickListener {
+public class LoginActivity extends MainActivity implements View.OnClickListener {
     EditText edtID, edtPW;
     ImageButton btnLogin;
     Button btnSignup;
@@ -56,7 +63,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,54 +77,67 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         btnLogin.setOnClickListener(this);
         btnSignup.setOnClickListener(this);
-//
+
+//temp
 //        Intent i = new Intent(LoginActivity.this, S3Activity.class);
 //        startActivity(i);
 //        finish();
 
-
-        MapiaPostRequest mapiaPostRequest = MapiaPostRequest.newInstance();
-
-        RestRequestHelper requestHelper = RestRequestHelper.newInstance();
         // RSA 공개키를 받아오기 위한 요청
-        requestHelper.login(new Callback<JsonObject>() {
-            @Override
-            public void success(JsonObject jsonObject, Response response) {
-                publicKey = jsonObject.get("public_key").toString();
-            }
+        String loginTokenApiUrl = QueryManager.makeLoginTokenApiUrl();
+        this.makeRequest(loginTokenApiUrl, new com.android.volley.Response.Listener<JSONObject>() {
+            public void onResponse(JSONObject jsonObject) {
+                try {
+                    if (!"success".equalsIgnoreCase(jsonObject.getString("resultStatus"))) {
+                        return;
+                    }
+                    publicKey = jsonObject.getJSONObject("result").getJSONObject("public_key").toString();
 
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(LoginActivity.this, "public key 못가져옴".toString(), Toast.LENGTH_LONG).show();
-                error.printStackTrace();
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
+//        RestRequestHelper requestHelper = RestRequestHelper.newInstance();
+//        // RSA 공개키를 받아오기 위한 요청
+//        requestHelper.login(new Callback<JsonObject>() {
+//            @Override
+//            public void success(JsonObject jsonObject, Response response) {
+//                publicKey = jsonObject.get("public_key").toString();
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                Toast.makeText(LoginActivity.this, "public key 못가져옴".toString(), Toast.LENGTH_LONG).show();
+//                error.printStackTrace();
+//            }
+//        });
 
-        requestHelper.profile(
-                new Callback<JsonObject>() {
-                    @Override
-                    public void success(JsonObject jsonObject,
-                                        Response response) {
-                        String resultMessage =
-                                jsonObject.get("message").toString();
-
-                        Intent i = new Intent(LoginActivity.this, MapActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        error.printStackTrace();
-                    }
-                });
+//        requestHelper.profile(
+//                new Callback<JsonObject>() {
+//                    @Override
+//                    public void success(JsonObject jsonObject,
+//                                        Response response) {
+//                        String resultMessage =
+//                                jsonObject.get("message").toString();
+//
+//                        Intent i = new Intent(LoginActivity.this, MapActivity.class);
+//                        startActivity(i);
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void failure(RetrofitError error) {
+//                        error.printStackTrace();
+//                    }
+//                });
     }
 
     public RSAPublicKey getPublicKeyFromString(String key)
             throws IOException, GeneralSecurityException {
         KeyFactory kf = KeyFactory.getInstance("RSA");
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(
+        X509EncodedKeySec keySpec = new X509EncodedKeySpec(
                 Base64.decode(key, Base64.DEFAULT));
         RSAPublicKey pubKey = null;
 
@@ -152,28 +171,22 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     String encryptedPassword = encrypt(password,
                             getPublicKeyFromString(publicKey));
 
-                    RestRequestHelper requestHelper = RestRequestHelper.newInstance();
 
-                    requestHelper.login(encryptedUsername, encryptedPassword,
-                            new Callback<JsonObject>() {
-                                @Override
-                                public void success(JsonObject jsonObject, Response response) {
-                                    Toast.makeText(LoginActivity.this, jsonObject.get("message")
-                                            .toString(), Toast.LENGTH_LONG).show();
-
-
-                                    Intent i = new Intent(LoginActivity.this, MapActivity.class);
-                                    startActivity(i);
-                                    finish();
+                    String loginUrl = QueryManager.makeLoginUrl(encryptedUsername, encryptedPassword);
+                    this.makeRequest(loginUrl, new com.android.volley.Response.Listener<JSONObject>() {
+                        public void onResponse(JSONObject jsonObject) {
+                            try {
+                                if (!"success".equalsIgnoreCase(jsonObject.getString("resultStatus"))) {
+                                    Toast.makeText(LoginActivity.this, "로그인 실패".toString(), Toast.LENGTH_LONG).show();
+                                    return;
                                 }
+                                Toast.makeText(LoginActivity.this, jsonObject.getJSONObject("result").getJSONObject("message").toString(), Toast.LENGTH_LONG).show();
 
-                                @Override
-                                public void failure(RetrofitError error) {
-                                    Toast.makeText(LoginActivity.this, "로그인 실패"
-                                            .toString(), Toast.LENGTH_LONG).show();
-                                    error.printStackTrace();
-                                }
-                            });
+                            } catch (JSONException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    });
 
                 } catch (Exception e) {
                     e.printStackTrace();

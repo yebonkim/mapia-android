@@ -7,6 +7,8 @@
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.asne/asne-core/0.3.3/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.asne/asne-core/0.3.3/5f5ae68ce6ecfc77943ae2a3285727d3bb7cace5/asne-core-0.3.3-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
