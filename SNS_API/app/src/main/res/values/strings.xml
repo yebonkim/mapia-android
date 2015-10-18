@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SNS_API</string>
+    <string name="facebook_app_id">977963982247420</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="client_id">2c7a7e80b13b423dbe879edc621421cb</string>
+    <string name="client_secret">956af1ddc25444d592ab4266c27cb2a3</string>
+    
+</resources>
